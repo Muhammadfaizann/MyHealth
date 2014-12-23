@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff">
+    <Button
+        android:text="Home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton"
+        android:background="#ffff1937"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff" />
+    <TableLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/tableButtons">
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="191.5dp"
+            android:layout_weight="1">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+                <ImageButton
+                    android:id="@+id/healthSearchBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/Search1"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="Health Search"
+                    android:textColor="#ff000000"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="25dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:id="@+id/frameLayout2">
+                <ImageButton
+                    android:id="@+id/healthProfessionalBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/Contact"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="Health Professionals"
+                    android:textColor="#ff000000"
+                    android:textStyle="normal"
+                    android:id="@+id/textView3"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="25dp" />
+            </FrameLayout>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+                <ImageButton
+                    android:id="@+id/healthNewsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/news_updates"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="Health News"
+                    android:textColor="#ff000000"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="25dp" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+                <ImageButton
+                    android:id="@+id/helpBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/help"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="I want to help"
+                    android:textColor="#ff000000"
+                    android:textStyle="normal"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="25dp" />
+            </FrameLayout>
+        </TableRow>
+        <Button
+            android:text="Important Notice"
+            android:layout_span="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/backButton"
+            android:background="#ffff1937"
+            android:textSize="18dp"
+            android:textColor="#ffffffff"
+            android:textColorHighlight="#ffffffff" />
+        <Button
+            android:text="Diabetes Awareness week"
+            android:layout_span="3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/backButton"
+            android:background="#ff6e8896"
+            android:textSize="18dp"
+            android:textColor="#ffffffff"
+            android:textColorHighlight="#ffffffff" />
+    </TableLayout>
+</LinearLayout>

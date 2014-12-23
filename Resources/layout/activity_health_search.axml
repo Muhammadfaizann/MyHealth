@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    tools:context="com.elevenvalues.rnitte.Speaker">
+    <Button
+        android:text="Home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton"
+        android:background="#ffff1937"
+        android:drawableLeft="@drawable/arrow_top2nd"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchText"
+        android:hint="Search"
+        android:textColor="#ff000000"
+        android:textColorHighlight="#ffbdbdbd"
+        android:textColorHint="#ff949494"
+        android:textColorLink="#ff313131"
+        android:layout_below="@+id/backButton"
+        android:drawableRight="@drawable/search_small" />
+    <ListView
+        android:id="@+id/diseaseList"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/searchOptions"
+        android:layout_below="@+id/searchText"
+        android:layout_height="wrap_content" />
+    <ExpandableListView
+        android:id="@+id/expandableDiseaseList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/searchOptions"
+        android:layout_below="@+id/searchText" />
+    <Button
+        android:id="@+id/searchOptions"
+        android:text="Search Options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffff1937"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_above="@+id/bottomButtons"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff" />
+    <LinearLayout
+        android:id="@+id/bottomButtons"
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/atozButton"
+            android:text="A-Z"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff6e8896"
+            android:textSize="18dp"
+            android:layout_weight="0.4"
+            android:textColor="#ffffffff"
+            android:textColorHighlight="#ffffffff" />
+        <Button
+            android:id="@+id/categoriesButton"
+            android:text="Categories"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff6e8896"
+            android:textColor="#ffffffff"
+            android:textColorHighlight="#ffffffff"
+            android:textSize="18dp"
+            android:layout_weight="0.3"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp" />
+        <Button
+            android:id="@+id/recentButton"
+            android:text="Recent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff6e8896"
+            android:textSize="18dp"
+            android:layout_weight="0.4"
+            android:textColor="#ffffffff"
+            android:textColorHighlight="#ffffffff" />
+    </LinearLayout>
+</RelativeLayout>

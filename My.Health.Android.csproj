@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MyHealthAndroid</RootNamespace>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AssemblyName>MyHealth_Android</AssemblyName>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Activities\LaunchActivity.cs" />
+    <Compile Include="Activities\HomeActivity.cs" />
+    <Compile Include="Activities\HealthSearchActivity.cs" />
+    <Compile Include="Activities\HealthProfessionalActivity.cs" />
+    <Compile Include="Activities\HealthNewsActivity.cs" />
+    <Compile Include="Activities\HelpActivity.cs" />
+    <Compile Include="Model\CommonData.cs" />
+    <Compile Include="Activities\CustomAdapaters\ExpandableListAdapater.cs" />
+    <Compile Include="Activities\DiseaseDetailActivity.cs" />
+    <Compile Include="Activities\CustomAdapaters\HPCustomAdapter.cs" />
+    <Compile Include="Activities\HPDetailsActivity.cs" />
+    <Compile Include="Activities\CustomAdapaters\HPEmergencyAdapter.cs" />
+    <Compile Include="Activities\CustomAdapaters\HPOrgnisationAdapter.cs" />
+    <Compile Include="Model\DataService.cs" />
+    <Compile Include="Activities\CustomAdapaters\HPUserfulNumberAdapter.cs" />
+    <Compile Include="Activities\CustomAdapaters\NewsChannelsAdapter.cs" />
+    <Compile Include="Model\RSSFeedReader.cs" />
+    <Compile Include="Activities\CustomAdapaters\NewsFeedAdapter.cs" />
+    <Compile Include="Activities\NewsDetailActivity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Resources\drawable-xhdpi\red_button.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+    <AndroidResource Include="Resources\layout\Launch.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\.DS_Store" />
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\.DS_Store" />
+    <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\.DS_Store" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\.DS_Store" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\.DS_Store" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\BMI_chart.GIF" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Cancer.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Contact.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Dropdown2.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Feedback.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\IrishHealth.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\IrishTimes.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\My_Profile.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\NewsHealth.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Next.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\PULSE.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\PartAIBTS.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\PartBIBTS.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RCSI.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RCSI1.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RCSISplash320x480.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RCSISplash640x1136.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RCSISplash640x960.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\RCSI_Front_Building_1.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Search.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Search1.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_top.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_top2nd.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\blood.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\blood2.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bmi.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\donor.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\donorOld.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dropDown.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\drop_down_new.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ecard.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\edit.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\emergency.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\emergency1.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\feedback2.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\fourm.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\grey_arrow_down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\grey_arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\heartfo.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\help.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\hospitals.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ihf.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\irish_blood_trans.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\irish_heart_foundation.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\map_large.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\more.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\news_updates.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\organ.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\organNotready.jpg" />
+    <AndroidResource Include="Resources\drawable-xhdpi\organisations.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\settings_top.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\share.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\useful.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon57.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon114.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon120.png" />
+    <AndroidResource Include="Resources\values\Styles.xml" />
+    <AndroidResource Include="Resources\layout\Home.axml" />
+    <AndroidResource Include="Resources\menu\main_activity_actions.xml" />
+    <AndroidResource Include="Resources\layout\SimpleListItem.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\arrow_right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\search_small.jpg" />
+    <AndroidResource Include="Resources\layout\ListHeader.xml" />
+    <AndroidResource Include="Resources\layout\ListChild.xml" />
+    <AndroidResource Include="Resources\layout\activity_disease_details.axml" />
+    <AndroidResource Include="Resources\layout\activity_health_professionals.axml" />
+    <AndroidResource Include="Resources\layout\activity_health_search.axml" />
+    <AndroidResource Include="Resources\layout\row_health_professionals_table.xml" />
+    <AndroidResource Include="Resources\layout\activity_hp_details_simple.axml" />
+    <AndroidResource Include="Resources\layout\activity_hp_details_table.axml" />
+    <AndroidResource Include="Resources\layout\activity_hp_details_contacts.axml" />
+    <AndroidResource Include="Resources\layout\row_hp_emergency.xml" />
+    <AndroidResource Include="Resources\layout\row_hp_orgnisation.xml" />
+    <AndroidResource Include="Resources\layout\row_hp_useful_numbers.xml" />
+    <AndroidResource Include="Resources\layout\alertview_custom_layout.xml" />
+    <AndroidResource Include="Resources\layout\row_news_details_table.xml" />
+    <AndroidResource Include="Resources\layout\row_news_table.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Activities\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-ldpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\menu\" />
+    <Folder Include="Model\" />
+    <Folder Include="Activities\CustomAdapaters\" />
+    <Folder Include="Assets\Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\AboutRCSI.html" />
+    <AndroidAsset Include="Assets\Content\Heart.html" />
+    <AndroidAsset Include="Assets\Content\LungCancer.html" />
+    <AndroidAsset Include="Assets\Content\MyUsefulNumbers.xml" />
+    <AndroidAsset Include="Assets\Content\OrganDonor.html" />
+  </ItemGroup>
+</Project>
