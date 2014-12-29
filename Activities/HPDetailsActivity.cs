@@ -14,7 +14,7 @@ using Android.Webkit;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "HPDetailsActivity")]			
+	[Activity (Label = "My Health")]			
 	public class HPDetailsActivity : Activity
 	{
 		private HPData _caller;

@@ -13,12 +13,12 @@ using Android.Widget;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "HealthNewsActivity", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class NewsDetailActivity : Activity
 	{
 		private Button backButton;
 		private ListView _channelsList;
-		private CommonData _model;
+		//private CommonData _model;
 
 		protected override void OnCreate (Bundle bundle)
 		{

@@ -14,7 +14,7 @@ using Android.Webkit;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "DiseaseDetailActivity")]			
+	[Activity (Label = "My Health")]			
 	public class DiseaseDetailActivity : Activity
 	{
 		private Button _backButton;

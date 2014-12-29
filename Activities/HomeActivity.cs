@@ -53,7 +53,7 @@ namespace MyHealthAndroid
 
 			helpBtn.Click += (object sender, EventArgs e) => 
 			{
-				var activity = new Intent(this, typeof(HealthSearchActivity));
+				var activity = new Intent(this, typeof(HelpActivity));
 				StartActivity( activity);
 			};
 		}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    tools:context="com.elevenvalues.rnitte.Speaker"
+    android:id="@+id/relativeLayout1">
+    <Button
+        android:text="Home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton"
+        android:background="#ffff1937"
+        android:drawableLeft="@drawable/arrow_top2nd"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButton"
+        android:id="@+id/feedbackUserName"
+        android:hint="Name"
+        android:textColor="#ff333333"
+        android:textColorHint="#ffaaaaaa" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/feedbackUserName"
+        android:id="@+id/feedbackUserEmail"
+        android:hint="Email"
+        android:textColor="#ff333333"
+        android:textColorHint="#ffaaaaaa" />
+    <EditText
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/feedbackUserEmail"
+        android:id="@+id/feedbackUserMessage"
+        android:textColor="#ff333333"
+        android:textColorHint="#ffaaaaaa"
+        android:hint="Message" />
+    <Button
+        android:text="Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/feedbackUserMessage"
+        android:id="@+id/button1" />
+</RelativeLayout>

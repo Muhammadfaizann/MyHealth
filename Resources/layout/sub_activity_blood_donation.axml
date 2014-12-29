@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    tools:context="com.elevenvalues.rnitte.Speaker">
+    <Button
+        android:text="Home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton"
+        android:background="#ffff1937"
+        android:drawableLeft="@drawable/arrow_top2nd"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff" />
+    <ImageView
+        android:id="@+id/simpleDetailImage"
+        android:src="@drawable/irish_blood_trans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButton"
+        android:minHeight="125dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop"
+        android:minWidth="125dp" />
+    <TextView
+        android:text="Days of Blood Left as of 20th June 2014"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/simpleDetailImage"
+        android:id="@+id/textView1"
+        android:textColor="#ff333333"
+        android:gravity="center" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
+        android:id="@+id/linearLayout1">
+        <ImageView
+            android:src="@drawable/PartAIBTS"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/imageView1"
+            android:layout_weight="0.5" />
+        <ImageView
+            android:src="@drawable/PartBIBTS"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView2"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+    <Button
+        android:text="Click here for IBTS Web Site"
+        android:id="@+id/bloodDonationLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout1"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:textColor="#ff4b92cc" />
+</RelativeLayout>

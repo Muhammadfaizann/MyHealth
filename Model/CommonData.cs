@@ -69,6 +69,32 @@ namespace MyHealthAndroid
 
 			return channels;
 		}
+
+		public List<HelpData> GetHelpList() {
+			var help = new List <HelpData> ();
+			help.Add(new HelpData("Blood Donation", Resource.Drawable.blood));
+			help.Add(new HelpData("Organ Donors", Resource.Drawable.donor));
+			help.Add (new HelpData("Feedback", Resource.Drawable.Feedback));
+			help.Add (new HelpData ("My BMI", Resource.Drawable.bmi));
+			return help;
+		}
+
+		public List<String> GetFeetData () {
+			var data = new List<String> ();
+			for (int i = 1; i <= 12; i++) {
+				data.Add (i.ToString () + " feet");
+			}
+			return data;
+		}
+
+		public List<String> GetInchData () {
+			var data = new List<String> ();
+			for (int i = 1; i < 12; i++) {
+				data.Add (i.ToString () + " in");
+			}
+			return data;
+		}
+
 	}
 
 	//------------------------------------ custom classes ------------------------------------//
@@ -78,6 +104,20 @@ namespace MyHealthAndroid
 		public long Id { get; set;}
 		public string DisplayName { get; set;}
 		public int DisplayIcon { get; set;}
+	}
+
+	public class HelpData
+	{
+		public string HelpName { get; set; }
+		public int HelpIcon { get; set;}
+
+		public HelpData () {
+		}
+
+		public HelpData ( string name , int icon) {
+			HelpName = name;
+			HelpIcon = icon;
+		}
 	}
 
 	public class Organisation

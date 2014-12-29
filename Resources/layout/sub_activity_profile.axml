@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffffff"
+    tools:context="com.elevenvalues.rnitte.Speaker"
+    android:id="@+id/relativeLayout1">
+    <Button
+        android:text="Home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton"
+        android:background="#ffff1937"
+        android:drawableLeft="@drawable/arrow_top2nd"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff" />
+    <TextView
+        android:text="Please enter your information below"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButton"
+        android:id="@+id/textView1"
+        android:textColor="#ff333333"
+        android:gravity="center"
+        android:layout_margin="10dp" />
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
+        android:id="@+id/toggleButton1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp" />
+    <TextView
+        android:text="Matric Answer"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/textView2"
+        android:textColor="#ff333333"
+        android:layout_toLeftOf="@id/toggleButton1"
+        android:layout_below="@id/textView1"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:id="@+id/heightComponentLayout">
+        <TextView
+            android:text="Height"
+            android:id="@+id/textView3"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textColor="#ff333333"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:layout_marginRight="25dp" />
+        <Spinner
+            android:id="@+id/heightFeetSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <Spinner
+            android:id="@+id/heightInchSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -14,7 +14,7 @@ using MyHealthAndroid;
 
 namespace MyHealth.Android
 {
-	[Activity (Label = "HealthNewsActivity", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class HealthNewsActivity : Activity
 	{
 		private Button backButton;

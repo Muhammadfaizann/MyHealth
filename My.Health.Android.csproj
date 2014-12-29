@@ -16,6 +16,8 @@
     <AssemblyName>MyHealth_Android</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,6 +67,11 @@
     <Compile Include="Model\RSSFeedReader.cs" />
     <Compile Include="Activities\CustomAdapaters\NewsFeedAdapter.cs" />
     <Compile Include="Activities\NewsDetailActivity.cs" />
+    <Compile Include="Activities\CustomAdapaters\HelpDataAdapter.cs" />
+    <Compile Include="Activities\SubActivities\BloodDonationActivity.cs" />
+    <Compile Include="Activities\SubActivities\OrganDonationActivity.cs" />
+    <Compile Include="Activities\SubActivities\FeedbackActivity.cs" />
+    <Compile Include="Activities\SubActivities\MyProfileActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -76,15 +83,10 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\Launch.axml" />
-    <AndroidResource Include="Resources\drawable-hdpi\.DS_Store" />
     <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\.DS_Store" />
     <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\.DS_Store" />
     <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\.DS_Store" />
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\.DS_Store" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BMI_chart.GIF" />
     <AndroidResource Include="Resources\drawable-xhdpi\Cancer.png" />
@@ -163,6 +165,11 @@
     <AndroidResource Include="Resources\layout\alertview_custom_layout.xml" />
     <AndroidResource Include="Resources\layout\row_news_details_table.xml" />
     <AndroidResource Include="Resources\layout\row_news_table.xml" />
+    <AndroidResource Include="Resources\layout\activity_help_data.axml" />
+    <AndroidResource Include="Resources\layout\sub_activity_blood_donation.axml" />
+    <AndroidResource Include="Resources\layout\sub_activity_organ_donation.axml" />
+    <AndroidResource Include="Resources\layout\sub_activity_feedback.axml" />
+    <AndroidResource Include="Resources\layout\sub_activity_profile.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -176,6 +183,7 @@
     <Folder Include="Model\" />
     <Folder Include="Activities\CustomAdapaters\" />
     <Folder Include="Assets\Content\" />
+    <Folder Include="Activities\SubActivities\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\AboutRCSI.html" />
