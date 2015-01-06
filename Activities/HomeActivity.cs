@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +25,8 @@ namespace MyHealthAndroid
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Home);
+
+			SetCustomActionBar ();
 
 			searchBtn = FindViewById<ImageButton> (Resource.Id.healthSearchBtn);
 			healthProBtn = FindViewById<ImageButton> (Resource.Id.healthProfessionalBtn);
@@ -58,8 +59,14 @@ namespace MyHealthAndroid
 			};
 		}
 
-
-
+		//------------------------ custom activity ----------------------//
+		public void SetCustomActionBar () 
+		{
+			ActionBar.SetDisplayShowHomeEnabled (false);
+			ActionBar.SetDisplayShowTitleEnabled (false);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetDisplayShowCustomEnabled (true);
+		}
 
 		//------------------------ menu item ----------------------//
 		public override bool OnCreateOptionsMenu (IMenu menu)
@@ -73,7 +80,8 @@ namespace MyHealthAndroid
 			switch (item.ItemId) {
 				
 			case Resource.Id.action_profile:
-				
+				var newActivity = new Intent(this, typeof(MyProfileActivity));
+				StartActivity(newActivity);
 				break;
 			}
 			return base.OnMenuItemSelected (featureId, item);

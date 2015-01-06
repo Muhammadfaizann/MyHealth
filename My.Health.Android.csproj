@@ -170,6 +170,7 @@
     <AndroidResource Include="Resources\layout\sub_activity_organ_donation.axml" />
     <AndroidResource Include="Resources\layout\sub_activity_feedback.axml" />
     <AndroidResource Include="Resources\layout\sub_activity_profile.axml" />
+    <AndroidResource Include="Resources\layout\actionbar_custom.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

@@ -37,6 +37,7 @@ namespace MyHealthAndroid
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_health_search);
 
+			SetCustomActionBar ();
 			model = new CommonData ();
 
 			_diseaseList = FindViewById<ListView> (Resource.Id.diseaseList);
@@ -104,6 +105,15 @@ namespace MyHealthAndroid
 			//Get the recent DiseaseList onLoad
 			GetRecentDiseases (this);
 
+		}
+
+		//------------------------ custom activity ----------------------//
+		public void SetCustomActionBar () 
+		{
+			ActionBar.SetDisplayShowHomeEnabled (false);
+			ActionBar.SetDisplayShowTitleEnabled (false);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetDisplayShowCustomEnabled (true);
 		}
 
 		//------------------------ List Item Clicked ----------------------//
@@ -179,7 +189,8 @@ namespace MyHealthAndroid
 			switch (item.ItemId) {
 
 			case Resource.Id.action_profile:
-
+				var newActivity = new Intent(this, typeof(MyProfileActivity));
+				StartActivity(newActivity);
 				break;
 			}
 			return base.OnMenuItemSelected (featureId, item);

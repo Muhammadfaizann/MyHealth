@@ -23,6 +23,7 @@ namespace MyHealthAndroid
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_help_data);
+			SetCustomActionBar ();
 
 			_helpList = FindViewById<ListView> (Resource.Id.helpDataList);
 			var _listAdapter = new HelpDataAdapter(this);
@@ -58,6 +59,33 @@ namespace MyHealthAndroid
 			{
 				base.OnBackPressed();
 			};
+		}
+
+		//------------------------ custom activity ----------------------//
+		public void SetCustomActionBar () 
+		{
+			ActionBar.SetDisplayShowHomeEnabled (false);
+			ActionBar.SetDisplayShowTitleEnabled (false);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetDisplayShowCustomEnabled (true);
+		}
+
+		//------------------------ menu item ----------------------//
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
+			return base.OnCreateOptionsMenu (menu);
+		}
+
+		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
+		{
+			switch (item.ItemId) {
+
+			case Resource.Id.action_profile:
+				var newActivity = new Intent(this, typeof(MyProfileActivity));
+				StartActivity(newActivity);	break;
+			}
+			return base.OnMenuItemSelected (featureId, item);
 		}
 	}
 }

@@ -79,7 +79,7 @@ namespace MyHealthAndroid
 			return help;
 		}
 
-		public List<String> GetFeetData () {
+		public List<String> GetHeightFeets () {
 			var data = new List<String> ();
 			for (int i = 1; i <= 12; i++) {
 				data.Add (i.ToString () + " feet");
@@ -87,7 +87,7 @@ namespace MyHealthAndroid
 			return data;
 		}
 
-		public List<String> GetInchData () {
+		public List<String> GetHeightInches () {
 			var data = new List<String> ();
 			for (int i = 1; i < 12; i++) {
 				data.Add (i.ToString () + " in");
@@ -95,6 +95,120 @@ namespace MyHealthAndroid
 			return data;
 		}
 
+		public List<String> GetHeightMeters () {
+			var data = new List<String> ();
+			for (int i = 1; i <= 5; i++) {
+				data.Add (i.ToString () + " m");
+			}
+			return data;
+		}
+
+		public List<String> GetHeightCentimeters () {
+			var data = new List<String> ();
+			for (int i = 1; i < 100; i++) {
+				data.Add (i.ToString () + " cm");
+			}
+			return data;
+		}
+
+		public List<String> GetWeightStones () {
+			var data = new List<String> ();
+			for (int i = 1; i <= 100; i++) {
+				data.Add (i.ToString () + " st");
+			}
+			return data;
+		}
+
+		public List<String> GetWeightPounds () {
+			var data = new List<String> ();
+			for (int i = 1; i < 14; i++) {
+				data.Add (i.ToString () + " lbs");
+			}
+			return data;
+		}
+
+		public List<String> GetWeightKilograms () {
+			var data = new List<String> ();
+			for (int i = 1; i <= 500; i++) {
+				data.Add (i.ToString () + " kg");
+			}
+			return data;
+		}
+
+		public List<String> GetWeightGrams () {
+			var data = new List<String> ();
+			for (int i = 1; i < 1000; i++) {
+				data.Add (i.ToString () + " g");
+			}
+			return data;
+		}
+
+		public List<String> GetGenderList () {
+			var data = new List<String> ();
+				data.Add ("Male");
+				data.Add ("female");
+			return data;
+		}
+
+		public List<String> GetAgeList () {
+			var data = new List<String> ();
+				data.Add ("Under 18");
+				data.Add ("18-25");
+				data.Add ("26-40");
+				data.Add ("41-60");
+				data.Add ("60+");
+			return data;
+		}
+
+		public List<String> GetBloodGroups () {
+			var data = new List<String> ();
+				data.Add ("O Negative");
+				data.Add ("O Positive");
+				data.Add ("A Negative");
+				data.Add ("A Positive");
+				data.Add ("B Negative");
+				data.Add ("B Positive");
+				data.Add ("AB Negative");
+				data.Add ("AB Positive");
+			return data;
+		}
+
+		public List<String> GetCountries () {
+			var data = new List<String> ();
+				data.Add ("Antrim");
+				data.Add ("Armagh");
+				data.Add ("Carlow");
+				data.Add ("Cavan");
+				data.Add ("Clare");
+				data.Add ("Cork");
+				data.Add ("Derry");
+				data.Add ("Donegal");
+				data.Add ("Down");
+				data.Add ("Dublin");
+				data.Add ("Fermanagh");
+				data.Add ("Galway");
+				data.Add ("Kerry");
+				data.Add ("Kildare");
+				data.Add ("Kilkenny");
+				data.Add ("Laois");
+				data.Add ("Leitrim");
+				data.Add ("Limerick");
+				data.Add ("Longford");
+				data.Add ("Louth");
+				data.Add ("Mayo");
+				data.Add ("Meath");
+				data.Add ("Monaghan");
+				data.Add ("Offaly");
+				data.Add ("Roscommon");
+				data.Add ("Sligo");
+				data.Add ("Tipperary");
+				data.Add ("Tyrone");
+				data.Add ("Waterford");
+				data.Add ("Westmeath");
+				data.Add ("Wexford");
+				data.Add ("Wicklow");
+			return data;
+		}
 	}
 
 	//------------------------------------ custom classes ------------------------------------//

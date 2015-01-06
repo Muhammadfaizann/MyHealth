@@ -28,6 +28,8 @@ namespace MyHealth.Android
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_health_professionals);
 
+			SetCustomActionBar ();
+
 			_professionalsList = FindViewById<ListView> (Resource.Id.healthProfessionalsList);
 			var _listAdapter = new HPCustomAdapter(this);
 			_professionalsList.Adapter = _listAdapter;
@@ -47,6 +49,34 @@ namespace MyHealth.Android
 				base.OnBackPressed();
 			};
 
+		}
+
+		//------------------------ custom activity ----------------------//
+		public void SetCustomActionBar () 
+		{
+			ActionBar.SetDisplayShowHomeEnabled (false);
+			ActionBar.SetDisplayShowTitleEnabled (false);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetDisplayShowCustomEnabled (true);
+		}
+
+		//------------------------ menu item ----------------------//
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
+			return base.OnCreateOptionsMenu (menu);
+		}
+
+		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
+		{
+			switch (item.ItemId) {
+
+			case Resource.Id.action_profile:
+				var newActivity = new Intent(this, typeof(MyProfileActivity));
+				StartActivity(newActivity);
+				break;
+			}
+			return base.OnMenuItemSelected (featureId, item);
 		}
 	}
 }

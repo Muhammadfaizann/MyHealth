@@ -30,6 +30,8 @@ namespace MyHealthAndroid
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_disease_details);
 
+			SetCustomActionBar ();
+
 			_imageView = FindViewById<ImageView> (Resource.Id.diseaseDetailImage);
 			_webView = FindViewById<WebView> (Resource.Id.diseaseDetailWebView);
 
@@ -50,6 +52,15 @@ namespace MyHealthAndroid
 				base.OnBackPressed();
 			};
 
+		}
+
+		//------------------------ custom activity ----------------------//
+		public void SetCustomActionBar () 
+		{
+			ActionBar.SetDisplayShowHomeEnabled (false);
+			ActionBar.SetDisplayShowTitleEnabled (false);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetDisplayShowCustomEnabled (true);
 		}
 	}
 }

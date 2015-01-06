@@ -38,13 +38,23 @@ namespace MyHealthAndroid
 
 			//based on the extra that will be receied form last activity
 			//all the resource will be set. 
-			setContentAsPerCaller (_caller);
+			SetContentAsPerCaller (_caller);
+			SetCustomActionBar ();
 
 
 		}
-			
+
+		//------------------------ custom activity ----------------------//
+		public void SetCustomActionBar () 
+		{
+			ActionBar.SetDisplayShowHomeEnabled (false);
+			ActionBar.SetDisplayShowTitleEnabled (false);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetDisplayShowCustomEnabled (true);
+		}
+
 		//-------------------------------------- Setup Layout --------------------------------------//
-		private void setContentAsPerCaller (HPData data) {
+		private void SetContentAsPerCaller (HPData data) {
 		
 			switch (data.Id) 
 			{
@@ -179,6 +189,24 @@ namespace MyHealthAndroid
 
 		//-------------------------------------- Private functions --------------------------------------//
 
+		//------------------------ menu item ----------------------//
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
+			return base.OnCreateOptionsMenu (menu);
+		}
+
+		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
+		{
+			switch (item.ItemId) {
+
+			case Resource.Id.action_profile:
+				var newActivity = new Intent(this, typeof(MyProfileActivity));
+				StartActivity(newActivity);
+				break;
+			}
+			return base.OnMenuItemSelected (featureId, item);
+		}
 	}
 }
 

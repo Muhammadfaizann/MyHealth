@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffffff"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="com.elevenvalues.rnitte.Speaker">
     <Button
         android:text="Home"
