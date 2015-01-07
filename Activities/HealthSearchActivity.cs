@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Preferences;
+using MyHealthDB;
 
 namespace MyHealthAndroid
 {
@@ -44,7 +45,7 @@ namespace MyHealthAndroid
 			_searchText  = FindViewById<EditText> (Resource.Id.searchText);
 
 			//_listAdapter = new ExpandableDataAdapter (this, model.getAllDiseases ());
-			_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,model.GetAllDiseases ());
+			_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,model.GetAllDiseases ().Select(x => x.Name).ToList<string>());
 			_diseaseList.Adapter = _listAdapter;
 
 			_diseaseList.ItemClick += OnListItemClicked;
@@ -77,7 +78,7 @@ namespace MyHealthAndroid
 			atozButton = FindViewById<Button> (Resource.Id.atozButton);
 			atozButton.Click += (object sender, EventArgs e) => {
 
-				_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,model.GetAllDiseases ());
+				_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,model.GetAllDiseases ().Select(x => x.Name).ToList<string>());
 				_diseaseList.Adapter = _listAdapter;
 
 				_diseaseList.Visibility = ViewStates.Visible;
@@ -106,12 +107,7 @@ namespace MyHealthAndroid
 			GetRecentDiseases (this);
 
 		}
-
-		protected override void OnResume ()
-		{
-			base.OnResume ();
-
-		}
+			
 
 		//------------------------ custom activity ----------------------//
 		public void SetCustomActionBar () 
@@ -124,7 +120,7 @@ namespace MyHealthAndroid
 
 		//------------------------ List Item Clicked ----------------------//
 		private void OnListItemClicked (object sender, AdapterView.ItemClickEventArgs e) {
-			var t = model.GetAllDiseases()[e.Position];
+			var t = model.GetAllDiseases().ElementAtOrDefault(e.Position).Name;
 			SaveRecentDiseases(this, t);
 			var DiseaseDetails =  new Intent(this, typeof (DiseaseDetailActivity));
 			DiseaseDetails.PutExtra ("diseaseName", t);
@@ -164,7 +160,7 @@ namespace MyHealthAndroid
 
 			dictGroup = new Dictionary<string, List<string>> ();
 			//lstKeys = new List<string> ();
-			String[] items = model.GetAllDiseases ();
+			String[] items = { "", "" }; //model.GetAllDiseases ();
 
 			foreach (var diseaes in indexTitles) {
 

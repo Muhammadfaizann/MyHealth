@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyHealthDB;
 
 namespace MyHealthAndroid
 {
@@ -11,12 +12,32 @@ namespace MyHealthAndroid
 
 		}
 
-		public String[] GetAllDiseases () 
+//		public String[] GetAllDiseases () 
+//		{
+//			 String[] _items = {"Obesity", "Depression", "Heart Attack", "Lung Cancer","Heart Bypass",
+//				"Heart Failure", "Heart Murmurs", "Heart Valve Infection","Diabeties", "Asthma", 
+//				"Appendicitis", "Baby acne", "Burns", "Cold sores", "Dementia"};
+//			return _items; 
+//		}
+
+		public IList <HealthSearch> GetAllDiseases () 
 		{
-			 String[] _items = {"Obesity", "Depression", "Heart Attack", "Lung Cancer","Heart Bypass",
+			String[] _items = {"Obesity", "Depression", "Heart Attack", "Lung Cancer","Heart Bypass",
 				"Heart Failure", "Heart Murmurs", "Heart Valve Infection","Diabeties", "Asthma", 
 				"Appendicitis", "Baby acne", "Burns", "Cold sores", "Dementia"};
-			return _items; 
+
+			var disease = MyHealthDB.HealthSearchManager.GetAllItems ();
+			if (disease.Count <= 0) {
+				for (int count= 0; count < _items.Length; count++) {
+					MyHealthDB.HealthSearchManager.SaveItem (new HealthSearch { 
+						ID = count, 
+						Name = _items[count],
+						Details = "Some details if needed, like ever for " + _items[count]
+					});
+				}
+				disease = MyHealthDB.HealthSearchManager.GetAllItems ();
+			}
+			return disease; 
 		}
 
 		public List<HPData> GetHealthProfessionals () {

@@ -13,6 +13,9 @@ namespace MyHealthAndroid
 		ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
+
+		private CommonData _model;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
