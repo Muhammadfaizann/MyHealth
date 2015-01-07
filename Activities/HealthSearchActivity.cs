@@ -107,6 +107,12 @@ namespace MyHealthAndroid
 
 		}
 
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+
+		}
+
 		//------------------------ custom activity ----------------------//
 		public void SetCustomActionBar () 
 		{

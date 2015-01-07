@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Health.Android", "My.Health.Android.csproj", "{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MyHealthDB", "MyHealthDB\MyHealthDB.shproj", "{8892DED7-FE9E-4620-A868-C3E9CC2517E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

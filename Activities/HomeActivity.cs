@@ -11,8 +11,7 @@ using Android.Views;
 using Android.Widget;
 using MyHealth.Android;
 
-namespace MyHealthAndroid
-{
+namespace MyHealthAndroid{
 	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class HomeActivity : Activity
 	{

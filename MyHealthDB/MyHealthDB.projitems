@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{8892DED7-FE9E-4620-A868-C3E9CC2517E8}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MyHealthDB</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IDBEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\DBEntityBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\HealthSearch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\HealthSearchManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Contracts\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Tables\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
+  </ItemGroup>
+</Project>
