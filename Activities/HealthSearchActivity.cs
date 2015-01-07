@@ -160,7 +160,7 @@ namespace MyHealthAndroid
 
 			dictGroup = new Dictionary<string, List<string>> ();
 			//lstKeys = new List<string> ();
-			String[] items = { "", "" }; //model.GetAllDiseases ();
+			var items = model.GetAllDiseases ().Select(x => x.Name).ToList<string>();
 
 			foreach (var diseaes in indexTitles) {
 
