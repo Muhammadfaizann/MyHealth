@@ -1,14 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyHealthDB/Tables/HealthSearchManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.8.0" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MyHealthDB/DatabaseRepository.cs">
     <Files>
-      <File FileName="MyHealthDB/Contracts/IDBEntity.cs" Line="1" Column="1" />
-      <File FileName="MyHealthDB/Contracts/DBEntityBase.cs" Line="1" Column="1" />
+      <File FileName="MyHealthDB/Interfaces/IDBEntity.cs" Line="1" Column="1" />
+      <File FileName="MyHealthDB/Interfaces/DBEntityBase.cs" Line="1" Column="1" />
       <File FileName="MyHealthDB/SQLite/SQLite.cs" Line="9" Column="9" />
-      <File FileName="MyHealthDB/Entities/HealthSearch.cs" Line="36" Column="36" />
-      <File FileName="MyHealthDB/DatabaseManager.cs" Line="45" Column="45" />
-      <File FileName="MyHealthDB/Tables/HealthSearchManager.cs" Line="46" Column="46" />
-      <File FileName="MyHealthDB/DatabaseRepository.cs" Line="47" Column="47" />
+      <File FileName="MyHealthDB/DatabaseManager.cs" Line="19" Column="19" />
+      <File FileName="MyHealthDB/Tables/HealthSearchManager.cs" Line="4" Column="4" />
+      <File FileName="MyHealthDB/DatabaseRepository.cs" Line="34" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
