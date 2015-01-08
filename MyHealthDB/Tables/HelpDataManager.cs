@@ -8,25 +8,24 @@ namespace MyHealthDB
 		static HelpDataManager ()
 		{
 		}
-
-		public static HelpData GetItemAt (int id)
+		public static HelpData GetHelpData (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetHelpData (id);
 		}
 
-		public static IList<HelpData> GetAllItems ()
+		public static IList<HelpData> GetAllHelpData ()
 		{
-			return new List<HelpData> (DatabaseRepository.GetItems ());
+			return new List<HelpData> (DatabaseRepository.GetAllHelpData ());
 		}
 
-		public static int SaveItem( HelpData item ) 
+		public static int SaveHelpData( HelpData item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveHelpData (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteHelpData (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteHelpData (id);
 		}
 	}
 }

@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static EmergencyContact GetItemAt (int id)
+		public static EmergencyContact GetEmergencyContact (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetEmergencyContact (id);
 		}
 
-		public static IList<EmergencyContact> GetAllItems ()
+		public static IList<EmergencyContact> GetAllEmergencyContacts ()
 		{
-			return new List<EmergencyContact> (DatabaseRepository.GetItems ());
+			return new List<EmergencyContact> (DatabaseRepository.GetAllEmergencyContacts ());
 		}
 
-		public static int SaveItem( EmergencyContact item ) 
+		public static int SaveEmergencyContact( EmergencyContact item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveEmergencyContact (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteEmergencyContact (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteEmergencyContact (id);
 		}
 	}
 }

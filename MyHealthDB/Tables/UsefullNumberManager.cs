@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static UsefullNumbers GetItemAt (int id)
+		public static UsefullNumbers GetUsefullNumbers (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetUsefullNumbers (id);
 		}
 
-		public static IList<UsefullNumbers> GetAllItems ()
+		public static IList<UsefullNumbers> GetAllUsefullNumbers ()
 		{
-			return new List<UsefullNumbers> (DatabaseRepository.GetItems ());
+			return new List<UsefullNumbers> (DatabaseRepository.GetAllUsefullNumbers ());
 		}
 
-		public static int SaveItem( UsefullNumbers item ) 
+		public static int SaveUsefullNumbers( UsefullNumbers item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveUsefullNumbers (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteUsefullNumbers (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteUsefullNumbers (id);
 		}
 	}
 }

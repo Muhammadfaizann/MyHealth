@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static Disease GetItemAt (int id)
+		public static Disease GetDisease (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetDisease (id);
 		}
 
-		public static IList<Disease> GetAllItems ()
+		public static IList<Disease> GetAllCounties ()
 		{
-			return new List<Disease> (DatabaseRepository.GetItems ());
+			return new List<Disease> (DatabaseRepository.GetAllDisease());
 		}
 
-		public static int SaveItem( Disease item ) 
+		public static int SaveDisease( Disease item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveDisease (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteDisease (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteDisease (id);
 		}
 	}
 }

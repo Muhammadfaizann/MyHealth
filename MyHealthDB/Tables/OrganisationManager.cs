@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static Organisation GetItemAt (int id)
+		public static Organisation GetOrganisation (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetOrganisation (id);
 		}
 
-		public static IList<Organisation> GetAllItems ()
+		public static IList<Organisation> GetAllOrganisations ()
 		{
-			return new List<Organisation> (DatabaseRepository.GetItems ());
+			return new List<Organisation> (DatabaseRepository.GetAllOrganisations ());
 		}
 
-		public static int SaveItem( Organisation item ) 
+		public static int SaveOrganisation( Organisation item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveOrganisation (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteOrganisation (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteNewsChannels (id);
 		}
 	}
 }

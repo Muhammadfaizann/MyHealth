@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static NewsChannels GetItemAt (int id)
+		public static NewsChannels GetNewsChannels (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetNewsChannels (id);
 		}
 
-		public static IList<NewsChannels> GetAllItems ()
+		public static IList<NewsChannels> GetAllNewsChannels ()
 		{
-			return new List<NewsChannels> (DatabaseRepository.GetItems ());
+			return new List<NewsChannels> (DatabaseRepository.GetAllNewsChannels ());
 		}
 
-		public static int SaveItem( NewsChannels item ) 
+		public static int SaveNewsChannels( NewsChannels item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveNewsChannels (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteNewsChannels (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteNewsChannels (id);
 		}
 	}
 }

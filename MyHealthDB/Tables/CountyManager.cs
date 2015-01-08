@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static County GetItemAt (int id)
+		public static County GetCounty (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetCounty (id);
 		}
 
-		public static IList<County> GetAllItems ()
+		public static IList<County> GetAllCounties ()
 		{
-			return new List<County> (DatabaseRepository.GetItems ());
+			return new List<County> (DatabaseRepository.GetAllCounties ());
 		}
 
-		public static int SaveItem( County item ) 
+		public static int SaveCounty( County item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveCounty (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteCounty (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteCounty (id);
 		}
 	}
 }

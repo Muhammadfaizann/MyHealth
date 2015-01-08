@@ -9,24 +9,24 @@ namespace MyHealthDB
 		{
 		}
 
-		public static Hosptial GetItemAt (int id)
+		public static Hospital GetHospital (int id)
 		{
-			return DatabaseRepository.GetItem (id);
+			return DatabaseRepository.GetHospital (id);
 		}
 
-		public static IList<Hosptial> GetAllItems ()
+		public static IList<Hospital> GetAllHospitals ()
 		{
-			return new List<Hosptial> (DatabaseRepository.GetItems ());
+			return new List<Hospital> (DatabaseRepository.GetAllHospitals ());
 		}
 
-		public static int SaveItem( Hosptial item ) 
+		public static int SaveHospital( Hospital item ) 
 		{
-			return DatabaseRepository.SaveItem (item);
+			return DatabaseRepository.SaveHospital (item);
 		}
 
-		public static int DeleteItem (int id)
+		public static int DeleteHospital (int id)
 		{
-			return DatabaseRepository.DeleteItem (id);
+			return DatabaseRepository.DeleteHospital (id);
 		}
 	}
 }
