@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 namespace MyHealthDB
 {
-	public class HealthSearchManager
+	public class DiseaseManager
 	{
-		static HealthSearchManager ()
+		static DiseaseManager ()
 		{
 		}
 
-		public static HealthSearch GetItemAt (int id)
+		public static Disease GetItemAt (int id)
 		{
 			return DatabaseRepository.GetItem (id);
 		}
 
-		public static IList<HealthSearch> GetAllItems ()
+		public static IList<Disease> GetAllItems ()
 		{
-			return new List<HealthSearch> (DatabaseRepository.GetItems ());
+			return new List<Disease> (DatabaseRepository.GetItems ());
 		}
 
-		public static int SaveItem( HealthSearch item ) 
+		public static int SaveItem( Disease item ) 
 		{
 			return DatabaseRepository.SaveItem (item);
 		}
