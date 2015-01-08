@@ -9,18 +9,18 @@
     <Import_RootNamespace>MyHealthDB</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IDBEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\DBEntityBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\HealthSearch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\HealthSearchManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDBEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\DBEntityBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Contracts\" />
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Tables\" />
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
   </ItemGroup>
 </Project>

@@ -155,7 +155,6 @@ namespace MyHealthAndroid
 		//------------------------ search items in list ----------------------//
 		private void CreateExpendableListData ()
 		{
-			//String[] indexTitles = {@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", "X", "Y", "Z"};
 			String[] indexTitles = {@"Cancer", @"Diabeties", @"Heart", @"Obessity"};
 
 			dictGroup = new Dictionary<string, List<string>> ();
