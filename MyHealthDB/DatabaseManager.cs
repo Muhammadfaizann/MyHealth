@@ -11,10 +11,18 @@ namespace MyHealthDB
 
 		public DatabaseManager (string path) : base (path)
 		{
-			CreateTable<HealthSearch> ();
+			CreateTable<County> ();
+			CreateTable<Disease> ();
+			CreateTable<DiseaseCategory> ();
+			CreateTable<EmergencyContacts> ();
+			CreateTable<HelpData> ();
+			CreateTable<Hospital> ();
+			CreateTable<NewsChannels> ();
+			CreateTable<Organisation> ();
+			CreateTable<UsefullNumbers> ();
 		}
 
-		public IEnumerable<T> GetItems<T> () where T : IDBEntity, new () 
+		public IList<T> GetItems<T> () where T : IDBEntity, new () 
 		{
 			lock (locker) {
 				return (from i in Table<T> ()
@@ -30,7 +38,8 @@ namespace MyHealthDB
 		public int SaveItem<T> (T item) where T : IDBEntity, new()
 		{
 			lock (locker) {
-				if (item.ID != 0) {
+				if (item.ID > 0 && Table<T>().Any(x => x.ID == item.ID)) {
+
 					Update (item);
 					return item.ID;
 				} else {
@@ -39,7 +48,7 @@ namespace MyHealthDB
 			}
 		}
 
-		public int DeleteItem<T> (int id) where T : HealthSearch, new() 
+		public int DeleteItem<T> (int id) where T : IDBEntity, new() 
 		{
 			lock (locker) {
 				return Delete<T> (new T () { ID = id });

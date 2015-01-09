@@ -8,18 +8,18 @@ using MyHealthDB;
 
 namespace MyHealthAndroid
 {
-	public class HPOrgnisationAdapter : BaseAdapter
+	public class HospitalsAdapter : BaseAdapter
 	{
-		private List<Organisation> _list;
+		private List<Hospital> _list;
 		private Activity _activity;
 		private CommonData _model;
 
 		//constructor
-		public HPOrgnisationAdapter (Activity activity)
+		public HospitalsAdapter (Activity activity)
 		{
 			_activity = activity;
 			_model = new CommonData ();
-			_list = _model.GetOrgnisations ();
+			_list = _model.GetHospitalsInCounty (0);
 		}
 			
 		//count of rows in ListView

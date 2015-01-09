@@ -53,34 +53,33 @@ namespace MyHealthDB
 
 
 
-	public static HealthSearch GetItem (int id)
-		{
-			return me.db.GetItem<HealthSearch> (id);
-		}
+//		public static HealthSearch GetItem (int id)
+//		{
+//			return me.db.GetItem<HealthSearch> (id);
+//		}
+//
+//
+//
+//		public static IEnumerable<HealthSearch> GetItems ()
+//		{
+//			return me.db.GetItems<HealthSearch> ();
+//		}
+//
+//
+//
+//		public static int SaveItem (HealthSearch item)
+//		{
+//			return me.db.SaveItem<HealthSearch> (item);
+//		}
+//
+//
+//
+//		public static int DeleteItem (int id)
+//		{
+//			return me.db.DeleteItem<HealthSearch> (id);
+//		}
 
 
-
-		public static IEnumerable<HealthSearch> GetItems ()
-		{
-			return me.db.GetItems<HealthSearch> ();
-		}
-
-
-
-		public static int SaveItem (HealthSearch item)
-		{
-			return me.db.SaveItem<HealthSearch> (item);
-		}
-
-
-
-		public static int DeleteItem (int id)
-		{
-			return me.db.DeleteItem<HealthSearch> (id);
-		}
-
-
-		#endregion
 		#region[County]
 
 		public static County GetCounty (int id)
@@ -183,28 +182,28 @@ namespace MyHealthDB
 
 		#endregion
 
-		#region[EmergencyContact]
+		#region[EmergencyContacts]
 
-		public static EmergencyContact GetEmergencyContact (int id)
+		public static EmergencyContacts GetEmergencyContact (int id)
 		{
 
-			return me.db.GetItem<EmergencyContact> (id);
+			return me.db.GetItem<EmergencyContacts> (id);
 		}
 
 
 
-		public static IList<EmergencyContact> GetAllEmergencyContacts()
+		public static IList<EmergencyContacts> GetAllEmergencyContacts()
 		{
 
-			return me.db.GetItems<EmergencyContact> ();
+			return me.db.GetItems<EmergencyContacts> ();
 		}
 
 
 
-		public static int SaveEmergencyContact(EmergencyContact item)
+		public static int SaveEmergencyContact(EmergencyContacts item)
 		{
 
-			return me.db.SaveItem<EmergencyContact> (item);
+			return me.db.SaveItem<EmergencyContacts> (item);
 		}
 
 
@@ -212,7 +211,7 @@ namespace MyHealthDB
 		public static int DeleteEmergencyContact (int id)
 		{
 
-			return me.db.DeleteItem<EmergencyContact> (id);
+			return me.db.DeleteItem<EmergencyContacts> (id);
 		}
 
 

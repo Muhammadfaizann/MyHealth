@@ -155,19 +155,18 @@ namespace MyHealthAndroid
 		//------------------------ search items in list ----------------------//
 		private void CreateExpendableListData ()
 		{
-			String[] indexTitles = {@"Cancer", @"Diabeties", @"Heart", @"Obessity"};
-
 			dictGroup = new Dictionary<string, List<string>> ();
-			//lstKeys = new List<string> ();
-			var items = model.GetAllDiseases ().Select(x => x.Name).ToList<string>();
+
+			var items = model.GetAllDiseases ();
+			var indexTitles = model.GetAllDiseasesCategory ();
 
 			foreach (var diseaes in indexTitles) {
+				var foundItems = items.Where (i => i.DiseaseCategoryID == diseaes.ID).Select(x => x.Name).ToList ();
 
-				var foundItems = items.Where (i => i.StartsWith (diseaes) || i.StartsWith (diseaes.ToLower ()) || i.Contains(diseaes)).OrderBy(i => i).ToArray ();
-				if (foundItems != null && foundItems.Length > 0) {
-					dictGroup.Add (string.Format (" {0} ", diseaes), foundItems.ToList<String> ());
+				if (foundItems != null && foundItems.Count() > 0) {
+					dictGroup.Add (string.Format (" {0} ", diseaes.CategoryName), foundItems);
 				} else {
-					dictGroup.Add (string.Format (" {0} ", diseaes), new List<string>());
+					dictGroup.Add (string.Format (" {0} ", diseaes.CategoryName), new List<string>());
 				}
 			}
 		}

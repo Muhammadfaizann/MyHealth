@@ -14,7 +14,7 @@ namespace MyHealthDB
 			return DatabaseRepository.GetNewsChannels (id);
 		}
 
-		public static IList<NewsChannels> GetAllNewsChannels ()
+		public static List<NewsChannels> GetAllNewsChannels ()
 		{
 			return new List<NewsChannels> (DatabaseRepository.GetAllNewsChannels ());
 		}

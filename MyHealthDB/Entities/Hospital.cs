@@ -9,8 +9,8 @@ namespace MyHealthDB
 		{
 		}
 
-		[PrimaryKey]
-		public int ID { get; set; }
+		//[PrimaryKey]
+		//public int ID { get; set; }
 		public int CountyID{get;set;}
 		public String Name { get; set; }
 		public String PhoneNumber { get; set; }

@@ -14,7 +14,7 @@ namespace MyHealthDB
 			return DatabaseRepository.GetOrganisation (id);
 		}
 
-		public static IList<Organisation> GetAllOrganisations ()
+		public static List<Organisation> GetAllOrganisations ()
 		{
 			return new List<Organisation> (DatabaseRepository.GetAllOrganisations ());
 		}

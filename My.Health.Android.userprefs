@@ -1,17 +1,23 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.8.0" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyHealthDB/DatabaseRepository.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_API_12" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MyHealthDB/Entities/UsefullNumbers.cs">
     <Files>
-      <File FileName="MyHealthDB/Interfaces/IDBEntity.cs" Line="1" Column="1" />
-      <File FileName="MyHealthDB/Interfaces/DBEntityBase.cs" Line="1" Column="1" />
-      <File FileName="MyHealthDB/SQLite/SQLite.cs" Line="9" Column="9" />
-      <File FileName="MyHealthDB/DatabaseManager.cs" Line="19" Column="19" />
-      <File FileName="MyHealthDB/Tables/HealthSearchManager.cs" Line="4" Column="4" />
-      <File FileName="MyHealthDB/DatabaseRepository.cs" Line="34" Column="34" />
+      <File FileName="MyHealthDB/DatabaseRepository.cs" Line="1" Column="1" />
+      <File FileName="MyHealthDB/DatabaseManager.cs" Line="15" Column="15" />
+      <File FileName="Model/CommonData.cs" Line="75" Column="75" />
+      <File FileName="Activities/HealthProfessionalActivity.cs" Line="70" Column="70" />
+      <File FileName="Activities/HPDetailsActivity.cs" Line="1" Column="1" />
+      <File FileName="Activities/CustomAdapaters/HPUserfulNumberAdapter.cs" Line="26" Column="26" />
+      <File FileName="MyHealthDB/Tables/UsefullNumberManager.cs" Line="1" Column="1" />
+      <File FileName="Model/DataService.cs" Line="68" Column="68" />
+      <File FileName="MyHealthDB/Interfaces/IDBEntity.cs" Line="3" Column="3" />
+      <File FileName="MyHealthDB/Entities/UsefullNumbers.cs" Line="16" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="40" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.My.Health.Android MonoForAntroid.PreferredDevice="Nexus 4" />

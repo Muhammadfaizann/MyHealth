@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Views;
 using Android.Content;
+using MyHealthDB;
 
 namespace MyHealthAndroid
 {
 	public class HPEmergencyAdapter : BaseAdapter
 	{
-		private String[,] _list;
+		private List<EmergencyContacts> _list;
 		private Activity _activity;
 		private CommonData _model;
 
@@ -23,7 +24,7 @@ namespace MyHealthAndroid
 			
 		//count of rows in ListView
 		public override int Count {
-			get { return _list.GetLength(0); }
+			get { return _list.Count; }
 		}
 
 		public override Java.Lang.Object GetItem (int position) {
@@ -43,9 +44,9 @@ namespace MyHealthAndroid
 			var emergencyName = view.FindViewById<TextView> (Resource.Id.emergencyName);
 			var emergencyInfo = view.FindViewById<TextView> (Resource.Id.emergencyInfo);
 			var emergencyNumber = view.FindViewById<TextView> (Resource.Id.emergencyNumber);
-			emergencyName.Text = _list[position , 0];
-			emergencyInfo.Text = _list[position, 1];
-			emergencyNumber.Text = _list[position , 2];
+			emergencyName.Text = _list [position].Name;  //_list[position , 0];
+			emergencyInfo.Text = _list [position].Description; //_list[position, 1];
+			emergencyNumber.Text = _list [position].PhoneNumber.ToString(); //_list[position , 2];
 
 			emergencyNumber.Clickable = true;
 			emergencyNumber.Click += (object sender, EventArgs e) => {

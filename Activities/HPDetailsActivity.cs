@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Webkit;
+using MyHealthDB;
 
 namespace MyHealthAndroid
 {
@@ -83,7 +84,7 @@ namespace MyHealthAndroid
 
 			//implement the back button 
 			_backButton = FindViewById<Button> (Resource.Id.backButton);
-			_backButton.Text = data.DisplayName;
+			_backButton.Text = (data.DisplayName.Equals("Hospitals")) ? "Counties" : data.DisplayName;
 			_backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();
@@ -126,6 +127,12 @@ namespace MyHealthAndroid
 			if (resourceName.Equals ("Hospitals")) {
 				_webView.Visibility = ViewStates.Invisible;
 				_imageView.SetImageResource (Resource.Drawable.map_large);
+				_imageView.Clickable = true;
+				_imageView.Click += (object sender, EventArgs e) => {
+					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
+					intent.PutExtra("county", "somecounty");
+					StartActivity(intent);
+				};
 
 			} else {
 				_webView.LoadUrl ("file:///android_asset/Content/AboutRCSI.html");
@@ -156,24 +163,29 @@ namespace MyHealthAndroid
 			var view = this.LayoutInflater.Inflate (Resource.Layout.alertview_custom_layout, null);
 			alert.SetView (view);
 
-			var contactList = DataService.LoadNumbers();
+			var contactList = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();
 			var UserName = view.FindViewById<EditText>(Resource.Id.contactNameInput);
 			var UserNumber = view.FindViewById<EditText>(Resource.Id.contactNumberInput);
 			if (index >= 0) {
-				UserName.Text = contactList.ElementAt(index).Title;
+				UserName.Text = contactList.ElementAt(index).Name;
 				UserNumber.Text = contactList.ElementAt(index).Number;
 			}
 
 			alert.SetPositiveButton ("Ok", (object sender, DialogClickEventArgs e) => {
 
 				if (!UserName.Text.Equals("")) {
+					UsefullNumbers contact;
 					if (index >= 0) {
-						contactList.ElementAt(index).Title = UserName.Text;
-						contactList.ElementAt(index).Number = UserNumber.Text;
+						contact = contactList.ElementAt(index);
+						contact.Name = UserName.Text;
+						contact.Number = UserNumber.Text;
 					} else {
-						contactList.Add(new MyUsefulNumbers(UserName.Text, UserNumber.Text));
+						contact = new UsefullNumbers();
+						contact.ID = contactList.Max(x => x.ID) + 1;
+						contact.Name = UserName.Text; 
+						contact.Number = UserNumber.Text;
 					}
-					DataService.SaveNumbers(contactList);
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers(contact);
 					_contactAdapter = new HPUserfulNumberAdapter (this);
 					_commonListView.Adapter = _contactAdapter;
 				}

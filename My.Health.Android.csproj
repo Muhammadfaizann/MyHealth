@@ -72,6 +72,8 @@
     <Compile Include="Activities\SubActivities\OrganDonationActivity.cs" />
     <Compile Include="Activities\SubActivities\FeedbackActivity.cs" />
     <Compile Include="Activities\SubActivities\MyProfileActivity.cs" />
+    <Compile Include="Activities\SubActivities\HospitcalsInCountyActivity.cs" />
+    <Compile Include="Activities\CustomAdapaters\HospitalsAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

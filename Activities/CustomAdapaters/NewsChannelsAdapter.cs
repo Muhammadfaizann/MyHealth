@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Views;
 using Android.Content;
+using MyHealthDB;
 
 namespace MyHealthAndroid
 {
 	public class NewsChannelsAdapter : BaseAdapter
 	{
-		private List<NewsChannels> _list;
+		public List<NewsChannels> ChannelList;
 		private Activity _activity;
 		private CommonData _model;
 
@@ -18,12 +19,12 @@ namespace MyHealthAndroid
 		{
 			_activity = activity;
 			_model = new CommonData ();
-			_list = _model.GetAllChannels ();
+			ChannelList = _model.GetAllChannels ();
 		}
 			
 		//count of rows in ListView
 		public override int Count {
-			get { return _list.Count; }
+			get { return ChannelList.Count; }
 		}
 
 		public override Java.Lang.Object GetItem (int position) {
@@ -43,8 +44,8 @@ namespace MyHealthAndroid
 			var contactName = view.FindViewById<TextView> (Resource.Id.newsChannelName);
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.newsChannelImage);
 
-			contactName.Text = _list [position].ChannelName;
-			contactImage.SetImageResource (_list [position].ChannelIcon);
+			contactName.Text = ChannelList [position].Name;
+			contactImage.SetImageResource (ChannelList [position].resourceID);
 
 			return view;
 		}

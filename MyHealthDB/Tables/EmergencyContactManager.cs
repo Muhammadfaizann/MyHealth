@@ -9,17 +9,17 @@ namespace MyHealthDB
 		{
 		}
 
-		public static EmergencyContact GetEmergencyContact (int id)
+		public static EmergencyContacts GetEmergencyContact (int id)
 		{
 			return DatabaseRepository.GetEmergencyContact (id);
 		}
 
-		public static IList<EmergencyContact> GetAllEmergencyContacts ()
+		public static List<EmergencyContacts> GetAllEmergencyContacts ()
 		{
-			return new List<EmergencyContact> (DatabaseRepository.GetAllEmergencyContacts ());
+			return new List<EmergencyContacts> (DatabaseRepository.GetAllEmergencyContacts ());
 		}
 
-		public static int SaveEmergencyContact( EmergencyContact item ) 
+		public static int SaveEmergencyContact( EmergencyContacts item ) 
 		{
 			return DatabaseRepository.SaveEmergencyContact (item);
 		}

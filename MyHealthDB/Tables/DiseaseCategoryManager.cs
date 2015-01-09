@@ -14,7 +14,7 @@ namespace MyHealthDB
 			return DatabaseRepository.GetDiseaseCategory (id);
 		}
 
-		public static IList<DiseaseCategory> GetAllDiseaseCategories ()
+		public static List<DiseaseCategory> GetAllDiseaseCategories ()
 		{
 			return new List<DiseaseCategory> (DatabaseRepository.GetAllDiseaseCategories ());
 		}

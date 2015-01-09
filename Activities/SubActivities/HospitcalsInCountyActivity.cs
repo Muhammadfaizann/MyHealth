@@ -10,41 +10,36 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MyHealthAndroid;
+using Android.Webkit;
+using MyHealthDB;
 
-namespace MyHealth.Android
+namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
-	public class HealthNewsActivity : Activity
+	[Activity (Label = "My Health")]			
+	public class HospitalsInCountyActivity : Activity
 	{
-		private Button backButton;
-		private ListView _channelsList;
+
 		private CommonData _model;
+		private ListView _commonListView;
+		private Button _backButton;
+
 
 		protected override void OnCreate (Bundle bundle)
 		{
+
 			base.OnCreate (bundle);
 			_model = new CommonData ();
 
-			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_hp_details_table);
+			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);
+			_commonListView.Adapter = new HospitalsAdapter (this);
 
 			SetCustomActionBar ();
 
-			_channelsList = FindViewById<ListView> (Resource.Id.emergencyList);
-			var _listAdapter = new NewsChannelsAdapter(this);
-			_channelsList.Adapter = _listAdapter;
-
-			_channelsList.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-				var detailActivity = new Intent (this, typeof (NewsDetailActivity));
-				detailActivity.PutExtra("ChannelName",_listAdapter.ChannelList.ElementAt(e.Position).Name);
-				StartActivity(detailActivity);
-			};
-
-			// back button
-			backButton = FindViewById<Button> (Resource.Id.backButton);
-			backButton.Text = "News";
-			backButton.Click += (object sender, EventArgs e) => 
+			//implement the back button 
+			_backButton = FindViewById<Button> (Resource.Id.backButton);
+			_backButton.Text = "Hospitals";
+			_backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();
 			};
@@ -58,6 +53,9 @@ namespace MyHealth.Android
 			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
 			ActionBar.SetDisplayShowCustomEnabled (true);
 		}
+			
+
+		//-------------------------------------- Private functions --------------------------------------//
 
 		//------------------------ menu item ----------------------//
 		public override bool OnCreateOptionsMenu (IMenu menu)

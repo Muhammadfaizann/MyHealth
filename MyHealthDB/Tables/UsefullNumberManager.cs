@@ -14,7 +14,7 @@ namespace MyHealthDB
 			return DatabaseRepository.GetUsefullNumbers (id);
 		}
 
-		public static IList<UsefullNumbers> GetAllUsefullNumbers ()
+		public static List<UsefullNumbers> GetAllUsefullNumbers ()
 		{
 			return new List<UsefullNumbers> (DatabaseRepository.GetAllUsefullNumbers ());
 		}

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MyHealthDB
 {
-	public class HosptialManager
+	public class HospitalManager
 	{
-		static HosptialManager ()
+		static HospitalManager ()
 		{
 		}
 
@@ -14,7 +14,7 @@ namespace MyHealthDB
 			return DatabaseRepository.GetHospital (id);
 		}
 
-		public static IList<Hospital> GetAllHospitals ()
+		public static List<Hospital> GetAllHospitals ()
 		{
 			return new List<Hospital> (DatabaseRepository.GetAllHospitals ());
 		}
