@@ -4,7 +4,7 @@ namespace MyHealthDB
 {
 	public interface IDBEntity
 	{
-		int ID { get; set;}
+		int? ID { get; set;}
 	}
 }
 

@@ -38,10 +38,10 @@ namespace MyHealthDB
 		public int SaveItem<T> (T item) where T : IDBEntity, new()
 		{
 			lock (locker) {
-				if (item.ID > 0 && Table<T>().Any(x => x.ID == item.ID)) {
+				if (item.ID >= 0 && Table<T>().Any(x => x.ID == item.ID)) {
 
 					Update (item);
-					return item.ID;
+					return item.ID.Value;
 				} else {
 					return Insert (item);
 				}

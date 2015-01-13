@@ -112,10 +112,11 @@ namespace MyHealthAndroid
 			_commonListView.Adapter = _contactAdapter;
 
 			_addNumberButton = FindViewById<Button> (Resource.Id.addContactButton);
-			_saveNumberButton = FindViewById<Button> (Resource.Id.saveContactButton);
+			//_saveNumberButton = FindViewById<Button> (Resource.Id.saveContactButton);
+			//_saveNumberButton.Visibility = ViewStates.Invisible;
 
 			_addNumberButton.Click += onAddButtonClicked;
-			_saveNumberButton.Click += onSaveButtonClicked;
+			//_saveNumberButton.Click += onSaveButtonClicked;
 		}
 
 		private void setSimpleLayout (string resourceName) 
@@ -171,7 +172,7 @@ namespace MyHealthAndroid
 				UserNumber.Text = contactList.ElementAt(index).Number;
 			}
 
-			alert.SetPositiveButton ("Ok", (object sender, DialogClickEventArgs e) => {
+			alert.SetPositiveButton ("Save", (object sender, DialogClickEventArgs e) => {
 
 				if (!UserName.Text.Equals("")) {
 					UsefullNumbers contact;

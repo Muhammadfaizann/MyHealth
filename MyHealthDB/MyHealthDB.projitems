@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\NewsChannels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Organisation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\UsefullNumbers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiceConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />

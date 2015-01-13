@@ -53,6 +53,6 @@ Global
 		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ios\MyHealth.csproj
+		StartupItem = My.Health.Android.csproj
 	EndGlobalSection
 EndGlobal
