@@ -52,7 +52,4 @@ Global
 		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = My.Health.Android.csproj
-	EndGlobalSection
 EndGlobal

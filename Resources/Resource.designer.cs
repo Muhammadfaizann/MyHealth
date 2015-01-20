@@ -26,6 +26,8 @@ namespace MyHealthAndroid
 		
 		public static void UpdateIdValues()
 		{
+			global::Xamarin.InsightsCore.Resource.String.ApplicationName = global::MyHealthAndroid.Resource.String.ApplicationName;
+			global::Xamarin.InsightsCore.Resource.String.Hello = global::MyHealthAndroid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -250,8 +252,8 @@ namespace MyHealthAndroid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080056
-			public const int action_profile = 2131230806;
+			// aapt resource value: 0x7f080058
+			public const int action_profile = 2131230808;
 			
 			// aapt resource value: 0x7f08002f
 			public const int actualNews = 2131230767;
@@ -466,11 +468,17 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080013
 			public const int simpleWebView = 2131230739;
 			
+			// aapt resource value: 0x7f080057
+			public const int syncButton = 2131230807;
+			
 			// aapt resource value: 0x7f080017
 			public const int tableButtons = 2131230743;
 			
 			// aapt resource value: 0x7f080018
 			public const int tableRow1 = 2131230744;
+			
+			// aapt resource value: 0x7f080056
+			public const int testlayoutforawhile = 2131230806;
 			
 			// aapt resource value: 0x7f080001
 			public const int textView1 = 2131230721;
@@ -626,13 +634,19 @@ namespace MyHealthAndroid
 		{
 			
 			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			public const int ApplicationName = 2130968577;
 			
 			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040003
+			public const int app_name = 2130968579;
 			
 			// aapt resource value: 0x7f040002
-			public const int profile_text = 2130968578;
+			public const int hello = 2130968578;
+			
+			// aapt resource value: 0x7f040004
+			public const int profile_text = 2130968580;
 			
 			static String()
 			{

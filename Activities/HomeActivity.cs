@@ -32,9 +32,6 @@ namespace MyHealthAndroid{
 			healthNewsBtn = FindViewById<ImageButton> (Resource.Id.healthNewsBtn);
 			helpBtn = FindViewById<ImageButton> (Resource.Id.helpBtn);
 
-
-			MyHealthDB.ServiceConsumer.updateApplication ("UUID");
-
 			searchBtn.Click += (object sender, EventArgs e) => 
 			{
 				var activity = new Intent(this, typeof(HealthSearchActivity));

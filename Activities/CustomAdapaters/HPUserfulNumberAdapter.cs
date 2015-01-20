@@ -16,43 +16,45 @@ namespace MyHealthAndroid
 		//constructor
 		public HPUserfulNumberAdapter (HPDetailsActivity activity)
 		{
-			_activity = activity;
-			_list = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();//DataService.LoadNumbers ();
-			if (_list.Count <= 0) {
-				MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-					ID = 0,
-					Name = "My GP",
-					Number = "1234567890"
-				});
 
-				MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-					ID = 1,
-					Name = "My Dentist", 
-					Number = "+353876416352"
-				});
+				_activity = activity;
+				_list = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();//DataService.LoadNumbers ();
+				if (_list.Count <= 0) {
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
+						ID = 0,
+						Name = "My GP",
+						Number = "1234567890"
+					});
 
-				MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-					ID = 2,
-					Name = "My Health Insurer", 
-					Number = "1234567890"
-				});
-				MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-					ID = 3,
-					Name = "My Garda Station",
-					Number = ""
-				});
-				MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-					ID = 4,
-					Name = "My Pharmacy",
-					Number = ""
-				});
-				MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-					ID = 5,
-					Name = "My Public Health Nurse",
-					Number = ""
-				});
-				_list = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();
-			}
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
+						ID = 1,
+						Name = "My Dentist", 
+						Number = "+353876416352"
+					});
+
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
+						ID = 2,
+						Name = "My Health Insurer", 
+						Number = "1234567890"
+					});
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
+						ID = 3,
+						Name = "My Garda Station",
+						Number = ""
+					});
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
+						ID = 4,
+						Name = "My Pharmacy",
+						Number = ""
+					});
+					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
+						ID = 5,
+						Name = "My Public Health Nurse",
+						Number = ""
+					});
+					_list = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();
+				}
+		
 		}
 			
 		//count of rows in ListView

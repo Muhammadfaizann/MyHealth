@@ -26,6 +26,7 @@ namespace MyHealthAndroid
 		private Spinner bloodGroupSpinner;
 		private ToggleButton matricToggleButton;
 		private Button calculateBMIButton;
+		private Button syncButton;
 
 		private List<String> HeightUnitBig;
 		private List<String> HeightUnitSmall;
@@ -51,11 +52,17 @@ namespace MyHealthAndroid
 			bloodGroupSpinner = FindViewById<Spinner> (Resource.Id.bloodGroupSpinner);
 			matricToggleButton = FindViewById<ToggleButton> (Resource.Id.matricToggleButton);
 			calculateBMIButton = FindViewById<Button> (Resource.Id.calculateBMIButton);
+			syncButton = FindViewById<Button> (Resource.Id.syncButton);
+
+			syncButton.Click += (object sender, EventArgs e) => {
+				MyHealthDB.ServiceConsumer.updateUsefullNumbers("UUID");
+			};
 
 			calculateBMIButton.Click += CalculateBMI;
 			matricToggleButton.Click += (object sender, EventArgs e) => {
 				SetSpinnersAdapter (matricToggleButton.Checked);
 			};
+
 			//populate the spinners
 			SetSpinnersAdapter (false);
 

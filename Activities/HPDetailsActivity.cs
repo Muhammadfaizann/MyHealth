@@ -22,7 +22,7 @@ namespace MyHealthAndroid
 		private CommonData _model;
 		private ListView _commonListView;
 		private Button _addNumberButton;
-		private Button _saveNumberButton;
+		//private Button _saveNumberButton;
 		private Button _backButton;
 		private WebView _webView;
 		private ImageView _imageView;

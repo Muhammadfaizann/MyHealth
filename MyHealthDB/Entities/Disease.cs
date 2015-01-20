@@ -12,13 +12,12 @@ namespace MyHealthDB
 
 		}
 
-
-
 		//[PrimaryKey]
 		//public int ID { get; set;}
 		public int DiseaseCategoryID{get;set;}
 		public String Name { get; set;}
 		public String Details { get; set;}
+		public String DescriptionURL { get; set;}
 	}
 }
 

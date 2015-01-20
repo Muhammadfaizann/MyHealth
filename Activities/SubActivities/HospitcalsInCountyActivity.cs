@@ -18,17 +18,15 @@ namespace MyHealthAndroid
 	[Activity (Label = "My Health")]			
 	public class HospitalsInCountyActivity : Activity
 	{
-
-		private CommonData _model;
+		//private CommonData _model;
 		private ListView _commonListView;
 		private Button _backButton;
-
 
 		protected override void OnCreate (Bundle bundle)
 		{
 
 			base.OnCreate (bundle);
-			_model = new CommonData ();
+			//_model = new CommonData ();
 
 			SetContentView (Resource.Layout.activity_hp_details_table);
 			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);

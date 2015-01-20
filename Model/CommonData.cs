@@ -67,12 +67,12 @@ namespace MyHealthAndroid
 
 				MyHealthDB.CountyManager.SaveCounty (new County {
 					ID = 1,
-					Name = "First County",
+					Name = "Second County",
 				});
 
 				MyHealthDB.CountyManager.SaveCounty (new County {
-					ID = 0,
-					Name = "First County",
+					ID = 2,
+					Name = "Third County",
 				});
 
 				counties = MyHealthDB.CountyManager.GetAllCounties ();
@@ -219,13 +219,13 @@ namespace MyHealthAndroid
 			//				channels.Add (new NewsChannels ("Irish Health", Resource.Drawable.IrishHealth));
 			//				channels.Add (new NewsChannels ("Irish Times Health", Resource.Drawable.IrishTimes));
 			var channels = MyHealthDB.NewsChannelsManager.GetAllNewsChannels ();
-//			if (channels.Count <= 0) {
-//				MyHealthDB.NewsChannelsManager.SaveNewsChannels ( new NewsChannels {
-//					ID = 0,
-//					Name = "BBC Medical News",
-//					resourceID = Resource.Drawable.NewsHealth,
-//					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
-//				});
+			if (channels.Count <= 0) {
+				MyHealthDB.NewsChannelsManager.SaveNewsChannels ( new NewsChannels {
+					ID = 0,
+					Name = "BBC Medical News",
+					resourceID = Resource.Drawable.NewsHealth,
+					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
+				});
 				MyHealthDB.NewsChannelsManager.SaveNewsChannels (new NewsChannels {
 					ID = 1,
 					Name = "Pulse Latest",
@@ -246,7 +246,7 @@ namespace MyHealthAndroid
 					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
 				});
 				channels = MyHealthDB.NewsChannelsManager.GetAllNewsChannels ();
-//			}
+			}
 			return channels;
 		}
 

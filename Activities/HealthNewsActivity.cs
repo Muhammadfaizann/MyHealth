@@ -19,12 +19,12 @@ namespace MyHealth.Android
 	{
 		private Button backButton;
 		private ListView _channelsList;
-		private CommonData _model;
+		//private CommonData _model = new CommonData ();
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-			_model = new CommonData ();
+			//_model = new CommonData ();
 
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_hp_details_table);

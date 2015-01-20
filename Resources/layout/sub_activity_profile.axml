@@ -233,5 +233,19 @@
                 android:id="@+id/calculateBMIButton"
                 android:layout_weight="0.5" />
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/buttonsComponentLayout"
+            android:id="@+id/testlayoutforawhile">
+            <Button
+                android:text="Sync With Server"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/syncButton" />
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

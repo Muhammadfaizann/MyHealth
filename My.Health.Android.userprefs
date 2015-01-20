@@ -1,22 +1,23 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_API_12" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyHealthDB/Entities/UsefullNumbers.cs">
+﻿<Properties StartupItem="My.Health.Android.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.7.1" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ios/AppDelegate.cs">
     <Files>
-      <File FileName="MyHealthDB/DatabaseRepository.cs" Line="1" Column="1" />
-      <File FileName="MyHealthDB/DatabaseManager.cs" Line="15" Column="15" />
-      <File FileName="Model/CommonData.cs" Line="75" Column="75" />
-      <File FileName="Activities/HealthProfessionalActivity.cs" Line="70" Column="70" />
-      <File FileName="Activities/HPDetailsActivity.cs" Line="1" Column="1" />
-      <File FileName="Activities/CustomAdapaters/HPUserfulNumberAdapter.cs" Line="26" Column="26" />
-      <File FileName="MyHealthDB/Tables/UsefullNumberManager.cs" Line="1" Column="1" />
-      <File FileName="Model/DataService.cs" Line="68" Column="68" />
-      <File FileName="MyHealthDB/Interfaces/IDBEntity.cs" Line="3" Column="3" />
-      <File FileName="MyHealthDB/Entities/UsefullNumbers.cs" Line="16" Column="16" />
+      <File FileName="ios/AppDelegate.cs" Line="4" Column="4" />
+      <File FileName="ios/Main.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="MyHealth" expanded="True">
+            <Node name="TopBarController.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="40" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/AppDelegate.cs" line="58" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
