@@ -11,22 +11,22 @@ namespace MyHealthDB
 
 		public static Disease GetDisease (int id)
 		{
-			return DatabaseRepository.GetDisease (id);
+			return null; //DatabaseRepository.GetDisease (id);
 		}
 
 		public static IList<Disease> GetAllDiseases ()
 		{
-			return new List<Disease> (DatabaseRepository.GetAllDisease());
+			return null; //new List<Disease> (DatabaseRepository.GetAllDisease());
 		}
 
 		public static int SaveDisease( Disease item ) 
 		{
-			return DatabaseRepository.SaveDisease (item);
+			return 0; //DatabaseRepository.SaveDisease (item);
 		}
 
 		public static int DeleteDisease (int id)
 		{
-			return DatabaseRepository.DeleteDisease (id);
+			return 0; //DatabaseRepository.DeleteDisease (id);
 		}
 	}
 }

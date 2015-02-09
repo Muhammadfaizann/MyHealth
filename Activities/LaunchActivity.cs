@@ -16,7 +16,7 @@ namespace MyHealthAndroid
 		ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			Xamarin.Insights.Initialize ("0f69e93547fe9808f9e454c362ec1f65a490762c", this.BaseContext);
@@ -29,16 +29,21 @@ namespace MyHealthAndroid
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Launch);
 
-			MyHealthDB.ServiceConsumer.DeviceID = RetreiveDeviceID ();
-
 			AlertDialog.Builder alert = new AlertDialog.Builder (this);
 			alert.SetTitle("Accept Terms of Use");
 			alert.SetMessage("Read our terms and conditions");
 
 			alert.SetCancelable (false);
 			
-			alert.SetPositiveButton ("Agree", (senderAlert, args) => {
-				StartActivity(typeof(HomeActivity));
+			alert.SetPositiveButton ("Agree", async (senderAlert, args) => {
+				if (!ifDatabaseExists(BaseContext)) {
+					await MyHealthDB.ServiceConsumer.CreateDatabase();
+					await MyHealthDB.Logger.LogManager.SyncAllLogs ();
+					SaveDatabaseExits(BaseContext);
+					StartActivity (new Intent(this, typeof(MyProfileActivity)));
+				} else {
+					StartActivity(typeof(HomeActivity));
+				}
 			});
 
 			alert.SetNegativeButton ("Don't Agree", (senderAlert, args) => {
@@ -55,6 +60,21 @@ namespace MyHealthAndroid
 			base.OnPause ();
 		}
 
+		//------------------------ Check If Databases Exists ----------------------//
+		private Boolean ifDatabaseExists (Context _context) {
+			ISharedPreferences prefs = Application.Context.GetSharedPreferences("MyHealthAppPrefs", FileCreationMode.Private);//PreferenceManager.GetDefaultSharedPreferences (_context);
+			return prefs.GetBoolean ("dbExists", false);
+
+		}
+
+		private void SaveDatabaseExits (Context _context) {
+
+			ISharedPreferences prefs = Application.Context.GetSharedPreferences ("MyHealthAppPrefs", FileCreationMode.Private);//PreferenceManager.GetDefaultSharedPreferences (_context);
+			ISharedPreferencesEditor editor = prefs.Edit ();
+
+			editor.PutBoolean ("dbExists", true);
+			editor.Apply ();
+		}
 		//------------------------ Get Device ID ----------------------//
 
 		private string RetreiveDeviceID ()

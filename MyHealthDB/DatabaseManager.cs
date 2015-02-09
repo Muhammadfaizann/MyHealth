@@ -1,59 +1,700 @@
 ﻿using System;
-using MyHealth.DB.SQLite;
+using MyHealth.DB.SQLiteAsync;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace MyHealthDB
 {
-	public class DatabaseManager : SQLiteConnection
+	public class DatabaseManager //: SQLiteAsyncConnection
 	{
-		static object locker = new object();
+		public static string DatabaseFilePath {
+			get {
+				var sqliteFilename = "MyHealthDB.db3";
 
-		public DatabaseManager (string path) : base (path)
-		{
-			CreateTable<County> ();
-			CreateTable<Disease> ();
-			CreateTable<DiseaseCategory> ();
-			CreateTable<EmergencyContacts> ();
-			CreateTable<HelpData> ();
-			CreateTable<Hospital> ();
-			CreateTable<NewsChannels> ();
-			CreateTable<Organisation> ();
-			CreateTable<UsefullNumbers> ();
-		}
+				#if SILVERLIGHT
+				var path = sqliteFilename;
+				#else
 
-		public IList<T> GetItems<T> () where T : IDBEntity, new () 
-		{
-			lock (locker) {
-				return (from i in Table<T> ()
-				        select i).ToList ();
+				#if __ANDROID__
+				string libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+
+				#else
+
+				string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+				string libraryPath = Path.Combine (documentsPath, "..", "Library");
+
+				#endif
+
+				var path = Path.Combine(libraryPath, sqliteFilename);
+
+				#endif
+
+				return path;
 			}
 		}
 
-		public T GetItem<T> (int id) where T : IDBEntity, new() 
-		{
-			return Table<T> ().FirstOrDefault (x => x.ID == id);
+		public static SQLiteAsyncConnection dbConnection {
+			get {
+				var conn = new SQLiteAsyncConnection (DatabaseFilePath);
+				return conn;
+			}
 		}
 
-		public int SaveItem<T> (T item) where T : IDBEntity, new()
+		public async static Task CreateAllTables()
 		{
-			lock (locker) {
-				if (item.ID >= 0 && Table<T>().Any(x => x.ID == item.ID)) {
+			//var db = new SQLiteAsyncConnection(DatabaseRepository.DatabaseFilePath);
+			await dbConnection.CreateTableAsync<RegisteredDevice> ();
 
-					Update (item);
-					return item.ID.Value;
-				} else {
-					return Insert (item);
+			await dbConnection.CreateTableAsync<County> ();
+
+			await dbConnection.CreateTableAsync<Disease> ();
+
+			await dbConnection.CreateTableAsync<DiseaseCategory> ();
+
+			await dbConnection.CreateTableAsync<DiseasesForCategory> ();
+
+			await dbConnection.CreateTableAsync<EmergencyContacts> ();
+
+			await dbConnection.CreateTableAsync<Hospital> ();
+
+			await dbConnection.CreateTableAsync<HelpData> ();
+
+			await dbConnection.CreateTableAsync<NewsChannels> ();
+
+			await dbConnection.CreateTableAsync<Organisation> ();
+
+			await dbConnection.CreateTableAsync<UsefullNumbers> ();
+
+			await dbConnection.CreateTablesAsync<LogContent, LogExternalLink, LogFeedback, LogUsage> ();
+		}
+
+		#region[Register]
+		public async static Task<List<RegisteredDevice>> SelectAllDevices()
+		{
+			var counties = await dbConnection.Table<RegisteredDevice>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<RegisteredDevice> SelectDevice(int id)
+		{
+			return await dbConnection.Table<RegisteredDevice> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveDevice(RegisteredDevice device)
+		{
+			var selected = await dbConnection.Table<RegisteredDevice> ().Where(x => x.ID == device.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (device).ContinueWith (t => {
+					Console.WriteLine ("New County Name : {0}", device.UserName);
+				});
+			} else {
+				await dbConnection.UpdateAsync (device).ContinueWith (t => {
+					Console.WriteLine ("Updated County Name : {0}", device.UserName);
+				});
+			}
+		}
+
+		public async static Task DeleteDevice(RegisteredDevice device)
+		{
+			await dbConnection.DeleteAsync(device).ContinueWith(t => {
+				Console.WriteLine ("New County Name : {0}", device.UserName);
+			});
+		}
+		#endregion
+
+		#region[County]
+		public async static Task<List<County>> SelectAllCounties()
+		{
+			var counties = await dbConnection.Table<County>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<County> SelectCounty(int id)
+		{
+			return await dbConnection.Table<County> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveCounty(County county)
+		{
+			var selected = await dbConnection.Table<County> ().Where(x => x.ID == county.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (county).ContinueWith (t => {
+					Console.WriteLine ("New County Name : {0}", county.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (county).ContinueWith (t => {
+					Console.WriteLine ("Updated County Name : {0}", county.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteCounty(County county)
+		{
+			await dbConnection.DeleteAsync(county).ContinueWith(t => {
+				Console.WriteLine ("New County Name : {0}", county.Name);
+			});
+		}
+		#endregion
+
+		#region[Disease]
+		public async static Task<List<Disease>> SelectAllDiseases()
+		{
+			var diseases = await dbConnection.Table<Disease>().ToListAsync ();
+			return diseases;
+		}
+
+		public async static Task<Disease> SelectDisease(int id)
+		{
+			return await dbConnection.Table<Disease> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveDisease(Disease disease)
+		{
+			var selected = await dbConnection.Table<Disease> ().Where(x => x.ID == disease.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (disease).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", disease.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (disease).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", disease.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteDisease(Disease county)
+		{
+			await dbConnection.DeleteAsync(county).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", county.Name);
+			});
+		}
+		#endregion
+
+		#region[DiseaseCategory]
+		public async static Task<List<DiseaseCategory>> SelectAllDiseaseCategories()
+		{
+			var diseaseCategory = await dbConnection.Table<DiseaseCategory>().ToListAsync ();
+			return diseaseCategory;
+		}
+
+		public async static Task<DiseaseCategory> SelectDiseaseCategory(int id)
+		{
+			return await dbConnection.Table<DiseaseCategory> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveDiseaseCategory(DiseaseCategory category)
+		{
+			var selected = await dbConnection.Table<DiseaseCategory> ().Where(x => x.ID == category.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (category).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", category.CategoryName);
+				});
+			} else {
+				await dbConnection.UpdateAsync (category).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", category.CategoryName);
+				});
+			}
+		}
+
+		public async static Task DeleteDiseaseCategory(DiseaseCategory category)
+		{
+			await dbConnection.DeleteAsync(category).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", category.CategoryName);
+			});
+		}
+		#endregion
+
+		#region[DiseasesForCategory]
+		public async static Task<List<DiseasesForCategory>> SelectAllDiseasesForCategory()
+		{
+			var diseasesForCategories = await dbConnection.Table<DiseasesForCategory>().ToListAsync ();
+			return diseasesForCategories;
+		}
+
+		public async static Task<DiseasesForCategory> SelectDiseasesForCategory(int id)
+		{
+			return await dbConnection.Table<DiseasesForCategory> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveDiseasesForCategory(DiseasesForCategory diseaseForCategory)
+		{
+			var selected = await dbConnection.Table<DiseasesForCategory> ().Where(x => x.ID == diseaseForCategory.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (diseaseForCategory).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", diseaseForCategory.CategoryId);
+				});
+			} else {
+				await dbConnection.UpdateAsync (diseaseForCategory).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", diseaseForCategory.CategoryId);
+				});
+			}
+		}
+
+		public async static Task DeleteDiseasesForCategory(DiseasesForCategory diseaseForCategory)
+		{
+			await dbConnection.DeleteAsync(diseaseForCategory).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", diseaseForCategory.CategoryId);
+			});
+		}
+		#endregion
+
+		#region[EmergencyContacts]
+		public async static Task<List<EmergencyContacts>> SelectAllEmergencyContacts()
+		{
+			var contacts = await dbConnection.Table<EmergencyContacts>().ToListAsync ();
+			return contacts;
+		}
+
+		public async static Task<EmergencyContacts> SelectEmergencyContacts(int id)
+		{
+			return await dbConnection.Table<EmergencyContacts> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveEmergencyContacts(EmergencyContacts contacts)
+		{
+			var selected = await dbConnection.Table<EmergencyContacts> ().Where(x => x.ID == contacts.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (contacts).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", contacts.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (contacts).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", contacts.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteEmergencyContacts(EmergencyContacts contacts)
+		{
+			await dbConnection.DeleteAsync(contacts).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", contacts.Name);
+			});
+		}
+		#endregion
+
+		#region[HelpData]
+		public async static Task<List<HelpData>> SelectAllHelpData()
+		{
+			var counties = await dbConnection.Table<HelpData>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<HelpData> SelectHelpData(int id)
+		{
+			return await dbConnection.Table<HelpData> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveHelpData(HelpData data)
+		{
+			var selected = await dbConnection.Table<HelpData> ().Where(x => x.ID == data.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (data).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", data.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (data).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", data.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteHelpData(HelpData data)
+		{
+			await dbConnection.DeleteAsync(data).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", data.Name);
+			});
+		}
+		#endregion
+
+		#region[Hospital]
+		public async static Task<List<Hospital>> SelectAllHospitals()
+		{
+			var counties = await dbConnection.Table<Hospital>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<Hospital> SelectHospital(int id)
+		{
+			return await dbConnection.Table<Hospital> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveHospital(Hospital hospital)
+		{
+			var selected = await dbConnection.Table<Hospital> ().Where(x => x.ID == hospital.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (hospital).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", hospital.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (hospital).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", hospital.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteHospital(Hospital hospital)
+		{
+			await dbConnection.DeleteAsync(hospital).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", hospital.Name);
+			});
+		}
+		#endregion
+
+		#region[NewsChannels]
+		public async static Task<List<NewsChannels>> SelectAllNewsChannels()
+		{
+			var counties = await dbConnection.Table<NewsChannels>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<NewsChannels> SelectNewsChannel(int id)
+		{
+			return await dbConnection.Table<NewsChannels> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveNewsChannels(NewsChannels channel)
+		{
+			var selected = await dbConnection.Table<NewsChannels> ().Where(x => x.ID == channel.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (channel).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", channel.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (channel).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", channel.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteNewsChannels(NewsChannels channel)
+		{
+			await dbConnection.DeleteAsync(channel).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", channel.Name);
+			});
+		}
+		#endregion
+
+		#region[Organisation]
+		public async static Task<List<Organisation>> SelectAllOrganisations()
+		{
+			var counties = await dbConnection.Table<Organisation>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<Organisation> SelectOrganisation(int id)
+		{
+			return await dbConnection.Table<Organisation> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveOrganisation(Organisation organisation)
+		{
+			var selected = await dbConnection.Table<Organisation> ().Where(x => x.ID == organisation.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (organisation).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", organisation.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (organisation).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", organisation.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteOrganisation(Organisation organisation)
+		{
+			await dbConnection.DeleteAsync(organisation).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", organisation.Name);
+			});
+		}
+		#endregion
+
+		#region[UsefullNumbers]
+		public async static Task<List<UsefullNumbers>> SelectAllUsefullNumbers()
+		{
+			var counties = await dbConnection.Table<UsefullNumbers>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<UsefullNumbers> SelectUsefullNumber(int id)
+		{
+			return await dbConnection.Table<UsefullNumbers> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveUsefullNumber(UsefullNumbers number)
+		{
+			var selected = await dbConnection.Table<UsefullNumbers> ().Where(x => x.ID == number.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (number).ContinueWith (t => {
+					Console.WriteLine ("New Disease Name : {0}", number.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (number).ContinueWith (t => {
+					Console.WriteLine ("Updated Disease Name : {0}", number.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteUsefullNumber(UsefullNumbers number)
+		{
+			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+				Console.WriteLine ("New Disease Name : {0}", number.Name);
+			});
+		}
+		#endregion
+
+		#region[LogContent]
+		public async static Task<List<LogContent>> SelectAllLogContent()
+		{
+			var log = await dbConnection.Table<LogContent>().ToListAsync ();
+			return log;
+		}
+
+		public async static Task<List<LogContent>> SelectLogContent (int numberOfRecords = 100)
+		{
+			var log = await dbConnection.Table<LogContent> ().Take (numberOfRecords).ToListAsync ();
+			return log;
+		}
+
+		public async static Task<LogContent> SelectLogContentList(int id)
+		{
+			return await dbConnection.Table<LogContent> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveLogContent(LogContent log)
+		{
+			var selected = await dbConnection.Table<LogContent> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (log).ContinueWith (t => {
+					Console.WriteLine ("New LogContent Name : {0}", log.ID);
+				});
+			} else {
+				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+					Console.WriteLine ("Updated LogContent Name : {0}", log.ID);
+				});
+			}
+		}
+
+		public async static Task DeleteLogContent(LogContent number)
+		{
+			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+				Console.WriteLine ("LogContent with ID : {0} >> deleted", number.ID);
+			});
+		}
+
+		public async static Task DeleteLogContentList(List<LogContent> logList)
+		{
+			try {
+				foreach (var log in logList) 
+				{
+					await dbConnection.DeleteAsync(log).ContinueWith(t => {
+						Console.WriteLine ("LogContent with ID : {0} >> deleted", log.ID);
+					});
 				}
+			} catch (Exception ex) {
+				Console.WriteLine("Deletion List List<LogContent> was stopped because of [{0}]", ex.ToString());
+			}
+		}
+		#endregion
+
+		#region[LogExternalLink]
+		public async static Task<List<LogExternalLink>> SelectAllLogExternalLink()
+		{
+			var log = await dbConnection.Table<LogExternalLink>().ToListAsync ();
+			return log;
+		}
+
+		public async static Task<List<LogExternalLink>> SelectLogExternalLinkList (int numberOfRecords = 100)
+		{
+			var log = await dbConnection.Table<LogExternalLink> ().Take (numberOfRecords).ToListAsync ();
+			return log;
+		}
+
+		public async static Task<LogExternalLink> SelectLogExternalLink(int id)
+		{
+			return await dbConnection.Table<LogExternalLink> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveLogExternalLink(LogExternalLink log)
+		{
+			var selected = await dbConnection.Table<LogExternalLink> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (log).ContinueWith (t => {
+					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
+				});
+			} else {
+				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
+				});
 			}
 		}
 
-		public int DeleteItem<T> (int id) where T : IDBEntity, new() 
+		public async static Task DeleteLogExternalLink(LogExternalLink number)
 		{
-			lock (locker) {
-				return Delete<T> (new T () { ID = id });
+			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+				Console.WriteLine ("LogExternalLink with ID : {0} >> deleted", number.ID);
+			});
+		}
+
+		public async static Task DeleteLogExternalLinkList(List<LogExternalLink> logList)
+		{
+			try {
+				foreach (var log in logList) 
+				{
+					await dbConnection.DeleteAsync(log).ContinueWith(t => {
+						Console.WriteLine ("LogContent with ID : {0} >> deleted", log.ID);
+					});
+				}
+			} catch (Exception ex) {
+				Console.WriteLine("Deletion List List<LogExternalLink> was stopped because of [{0}]", ex.ToString());
 			}
 		}
+
+		#endregion
+
+		#region[LogFeedback]
+		public async static Task<List<LogFeedback>> SelectAllLogFeedback()
+		{
+			var log = await dbConnection.Table<LogFeedback>().ToListAsync ();
+			return log;
+		}
+
+		public async static Task<List<LogFeedback>> SelectLogFeedbackList (int numberOfRecords = 100)
+		{
+			var log = await dbConnection.Table<LogFeedback> ().Take (numberOfRecords).ToListAsync ();
+			return log;
+		}
+
+		public async static Task<LogFeedback> SelectLogFeedback(int id)
+		{
+			return await dbConnection.Table<LogFeedback> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveLogFeedback(LogFeedback log)
+		{
+			var selected = await dbConnection.Table<LogFeedback> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (log).ContinueWith (t => {
+					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
+				});
+			} else {
+				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
+				});
+			}
+		}
+
+		public async static Task DeleteLogFeedback(LogFeedback number)
+		{
+			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+				Console.WriteLine ("LogExternalLink with ID : {0} >> deleted", number.ID);
+			});
+		}
+
+		public async static Task DeleteLogFeedbackList(List<LogFeedback> logList)
+		{
+			try {
+				foreach (var log in logList) 
+				{
+					await dbConnection.DeleteAsync(log).ContinueWith(t => {
+						Console.WriteLine ("LogContent with ID : {0} >> deleted", log.ID);
+					});
+				}
+			} catch (Exception ex) {
+				Console.WriteLine("Deletion List List<LogFeedback> was stopped because of [{0}]", ex.ToString());
+			}
+		}
+		#endregion
+
+		#region[LogUsage]
+		public async static Task<List<LogUsage>> SelectAllLogUsage()
+		{
+			var log = await dbConnection.Table<LogUsage>().ToListAsync ();
+			return log;
+		}
+
+		public async static Task<List<LogUsage>> SelectLogUsageList (int numberOfRecords = 100)
+		{
+			var log = await dbConnection.Table<LogUsage> ().Take (numberOfRecords).ToListAsync ();
+			return log;
+		}
+
+		public async static Task<LogUsage> SelectLogUsage(int id)
+		{
+			return await dbConnection.Table<LogUsage> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveLogUsage(LogUsage log)
+		{
+			var selected = await dbConnection.Table<LogUsage> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (log).ContinueWith (t => {
+					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
+				});
+			} else {
+				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
+				});
+			}
+		}
+
+		public async static Task DeleteLogUsage(LogUsage number)
+		{
+			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+				Console.WriteLine ("LogExternalLink with ID : {0} >> deleted", number.ID);
+			});
+		}
+
+		public async static Task DeleteLogUsageList(List<LogUsage> logList)
+		{
+			try {
+				foreach (var log in logList) 
+				{
+					await dbConnection.DeleteAsync(log).ContinueWith(t => {
+						Console.WriteLine ("LogContent with ID : {0} >> deleted", log.ID);
+					});
+				}
+			} catch (Exception ex) {
+				Console.WriteLine("Deletion List List<LogFeedback> was stopped because of [{0}]", ex.ToString());
+			}
+		}
+		#endregion
+//
+//		public async Task<List<T>> GetItems<T> () where T : IDBEntity, new () 
+//		{
+			//lock (locker) {
+//				return await Table<T> ().ToListAsync ();
+//				return (from i in Table<T> ()
+//				        select i).ToList ();
+			//}
+//		}
+//
+//		public async Task<T> GetItem<T> (int id) where T : IDBEntity, new() 
+//		{
+//			return await Table<T> ().Where (x => x.ID == id).FirstOrDefaultAsync ();
+//			//return Table<T> ().FirstOrDefault (x => x.ID == id);
+//		}
+//
+//		public async Task<int> SaveItem<T> (T item) where T : IDBEntity, new()
+//		{
+//			//lock (locker) {
+//				if (item.ID >= 0 && Table<T>().Where(x => x.ID == item.ID) != null) {
+//					 await UpdateAsync (item);
+//					return item.ID.Value;
+//				} else {
+//					await InsertAsync (item);
+//					return item.ID.Value;
+//				}
+//			//}
+//		}
+//
+//		public async Task<int> DeleteItem<T> (int id) where T : IDBEntity, new() 
+//		{
+//			//lock (locker) {
+//			return await DeleteAsdync<T> (new T () { ID = id });
+//			//}
+//		}
 	}
 }
 

@@ -10,6 +10,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MyHealth.Android;
+using Android.Preferences;
+
+using MyHealthDB;
+using MyHealthDB.Logger;
 
 namespace MyHealthAndroid{
 	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -20,12 +24,14 @@ namespace MyHealthAndroid{
 		private ImageButton healthNewsBtn;
 		private ImageButton helpBtn;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Home);
 
 			SetCustomActionBar ();
+
+			await LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.Home).ToString() });
 
 			searchBtn = FindViewById<ImageButton> (Resource.Id.healthSearchBtn);
 			healthProBtn = FindViewById<ImageButton> (Resource.Id.healthProfessionalBtn);
@@ -56,6 +62,7 @@ namespace MyHealthAndroid{
 				StartActivity( activity);
 			};
 		}
+
 
 		//------------------------ custom activity ----------------------//
 		public void SetCustomActionBar () 

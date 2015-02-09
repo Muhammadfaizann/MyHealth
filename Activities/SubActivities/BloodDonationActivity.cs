@@ -11,6 +11,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealthAndroid
 {
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -22,6 +25,8 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.sub_activity_blood_donation);
 
 			SetCustomActionBar ();
+
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.BloodDonation).ToString() });
 
 			var Link = FindViewById (Resource.Id.bloodDonationLink);
 			Link.Click += (object sender, EventArgs e) => {

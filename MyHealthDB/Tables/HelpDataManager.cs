@@ -10,22 +10,22 @@ namespace MyHealthDB
 		}
 		public static HelpData GetHelpData (int id)
 		{
-			return DatabaseRepository.GetHelpData (id);
+			return null;// DatabaseRepository.GetHelpData (id);
 		}
 
 		public static IList<HelpData> GetAllHelpData ()
 		{
-			return new List<HelpData> (DatabaseRepository.GetAllHelpData ());
+			return null; //new List<HelpData> (DatabaseRepository.GetAllHelpData ());
 		}
 
 		public static int SaveHelpData( HelpData item ) 
 		{
-			return DatabaseRepository.SaveHelpData (item);
+			return 0; //DatabaseRepository.SaveHelpData (item);
 		}
 
 		public static int DeleteHelpData (int id)
 		{
-			return DatabaseRepository.DeleteHelpData (id);
+			return 0; //DatabaseRepository.DeleteHelpData (id);
 		}
 	}
 }

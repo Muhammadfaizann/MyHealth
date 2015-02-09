@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Webkit;
 using MyHealthDB;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -55,16 +56,16 @@ namespace MyHealthAndroid
 		}
 
 		//-------------------------------------- Setup Layout --------------------------------------//
-		private void SetContentAsPerCaller (HPData data) {
+		private async Task SetContentAsPerCaller (HPData data) {
 		
 			switch (data.Id) 
 			{
 			case 0:  
-				setLayoutWithTable (data.DisplayName);
+				await setLayoutWithTable (data.DisplayName);
 
 				break;
 			case 1:
-				setLayoutWithTable (data.DisplayName);
+				await setLayoutWithTable (data.DisplayName);
 
 				break;
 
@@ -91,12 +92,13 @@ namespace MyHealthAndroid
 			};
 		}
 
-		private void setLayoutWithTable (string resourceName) 
+		private async Task setLayoutWithTable (string resourceName) 
 		{
 			SetContentView (Resource.Layout.activity_hp_details_table);
 			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);
 			if (resourceName.Equals ("Emergency")) {
 				var emergencyAdapter = new HPEmergencyAdapter (this);
+				await emergencyAdapter.loadData ();
 				_commonListView.Adapter = emergencyAdapter;
 			} else {
 				var emergencyAdapter = new HPOrgnisationAdapter (this);

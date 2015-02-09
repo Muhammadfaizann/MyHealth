@@ -11,22 +11,22 @@ namespace MyHealthDB
 
 		public static EmergencyContacts GetEmergencyContact (int id)
 		{
-			return DatabaseRepository.GetEmergencyContact (id);
+			return null;//DatabaseRepository.GetEmergencyContact (id);
 		}
 
 		public static List<EmergencyContacts> GetAllEmergencyContacts ()
 		{
-			return new List<EmergencyContacts> (DatabaseRepository.GetAllEmergencyContacts ());
+			return null; //new List<EmergencyContacts> (DatabaseRepository.GetAllEmergencyContacts ());
 		}
 
 		public static int SaveEmergencyContact( EmergencyContacts item ) 
 		{
-			return DatabaseRepository.SaveEmergencyContact (item);
+			return 0;// DatabaseRepository.SaveEmergencyContact (item);
 		}
 
 		public static int DeleteEmergencyContact (int id)
 		{
-			return DatabaseRepository.DeleteEmergencyContact (id);
+			return 0;// DatabaseRepository.DeleteEmergencyContact (id);
 		}
 	}
 }

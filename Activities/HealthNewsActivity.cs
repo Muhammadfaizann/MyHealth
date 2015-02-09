@@ -12,6 +12,9 @@ using Android.Views;
 using Android.Widget;
 using MyHealthAndroid;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealth.Android
 {
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
@@ -30,6 +33,8 @@ namespace MyHealth.Android
 			SetContentView (Resource.Layout.activity_hp_details_table);
 
 			SetCustomActionBar ();
+
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.HealthNews).ToString() });
 
 			_channelsList = FindViewById<ListView> (Resource.Id.emergencyList);
 			var _listAdapter = new NewsChannelsAdapter(this);

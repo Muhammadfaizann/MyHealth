@@ -9,7 +9,6 @@
     <Import_RootNamespace>MyHealthDB</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDBEntity.cs" />
@@ -33,11 +32,43 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Organisation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\UsefullNumbers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceConsumer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebClient\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebClient\WebService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMHandShake.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblHealthHospital.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblCPCategory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblCPCondition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblCounty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblHealthEmergencyNumber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblHealthOrganizationsInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblHealthAboutRCSI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMConditionCategories.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMApplicationUsersApp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateDBManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\DiseasesForCategory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\DiseaseForCategoryManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLiteAsync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\RegisteredDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\SuccessfullSync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblLogContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblLogExternalLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblLogFeedback.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMLogUsage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\LogContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\LogExternalLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\LogFeedback.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\LogUsage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Tables\" />
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Helper\" />
+    <Folder Include="$(MSBuildThisFileDirectory)WebClient\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Model\" />
   </ItemGroup>
 </Project>

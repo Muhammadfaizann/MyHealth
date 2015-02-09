@@ -1,12 +1,22 @@
 using System;
 using MyHealth.DB.SQLite;
+using MyHealthDB.Model;
 
 namespace MyHealthDB
 {
 	public class Organisation : DBEntityBase
 	{
-		public Organisation()
+//		public Organisation(SMtblHealthOrganizationsInfo organizatoin)
+//		{
+//			ID = organizatoin.Id;
+//			Name = organizatoin.Name;
+//			PhoneNumber = organizatoin.Number;
+//			URL = organizatoin.Website;
+//		}
+
+		public Organisation ()
 		{
+
 		}
 
 		//[PrimaryKey]

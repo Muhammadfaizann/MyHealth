@@ -11,6 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MyHealthAndroid;
+using MyHealthDB;
+using MyHealthDB.Logger;
 
 namespace MyHealth.Android
 {
@@ -29,6 +31,8 @@ namespace MyHealth.Android
 			SetContentView (Resource.Layout.activity_health_professionals);
 
 			SetCustomActionBar ();
+
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.HealthProfessionals).ToString() });
 
 			_professionalsList = FindViewById<ListView> (Resource.Id.healthProfessionalsList);
 			var _listAdapter = new HPCustomAdapter(this);

@@ -12,6 +12,9 @@ using Android.Views;
 using Android.Widget;
 using Android.Webkit;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealthAndroid
 {
 	[Activity (Label = "My Health")]			
@@ -25,17 +28,29 @@ namespace MyHealthAndroid
 		private String _backButtonTitle = "";
 		private String _selectedDiseases = "";
 
-		protected override void OnCreate (Bundle bundle)
+		protected override async void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_disease_details);
 
 			SetCustomActionBar ();
 
+			//LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.Home).ToString() });
+
 			_imageView = FindViewById<ImageView> (Resource.Id.diseaseDetailImage);
 			_webView = FindViewById<WebView> (Resource.Id.diseaseDetailWebView);
 
 			_selectedDiseases = Intent.GetStringExtra ("diseaseName");
+			var _selectedDiseaseId = Convert.ToInt32(Intent.GetStringExtra ("diseaseId"));
+
+			if (_selectedDiseaseId > 0) {
+				var selectedDisease = await DatabaseManager.SelectDisease (_selectedDiseaseId);
+				await LogManager.Log<LogContent> (new LogContent () {
+					Date = DateTime.Now,
+					ConditionId = selectedDisease.ID,
+					CategoryId = selectedDisease.DiseaseCategoryID
+				});
+			}
 
 			if (_selectedDiseases.Contains ("Heart") || _selectedDiseases.Contains ("heart")) {
 				_imageView.SetImageResource (Resource.Drawable.ihf);
@@ -52,6 +67,7 @@ namespace MyHealthAndroid
 				base.OnBackPressed();
 			};
 
+			_webView.SetWebViewClient(new MyHealthWebViewClient(this));
 		}
 
 		//------------------------ custom activity ----------------------//
@@ -61,6 +77,27 @@ namespace MyHealthAndroid
 			ActionBar.SetDisplayShowTitleEnabled (false);
 			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
 			ActionBar.SetDisplayShowCustomEnabled (true);
+		}
+	}
+
+	public class MyHealthWebViewClient : WebViewClient
+	{
+		Activity _activity;
+		public MyHealthWebViewClient (Activity activity)
+		{
+			_activity = activity;
+		}
+
+		public override bool ShouldOverrideUrlLoading (WebView view, string url)
+		{
+			LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
+
+			// launch another Activity that handles URLs
+			Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse (url));
+			_activity.StartActivity (intent);
+
+			base.ShouldOverrideUrlLoading (view, url);
+			return true;
 		}
 	}
 }

@@ -10,6 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealthAndroid
 {
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -21,6 +24,8 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.sub_activity_feedback);
 
 			SetCustomActionBar ();
+
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.Feedback).ToString() });
 
 			// back button
 			var _backButton = FindViewById<Button> (Resource.Id.backButton);

@@ -5,6 +5,7 @@ using Android.App;
 using Android.Views;
 using Android.Content;
 using MyHealthDB;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -19,8 +20,13 @@ namespace MyHealthAndroid
 		{
 			_activity = activity;
 			_model = new CommonData ();
-			_list = _model.GetEmergencyContacts ();
+
 		}
+
+		public async Task loadData () {
+			_list = await _model.GetEmergencyContacts ();
+		}
+
 			
 		//count of rows in ListView
 		public override int Count {

@@ -1,23 +1,46 @@
 ﻿<Properties StartupItem="My.Health.Android.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.7.1" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ios/AppDelegate.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_API_12" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Activities/LaunchActivity.cs">
     <Files>
-      <File FileName="ios/AppDelegate.cs" Line="4" Column="4" />
-      <File FileName="ios/Main.cs" Line="1" Column="1" />
+      <File FileName="Activities/HomeActivity.cs" Line="4" Column="4" />
+      <File FileName="Activities/HelpActivity.cs" Line="108" Column="108" />
+      <File FileName="Activities/HealthSearchActivity.cs" Line="6" Column="6" />
+      <File FileName="Activities/HealthProfessionalActivity.cs" Line="116" Column="116" />
+      <File FileName="Activities/SubActivities/OrganDonationActivity.cs" Line="108" Column="108" />
+      <File FileName="Activities/SubActivities/MyProfileActivity.cs" Line="102" Column="102" />
+      <File FileName="Activities/SubActivities/HospitcalsInCountyActivity.cs" Line="6" Column="6" />
+      <File FileName="Activities/SubActivities/FeedbackActivity.cs" Line="105" Column="105" />
+      <File FileName="Activities/SubActivities/BloodDonationActivity.cs" Line="110" Column="110" />
+      <File FileName="Activities/NewsDetailActivity.cs" Line="22" Column="22" />
+      <File FileName="Activities/DiseaseDetailActivity.cs" Line="4" Column="4" />
+      <File FileName="MyHealthDB/Entities/Disease.cs" Line="31" Column="31" />
+      <File FileName="Activities/CustomAdapaters/ExpandableListAdapater.cs" Line="25" Column="25" />
+      <File FileName="MyHealthDB/WebClient/Client.cs" Line="4" Column="4" />
+      <File FileName="MyHealthDB/WebClient/WebService.cs" Line="3" Column="3" />
+      <File FileName="MyHealthDB/DatabaseManager.cs" Line="3" Column="3" />
+      <File FileName="Activities/LaunchActivity.cs" Line="4" Column="4" />
+      <File FileName="MyHealthDB/LogManager.cs" Line="4" Column="4" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="MyHealth" expanded="True">
-            <Node name="TopBarController.cs" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/AppDelegate.cs" line="58" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/SearchButtonsController.cs" line="18" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HealthNewsActivity.cs" line="28" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HealthSearchActivity.cs" line="40" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HealthSearchActivity.cs" line="55" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HealthSearchActivity.cs" line="130" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="32" column="4" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="37" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="38" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="40" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="39" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="42" column="4" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="44" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="46" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="47" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="45" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/LogManager.cs" line="43" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/DiseaseDetailActivity.cs" line="44" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

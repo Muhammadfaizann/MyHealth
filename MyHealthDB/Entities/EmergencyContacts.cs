@@ -1,5 +1,6 @@
 using System;
 using MyHealth.DB.SQLite;
+using MyHealthDB.Model;
 
 namespace MyHealthDB
 {
@@ -8,6 +9,7 @@ namespace MyHealthDB
 		public EmergencyContacts()
 		{
 		}
+
 
 		//[PrimaryKey]
 		//public int ID { get; set; }

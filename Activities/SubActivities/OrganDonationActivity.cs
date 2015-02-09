@@ -12,6 +12,9 @@ using Android.Views;
 using Android.Widget;
 using Android.Webkit;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealthAndroid
 {
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -23,6 +26,8 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.sub_activity_organ_donation);
 
 			SetCustomActionBar ();
+
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.OrganDonors).ToString() });
 
 			var webView = FindViewById<WebView> (Resource.Id.organDonationWebView);
 			webView.LoadUrl("file:///android_asset/Content/OrganDonor.html");

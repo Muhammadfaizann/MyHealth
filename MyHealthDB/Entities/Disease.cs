@@ -1,5 +1,6 @@
 ﻿using System;
 using MyHealth.DB.SQLite;
+using MyHealthDB.Model;
 
 namespace MyHealthDB
 {
@@ -12,12 +13,13 @@ namespace MyHealthDB
 
 		}
 
-		//[PrimaryKey]
-		//public int ID { get; set;}
-		public int DiseaseCategoryID{get;set;}
-		public String Name { get; set;}
-		public String Details { get; set;}
-		public String DescriptionURL { get; set;}
+		public string Name { get; set; }
+		public string Url { get; set; }
+		public string Description { get; set; }
+		public string SignAndSymptoms { get; set; }
+		public string PreventiveMeasures { get; set; }
+		public string MisSpelling { get; set; }
+		public int DiseaseCategoryID { get; set;}
 	}
 }
 

@@ -10,6 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealthAndroid
 {
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -42,6 +45,8 @@ namespace MyHealthAndroid
 
 			SetCustomActionBar ();
 
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.MyBMI).ToString() });
+
 			heightFeetSpinner = FindViewById<Spinner> (Resource.Id.heightFeetSpinner);
 			heightInchSpinner = FindViewById<Spinner> (Resource.Id.heightInchSpinner);
 			weightKiloSpinner = FindViewById<Spinner> (Resource.Id.weightKiloSpinner);
@@ -55,7 +60,7 @@ namespace MyHealthAndroid
 			syncButton = FindViewById<Button> (Resource.Id.syncButton);
 
 			syncButton.Click += (object sender, EventArgs e) => {
-				MyHealthDB.ServiceConsumer.updateUsefullNumbers("UUID");
+				MyHealthDB.ServiceConsumer.SyncDevice();
 			};
 
 			calculateBMIButton.Click += CalculateBMI;

@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Webkit;
 using MyHealthDB;
+using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
@@ -33,6 +34,8 @@ namespace MyHealthAndroid
 			_commonListView.Adapter = new HospitalsAdapter (this);
 
 			SetCustomActionBar ();
+
+			//LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.IWantToHelp).ToString() });
 
 			//implement the back button 
 			_backButton = FindViewById<Button> (Resource.Id.backButton);

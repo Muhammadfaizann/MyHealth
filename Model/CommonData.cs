@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MyHealthDB;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -13,70 +14,57 @@ namespace MyHealthAndroid
 		}
 
 
-		public IList <DiseaseCategory> GetAllDiseasesCategory () 
+		public async Task<List<DiseaseCategory>> GetAllCategory () 
 		{
-			String[] _indexTitles = {@"Cancer", @"Diabeties", @"Heart", @"Obessity"};
+//			String[] _indexTitles = {@"Cancer", @"Diabeties", @"Heart", @"Obessity"};
 
-			var categories = MyHealthDB.DiseaseCategoryManager.GetAllDiseaseCategories ();
+			var categories = await MyHealthDB.DatabaseManager.SelectAllDiseaseCategories ();
 
-			if (categories.Count <= 0) {
-				for (int count= 0; count < _indexTitles.Length; count++) {
-					MyHealthDB.DiseaseCategoryManager.SaveDiseaseCategory (new DiseaseCategory { 
-						ID = count, 
-						CategoryName = _indexTitles[count],
-						CategoryDetails = "Some details if needed, like ever for " + _indexTitles[count]
-					});
-				}
-				categories = MyHealthDB.DiseaseCategoryManager.GetAllDiseaseCategories ();
-			}
+//			if (categories.Count <= 0) {
+//				for (int count= 0; count < _indexTitles.Length; count++) {
+//					MyHealthDB.DiseaseCategoryManager.SaveDiseaseCategory (new DiseaseCategory { 
+//						ID = count, 
+//						CategoryName = _indexTitles[count],
+//						CategoryDetails = "Some details if needed, like ever for " + _indexTitles[count]
+//					});
+//				}
+//				categories = MyHealthDB.DiseaseCategoryManager.GetAllDiseaseCategories ();
+//			}
 			return categories; 
 		}
 
-		public IList <Disease> GetAllDiseases () 
+		public async Task<List<DiseasesForCategory>> GetAllDiseasesForCategory () 
 		{
-			String[] _items = {"Obesity", "Depression", "Heart Attack", "Lung Cancer","Heart Bypass",
-				"Heart Failure", "Heart Murmurs", "Heart Valve Infection","Diabeties", "Asthma", 
-				"Appendicitis", "Baby acne", "Burns", "Cold sores", "Dementia"};
+		
+			var categories = await MyHealthDB.DatabaseManager.SelectAllDiseasesForCategory ();
+			return categories; 
+		}
 
-			var disease = MyHealthDB.DiseaseManager.GetAllDiseases ();
-			var randId = new Random ();
-			if (disease.Count <= 0) {
-				for (int count= 0; count < _items.Length; count++) {
-					MyHealthDB.DiseaseManager.SaveDisease (new Disease { 
-						ID = count, 
-						Name = _items[count],
-						Details = "Some details if needed, like ever for " + _items[count],
-						DiseaseCategoryID = randId.Next(0,4)
-					});
-				}
-				disease = MyHealthDB.DiseaseManager.GetAllDiseases ();
-			}
+		public Task<List<Disease>> GetAllDiseases () 
+		{
+//			String[] _items = {"Obesity", "Depression", "Heart Attack", "Lung Cancer","Heart Bypass",
+//				"Heart Failure", "Heart Murmurs", "Heart Valve Infection","Diabeties", "Asthma", 
+//				"Appendicitis", "Baby acne", "Burns", "Cold sores", "Dementia"};
+
+			var disease = MyHealthDB.DatabaseManager.SelectAllDiseases ();
+//			var randId = new Random ();
+//			if (disease.Count <= 0) {
+//				for (int count= 0; count < _items.Length; count++) {
+//					MyHealthDB.DiseaseManager.SaveDisease (new Disease { 
+//						ID = count, 
+//						Name = _items[count],
+//						DiseaseCategoryID = randId.Next(0,4)
+//					});
+//				}
+//				disease = MyHealthDB.DiseaseManager.GetAllDiseases ();
+//			}
 			return disease; 
 		}
 
-		public List <County> GetAllCounty () 
+		public async Task<List<County>> GetAllCounty () 
 		{
-			var counties = MyHealthDB.CountyManager.GetAllCounties ();
-
-			if (counties.Count <= 0) {
-
-				MyHealthDB.CountyManager.SaveCounty (new County {
-					ID = 0,
-					Name = "First County",
-				});
-
-				MyHealthDB.CountyManager.SaveCounty (new County {
-					ID = 1,
-					Name = "Second County",
-				});
-
-				MyHealthDB.CountyManager.SaveCounty (new County {
-					ID = 2,
-					Name = "Third County",
-				});
-
-				counties = MyHealthDB.CountyManager.GetAllCounties ();
-			}
+			var counties = await MyHealthDB.DatabaseManager.SelectAllCounties();
+		
 			return counties; 
 		}
 			
@@ -134,7 +122,7 @@ namespace MyHealthAndroid
 		}
 
 		//public String[,] GetEmergencyContacts () 
-		public List<EmergencyContacts> GetEmergencyContacts () 
+		public async Task<List<EmergencyContacts>> GetEmergencyContacts () 
 		{
 //			String[,] _items = new String[,] {
 //				{"Emergency","Emergency police Fire Ambulance", "112"}, 
@@ -143,38 +131,7 @@ namespace MyHealthAndroid
 //				{"SouthDoc","Cork and Kerry", "1850 335 999"}
 //			};
 
-			List<EmergencyContacts> _items = MyHealthDB.EmergencyContactManager.GetAllEmergencyContacts ();
-			if (_items.Count <= 0) {
-				MyHealthDB.EmergencyContactManager.SaveEmergencyContact(new EmergencyContacts{
-					ID = 0,
-					Name = "Emergency",
-					Description = "Emergency police Fire Ambulance",
-					PhoneNumber = "112"
-				});
-
-				MyHealthDB.EmergencyContactManager.SaveEmergencyContact(new EmergencyContacts{
-					ID = 1,
-					Name = "KDOC",
-					Description = "Kildare and West Wicklow Doctors on Call",
-					PhoneNumber = "1890 599 362"
-				});
-
-				MyHealthDB.EmergencyContactManager.SaveEmergencyContact(new EmergencyContacts{
-					ID = 2,
-					Name = "NEDOC", 
-					Description = "North East Doctor on Call",
-					PhoneNumber = "1890 777 911"
-				});
-
-				MyHealthDB.EmergencyContactManager.SaveEmergencyContact(new EmergencyContacts{
-					ID = 3,
-					Name = "SouthDoc",
-					Description = "Cork and Kerry", 
-					PhoneNumber = "1850 335 999"
-				});
-				_items = MyHealthDB.EmergencyContactManager.GetAllEmergencyContacts ();
-			}
-
+			List<EmergencyContacts> _items = await MyHealthDB.DatabaseManager.SelectAllEmergencyContacts ();
 			return _items;
 		}
 
@@ -219,7 +176,7 @@ namespace MyHealthAndroid
 			//				channels.Add (new NewsChannels ("Irish Health", Resource.Drawable.IrishHealth));
 			//				channels.Add (new NewsChannels ("Irish Times Health", Resource.Drawable.IrishTimes));
 			var channels = MyHealthDB.NewsChannelsManager.GetAllNewsChannels ();
-			if (channels.Count <= 0) {
+			if (channels != null && channels.Count <= 0) {
 				MyHealthDB.NewsChannelsManager.SaveNewsChannels ( new NewsChannels {
 					ID = 0,
 					Name = "BBC Medical News",

@@ -12,6 +12,8 @@ using Android.Views;
 using Android.Widget;
 using Android.Preferences;
 using MyHealthDB;
+using MyHealthDB.Logger;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -30,27 +32,32 @@ namespace MyHealthAndroid
 
 		private Dictionary<string, List<string>> dictGroup;
 		private List<String> recentDiseases;
+		private List<Disease> diseases;
 
 		private CommonData model;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_health_search);
 
 			SetCustomActionBar ();
+
+			await LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.HealthSearch).ToString() });
+
 			model = new CommonData ();
 
 			_diseaseList = FindViewById<ListView> (Resource.Id.diseaseList);
 			_searchText  = FindViewById<EditText> (Resource.Id.searchText);
 
 			//_listAdapter = new ExpandableDataAdapter (this, model.getAllDiseases ());
-			_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,model.GetAllDiseases ().Select(x => x.Name).ToList<string>());
+			diseases = await model.GetAllDiseases ();
+			_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,diseases.Select(x => x.Name).ToList<string>());
 			_diseaseList.Adapter = _listAdapter;
 
 			_diseaseList.ItemClick += OnListItemClicked;
 
-			CreateExpendableListData ();
+			await CreateExpendableListData ();
 
 			_expandableDiseaseList = FindViewById<ExpandableListView> (Resource.Id.expandableDiseaseList);
 			_expandableDiseaseList.SetAdapter (new ExpendableListAdapter (this, dictGroup));
@@ -78,7 +85,7 @@ namespace MyHealthAndroid
 			atozButton = FindViewById<Button> (Resource.Id.atozButton);
 			atozButton.Click += (object sender, EventArgs e) => {
 
-				_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,model.GetAllDiseases ().Select(x => x.Name).ToList<string>());
+				_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,diseases.Select(x => x.Name).ToList<string>());
 				_diseaseList.Adapter = _listAdapter;
 
 				_diseaseList.Visibility = ViewStates.Visible;
@@ -120,10 +127,12 @@ namespace MyHealthAndroid
 
 		//------------------------ List Item Clicked ----------------------//
 		private void OnListItemClicked (object sender, AdapterView.ItemClickEventArgs e) {
-			var t = model.GetAllDiseases().ElementAtOrDefault(e.Position).Name;
+			var dis = diseases.ElementAtOrDefault (e.Position);
+			var t = dis.Name;
 			SaveRecentDiseases(this, t);
 			var DiseaseDetails =  new Intent(this, typeof (DiseaseDetailActivity));
 			DiseaseDetails.PutExtra ("diseaseName", t);
+			DiseaseDetails.PutExtra ("diseaseId", dis.ID.ToString());
 			StartActivity(DiseaseDetails);
 		}
 
@@ -153,22 +162,29 @@ namespace MyHealthAndroid
 		}
 
 		//------------------------ search items in list ----------------------//
-		private void CreateExpendableListData ()
+		private async Task<Boolean> CreateExpendableListData ()
 		{
 			dictGroup = new Dictionary<string, List<string>> ();
 
-			var items = model.GetAllDiseases ();
-			var indexTitles = model.GetAllDiseasesCategory ();
+			var diseases = await model.GetAllDiseases ();
+			var categories = await model.GetAllCategory ();
+			var diseaseForCategory = await model.GetAllDiseasesForCategory ();
 
-			foreach (var diseaes in indexTitles) {
-				var foundItems = items.Where (i => i.DiseaseCategoryID == diseaes.ID).Select(x => x.Name).ToList ();
+			foreach (var category in categories) {
+				//found diseases string against this category
+				string ids = diseaseForCategory.FirstOrDefault (x => x.CategoryId == category.ID).ConditionId;
+				//split that string to integer array.
+				int[] diseaseIDs = ids.Split (new String[]{ "," }, StringSplitOptions.RemoveEmptyEntries).Select( x => Convert.ToInt32(x)).ToArray();
+
+				var foundItems = diseases.Where (i => diseaseIDs.Contains (i.ID.Value)).Select(x => x.Name).ToList (); // here you have the diseases on the selected category.
 
 				if (foundItems != null && foundItems.Count() > 0) {
-					dictGroup.Add (string.Format (" {0} ", diseaes.CategoryName), foundItems);
+					dictGroup.Add (category.CategoryName, foundItems);
 				} else {
-					dictGroup.Add (string.Format (" {0} ", diseaes.CategoryName), new List<string>());
+					dictGroup.Add (category.CategoryName, new List<string>());
 				}
 			}
+			return true;
 		}
 
 		//------------------------ search items in list ----------------------//

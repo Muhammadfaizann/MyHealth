@@ -11,6 +11,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using MyHealthDB;
+using MyHealthDB.Logger;
+
 namespace MyHealthAndroid
 {
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -24,6 +27,8 @@ namespace MyHealthAndroid
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_help_data);
 			SetCustomActionBar ();
+
+			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.IWantToHelp).ToString() });
 
 			_helpList = FindViewById<ListView> (Resource.Id.helpDataList);
 			var _listAdapter = new HelpDataAdapter(this);

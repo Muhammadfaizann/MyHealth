@@ -11,22 +11,22 @@ namespace MyHealthDB
 
 		public static Hospital GetHospital (int id)
 		{
-			return DatabaseRepository.GetHospital (id);
+			return null; //DatabaseRepository.GetHospital (id);
 		}
 
 		public static List<Hospital> GetAllHospitals ()
 		{
-			return new List<Hospital> (DatabaseRepository.GetAllHospitals ());
+			return null; //new List<Hospital> (DatabaseRepository.GetAllHospitals ());
 		}
 
 		public static int SaveHospital( Hospital item ) 
 		{
-			return DatabaseRepository.SaveHospital (item);
+			return 0; //DatabaseRepository.SaveHospital (item);
 		}
 
 		public static int DeleteHospital (int id)
 		{
-			return DatabaseRepository.DeleteHospital (id);
+			return 0; //DatabaseRepository.DeleteHospital (id);
 		}
 	}
 }

@@ -11,22 +11,22 @@ namespace MyHealthDB
 
 		public static Organisation GetOrganisation (int id)
 		{
-			return DatabaseRepository.GetOrganisation (id);
+			return null; //DatabaseRepository.GetOrganisation (id);
 		}
 
 		public static List<Organisation> GetAllOrganisations ()
 		{
-			return new List<Organisation> (DatabaseRepository.GetAllOrganisations ());
+			return null; //new List<Organisation> (DatabaseRepository.GetAllOrganisations ());
 		}
 
 		public static int SaveOrganisation( Organisation item ) 
 		{
-			return DatabaseRepository.SaveOrganisation (item);
+			return 0; //DatabaseRepository.SaveOrganisation (item);
 		}
 
 		public static int DeleteOrganisation (int id)
 		{
-			return DatabaseRepository.DeleteNewsChannels (id);
+			return 0; //DatabaseRepository.DeleteNewsChannels (id);
 		}
 	}
 }
