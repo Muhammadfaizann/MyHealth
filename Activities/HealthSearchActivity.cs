@@ -31,6 +31,7 @@ namespace MyHealthAndroid
 		private ArrayAdapter _listAdapter;
 
 		private Dictionary<string, List<string>> dictGroup;
+		private Dictionary<string, List<int?>> dictCatergoryConditionIds;
 		private List<String> recentDiseases;
 		private List<Disease> diseases;
 
@@ -42,8 +43,6 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.activity_health_search);
 
 			SetCustomActionBar ();
-
-			await LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.HealthSearch).ToString() });
 
 			model = new CommonData ();
 
@@ -63,9 +62,16 @@ namespace MyHealthAndroid
 			_expandableDiseaseList.SetAdapter (new ExpendableListAdapter (this, dictGroup));
 			_expandableDiseaseList.Visibility = ViewStates.Gone;
 
-			_expandableDiseaseList.ChildClick += (object sender, ExpandableListView.ChildClickEventArgs e) => {
+			_expandableDiseaseList.ChildClick += async (object sender, ExpandableListView.ChildClickEventArgs e) => {
 				var item = dictGroup.ElementAt(e.GroupPosition).Value.ElementAt(e.ChildPosition);
 				var DiseaseDetails =  new Intent(this, typeof (DiseaseDetailActivity));
+				var cateogryid = Convert.ToInt32(dictCatergoryConditionIds.ElementAt(e.GroupPosition).Key);
+				var conditionid = dictCatergoryConditionIds.ElementAt(e.GroupPosition).Value.ElementAt(e.ChildPosition);
+				await LogManager.Log (new LogContent {
+					Date = DateTime.Now,
+					ConditionId = conditionid,
+					CategoryId = cateogryid
+				});
 				DiseaseDetails.PutExtra ("diseaseName", item);
 				StartActivity(DiseaseDetails);
 			};
@@ -112,6 +118,10 @@ namespace MyHealthAndroid
 
 			//Get the recent DiseaseList onLoad
 			GetRecentDiseases (this);
+			await LogManager.Log (new LogUsage {
+				Date = DateTime.Now,
+				Page = Convert.ToInt32(Pages.HealthSearch)
+			});
 
 		}
 			
@@ -126,13 +136,18 @@ namespace MyHealthAndroid
 		}
 
 		//------------------------ List Item Clicked ----------------------//
-		private void OnListItemClicked (object sender, AdapterView.ItemClickEventArgs e) {
+		private async void OnListItemClicked (object sender, AdapterView.ItemClickEventArgs e) {
 			var dis = diseases.ElementAtOrDefault (e.Position);
 			var t = dis.Name;
 			SaveRecentDiseases(this, t);
 			var DiseaseDetails =  new Intent(this, typeof (DiseaseDetailActivity));
 			DiseaseDetails.PutExtra ("diseaseName", t);
 			DiseaseDetails.PutExtra ("diseaseId", dis.ID.ToString());
+			await LogManager.Log (new LogContent {
+				Date = DateTime.Now, 
+				ConditionId = dis.DiseaseCategoryID,
+				CategoryId = -1
+			});
 			StartActivity(DiseaseDetails);
 		}
 
@@ -165,6 +180,7 @@ namespace MyHealthAndroid
 		private async Task<Boolean> CreateExpendableListData ()
 		{
 			dictGroup = new Dictionary<string, List<string>> ();
+			dictCatergoryConditionIds = new Dictionary<string, List<int?>> ();
 
 			var diseases = await model.GetAllDiseases ();
 			var categories = await model.GetAllCategory ();
@@ -177,11 +193,14 @@ namespace MyHealthAndroid
 				int[] diseaseIDs = ids.Split (new String[]{ "," }, StringSplitOptions.RemoveEmptyEntries).Select( x => Convert.ToInt32(x)).ToArray();
 
 				var foundItems = diseases.Where (i => diseaseIDs.Contains (i.ID.Value)).Select(x => x.Name).ToList (); // here you have the diseases on the selected category.
+				var diseaseId = diseases.Where (i => diseaseIDs.Contains (i.ID.Value)).Select(x => x.ID).ToList (); // here you have the diseases on the selected category.
 
 				if (foundItems != null && foundItems.Count() > 0) {
 					dictGroup.Add (category.CategoryName, foundItems);
+					dictCatergoryConditionIds.Add (category.ID.ToString(), diseaseId);
 				} else {
 					dictGroup.Add (category.CategoryName, new List<string>());
+					dictCatergoryConditionIds.Add (category.ID.ToString(), new List<int?>());
 				}
 			}
 			return true;

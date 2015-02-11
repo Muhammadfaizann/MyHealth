@@ -22,13 +22,11 @@ namespace MyHealthAndroid
 		private ListView _helpList;
 		private Button _backButton;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_help_data);
 			SetCustomActionBar ();
-
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.IWantToHelp).ToString() });
 
 			_helpList = FindViewById<ListView> (Resource.Id.helpDataList);
 			var _listAdapter = new HelpDataAdapter(this);
@@ -53,9 +51,13 @@ namespace MyHealthAndroid
 					newActivity = new Intent(this, typeof(MyProfileActivity));
 						StartActivity(newActivity);
 						break;
-
 				}
 			};
+
+			await LogManager.Log (new LogUsage {
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.IWantToHelp)
+			});
 
 			// back button
 			_backButton = FindViewById<Button> (Resource.Id.backButton);

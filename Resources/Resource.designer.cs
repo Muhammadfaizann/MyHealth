@@ -285,9 +285,6 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08000a
 			public const int bottomButtons = 2131230730;
 			
-			// aapt resource value: 0x7f08003b
-			public const int button1 = 2131230779;
-			
 			// aapt resource value: 0x7f080053
 			public const int buttonsComponentLayout = 2131230803;
 			
@@ -452,6 +449,9 @@ namespace MyHealthAndroid
 			
 			// aapt resource value: 0x7f080054
 			public const int saveBMIButton = 2131230804;
+			
+			// aapt resource value: 0x7f08003b
+			public const int saveFeedback = 2131230779;
 			
 			// aapt resource value: 0x7f08003d
 			public const int scrollView1 = 2131230781;

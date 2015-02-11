@@ -61,6 +61,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LogExternalLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LogFeedback.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LogUsage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblCpUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\CpUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />

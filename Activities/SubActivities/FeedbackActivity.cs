@@ -18,14 +18,40 @@ namespace MyHealthAndroid
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class FeedbackActivity : Activity
 	{
-		protected override void OnCreate (Bundle bundle)
+
+		public EditText username;
+		public EditText email;
+		public EditText message;
+		public Button saveFeedback;
+
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.sub_activity_feedback);
 
 			SetCustomActionBar ();
 
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.Feedback).ToString() });
+			username = FindViewById<EditText> (Resource.Id.feedbackUserName);
+			email = FindViewById<EditText> (Resource.Id.feedbackUserEmail);
+			message = FindViewById<EditText> (Resource.Id.feedbackUserMessage);
+			saveFeedback = FindViewById<Button> (Resource.Id.saveFeedback);
+
+
+			saveFeedback.Click += async (object sender, EventArgs e) => {
+				if (username.Text.Equals ("") || email.Text.Equals ("") || message.Text.Equals ("")) {
+					Toast.MakeText(this, "Please fill in all the feilds", ToastLength.Long).Show();
+				} else {
+					await LogManager.Log(new LogFeedback {
+						Date = DateTime.Now,
+						FeedbackText = string.Format("<name>{0}<name><email>{1}</email><message>{2}</message>", username.Text, email.Text, message.Text)
+					});
+				}
+			};
+
+			await LogManager.Log<LogUsage> (new LogUsage { 
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.Feedback)
+			});
 
 			// back button
 			var _backButton = FindViewById<Button> (Resource.Id.backButton);

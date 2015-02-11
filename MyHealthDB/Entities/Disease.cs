@@ -20,6 +20,7 @@ namespace MyHealthDB
 		public string PreventiveMeasures { get; set; }
 		public string MisSpelling { get; set; }
 		public int DiseaseCategoryID { get; set;}
+		public int CPUserId { get; set; }
 	}
 }
 

@@ -30,9 +30,7 @@ namespace MyHealthAndroid{
 			SetContentView (Resource.Layout.Home);
 
 			SetCustomActionBar ();
-
-			await LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.Home).ToString() });
-
+	
 			searchBtn = FindViewById<ImageButton> (Resource.Id.healthSearchBtn);
 			healthProBtn = FindViewById<ImageButton> (Resource.Id.healthProfessionalBtn);
 			healthNewsBtn = FindViewById<ImageButton> (Resource.Id.healthNewsBtn);
@@ -61,6 +59,11 @@ namespace MyHealthAndroid{
 				var activity = new Intent(this, typeof(HelpActivity));
 				StartActivity( activity);
 			};
+
+			await LogManager.Log (new LogUsage { 
+				Date = DateTime.Now,
+				Page = Convert.ToInt32(Pages.Home)
+			});
 		}
 
 

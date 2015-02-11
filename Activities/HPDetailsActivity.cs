@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Webkit;
 using MyHealthDB;
 using System.Threading.Tasks;
+using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
@@ -31,7 +32,7 @@ namespace MyHealthAndroid
 		private HPUserfulNumberAdapter _contactAdapter;
 
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 
 			base.OnCreate (bundle);
@@ -43,7 +44,10 @@ namespace MyHealthAndroid
 			SetContentAsPerCaller (_caller);
 			SetCustomActionBar ();
 
-
+			await LogManager.Log (new LogUsage {
+				Date = DateTime.Now,
+				Page = Convert.ToInt32(Pages.HealthProfessionalDetails)
+			});
 		}
 
 		//------------------------ custom activity ----------------------//

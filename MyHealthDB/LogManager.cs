@@ -26,6 +26,10 @@ namespace MyHealthDB.Logger
 					var logExternalLink = log as LogExternalLink;
 					await DatabaseManager.SaveLogExternalLink (logExternalLink);
 				}
+				if (log.GetType() == typeof(LogUsage)) {
+					var logUsage = log as LogUsage;
+					await DatabaseManager.SaveLogUsage(logUsage);
+				}
 			} catch {
 				// supressing any exception
 			}
@@ -36,7 +40,7 @@ namespace MyHealthDB.Logger
 			var service = new WebService ();
 			var obj = new HttpResponseMessage();
 			//uncomment the line below to input dummy data
-			await inputFakeData ();
+			//await inputFakeData ();
 
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
@@ -59,13 +63,20 @@ namespace MyHealthDB.Logger
 
 			obj = await service.PostLogContent(logContent);
 			content = await obj.Content.ReadAsStringAsync ();
+			if (!content.Equals("Saved")) { return false; }
 			await DatabaseManager.DeleteLogContentList (logContent);
 			obj = await service.PostLogContent(logExternalLink);
 			content = await obj.Content.ReadAsStringAsync ();
+			if (!content.Equals("Saved")) { return false; }
 			await DatabaseManager.DeleteLogExternalLinkList (logExternalLink);
 			obj = await service.PostLogContent(logFeedback);
 			content = await obj.Content.ReadAsStringAsync ();
+			if (!content.Equals("Saved")) { return false; }
 			await DatabaseManager.DeleteLogFeedbackList (logFeedback);
+			obj = await service.PostLogContent (logUsage);
+			content = await obj.Content.ReadAsStringAsync ();
+			if (!content.Equals ("Saved")) { return false; }
+			await DatabaseManager.DeleteLogUsageList (logUsage);
 
 			return true;
 		}
@@ -77,24 +88,30 @@ namespace MyHealthDB.Logger
 				for (var count=0; count < 100; count++) {
 					await DatabaseManager.SaveLogContent( new LogContent {
 						AppId = 1,
-						ConditionId = r.Next(100),
-						CategoryId = r.Next(20),
+						ConditionId = ((count % 2) ==  1)? 1 : 2,
+						CategoryId = ((count % 2) ==  1)? 1 : 2,
 						Date = DateTime.Now,
-						ID = count
+						ID = 0
 					});
 
 					await DatabaseManager.SaveLogExternalLink ( new LogExternalLink {
 						AppId = 1,
 						Date = DateTime.Now,
 						Link = string.Format("http://www.linnk{0}.com", count),
-						ID = count
+						ID = 0
 					});
 
 					await DatabaseManager.SaveLogFeedback ( new LogFeedback {
 
 						Date = DateTime.Now,
-						FeedbackText = "Some good old feedback text."
-						ID = count
+						FeedbackText = "Some good old feedback text.",
+						ID = 0
+					});
+
+					await DatabaseManager.SaveLogUsage(new LogUsage {
+						Date = DateTime.Now,
+						Page = r.Next(10),
+						ID = 0
 					});
 				}
 
@@ -112,13 +129,12 @@ namespace MyHealthDB.Logger
 		HealthProfessionals = 3,
 		HealthNews = 4,
 		IWantToHelp = 5,
-
 		HealthProfessionalDetails = 6,
 
 		BloodDonation = 7,
 		OrganDonors = 8,
 		Feedback = 9,
-		MyBMI = 10,
+		MyProfile = 10,
 	}
 }
 

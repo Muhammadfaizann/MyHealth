@@ -35,8 +35,6 @@ namespace MyHealthAndroid
 
 			SetCustomActionBar ();
 
-			//LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.Home).ToString() });
-
 			_imageView = FindViewById<ImageView> (Resource.Id.diseaseDetailImage);
 			_webView = FindViewById<WebView> (Resource.Id.diseaseDetailWebView);
 

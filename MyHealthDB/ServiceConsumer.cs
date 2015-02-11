@@ -9,6 +9,7 @@ using System.Text;
 using MyHealthDB;
 using MyHealthDB.Model;
 using MyHealthDB.Service;
+using MyHealthDB.Logger;
 
 
 namespace MyHealthDB
@@ -124,6 +125,8 @@ namespace MyHealthDB
 			if (await UpdateDBManager.UpdateOrganizations (_AllOrganisations)) {
 				Console.WriteLine ("\n Organisations are updated.");
 			}
+
+			await LogManager.SyncAllLogs ();
 
 			//obj = await _service.GoodBye();
 			//TODO : Make a table and save successfull sync date. 

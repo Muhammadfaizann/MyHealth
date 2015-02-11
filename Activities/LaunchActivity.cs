@@ -9,6 +9,8 @@ using Android.OS;
 using Xamarin;
 using Android.Telephony;
 using Java.Util;
+using MyHealthDB.Logger;
+using MyHealthDB;
 
 namespace MyHealthAndroid
 {
@@ -16,16 +18,10 @@ namespace MyHealthAndroid
 		ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
-		protected async override void OnCreate (Bundle bundle)
+		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-			Xamarin.Insights.Initialize ("0f69e93547fe9808f9e454c362ec1f65a490762c", this.BaseContext);
 
-			try  {
-				throw (new Exception());
-			} catch (Exception exception) {
-				Xamarin.Insights.Report (exception);
-			}
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Launch);
 
@@ -38,9 +34,9 @@ namespace MyHealthAndroid
 			alert.SetPositiveButton ("Agree", async (senderAlert, args) => {
 				if (!ifDatabaseExists(BaseContext)) {
 					await MyHealthDB.ServiceConsumer.CreateDatabase();
-					await MyHealthDB.Logger.LogManager.SyncAllLogs ();
 					SaveDatabaseExits(BaseContext);
 					StartActivity (new Intent(this, typeof(MyProfileActivity)));
+					//await MyHealthDB.Logger.LogManager.SyncAllLogs ();
 				} else {
 					StartActivity(typeof(HomeActivity));
 				}

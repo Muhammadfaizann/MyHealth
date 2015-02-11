@@ -20,14 +20,17 @@ namespace MyHealthAndroid
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class OrganDonationActivity : Activity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.sub_activity_organ_donation);
 
 			SetCustomActionBar ();
 
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.OrganDonors).ToString() });
+			await LogManager.Log<LogUsage> (new LogUsage { 
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.OrganDonors)
+			});
 
 			var webView = FindViewById<WebView> (Resource.Id.organDonationWebView);
 			webView.LoadUrl("file:///android_asset/Content/OrganDonor.html");

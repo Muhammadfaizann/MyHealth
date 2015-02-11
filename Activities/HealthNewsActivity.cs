@@ -24,7 +24,7 @@ namespace MyHealth.Android
 		private ListView _channelsList;
 		//private CommonData _model = new CommonData ();
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			//_model = new CommonData ();
@@ -33,8 +33,6 @@ namespace MyHealth.Android
 			SetContentView (Resource.Layout.activity_hp_details_table);
 
 			SetCustomActionBar ();
-
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.HealthNews).ToString() });
 
 			_channelsList = FindViewById<ListView> (Resource.Id.emergencyList);
 			var _listAdapter = new NewsChannelsAdapter(this);
@@ -53,6 +51,11 @@ namespace MyHealth.Android
 			{
 				base.OnBackPressed();
 			};
+
+			await LogManager.Log<LogUsage> (new LogUsage { 
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.HealthNews)
+			});
 		}
 
 		//------------------------ custom activity ----------------------//

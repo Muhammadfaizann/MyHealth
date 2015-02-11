@@ -31,6 +31,7 @@ namespace MyHealthDB.Model
 		public Nullable<int> PASSWORD_RESET_BY { get; set; }
 		public string Type { get; set; }
 		public string UserGuid { get; set; }
+		public string OSVersion { get; set; }
 	}
 }
 

@@ -36,7 +36,7 @@ namespace MyHealthAndroid
 		private List<String> WeightUnitBig;
 		private List<String> WeightUnitSmall;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			_data = new CommonData ();
 
@@ -45,7 +45,10 @@ namespace MyHealthAndroid
 
 			SetCustomActionBar ();
 
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.MyBMI).ToString() });
+			await LogManager.Log<LogUsage> (new LogUsage { 
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.MyProfile)
+			});
 
 			heightFeetSpinner = FindViewById<Spinner> (Resource.Id.heightFeetSpinner);
 			heightInchSpinner = FindViewById<Spinner> (Resource.Id.heightInchSpinner);

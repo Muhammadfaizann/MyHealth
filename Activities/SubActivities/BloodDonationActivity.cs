@@ -19,14 +19,17 @@ namespace MyHealthAndroid
 	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class BloodDonationActivity : Activity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.sub_activity_blood_donation);
 
 			SetCustomActionBar ();
 
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.BloodDonation).ToString() });
+			await LogManager.Log<LogUsage> (new LogUsage { 
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.BloodDonation)
+			});
 
 			var Link = FindViewById (Resource.Id.bloodDonationLink);
 			Link.Click += (object sender, EventArgs e) => {

@@ -23,7 +23,7 @@ namespace MyHealth.Android
 		private ListView _professionalsList;
 		//private CommonData _model;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			//_model = new CommonData ();
 
@@ -31,8 +31,6 @@ namespace MyHealth.Android
 			SetContentView (Resource.Layout.activity_health_professionals);
 
 			SetCustomActionBar ();
-
-			LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.HealthProfessionals).ToString() });
 
 			_professionalsList = FindViewById<ListView> (Resource.Id.healthProfessionalsList);
 			var _listAdapter = new HPCustomAdapter(this);
@@ -53,6 +51,10 @@ namespace MyHealth.Android
 				base.OnBackPressed();
 			};
 
+			await LogManager.Log (new LogUsage { 
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.HealthProfessionals)
+			});
 		}
 
 		//------------------------ custom activity ----------------------//

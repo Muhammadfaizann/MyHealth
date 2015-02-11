@@ -76,8 +76,14 @@ namespace MyHealthDB.Service
 
 		public async Task<HttpResponseMessage> PostLogContent(List<LogExternalLink> data)
 		{
-			string url = string.Format("api/v1/LogExternalLink/PostAll");
-			return await Client.Post(data, url);
+			string url = string.Format ("api/v1/LogExternalLink/PostAll");
+			return await Client.Post (data, url);
+		}
+
+		public async Task<HttpResponseMessage> PostLogContent(List<LogUsage> data)
+		{
+			string url = string.Format ("api/v1/LogUsage/PostAll");
+			return await Client.Post (data, url);
 		}
 
 		//		public async Task<HttpResponseMessage> GetApplicationUsersApp()
