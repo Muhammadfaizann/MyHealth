@@ -5,6 +5,7 @@ using Android.App;
 using Android.Views;
 using Android.Content;
 using MyHealthDB;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -18,43 +19,45 @@ namespace MyHealthAndroid
 		{
 
 				_activity = activity;
-				_list = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();//DataService.LoadNumbers ();
-				if (_list.Count <= 0) {
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-						ID = 0,
-						Name = "My GP",
-						Number = "1234567890"
-					});
+		}
 
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-						ID = 1,
-						Name = "My Dentist", 
-						Number = "+353876416352"
-					});
+		public async Task loadData() {
+			_list = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();//DataService.LoadNumbers ();
+			if (_list.Count <= 0) {
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+					ID = 0,
+					Name = "My GP",
+					Number = "1234567890"
+				});
 
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-						ID = 2,
-						Name = "My Health Insurer", 
-						Number = "1234567890"
-					});
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-						ID = 3,
-						Name = "My Garda Station",
-						Number = ""
-					});
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-						ID = 4,
-						Name = "My Pharmacy",
-						Number = ""
-					});
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers (new UsefullNumbers { 
-						ID = 5,
-						Name = "My Public Health Nurse",
-						Number = ""
-					});
-					_list = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();
-				}
-		
+				MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+					ID = 1,
+					Name = "My Dentist", 
+					Number = "+353876416352"
+				});
+
+				MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+					ID = 2,
+					Name = "My Health Insurer", 
+					Number = "1234567890"
+				});
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+					ID = 3,
+					Name = "My Garda Station",
+					Number = ""
+				});
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+					ID = 4,
+					Name = "My Pharmacy",
+					Number = ""
+				});
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+					ID = 5,
+					Name = "My Public Health Nurse",
+					Number = ""
+				});
+				_list = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();
+			}
 		}
 			
 		//count of rows in ListView

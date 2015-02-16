@@ -35,7 +35,9 @@ namespace MyHealthAndroid
 				if (!ifDatabaseExists(BaseContext)) {
 					await MyHealthDB.ServiceConsumer.CreateDatabase();
 					SaveDatabaseExits(BaseContext);
-					StartActivity (new Intent(this, typeof(MyProfileActivity)));
+					var myProfile = new Intent(this, typeof(MyProfileActivity));
+					myProfile.PutExtra("fromLaunchAvtivity", true);
+					StartActivity (myProfile);
 					//await MyHealthDB.Logger.LogManager.SyncAllLogs ();
 				} else {
 					StartActivity(typeof(HomeActivity));

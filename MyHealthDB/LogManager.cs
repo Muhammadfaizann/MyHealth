@@ -26,9 +26,9 @@ namespace MyHealthDB.Logger
 					var logExternalLink = log as LogExternalLink;
 					await DatabaseManager.SaveLogExternalLink (logExternalLink);
 				}
-				if (log.GetType() == typeof(LogUsage)) {
-					var logUsage = log as LogUsage;
-					await DatabaseManager.SaveLogUsage(logUsage);
+				if (log.GetType() == typeof(LogFeedback)) {
+					var logUsage = log as LogFeedback;
+					await DatabaseManager.SaveLogFeedback(logUsage);
 				}
 			} catch {
 				// supressing any exception
@@ -42,42 +42,57 @@ namespace MyHealthDB.Logger
 			//uncomment the line below to input dummy data
 			//await inputFakeData ();
 
-			var AllDevices = await DatabaseManager.SelectAllDevices ();
-			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
-			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
-
-			//the initial hand shake
-			obj = await service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
-			content = await obj.Content.ReadAsStringAsync();
-			SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
-			Helper.Helper.Hash = _SMHandShake.Hash;
-			if (_SMHandShake.StatusId != 1) {
-				Console.WriteLine ("HandShake was rejected");
-				return false;
-			}
+//			var AllDevices = await DatabaseManager.SelectAllDevices ();
+//			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+//			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+//
+//			//the initial hand shake
+//			obj = await service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
+//			content = await obj.Content.ReadAsStringAsync();
+//			SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
+//			Helper.Helper.Hash = _SMHandShake.Hash;
+//			if (_SMHandShake.StatusId != 1) {
+//				Console.WriteLine ("HandShake was rejected");
+//				return false;
+//			}
 
 			var logContent = await DatabaseManager.SelectLogContent ();
 			var logExternalLink = await DatabaseManager.SelectLogExternalLinkList ();
 			var logFeedback = await DatabaseManager.SelectLogFeedbackList ();
 			var logUsage = await DatabaseManager.SelectLogUsageList ();
 
-			obj = await service.PostLogContent(logContent);
-			content = await obj.Content.ReadAsStringAsync ();
-			if (!content.Equals("Saved")) { return false; }
-			await DatabaseManager.DeleteLogContentList (logContent);
-			obj = await service.PostLogContent(logExternalLink);
-			content = await obj.Content.ReadAsStringAsync ();
-			if (!content.Equals("Saved")) { return false; }
-			await DatabaseManager.DeleteLogExternalLinkList (logExternalLink);
-			obj = await service.PostLogContent(logFeedback);
-			content = await obj.Content.ReadAsStringAsync ();
-			if (!content.Equals("Saved")) { return false; }
-			await DatabaseManager.DeleteLogFeedbackList (logFeedback);
-			obj = await service.PostLogContent (logUsage);
-			content = await obj.Content.ReadAsStringAsync ();
-			if (!content.Equals ("Saved")) { return false; }
-			await DatabaseManager.DeleteLogUsageList (logUsage);
-
+			if (logContent.Count > 0) {
+				obj = await service.PostLogContent (logContent);
+				content = await obj.Content.ReadAsStringAsync ();
+				if (!content.Equals ("\"Saved\"")) {
+					return false;
+				}
+				await DatabaseManager.DeleteLogContentList (logContent);
+			}
+			if (logExternalLink.Count > 0) {
+				obj = await service.PostLogContent (logExternalLink);
+				content = await obj.Content.ReadAsStringAsync ();
+				if (!content.Equals ("\"Saved\"")) {
+					return false;
+				}
+				await DatabaseManager.DeleteLogExternalLinkList (logExternalLink);
+			}
+			if (logFeedback.Count > 0) {
+				obj = await service.PostLogContent (logFeedback);
+				content = await obj.Content.ReadAsStringAsync ();
+				if (!content.Equals ("\"Saved\"")) {
+					return false;
+				}
+				await DatabaseManager.DeleteLogFeedbackList (logFeedback);
+			}
+			if (logUsage.Count > 0) {
+				obj = await service.PostLogContent (logUsage);
+				content = await obj.Content.ReadAsStringAsync ();
+				if (!content.Equals ("\"Saved\"")) {
+					return false;
+				}
+				await DatabaseManager.DeleteLogUsageList (logUsage);
+			}
 			return true;
 		}
 
@@ -116,7 +131,7 @@ namespace MyHealthDB.Logger
 				}
 
 			} catch (Exception ex) {
-				Console.WriteLine ();
+				Console.WriteLine ("Exception  : {0}", ex.ToString());
 				return false;
 			}
 			return true;

@@ -45,6 +45,8 @@ namespace MyHealthAndroid
 						Date = DateTime.Now,
 						FeedbackText = string.Format("<name>{0}<name><email>{1}</email><message>{2}</message>", username.Text, email.Text, message.Text)
 					});
+					username.Text = email.Text = message.Text = "";
+					Toast.MakeText(this, "Feedback Saved.!", ToastLength.Long).Show();
 				}
 			};
 

@@ -36,6 +36,7 @@ namespace MyHealth.Android
 
 			_channelsList = FindViewById<ListView> (Resource.Id.emergencyList);
 			var _listAdapter = new NewsChannelsAdapter(this);
+			await _listAdapter.loadData ();
 			_channelsList.Adapter = _listAdapter;
 
 			_channelsList.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {

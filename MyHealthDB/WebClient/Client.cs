@@ -29,6 +29,8 @@ namespace MyHealthDB.WebClient
 							new AuthenticationHeaderValue("Basic",
 								Convert.ToBase64String(Encoding.UTF8.GetBytes(String.Format("{0}:{1}", Helper.Helper.DeviceId, Helper.Helper.Hash))));
 
+					Console.WriteLine("url : {0}, DeviceID : {1}, Hash : {2}", url, Helper.Helper.DeviceId, Helper.Helper.Hash);
+
 					HttpResponseMessage msg = await client.GetAsync(url);
 					msg.EnsureSuccessStatusCode();
 					return msg;
@@ -53,6 +55,7 @@ namespace MyHealthDB.WebClient
 						new AuthenticationHeaderValue ("Basic",
 						Convert.ToBase64String (Encoding.UTF8.GetBytes (String.Format ("{0}:{1}", Helper.Helper.DeviceId, Helper.Helper.Hash))));
 					client.DefaultRequestHeaders.Accept.Add (new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue ("application/json"));
+					Console.WriteLine("url : {0}, DeviceID : {1}, Hash : {2}", url, Helper.Helper.DeviceId, Helper.Helper.Hash);
 					return await client.PostAsync (url, new StringContent (JsonConvert.SerializeObject (data), System.Text.Encoding.UTF8, "application/json"));
 
 				}

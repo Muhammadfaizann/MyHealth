@@ -41,7 +41,7 @@ namespace MyHealthAndroid
 
 			//based on the extra that will be receied form last activity
 			//all the resource will be set. 
-			SetContentAsPerCaller (_caller);
+			await SetContentAsPerCaller (_caller);
 			SetCustomActionBar ();
 
 			await LogManager.Log (new LogUsage {
@@ -66,11 +66,9 @@ namespace MyHealthAndroid
 			{
 			case 0:  
 				await setLayoutWithTable (data.DisplayName);
-
 				break;
 			case 1:
 				await setLayoutWithTable (data.DisplayName);
-
 				break;
 
 			case 2:
@@ -78,7 +76,7 @@ namespace MyHealthAndroid
 				break;
 
 			case 3:
-				setLayoutWithTableContacts ();
+				await setLayoutWithTableContacts ();
 				break;
 
 			case 4:
@@ -106,15 +104,17 @@ namespace MyHealthAndroid
 				_commonListView.Adapter = emergencyAdapter;
 			} else {
 				var emergencyAdapter = new HPOrgnisationAdapter (this);
+				await emergencyAdapter.loadData ();
 				_commonListView.Adapter = emergencyAdapter;
 			}
 		}
 
-		private void setLayoutWithTableContacts () 
+		private async Task setLayoutWithTableContacts () 
 		{
 			SetContentView (Resource.Layout.activity_hp_details_contacts);
 			_commonListView = FindViewById<ListView> (Resource.Id.hpUsefulContactList);
 			_contactAdapter = new HPUserfulNumberAdapter (this);
+			await _contactAdapter.loadData ();
 			_commonListView.Adapter = _contactAdapter;
 
 			_addNumberButton = FindViewById<Button> (Resource.Id.addContactButton);

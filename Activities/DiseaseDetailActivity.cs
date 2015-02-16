@@ -15,6 +15,7 @@ using Android.Graphics;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {

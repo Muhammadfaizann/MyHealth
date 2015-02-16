@@ -5,6 +5,7 @@ using Android.App;
 using Android.Views;
 using Android.Content;
 using MyHealthDB;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -19,9 +20,13 @@ namespace MyHealthAndroid
 		{
 			_activity = activity;
 			_model = new CommonData ();
-			ChannelList = _model.GetAllChannels ();
+			//ChannelList = _model.GetAllChannels ();
 		}
-			
+
+		public async Task loadData () {
+			ChannelList = await _model.GetAllChannels ();
+		}
+
 		//count of rows in ListView
 		public override int Count {
 			get { return ChannelList.Count; }

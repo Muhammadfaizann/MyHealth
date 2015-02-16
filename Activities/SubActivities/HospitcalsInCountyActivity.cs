@@ -23,7 +23,7 @@ namespace MyHealthAndroid
 		private ListView _commonListView;
 		private Button _backButton;
 
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 
 			base.OnCreate (bundle);
@@ -31,8 +31,9 @@ namespace MyHealthAndroid
 
 			SetContentView (Resource.Layout.activity_hp_details_table);
 			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);
-			_commonListView.Adapter = new HospitalsAdapter (this);
-
+			var hospitalAdapter = new HospitalsAdapter (this);
+			await hospitalAdapter.loadData ();
+			_commonListView.Adapter = hospitalAdapter;
 			SetCustomActionBar ();
 
 			//LogManager.Log<LogUsage> (new LogUsage (){ Date = DateTime.Now, Page = Convert.ToInt32(Pages.IWantToHelp).ToString() });

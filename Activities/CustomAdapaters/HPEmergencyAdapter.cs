@@ -20,7 +20,6 @@ namespace MyHealthAndroid
 		{
 			_activity = activity;
 			_model = new CommonData ();
-
 		}
 
 		public async Task loadData () {

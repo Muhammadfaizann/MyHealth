@@ -62,8 +62,8 @@ namespace MyHealthAndroid
 			calculateBMIButton = FindViewById<Button> (Resource.Id.calculateBMIButton);
 			syncButton = FindViewById<Button> (Resource.Id.syncButton);
 
-			syncButton.Click += (object sender, EventArgs e) => {
-				MyHealthDB.ServiceConsumer.SyncDevice();
+			syncButton.Click += async (object sender, EventArgs e) => {
+				await MyHealthDB.ServiceConsumer.SyncDevice();
 			};
 
 			calculateBMIButton.Click += CalculateBMI;
@@ -74,12 +74,19 @@ namespace MyHealthAndroid
 			//populate the spinners
 			SetSpinnersAdapter (false);
 
+			//chcek to see where this activity was launched from
+			var ifFromLaunch = Intent.GetBooleanExtra ("fromLaunchAvtivity", false);
+
 			// back button
 			var _backButton = FindViewById<Button> (Resource.Id.backButton);
 			_backButton.Text = "My Profile";
 			_backButton.Click += (object sender, EventArgs e) => 
 			{
-				base.OnBackPressed();
+				if (ifFromLaunch) {
+					StartActivity(new Intent(this, typeof(HomeActivity)));
+				} else {
+					base.OnBackPressed();
+				}
 			};
 		}
 

@@ -32,10 +32,14 @@ namespace MyHealthAndroid
 			});
 
 			var Link = FindViewById (Resource.Id.bloodDonationLink);
-			Link.Click += (object sender, EventArgs e) => {
+			Link.Click += async (object sender, EventArgs e) => {
 				var uri = Android.Net.Uri.Parse ("http://www.giveblood.ie");
 				var intent = new Intent (Intent.ActionView, uri); 
 				StartActivity (intent);
+				await LogManager.Log<LogExternalLink> (new LogExternalLink {
+					Date = DateTime.Now, 
+					Link = "http://www.giveblood.ie"
+				});
 			};
 
 			// back button

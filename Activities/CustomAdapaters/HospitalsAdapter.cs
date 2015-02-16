@@ -5,6 +5,8 @@ using Android.App;
 using Android.Views;
 using Android.Content;
 using MyHealthDB;
+using System.Threading.Tasks;
+using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
@@ -19,9 +21,13 @@ namespace MyHealthAndroid
 		{
 			_activity = activity;
 			_model = new CommonData ();
-			_list = _model.GetHospitalsInCounty (0);
+			//_list = _model.GetHospitalsInCounty (0);
 		}
-			
+
+		public async Task loadData () {
+			_list = await _model.GetHospitalsInCounty (0);
+		}
+
 		//count of rows in ListView
 		public override int Count {
 			get { return _list.Count; }
@@ -56,10 +62,14 @@ namespace MyHealthAndroid
 			};
 
 			orgnisationWebsite.Clickable = true;
-			orgnisationWebsite.Click += (object sender, EventArgs e) => {
+			orgnisationWebsite.Click += async (object sender, EventArgs e) => {
 				var uri = Android.Net.Uri.Parse ("http://"+orgnisationWebsite.Text);
 				var intent = new Intent (Intent.ActionView, uri); 
 				_activity.StartActivity (intent); 
+				await LogManager.Log<LogExternalLink> (new LogExternalLink {
+					Date = DateTime.Now, 
+					Link = "http://"+orgnisationWebsite.Text
+				});
 			};
 
 			return view;

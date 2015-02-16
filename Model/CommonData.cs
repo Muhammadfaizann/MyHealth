@@ -68,13 +68,13 @@ namespace MyHealthAndroid
 			return counties; 
 		}
 			
-		public List <Hospital> GetHospitalsInCounty (int countyID) 
+		public async Task<List <Hospital>> GetHospitalsInCounty (int countyID) 
 		{
-			var hospitals = MyHealthDB.HospitalManager.GetAllHospitals();
+			var hospitals = await MyHealthDB.DatabaseManager.SelectAllHospitals();
 			var randId = new Random ();
 			if (hospitals.Count <= 0) {
 
-				MyHealthDB.HospitalManager.SaveHospital (new Hospital {
+				await MyHealthDB.DatabaseManager.SaveHospital (new Hospital {
 					ID = 0,
 					Name = "Beaumont Hospital",
 					PhoneNumber = "+353 1 809 3000", 
@@ -82,7 +82,7 @@ namespace MyHealthAndroid
 					CountyID = randId.Next(0,4)
 				});
 
-				MyHealthDB.HospitalManager.SaveHospital (new Hospital {
+				await MyHealthDB.DatabaseManager.SaveHospital (new Hospital {
 					ID = 1,
 					Name = "Mater Hospital",
 					PhoneNumber = "+353 1 803 2000", 
@@ -90,7 +90,7 @@ namespace MyHealthAndroid
 					CountyID = randId.Next(0,4)
 				});
 
-				MyHealthDB.HospitalManager.SaveHospital (new Hospital {
+				await MyHealthDB.DatabaseManager.SaveHospital (new Hospital {
 					ID = 2,
 					Name = "Rotunda hospital",
 					PhoneNumber = "+353 1 807 1700", 
@@ -98,7 +98,7 @@ namespace MyHealthAndroid
 					CountyID = randId.Next(0,4)
 				});
 
-				hospitals = MyHealthDB.HospitalManager.GetAllHospitals ();
+				 hospitals = await MyHealthDB.DatabaseManager.SelectAllHospitals ();
 			}
 			return hospitals; 
 		}
@@ -135,74 +135,74 @@ namespace MyHealthAndroid
 			return _items;
 		}
 
-		public List<Organisation> GetOrgnisations()
+		public async Task<List<Organisation>> GetOrgnisations()
 		{
-			List<Organisation> organisations = MyHealthDB.OrganisationManager.GetAllOrganisations ();
+			List<Organisation> organisations = await MyHealthDB.DatabaseManager.SelectAllOrganisations ();
 			if (organisations.Count <= 0) {
-				MyHealthDB.OrganisationManager.SaveOrganisation (new Organisation {
+				await MyHealthDB.DatabaseManager.SaveOrganisation (new Organisation {
 					ID = 0,
 					Name = "Irish Heart Foundation",
 					PhoneNumber = "1890 432 787",
 					URL = "www.irisheart.ie"
 				});
-				MyHealthDB.OrganisationManager.SaveOrganisation (new Organisation {
+				await MyHealthDB.DatabaseManager.SaveOrganisation (new Organisation {
 					ID = 1,
 					Name = "Irish Cancer Society",
 					PhoneNumber = "1800 200 700",
 					URL = "www.cancer.ie"
 				});
-				MyHealthDB.OrganisationManager.SaveOrganisation (new Organisation {
+				await MyHealthDB.DatabaseManager.SaveOrganisation (new Organisation {
 					ID = 2,
 					Name = "Diabetes Ireland",
 					PhoneNumber = "1890 909 909",
 					URL = "www.diabetes.ie"
 				});
-				MyHealthDB.OrganisationManager.SaveOrganisation (new Organisation {
+				await MyHealthDB.DatabaseManager.SaveOrganisation (new Organisation {
 					ID = 3,
 					Name = "Aware",
 					PhoneNumber = "016617211",
 					URL = "www.aware.ie"
 				});
 
-				organisations = MyHealthDB.OrganisationManager.GetAllOrganisations ();
+				organisations = await MyHealthDB.DatabaseManager.SelectAllOrganisations ();
 			}
 			return organisations;	
 		}
 
-		public List<NewsChannels> GetAllChannels ()
+		public async Task<List<NewsChannels>> GetAllChannels ()
 		{
 			//				channels.Add (new NewsChannels ("BBC Medical News", Resource.Drawable.NewsHealth));
 			//				channels.Add (new NewsChannels ("Pulse Latest", Resource.Drawable.PULSE));
 			//				channels.Add (new NewsChannels ("Irish Health", Resource.Drawable.IrishHealth));
 			//				channels.Add (new NewsChannels ("Irish Times Health", Resource.Drawable.IrishTimes));
-			var channels = MyHealthDB.NewsChannelsManager.GetAllNewsChannels ();
+			var channels = await MyHealthDB.DatabaseManager.SelectAllNewsChannels ();
 			if (channels != null && channels.Count <= 0) {
-				MyHealthDB.NewsChannelsManager.SaveNewsChannels ( new NewsChannels {
+				await MyHealthDB.DatabaseManager.SaveNewsChannels ( new NewsChannels {
 					ID = 0,
 					Name = "BBC Medical News",
 					resourceID = Resource.Drawable.NewsHealth,
 					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
 				});
-				MyHealthDB.NewsChannelsManager.SaveNewsChannels (new NewsChannels {
+				await MyHealthDB.DatabaseManager.SaveNewsChannels (new NewsChannels {
 					ID = 1,
 					Name = "Pulse Latest",
 					resourceID = Resource.Drawable.PULSE,
 					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
 				});
 
-				MyHealthDB.NewsChannelsManager.SaveNewsChannels ( new NewsChannels {
+				await MyHealthDB.DatabaseManager.SaveNewsChannels ( new NewsChannels {
 					ID = 2,
 					Name = "Irish Health",
 					resourceID = Resource.Drawable.IrishHealth,
 					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
 				});
-				MyHealthDB.NewsChannelsManager.SaveNewsChannels ( new NewsChannels {
+				await MyHealthDB.DatabaseManager.SaveNewsChannels ( new NewsChannels {
 					ID = 3,
 					Name = "Irish Times Health",
 					resourceID = Resource.Drawable.IrishTimes,
 					RSSFeedURL = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#"
 				});
-				channels = MyHealthDB.NewsChannelsManager.GetAllNewsChannels ();
+				channels = await MyHealthDB.DatabaseManager.SelectAllNewsChannels ();
 			}
 			return channels;
 		}
