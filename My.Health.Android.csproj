@@ -206,6 +206,9 @@
     <Folder Include="Activities\CustomAdapaters\" />
     <Folder Include="Assets\Content\" />
     <Folder Include="Activities\SubActivities\" />
+    <Folder Include="Assets\css\" />
+    <Folder Include="Assets\js\" />
+    <Folder Include="Assets\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\AboutRCSI.html" />
@@ -213,5 +216,12 @@
     <AndroidAsset Include="Assets\Content\LungCancer.html" />
     <AndroidAsset Include="Assets\Content\MyUsefulNumbers.xml" />
     <AndroidAsset Include="Assets\Content\OrganDonor.html" />
+    <AndroidAsset Include="Assets\css\bootstrap.min.css" />
+    <AndroidAsset Include="Assets\js\bootstrap.min.js" />
+    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.eot" />
+    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
 </Project>

@@ -55,6 +55,11 @@ namespace MyHealthDB.Service
 			return await Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAll");
 		}
 
+		public async Task<HttpResponseMessage> GetAllCpUsers ()
+		{
+			return await Client.GetAsync ("api/v1/CPUser/GetAll");
+		}
+
 		public async Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash)
 		{
 			var url = string.Format ("api/v1/Application/RegisterMe/{0}/{1}/{2}/{3}", DeviceId, Type, UserName, Hash);

@@ -68,6 +68,8 @@ namespace MyHealthDB
 			await dbConnection.CreateTableAsync<UsefullNumbers> ();
 
 			await dbConnection.CreateTablesAsync<LogContent, LogExternalLink, LogFeedback, LogUsage> ();
+
+			await dbConnection.CreateTableAsync<CpUser> ();
 		}
 
 		#region[Register]
@@ -464,12 +466,15 @@ namespace MyHealthDB
 
 		public async static Task SaveLogContent(LogContent log)
 		{
+
+			 
 			var selected = await dbConnection.Table<LogContent> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
 			if (selected == null) {
 				await dbConnection.InsertAsync (log).ContinueWith (t => {
 					Console.WriteLine ("New LogContent Name : {0}", log.ID);
 				});
 			} else {
+
 				await dbConnection.UpdateAsync (log).ContinueWith (t => {
 					Console.WriteLine ("Updated LogContent Name : {0}", log.ID);
 				});
@@ -524,6 +529,7 @@ namespace MyHealthDB
 					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
 				});
 			} else {
+				 
 				await dbConnection.UpdateAsync (log).ContinueWith (t => {
 					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
 				});
@@ -633,6 +639,7 @@ namespace MyHealthDB
 					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
 				});
 			} else {
+				 
 				await dbConnection.UpdateAsync (log).ContinueWith (t => {
 					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
 				});
@@ -657,6 +664,60 @@ namespace MyHealthDB
 				}
 			} catch (Exception ex) {
 				Console.WriteLine("Deletion List List<LogFeedback> was stopped because of [{0}]", ex.ToString());
+			}
+		}
+		#endregion
+
+		#region[CpUser]
+		public async static Task<List<CpUser>> SelectAllCpUser()
+		{
+			var user = await dbConnection.Table<CpUser>().ToListAsync ();
+			return user;
+		}
+
+		public async static Task<List<CpUser>> SelectCpUserList (int numberOfRecords = 100)
+		{
+			var user = await dbConnection.Table<CpUser> ().Take (numberOfRecords).ToListAsync ();
+			return user;
+		}
+
+		public async static Task<CpUser> SelectCpUser(int id)
+		{
+			return await dbConnection.Table<CpUser> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveCpUser(CpUser user)
+		{
+			var selected = await dbConnection.Table<CpUser> ().Where(x => x.ID == user.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (user).ContinueWith (t => {
+					Console.WriteLine ("New CpUser Name : {0}", user.ID);
+				});
+			} else {
+				await dbConnection.UpdateAsync (user).ContinueWith (t => {
+					Console.WriteLine ("Updated CpUser Name : {0}", user.ID);
+				});
+			}
+		}
+
+		public async static Task DeleteCpUser(CpUser user)
+		{
+			await dbConnection.DeleteAsync(user).ContinueWith(t => {
+				Console.WriteLine ("CpUser with ID : {0} >> deleted", user.ID);
+			});
+		}
+
+		public async static Task DeleteCpUserList(List<CpUser> userList)
+		{
+			try {
+				foreach (var user in userList) 
+				{
+					await dbConnection.DeleteAsync(user).ContinueWith(t => {
+						Console.WriteLine ("CP User with ID : {0} >> deleted", user.ID);
+					});
+				}
+			} catch (Exception ex) {
+				Console.WriteLine("Deletion List List<CpUser> was stopped because of [{0}]", ex.ToString());
 			}
 		}
 		#endregion

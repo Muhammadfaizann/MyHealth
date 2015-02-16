@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MyHealthDB.Helper
 {
@@ -52,6 +53,55 @@ namespace MyHealthDB.Helper
 			myHash = Helper.generateMD5(myHash);
 			return myHash;
 
+		}
+
+		public static async Task<string> BuildHtmlForDisease(int diseaseId) {
+			var selectedDisease = await DatabaseManager.SelectDisease (diseaseId);
+			StringBuilder htmlString = new StringBuilder ();
+			if (selectedDisease != null) {
+				var selectedCpUser = await DatabaseManager.SelectCpUser (selectedDisease.CPUserId);
+
+				htmlString.Append (@"<head><link rel=""stylesheet"" type=""text/css"" href=""css/bootstrap.min.css"">
+										<script type=""text/javascript"" src=""js/bootstrap.min.js""></script>
+									</head>
+									<body> <div style=""padding: 5px"">");
+
+				htmlString.AppendFormat ("<div>{0}</div> <div>{1}</div> <div>{2}</div> <div>{3}</div> ",
+					selectedDisease.Name,
+					selectedDisease.Description,
+					selectedDisease.SignAndSymptoms,
+					selectedDisease.PreventiveMeasures);
+
+				if (selectedCpUser != null) {
+					htmlString.AppendFormat ("<div><strong>Contact Details</strong><br /><br />{0}, {1}</div> ",
+						selectedCpUser.CharityName, selectedCpUser.CharityAddress);
+
+					if (!string.IsNullOrEmpty (selectedCpUser.Number)) {
+						htmlString.AppendFormat ("<div>T: {0}</div> ",
+							selectedCpUser.Number);
+					}
+					if (!string.IsNullOrEmpty (selectedCpUser.Fax)) {
+						if (!string.IsNullOrEmpty (selectedCpUser.Number)) {
+							htmlString.AppendFormat (", F: {0} ",
+								selectedCpUser.Fax);
+						} else {
+							htmlString.AppendFormat ("<div>F: {0}</div> ",
+								selectedCpUser.Fax);
+						}
+					}
+
+					if (!string.IsNullOrEmpty (selectedCpUser.Helpline))
+						htmlString.AppendFormat ("<div>Helpline: {0}</div> ",
+							selectedCpUser.Helpline);
+					if (!string.IsNullOrEmpty (selectedCpUser.LinkToDonate))
+						htmlString.AppendFormat (@"<div><strong>Link to Website</strong><br /><br/>Click the link to the website
+								<a href=""{0}"">{0}</a></div> ",
+							selectedCpUser.LinkToDonate);
+				}
+				htmlString.Append ("</div> </body>");
+			}
+
+			return htmlString.ToString ();
 		}
 	}
 

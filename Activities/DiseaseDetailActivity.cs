@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Webkit;
+using Android.Graphics;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
@@ -48,11 +49,27 @@ namespace MyHealthAndroid
 					ConditionId = selectedDisease.ID,
 					CategoryId = selectedDisease.DiseaseCategoryID
 				});
+
+				var selectedCpUser = await DatabaseManager.SelectCpUser (selectedDisease.CPUserId);
+
+				if (selectedCpUser != null) {
+					if(selectedCpUser.CharityLogo.Length > 0) {
+						// Convert bytes data into a Bitmap
+						Bitmap bmp = BitmapFactory.DecodeByteArray(selectedCpUser.CharityLogo, 0, selectedCpUser.CharityLogo.Length);
+						//ImageView imageView = new ImageView(ConversationsActivity.this);
+						// Set the Bitmap data to the ImageView
+						_imageView.SetImageBitmap(bmp);
+					}
+				}
 			}
 
-			if (_selectedDiseases.Contains ("Heart") || _selectedDiseases.Contains ("heart")) {
+			var htmlString = await MyHealthDB.Helper.Helper.BuildHtmlForDisease (_selectedDiseaseId);
+			if (!string.IsNullOrEmpty(htmlString)) {
+				//_imageView.SetImageResource (Resource.Drawable.Cancer);
+				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
+			} else if (_selectedDiseases.Contains ("Heart") || _selectedDiseases.Contains ("heart")) {
 				_imageView.SetImageResource (Resource.Drawable.ihf);
-				_webView.LoadUrl("file:///android_asset/Content/Heart.html");
+				_webView.LoadUrl ("file:///android_asset/Content/Heart.html");
 			} else {
 				_imageView.SetImageResource (Resource.Drawable.Cancer);
 				_webView.LoadUrl("file:///android_asset/Content/LungCancer.html");

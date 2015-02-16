@@ -18,6 +18,7 @@ namespace MyHealthDB.Model
 		public string SignAndSymptoms { get; set; }
 		public string PreventiveMeasures { get; set; }
 		public string MisSpelling { get; set; }
+		public int CPUserId { get; set; }
 	}
 }
 

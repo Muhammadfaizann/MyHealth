@@ -19,7 +19,8 @@ namespace MyHealthDB
 					Description = condition.Description,
 					MisSpelling = condition.MisSpelling,
 					PreventiveMeasures = condition.PreventiveMeasures,
-					SignAndSymptoms = condition.SignAndSymptoms
+					SignAndSymptoms = condition.SignAndSymptoms,
+					CPUserId = condition.CPUserId,
 				});
 			}
 			return true;
@@ -106,6 +107,25 @@ namespace MyHealthDB
 			return true;
 		}
 
+		public async static Task<Boolean> UpdateCpUsers (List<SMtblCpUser> AllCPUsers)
+		{
+			foreach (SMtblCpUser user in AllCPUsers) 
+			{
+				await MyHealthDB.DatabaseManager.SaveCpUser (new CpUser {
+					ID = user.Id,
+					CharityName = user.CharityName,
+					CharityLogo = user.CharityLogo,
+					CharityAddress = user.CharityAddress,
+					Email = user.Email,
+					Fax = user.Fax,
+					Helpline = user.Helpline,
+					LinkToDonate = user.LinkToDonate,
+					Number = user.Number,
+					Website = user.Website,
+				});
+			}
+			return true;
+		}
 	}
 }
 

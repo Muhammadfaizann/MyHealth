@@ -126,6 +126,13 @@ namespace MyHealthDB
 				Console.WriteLine ("\n Organisations are updated.");
 			}
 
+			obj = await _service.GetAllCpUsers ();
+			content = await obj.Content.ReadAsStringAsync();
+			List<SMtblCpUser> _allCpUsers = JsonConvert.DeserializeObject<List<SMtblCpUser>>(content);
+			if (await UpdateDBManager.UpdateCpUsers (_allCpUsers)) {
+				Console.WriteLine ("\n CpUsers are updated.");
+			}
+
 			await LogManager.SyncAllLogs ();
 
 			//obj = await _service.GoodBye();
