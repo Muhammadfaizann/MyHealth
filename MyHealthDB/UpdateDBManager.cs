@@ -26,6 +26,12 @@ namespace MyHealthDB
 			return true;
 		}
 
+		public async static Task<Boolean>UpdateAboutUs(AboutUs info) 
+		{
+			await MyHealthDB.DatabaseManager.SaveAboutUs (info);
+			return true;
+		}
+
 		public async static Task<Boolean> UpdateCategories (List<SMtblCPCategory> AllCategories)
 		{
 			foreach (SMtblCPCategory category in AllCategories) 
@@ -71,7 +77,7 @@ namespace MyHealthDB
 				await MyHealthDB.DatabaseManager.SaveHospital (new Hospital {
 					ID = hospital.Id,
 					Name = hospital.Name,
-					PhoneNumber = hospital.Number,
+					PhoneNumber = hospital.Number.ToString(),
 					URL = hospital.Website,
 					CountyID = hospital.countyId
 				});
@@ -86,7 +92,7 @@ namespace MyHealthDB
 				await MyHealthDB.DatabaseManager.SaveEmergencyContacts (new EmergencyContacts {
 					ID = number.Id,
 					Name = number.Name,
-					PhoneNumber = number.Number,
+					PhoneNumber = number.Number.ToString(),
 					Description = number.Description
 				});
 			}
@@ -100,7 +106,7 @@ namespace MyHealthDB
 				await MyHealthDB.DatabaseManager.SaveOrganisation (new Organisation {
 					ID = organisation.Id,
 					Name = organisation.Name,
-					PhoneNumber = organisation.Number,
+					PhoneNumber = organisation.Number.ToString(),
 					URL = organisation.Website
 				});
 			}

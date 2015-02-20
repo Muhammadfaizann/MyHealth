@@ -69,7 +69,7 @@ namespace MyHealthDB
 
 			await dbConnection.CreateTablesAsync<LogContent, LogExternalLink, LogFeedback, LogUsage> ();
 
-			await dbConnection.CreateTableAsync<CpUser> ();
+			await dbConnection.CreateTablesAsync<CpUser, AboutUs> ();
 		}
 
 		#region[Register]
@@ -102,6 +102,40 @@ namespace MyHealthDB
 		{
 			await dbConnection.DeleteAsync(device).ContinueWith(t => {
 				Console.WriteLine ("New County Name : {0}", device.UserName);
+			});
+		}
+		#endregion
+
+		#region[AboutUs]
+//		public async static Task<List<County>> SelectAllCounties()
+//		{
+//			var counties = await dbConnection.Table<County>().ToListAsync ();
+//			return counties;
+//		}
+
+		public async static Task<AboutUs> SelectAboutUs(int id)
+		{
+			return await dbConnection.Table<AboutUs> ().FirstOrDefaultAsync ();//dbConnection.Table<AboutUs> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveAboutUs(AboutUs aboutus)
+		{
+			var selected = await dbConnection.Table<AboutUs> ().Where(x => x.ID == aboutus.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (aboutus).ContinueWith (t => {
+					Console.WriteLine ("Saved New About Us  : {0}", aboutus.Title);
+				});
+			} else {
+				await dbConnection.UpdateAsync (aboutus).ContinueWith (t => {
+					Console.WriteLine ("Updated About Us  : {0}", aboutus.Title);
+				});
+			}
+		}
+
+		public async static Task DeleteAboutus(AboutUs aboutus)
+		{
+			await dbConnection.DeleteAsync(aboutus).ContinueWith(t => {
+				Console.WriteLine ("Deleted About Us  : {0}", aboutus.Title);
 			});
 		}
 		#endregion

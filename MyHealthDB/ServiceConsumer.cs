@@ -76,6 +76,15 @@ namespace MyHealthDB
 				return false;
 			}
 
+			//get the latest about us
+			obj = await _service.GetAboutUs ();
+			content = await obj.Content.ReadAsStringAsync ();
+			Console.WriteLine (content);
+			List<AboutUs> aboutus = JsonConvert.DeserializeObject<List<AboutUs>> (content);
+			if (await UpdateDBManager.UpdateAboutUs (aboutus[0])) {
+				Console.WriteLine ("About us was updated. ");
+			}
+
 			//call the service for updates.
 			obj = await _service.GetAllConditions ();
 			content = await obj.Content.ReadAsStringAsync();

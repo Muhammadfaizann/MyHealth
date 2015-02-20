@@ -55,8 +55,29 @@ namespace MyHealthDB.Helper
 
 		}
 
+		public static string BuildHtmlForAboutUs (AboutUs info) {
+			StringBuilder htmlString = new StringBuilder ();
+			htmlString.Append (@"<head><link rel=""stylesheet"" type=""text/css"" href=""css/bootstrap.min.css"">
+										<script type=""text/javascript"" src=""js/bootstrap.min.js""></script>
+									</head>
+									<body> <div style=""padding: 5px"">");
+
+			htmlString.AppendFormat ("<h3>{0}</h3> <div>{1}</div>",
+				info.Title,
+				info.Description);
+			htmlString.Append ("</div> </body>");
+
+			return htmlString.ToString ();
+		}
+
 		public static async Task<string> BuildHtmlForDisease(int diseaseId) {
-			var selectedDisease = await DatabaseManager.SelectDisease (diseaseId);
+			Disease selectedDisease;
+			try {
+				selectedDisease = await DatabaseManager.SelectDisease (diseaseId);
+			} catch (Exception ex) {
+				return "No data found.";
+			}
+
 			StringBuilder htmlString = new StringBuilder ();
 			if (selectedDisease != null) {
 				var selectedCpUser = await DatabaseManager.SelectCpUser (selectedDisease.CPUserId);
@@ -64,38 +85,37 @@ namespace MyHealthDB.Helper
 				htmlString.Append (@"<head><link rel=""stylesheet"" type=""text/css"" href=""css/bootstrap.min.css"">
 										<script type=""text/javascript"" src=""js/bootstrap.min.js""></script>
 									</head>
-									<body> <div style=""padding: 5px"">");
+									<body> <div style=""padding: 5px; font-family: Arial"">");
+				if (!string.IsNullOrEmpty(selectedDisease.Name))
+					htmlString.AppendFormat ("<h3><p style='color:#E11937;'>{0}</p></h3> ", selectedDisease.Name);
 
-				htmlString.AppendFormat ("<div>{0}</div> <div>{1}</div> <div>{2}</div> <div>{3}</div> ",
-					selectedDisease.Name,
-					selectedDisease.Description,
-					selectedDisease.SignAndSymptoms,
-					selectedDisease.PreventiveMeasures);
+				if (!string.IsNullOrEmpty(selectedDisease.Description))
+					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.Description);
+
+				if (!string.IsNullOrEmpty (selectedDisease.SignAndSymptoms))
+					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.SignAndSymptoms);
+
+				if (!string.IsNullOrEmpty(selectedDisease.PreventiveMeasures))
+					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.PreventiveMeasures);
 
 				if (selectedCpUser != null) {
-					htmlString.AppendFormat ("<div><strong>Contact Details</strong><br /><br />{0}, {1}</div> ",
+					htmlString.AppendFormat ("<p style='color:#E11937;'><strong>Contact Details</strong></p> <div>{0}, {1}</div> ",
 						selectedCpUser.CharityName, selectedCpUser.CharityAddress);
 
-					if (!string.IsNullOrEmpty (selectedCpUser.Number)) {
-						htmlString.AppendFormat ("<div>T: {0}</div> ",
-							selectedCpUser.Number);
-					}
-					if (!string.IsNullOrEmpty (selectedCpUser.Fax)) {
-						if (!string.IsNullOrEmpty (selectedCpUser.Number)) {
-							htmlString.AppendFormat (", F: {0} ",
-								selectedCpUser.Fax);
-						} else {
-							htmlString.AppendFormat ("<div>F: {0}</div> ",
-								selectedCpUser.Fax);
-						}
+					if (!string.IsNullOrEmpty (selectedCpUser.Number) && !string.IsNullOrEmpty (selectedCpUser.Fax)) {
+						htmlString.AppendFormat ("<div>T: {0}, F: {1} </div> ",
+							selectedCpUser.Number, selectedCpUser.Fax);
+					} else if (!string.IsNullOrEmpty (selectedCpUser.Fax)) {
+						htmlString.AppendFormat ("<div>F: {0}</div> ", selectedCpUser.Fax);
+					} else if (!string.IsNullOrEmpty (selectedCpUser.Number)) {
+						htmlString.AppendFormat ("<div>T: {0} </div> ", selectedCpUser.Number);
 					}
 
 					if (!string.IsNullOrEmpty (selectedCpUser.Helpline))
-						htmlString.AppendFormat ("<div>Helpline: {0}</div> ",
-							selectedCpUser.Helpline);
+						htmlString.AppendFormat ("<div>Helpline: {0}</div> ", selectedCpUser.Helpline);
 					if (!string.IsNullOrEmpty (selectedCpUser.LinkToDonate))
-						htmlString.AppendFormat (@"<div><strong>Link to Website</strong><br /><br/>Click the link to the website
-								<a href=""{0}"">{0}</a></div> ",
+						htmlString.AppendFormat (@"<p style='color:#E11937;'><strong>Link to Website</strong></p> <div><br/>
+								<a href=""{0}"">Click the link to the website {0}</a></div> ",
 							selectedCpUser.LinkToDonate);
 				}
 				htmlString.Append ("</div> </body>");

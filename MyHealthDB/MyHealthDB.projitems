@@ -63,6 +63,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LogUsage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblCpUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\CpUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\AboutUs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
