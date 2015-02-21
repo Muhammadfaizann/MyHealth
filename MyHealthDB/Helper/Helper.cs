@@ -93,7 +93,7 @@ namespace MyHealthDB.Helper
 					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.Description);
 
 				if (!string.IsNullOrEmpty (selectedDisease.SignAndSymptoms))
-					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.SignAndSymptoms);
+					htmlString.AppendFormat ("<p style='color:#E11937;'><strong>Sign and Symtoms</strong></p> <div>{0}</div> ", selectedDisease.SignAndSymptoms);
 
 				if (!string.IsNullOrEmpty(selectedDisease.PreventiveMeasures))
 					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.PreventiveMeasures);
@@ -114,7 +114,7 @@ namespace MyHealthDB.Helper
 					if (!string.IsNullOrEmpty (selectedCpUser.Helpline))
 						htmlString.AppendFormat ("<div>Helpline: {0}</div> ", selectedCpUser.Helpline);
 					if (!string.IsNullOrEmpty (selectedCpUser.LinkToDonate))
-						htmlString.AppendFormat (@"<p style='color:#E11937;'><strong>Link to Website</strong></p> <div><br/>
+						htmlString.AppendFormat (@"<p style='color:#E11937;'><strong>Link to Website</strong></p> <div>
 								<a href=""{0}"">Click the link to the website {0}</a></div> ",
 							selectedCpUser.LinkToDonate);
 				}
