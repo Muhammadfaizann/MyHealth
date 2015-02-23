@@ -167,6 +167,7 @@
     <BundleResource Include="Resources\images\grey_arrow_down.png" />
     <BundleResource Include="Resources\images\map_large.jpg" />
     <BundleResource Include="Resources\images\RCSI_Front_Building_1.jpg" />
+    <BundleResource Include="Resources\images\sync.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
