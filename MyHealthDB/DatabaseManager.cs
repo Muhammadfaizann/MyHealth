@@ -500,19 +500,17 @@ namespace MyHealthDB
 
 		public async static Task SaveLogContent(LogContent log)
 		{
-
-			 
-			var selected = await dbConnection.Table<LogContent> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
-			if (selected == null) {
+//			var selected = await dbConnection.Table<LogContent> ().Where (x => x.ID == log.ID);	//.FirstOrDefaultAsync();
+//			if (selected == null) {
 				await dbConnection.InsertAsync (log).ContinueWith (t => {
 					Console.WriteLine ("New LogContent Name : {0}", log.ID);
 				});
-			} else {
-
-				await dbConnection.UpdateAsync (log).ContinueWith (t => {
-					Console.WriteLine ("Updated LogContent Name : {0}", log.ID);
-				});
-			}
+//			} else {
+//
+//				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+//					Console.WriteLine ("Updated LogContent Name : {0}", log.ID);
+//				});
+//			}
 		}
 
 		public async static Task DeleteLogContent(LogContent number)
@@ -557,17 +555,17 @@ namespace MyHealthDB
 
 		public async static Task SaveLogExternalLink(LogExternalLink log)
 		{
-			var selected = await dbConnection.Table<LogExternalLink> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
-			if (selected == null) {
+//			var selected = await dbConnection.Table<LogExternalLink> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+//			if (selected == null) {
 				await dbConnection.InsertAsync (log).ContinueWith (t => {
 					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
 				});
-			} else {
-				 
-				await dbConnection.UpdateAsync (log).ContinueWith (t => {
-					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
-				});
-			}
+//			} else {
+//				 
+//				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+//					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
+//				});
+//			}
 		}
 
 		public async static Task DeleteLogExternalLink(LogExternalLink number)
@@ -613,16 +611,16 @@ namespace MyHealthDB
 
 		public async static Task SaveLogFeedback(LogFeedback log)
 		{
-			var selected = await dbConnection.Table<LogFeedback> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
-			if (selected == null) {
-				await dbConnection.InsertAsync (log).ContinueWith (t => {
-					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
-				});
-			} else {
-				await dbConnection.UpdateAsync (log).ContinueWith (t => {
-					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
-				});
-			}
+//			var selected = await dbConnection.Table<LogFeedback> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+//			if (selected == null) {
+			await dbConnection.InsertAsync (log).ContinueWith (t => {
+				Console.WriteLine ("New LogFeedback Name : {0}", log.ID);
+			});
+//			} else {
+//				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+//					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
+//				});
+//			}
 		}
 
 		public async static Task DeleteLogFeedback(LogFeedback number)
@@ -667,17 +665,17 @@ namespace MyHealthDB
 
 		public async static Task SaveLogUsage(LogUsage log)
 		{
-			var selected = await dbConnection.Table<LogUsage> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
-			if (selected == null) {
+//			var selected = await dbConnection.Table<LogUsage> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+//			if (selected == null) {
 				await dbConnection.InsertAsync (log).ContinueWith (t => {
 					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
 				});
-			} else {
-				 
-				await dbConnection.UpdateAsync (log).ContinueWith (t => {
-					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
-				});
-			}
+//			} else {
+//				 
+//				await dbConnection.UpdateAsync (log).ContinueWith (t => {
+//					Console.WriteLine ("Updated LogExternalLink Name : {0}", log.ID);
+//				});
+//			}
 		}
 
 		public async static Task DeleteLogUsage(LogUsage number)

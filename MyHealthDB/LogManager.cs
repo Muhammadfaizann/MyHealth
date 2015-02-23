@@ -144,12 +144,18 @@ namespace MyHealthDB.Logger
 		HealthProfessionals = 3,
 		HealthNews = 4,
 		IWantToHelp = 5,
-		HealthProfessionalDetails = 6,
+		AboutRCSI = 6,
 
 		BloodDonation = 7,
 		OrganDonors = 8,
 		Feedback = 9,
-		MyProfile = 10,
+		MyBMI = 10,
+
+		ConditionDetails = 11,
+		Emergency = 12,
+		Organisations = 13,
+		Hospitals = 14,
+		MyUsefulNumbers = 15,
 	}
 }
 
