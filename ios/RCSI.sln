@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHealth", "MyHealth.csproj", "{519CF0A5-37DC-451F-8909-86E945044746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Health.Android", "..\MyHealth_Android\My.Health.Android.csproj", "{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Release|iPhone.Build.0 = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{2B5BC4E3-8B3C-40BB-852B-B93C45F97E39}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{519CF0A5-37DC-451F-8909-86E945044746}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.Debug|iPhone.Build.0 = Debug|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{519CF0A5-37DC-451F-8909-86E945044746}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhone.ActiveCfg = Release|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhone.Build.0 = Release|iPhone
+		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{519CF0A5-37DC-451F-8909-86E945044746}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ..\MyHealth_Android\My.Health.Android.csproj
+	EndGlobalSection
+EndGlobal
