@@ -47,13 +47,13 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.sub_activity_profile);
 
 			//Get the shared Preferences
-			preferences = PreferenceManager.GetDefaultSharedPreferences (this); 
+			preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
 
 			SetCustomActionBar ();
 
 			await LogManager.Log<LogUsage> (new LogUsage { 
 				Date = DateTime.Now, 
-				Page = Convert.ToInt32(Pages.MyProfile)
+				Page = Convert.ToInt32(Pages.MyBMI)
 			});
 
 			heightFeetSpinner = FindViewById<Spinner> (Resource.Id.heightFeetSpinner);
@@ -71,9 +71,14 @@ namespace MyHealthAndroid
 
 			syncButton.Click += async (object sender, EventArgs e) => {
 				try {
+					ISharedPreferencesEditor editor = preferences.Edit();
 					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
+					editor.PutBoolean("applicationUpdated", false);
+					editor.Apply();
 					await MyHealthDB.ServiceConsumer.SyncDevice();
 					Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
+					editor.PutBoolean("applicationUpdated", true);
+					editor.Apply();
 				} catch (Exception ex) {
 					Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();
 				}

@@ -35,13 +35,13 @@ namespace MyHealthAndroid
 					Number = "1234567890"
 				});
 
-				MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
 					ID = 1,
 					Name = "My Dentist", 
 					Number = "+353876416352"
 				});
 
-				MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
 					ID = 2,
 					Name = "My Health Insurer", 
 					Number = "1234567890"
@@ -93,7 +93,7 @@ namespace MyHealthAndroid
 
 			contactEdit.Clickable = true;
 			contactEdit.Click += async (object sender, EventArgs e) => {
-				await _activity.ShowInputDialog(position, _list);
+				_activity.ShowInputDialog(position, _list);
 			};
 
 			return view;

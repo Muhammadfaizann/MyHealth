@@ -11,6 +11,7 @@ using Android.Telephony;
 using Java.Util;
 using MyHealthDB.Logger;
 using MyHealthDB;
+using Android.Net;
 
 namespace MyHealthAndroid
 {
@@ -18,47 +19,71 @@ namespace MyHealthAndroid
 		ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Launch);
 
-			AlertDialog.Builder alert = new AlertDialog.Builder (this);
-			alert.SetTitle("Accept Terms of Use");
-			alert.SetMessage("Read our terms and conditions");
-
-			alert.SetCancelable (false);
-			
-			alert.SetPositiveButton ("Agree", async (senderAlert, args) => {
-				if (!ifDatabaseExists(BaseContext)) {
-					Toast.MakeText(this.BaseContext, "Creating Databases and Registration", ToastLength.Long).Show();
-					await MyHealthDB.ServiceConsumer.CreateDatabase();
-					SaveDatabaseExits(BaseContext);
-					var myProfile = new Intent(this, typeof(MyProfileActivity));
-					myProfile.PutExtra("fromLaunchAvtivity", true);
-					StartActivity (myProfile);
-					//await MyHealthDB.Logger.LogManager.SyncAllLogs ();
+			await MyHealthDB.ServiceConsumer.CreateDatabase ();
+			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
+				ShowAcceptanceDialog ();
+			} else {
+				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
+				var activeConnection = connectivityManager.ActiveNetworkInfo;
+				if ((activeConnection != null) && activeConnection.IsConnected) {
+					Toast.MakeText (this, "Registering device", ToastLength.Long).Show();
+					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android")) {
+						ShowAcceptanceDialog ();
+					}
 				} else {
-					StartActivity(typeof(HomeActivity));
+					ShowConnectivityDialog ();
 				}
-			});
-
-			alert.SetNegativeButton ("Don't Agree", (senderAlert, args) => {
-				System.Environment.Exit(0);
-			});
-			//run the alert in UI thread to display in the screen
-			RunOnUiThread (() => {
-				alert.Show();
-			});
-		}
+			}
+			}
 			
 		protected override void OnPause()
 		{
 			base.OnPause ();
 		}
+		//------------------------ Show Acceptance Dialog ----------------------//
+		private void ShowAcceptanceDialog() {
+			AlertDialog.Builder alert = new AlertDialog.Builder (this);
+			alert.SetTitle ("Accept Terms of Use");
+			alert.SetMessage ("Read our terms and conditions");
 
+			alert.SetCancelable (false);
+
+			alert.SetPositiveButton ("Agree", async (senderAlert, args) => {
+				StartActivity (typeof(HomeActivity));
+			});
+
+			alert.SetNegativeButton ("Don't Agree", (senderAlert, args) => {
+				System.Environment.Exit (0);
+			});
+			//run the alert in UI thread to display in the screen
+			RunOnUiThread (() => {
+				alert.Show ();
+			});
+		}
+		private void ShowConnectivityDialog()
+		{
+			AlertDialog.Builder alert = new AlertDialog.Builder (this);
+			alert.SetTitle ("Connectivity");
+			alert.SetMessage ("Please check your internet connection and relaunch applicaiton");
+
+			alert.SetCancelable (false);
+
+			alert.SetPositiveButton ("Ok",(senderAlert, args) => {
+				System.Environment.Exit (0);
+			});
+
+			//run the alert in UI thread to display in the screen
+			RunOnUiThread (() => {
+				alert.Show ();
+			});
+		}
 		//------------------------ Check If Databases Exists ----------------------//
 		private Boolean ifDatabaseExists (Context _context) {
 			ISharedPreferences prefs = Application.Context.GetSharedPreferences("MyHealthAppPrefs", FileCreationMode.Private);//PreferenceManager.GetDefaultSharedPreferences (_context);

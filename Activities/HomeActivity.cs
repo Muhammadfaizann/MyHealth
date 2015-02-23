@@ -14,6 +14,7 @@ using Android.Preferences;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
+using Android.Net;
 
 namespace MyHealthAndroid{
 	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -64,6 +65,19 @@ namespace MyHealthAndroid{
 				Date = DateTime.Now,
 				Page = Convert.ToInt32(Pages.Home)
 			});
+
+			var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext);
+			if (!preferences.GetBoolean ("applicationUpdated", false)) {
+				Toast.MakeText (this, "Please Sync with latest data.", ToastLength.Long).Show ();
+				StartActivity (new Intent (this, typeof(MyProfileActivity)));
+			} else {
+				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
+				var activeConnection = connectivityManager.ActiveNetworkInfo;
+				if ((activeConnection != null) && activeConnection.IsConnected) {
+					await LogManager.SyncAllLogs ();
+				}
+			}
+
 		}
 
 

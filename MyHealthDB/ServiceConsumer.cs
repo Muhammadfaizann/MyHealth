@@ -20,6 +20,15 @@ namespace MyHealthDB
 		private static HttpResponseMessage obj;
 		private static string content = "";
 
+		public async static Task<Boolean> CheckRegisteredDevice ()
+		{
+			var device = await DatabaseManager.SelectDevice ();
+			if (device == null) {
+				return false;
+			}
+			return true;
+		}
+
 		public async static Task<Boolean> RegisterDevice (String device)
 		{
 			_service = new WebService ();
@@ -32,16 +41,19 @@ namespace MyHealthDB
 			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash);
 			content = await obj.Content.ReadAsStringAsync();
 			SMApplicationUsersApp _SMtblRegisterDevice = JsonConvert.DeserializeObject<SMApplicationUsersApp>(content);
+			if (_SMtblRegisterDevice.DEVICE_ID.ToLower () == DeviceId.ToLower ()) {
+				//Save UserName, DeviceType, DeviceId into Database.
+				//Use these for SMHandShake Call
 
-			//Save UserName, DeviceType, DeviceId into Database.
-			//Use these for SMHandShake Call
-
-			await DatabaseManager.SaveDevice (new RegisteredDevice {
-				ID = _SMtblRegisterDevice.ID,
-				UserName = _SMtblRegisterDevice.UserName,
-				DeviceId = _SMtblRegisterDevice.DEVICE_ID,
-				DeviceType = _SMtblRegisterDevice.Type
-			});
+				await DatabaseManager.SaveDevice (new RegisteredDevice {
+					ID = _SMtblRegisterDevice.ID,
+					UserName = _SMtblRegisterDevice.UserName,
+					DeviceId = _SMtblRegisterDevice.DEVICE_ID,
+					DeviceType = _SMtblRegisterDevice.Type
+				});
+			} else {
+				return false;
+			}
 
 			return true;
 		}
@@ -49,7 +61,6 @@ namespace MyHealthDB
 		public async static Task<Boolean> CreateDatabase(String device = "Android")
 		{
 			await MyHealthDB.DatabaseManager.CreateAllTables ();
-			await RegisterDevice (device);
 			return true;
 		}
 
@@ -79,9 +90,8 @@ namespace MyHealthDB
 			//get the latest about us
 			obj = await _service.GetAboutUs ();
 			content = await obj.Content.ReadAsStringAsync ();
-			Console.WriteLine (content);
 			List<AboutUs> aboutus = JsonConvert.DeserializeObject<List<AboutUs>> (content);
-			if (await UpdateDBManager.UpdateAboutUs (aboutus[0])) {
+			if (await UpdateDBManager.UpdateAboutUs (aboutus [0])) {
 				Console.WriteLine ("About us was updated. ");
 			}
 
@@ -141,10 +151,10 @@ namespace MyHealthDB
 			if (await UpdateDBManager.UpdateCpUsers (_allCpUsers)) {
 				Console.WriteLine ("\n CpUsers are updated.");
 			}
+				
+			obj = await _service.GoodBye();
 
 			await LogManager.SyncAllLogs ();
-
-			//obj = await _service.GoodBye();
 			//TODO : Make a table and save successfull sync date. 
 			return true;
 		}

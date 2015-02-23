@@ -42,56 +42,65 @@ namespace MyHealthDB.Logger
 			//uncomment the line below to input dummy data
 			//await inputFakeData ();
 
-//			var AllDevices = await DatabaseManager.SelectAllDevices ();
-//			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
-//			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
-//
-//			//the initial hand shake
-//			obj = await service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
-//			content = await obj.Content.ReadAsStringAsync();
-//			SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
-//			Helper.Helper.Hash = _SMHandShake.Hash;
-//			if (_SMHandShake.StatusId != 1) {
-//				Console.WriteLine ("HandShake was rejected");
-//				return false;
-//			}
+			var AllDevices = await DatabaseManager.SelectAllDevices ();
+			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
 
-			var logContent = await DatabaseManager.SelectLogContent ();
-			var logExternalLink = await DatabaseManager.SelectLogExternalLinkList ();
-			var logFeedback = await DatabaseManager.SelectLogFeedbackList ();
-			var logUsage = await DatabaseManager.SelectLogUsageList ();
+			//the initial hand shake
+			obj = await service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
+			content = await obj.Content.ReadAsStringAsync();
+			SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
+			Helper.Helper.Hash = _SMHandShake.Hash;
+			if (_SMHandShake.StatusId != 1) {
+				Console.WriteLine ("HandShake was rejected");
+				return false;
+			}
 
-			if (logContent.Count > 0) {
-				obj = await service.PostLogContent (logContent);
-				content = await obj.Content.ReadAsStringAsync ();
-				if (!content.Equals ("\"Saved\"")) {
-					return false;
+			var dataExists = true;
+			while (dataExists) {
+
+				dataExists = false;
+				var logContent = await DatabaseManager.SelectLogContent ();
+				var logExternalLink = await DatabaseManager.SelectLogExternalLinkList ();
+				var logFeedback = await DatabaseManager.SelectLogFeedbackList ();
+				var logUsage = await DatabaseManager.SelectLogUsageList ();
+
+				if (logContent.Count > 0) {
+					obj = await service.PostLogContent (logContent);
+					content = await obj.Content.ReadAsStringAsync ();
+					if (!content.Equals ("\"Saved\"")) {
+						dataExists = true;
+						return false;
+					}
+					await DatabaseManager.DeleteLogContentList (logContent);
 				}
-				await DatabaseManager.DeleteLogContentList (logContent);
-			}
-			if (logExternalLink.Count > 0) {
-				obj = await service.PostLogContent (logExternalLink);
-				content = await obj.Content.ReadAsStringAsync ();
-				if (!content.Equals ("\"Saved\"")) {
-					return false;
+				if (logExternalLink.Count > 0) {
+					obj = await service.PostLogContent (logExternalLink);
+					content = await obj.Content.ReadAsStringAsync ();
+					if (!content.Equals ("\"Saved\"")) {
+						dataExists = true;
+						return false;
+					}
+					await DatabaseManager.DeleteLogExternalLinkList (logExternalLink);
 				}
-				await DatabaseManager.DeleteLogExternalLinkList (logExternalLink);
-			}
-			if (logFeedback.Count > 0) {
-				obj = await service.PostLogContent (logFeedback);
-				content = await obj.Content.ReadAsStringAsync ();
-				if (!content.Equals ("\"Saved\"")) {
-					return false;
+				if (logFeedback.Count > 0) {
+					obj = await service.PostLogContent (logFeedback);
+					content = await obj.Content.ReadAsStringAsync ();
+					if (!content.Equals ("\"Saved\"")) {
+						dataExists = true;
+						return false;
+					}
+					await DatabaseManager.DeleteLogFeedbackList (logFeedback);
 				}
-				await DatabaseManager.DeleteLogFeedbackList (logFeedback);
-			}
-			if (logUsage.Count > 0) {
-				obj = await service.PostLogContent (logUsage);
-				content = await obj.Content.ReadAsStringAsync ();
-				if (!content.Equals ("\"Saved\"")) {
-					return false;
+				if (logUsage.Count > 0) {
+					obj = await service.PostLogContent (logUsage);
+					content = await obj.Content.ReadAsStringAsync ();
+					if (!content.Equals ("\"Saved\"")) {
+						dataExists = true;
+						return false;
+					}
+					await DatabaseManager.DeleteLogUsageList (logUsage);
 				}
-				await DatabaseManager.DeleteLogUsageList (logUsage);
 			}
 			return true;
 		}

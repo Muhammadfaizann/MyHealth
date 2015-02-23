@@ -79,9 +79,9 @@ namespace MyHealthDB
 			return counties;
 		}
 
-		public async static Task<RegisteredDevice> SelectDevice(int id)
+		public async static Task<RegisteredDevice> SelectDevice()
 		{
-			return await dbConnection.Table<RegisteredDevice> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+			return await dbConnection.Table<RegisteredDevice> ().FirstOrDefaultAsync ();
 		}
 
 		public async static Task SaveDevice(RegisteredDevice device)

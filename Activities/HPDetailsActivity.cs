@@ -45,11 +45,6 @@ namespace MyHealthAndroid
 			//all the resource will be set. 
 			await SetContentAsPerCaller (_caller);
 			SetCustomActionBar ();
-
-			await LogManager.Log (new LogUsage {
-				Date = DateTime.Now,
-				Page = Convert.ToInt32(Pages.HealthProfessionalDetails)
-			});
 		}
 
 		//------------------------ custom activity ----------------------//
@@ -104,10 +99,18 @@ namespace MyHealthAndroid
 				var emergencyAdapter = new HPEmergencyAdapter (this);
 				await emergencyAdapter.loadData ();
 				_commonListView.Adapter = emergencyAdapter;
+				await LogManager.Log (new LogUsage {
+					Date = DateTime.Now,
+					Page = Convert.ToInt32(Pages.Emergency)
+				});
 			} else {
 				var emergencyAdapter = new HPOrgnisationAdapter (this);
 				await emergencyAdapter.loadData ();
 				_commonListView.Adapter = emergencyAdapter;
+				await LogManager.Log (new LogUsage {
+					Date = DateTime.Now,
+					Page = Convert.ToInt32(Pages.Organisations)
+				});
 			}
 		}
 
@@ -118,6 +121,11 @@ namespace MyHealthAndroid
 			_contactAdapter = new HPUserfulNumberAdapter (this);
 			await _contactAdapter.loadData ();
 			_commonListView.Adapter = _contactAdapter;
+
+			await LogManager.Log (new LogUsage {
+				Date = DateTime.Now, 
+				Page = Convert.ToInt32(Pages.MyUsefulNumbers)
+			});
 
 			_addNumberButton = FindViewById<Button> (Resource.Id.addContactButton);
 			//_saveNumberButton = FindViewById<Button> (Resource.Id.saveContactButton);
@@ -137,6 +145,12 @@ namespace MyHealthAndroid
 				_webView.Visibility = ViewStates.Invisible;
 				_imageView.SetImageResource (Resource.Drawable.map_large);
 				_imageView.Clickable = true;
+
+				await LogManager.Log ( new LogUsage {
+					Date = DateTime.Now,
+					Page = Convert.ToInt32(Pages.Hospitals)
+				});
+
 				_imageView.Click += (object sender, EventArgs e) => {
 					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
 					intent.PutExtra("county", "somecounty");
@@ -151,6 +165,11 @@ namespace MyHealthAndroid
 				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
 				_imageView.SetImageBitmap(BitmapFactory.DecodeByteArray(aboutus.mainImage,0,aboutus.mainImage.Length));
 
+				await LogManager.Log (new LogUsage {
+					Date = DateTime.Now,
+					Page = Convert.ToInt32(Pages.AboutRCSI)
+				});
+
 				//_webView.LoadUrl ("file:///android_asset/Content/AboutRCSI.html");
 				//_imageView.SetImageResource (Resource.Drawable.RCSI_Front_Building_1);
 			}
@@ -158,10 +177,10 @@ namespace MyHealthAndroid
 
 		//-------------------------------------- Event Handlers --------------------------------------//
 
-		protected async void onAddButtonClicked (object sender, EventArgs e) 
+		protected void onAddButtonClicked (object sender, EventArgs e) 
 		{
 			//this calls the same dialog so it can add new number.
-			await ShowInputDialog (-1, _contactAdapter.contactList);
+			ShowInputDialog (-1, _contactAdapter.contactList);
 		}
 
 		protected void onSaveButtonClicked (object sender, EventArgs e) 
@@ -171,7 +190,7 @@ namespace MyHealthAndroid
 
 		//-------------------------------------- Public functions --------------------------------------//
 
-		public async Task ShowInputDialog(int index, List<UsefullNumbers> contactList) 
+		public void ShowInputDialog(int index, List<UsefullNumbers> contactList) 
 		{
 			//var contactList = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
