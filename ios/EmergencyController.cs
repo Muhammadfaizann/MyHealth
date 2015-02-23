@@ -27,7 +27,7 @@ namespace RCSI
 		
 			_emergencyContactSource = new EmergencyContactSource (this);
 			this.tableView.Source = _emergencyContactSource;
-
+			this.tableView.ReloadData ();
 
 			/*UITapGestureRecognizer gestureRecognizer = new UITapGestureRecognizer (HideKeyboard);
 			this.tableView.AddGestureRecognizer (gestureRecognizer);*/
