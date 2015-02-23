@@ -5,32 +5,33 @@ using System.Collections.Generic;
 using Android.App;
 using System.Linq;
 
+using MyHealthDB;
+
 namespace MyHealthAndroid
 {
 	public class ExpendableListAdapter: BaseExpandableListAdapter
 	{
-		Dictionary<string, List<string>> _dictGroup =null;
+		Dictionary<string, List<Disease>> _dictGroup =null;
 		List<string> _lstGroupID = null;
 		Activity _activity;
 
 		public ExpendableListAdapter (Activity activity,
-			Dictionary<string, List<string>> dictGroup)
+			Dictionary<string, List<Disease>> dictGroup)
 		{
 			_dictGroup = dictGroup;
 			_activity = activity;
 			_lstGroupID = dictGroup.Keys.ToList();
-
 		}
 
 		#region implemented abstract members of BaseExpandableListAdapter
 		public override Java.Lang.Object GetChild (int groupPosition, int childPosition)
 		{
-			return _dictGroup [_lstGroupID [groupPosition]] [childPosition];
+			return  _dictGroup [_lstGroupID [groupPosition]] [childPosition].Name;
 		}
 
 		public override long GetChildId (int groupPosition, int childPosition)
 		{
-			return childPosition;
+			return _dictGroup [_lstGroupID [groupPosition]] [childPosition].ID ?? 0;
 		}
 
 		public override int GetChildrenCount (int groupPosition)
@@ -80,7 +81,7 @@ namespace MyHealthAndroid
 				convertView = _activity.LayoutInflater.Inflate (Resource.Layout.ListChild, null);
 
 			var textBox = convertView.FindViewById<TextView> (Resource.Id.txtSmall);
-			textBox.SetText (item, TextView.BufferType.Normal);
+			textBox.SetText (item.Name, TextView.BufferType.Normal);
 
 			return convertView;
 		}

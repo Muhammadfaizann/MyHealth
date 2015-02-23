@@ -12,6 +12,7 @@ using Android.Widget;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
+using Android.Preferences;
 
 namespace MyHealthAndroid
 {
@@ -30,6 +31,8 @@ namespace MyHealthAndroid
 		private ToggleButton matricToggleButton;
 		private Button calculateBMIButton;
 		private Button syncButton;
+		private Button saveButton;
+		private ISharedPreferences preferences;
 
 		private List<String> HeightUnitBig;
 		private List<String> HeightUnitSmall;
@@ -42,6 +45,9 @@ namespace MyHealthAndroid
 
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.sub_activity_profile);
+
+			//Get the shared Preferences
+			preferences = PreferenceManager.GetDefaultSharedPreferences (this); 
 
 			SetCustomActionBar ();
 
@@ -61,9 +67,35 @@ namespace MyHealthAndroid
 			matricToggleButton = FindViewById<ToggleButton> (Resource.Id.matricToggleButton);
 			calculateBMIButton = FindViewById<Button> (Resource.Id.calculateBMIButton);
 			syncButton = FindViewById<Button> (Resource.Id.syncButton);
+			saveButton = FindViewById<Button> (Resource.Id.saveProfileButton);
 
 			syncButton.Click += async (object sender, EventArgs e) => {
-				await MyHealthDB.ServiceConsumer.SyncDevice();
+				try {
+					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
+					await MyHealthDB.ServiceConsumer.SyncDevice();
+					Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
+				} catch (Exception ex) {
+					Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();
+				}
+			};
+
+			saveButton.Click += (object sender, EventArgs e) => {
+
+				ISharedPreferencesEditor editor = preferences.Edit();
+
+				editor.PutInt("heightFeetSpinnerPos", heightFeetSpinner.SelectedItemPosition);
+				editor.PutInt("heightInchSpinnerPos", heightInchSpinner.SelectedItemPosition);
+				editor.PutInt("weightKiloSpinnerPos", weightKiloSpinner.SelectedItemPosition);
+				editor.PutInt ("weightGramSpinnerPos", weightGramSpinner.SelectedItemPosition);
+				editor.PutInt("countrySpinnerPos", countrySpinner.SelectedItemPosition);
+				editor.PutInt("ageSpinnerPos", ageSpinner.SelectedItemPosition);
+				editor.PutInt ("genderSpinnerPos", genderSpinner.SelectedItemPosition);
+				editor.PutInt("bloodGroupSpinnerPos", bloodGroupSpinner.SelectedItemPosition);
+
+				editor.Apply();
+
+				Toast.MakeText(this.BaseContext, "Profile Saved", ToastLength.Long).Show();
+
 			};
 
 			calculateBMIButton.Click += CalculateBMI;
@@ -162,41 +194,51 @@ namespace MyHealthAndroid
 			heightFeetSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var F = HeightUnitBig[e.Position];
 			};
+			heightFeetSpinner.SetSelection (preferences.GetInt ("heightFeetSpinnerPos", 0));
 
 			heightInchSpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, HeightUnitSmall);
 			heightInchSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = HeightUnitSmall[e.Position];
 			};
+			heightInchSpinner.SetSelection (preferences.GetInt ("heightInchSpinnerPos", 0));
 
 			weightKiloSpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, WeightUnitBig);
 			weightKiloSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var F = WeightUnitBig[e.Position];
 			};
+			weightKiloSpinner.SetSelection (preferences.GetInt("weightKiloSpinnerPos", 0));
 
 			weightGramSpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, WeightUnitSmall);
 			weightGramSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = WeightUnitSmall[e.Position];
 			};
 
+			weightGramSpinner.SetSelection (preferences.GetInt ("weightGramSpinnerPos", 0));
+
 			countrySpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, CountryList);
 			countrySpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = CountryList[e.Position];
 			};
+			countrySpinner.SetSelection (preferences.GetInt("countrySpinnerPos", 0));
 
 			ageSpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, AgeList);
 			ageSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = AgeList[e.Position];
 			};
+			ageSpinner.SetSelection (preferences.GetInt("ageSpinnerPos", 0));
 
 			genderSpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, GenderList);
 			genderSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = GenderList[e.Position];
 			};
+			genderSpinner.SetSelection (preferences.GetInt ("genderSpinnerPos", 0));
 
 			bloodGroupSpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, BloodGroupList);
 			bloodGroupSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = CountryList[e.Position];
 			};
+			bloodGroupSpinner.SetSelection (preferences.GetInt("bloodGroupSpinnerPos", 0));
+
 		}
 	}
 }

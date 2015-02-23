@@ -14,10 +14,15 @@ namespace MyHealthAndroid
 		private List<UsefullNumbers> _list;
 		private HPDetailsActivity _activity;
 
+		public List<UsefullNumbers> contactList {
+			get {
+				return _list;
+			}
+		}
+
 		//constructor
 		public HPUserfulNumberAdapter (HPDetailsActivity activity)
 		{
-
 				_activity = activity;
 		}
 
@@ -87,8 +92,8 @@ namespace MyHealthAndroid
 			contactNumber.Text = _list [position].Number;
 
 			contactEdit.Clickable = true;
-			contactEdit.Click += (object sender, EventArgs e) => {
-				_activity.ShowInputDialog(position);
+			contactEdit.Click += async (object sender, EventArgs e) => {
+				await _activity.ShowInputDialog(position, _list);
 			};
 
 			return view;

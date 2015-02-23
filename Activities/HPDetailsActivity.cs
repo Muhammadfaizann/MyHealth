@@ -14,6 +14,8 @@ using Android.Webkit;
 using MyHealthDB;
 using System.Threading.Tasks;
 using MyHealthDB.Logger;
+using MyHealthDB.Helper;
+using Android.Graphics;
 
 namespace MyHealthAndroid
 {
@@ -72,7 +74,7 @@ namespace MyHealthAndroid
 				break;
 
 			case 2:
-				setSimpleLayout (data.DisplayName);
+				await setSimpleLayout (data.DisplayName);
 				break;
 
 			case 3:
@@ -80,7 +82,7 @@ namespace MyHealthAndroid
 				break;
 
 			case 4:
-				setSimpleLayout (data.DisplayName);
+				await setSimpleLayout (data.DisplayName);
 				break;
 
 			}
@@ -125,7 +127,7 @@ namespace MyHealthAndroid
 			//_saveNumberButton.Click += onSaveButtonClicked;
 		}
 
-		private void setSimpleLayout (string resourceName) 
+		private async Task setSimpleLayout (string resourceName) 
 		{
 			SetContentView (Resource.Layout.activity_hp_details_simple);
 			_webView = FindViewById<WebView> (Resource.Id.simpleWebView);
@@ -142,17 +144,24 @@ namespace MyHealthAndroid
 				};
 
 			} else {
-				_webView.LoadUrl ("file:///android_asset/Content/AboutRCSI.html");
-				_imageView.SetImageResource (Resource.Drawable.RCSI_Front_Building_1);
+
+				AboutUs aboutus = await MyHealthDB.DatabaseManager.SelectAboutUs (0);
+				string htmlString = Helper.BuildHtmlForAboutUs(aboutus);
+
+				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
+				_imageView.SetImageBitmap(BitmapFactory.DecodeByteArray(aboutus.mainImage,0,aboutus.mainImage.Length));
+
+				//_webView.LoadUrl ("file:///android_asset/Content/AboutRCSI.html");
+				//_imageView.SetImageResource (Resource.Drawable.RCSI_Front_Building_1);
 			}
 		}
 
 		//-------------------------------------- Event Handlers --------------------------------------//
 
-		protected void onAddButtonClicked (object sender, EventArgs e) 
+		protected async void onAddButtonClicked (object sender, EventArgs e) 
 		{
 			//this calls the same dialog so it can add new number.
-			ShowInputDialog (-1);
+			await ShowInputDialog (-1, _contactAdapter.contactList);
 		}
 
 		protected void onSaveButtonClicked (object sender, EventArgs e) 
@@ -162,15 +171,17 @@ namespace MyHealthAndroid
 
 		//-------------------------------------- Public functions --------------------------------------//
 
-		public void ShowInputDialog(int index) 
+		public async Task ShowInputDialog(int index, List<UsefullNumbers> contactList) 
 		{
+			//var contactList = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
+
+			//pass the contactsList from where you call this function. 
 			alert.SetTitle("Add / Edit Contact");
 			var view = this.LayoutInflater.Inflate (Resource.Layout.alertview_custom_layout, null);
 			alert.SetView (view);
 
-			var contactList = MyHealthDB.UsefullNumberManager.GetAllUsefullNumbers ();
 			var UserName = view.FindViewById<EditText>(Resource.Id.contactNameInput);
 			var UserNumber = view.FindViewById<EditText>(Resource.Id.contactNumberInput);
 			if (index >= 0) {
@@ -178,7 +189,7 @@ namespace MyHealthAndroid
 				UserNumber.Text = contactList.ElementAt(index).Number;
 			}
 
-			alert.SetPositiveButton ("Save", (object sender, DialogClickEventArgs e) => {
+			alert.SetPositiveButton ("Save", async (object sender, DialogClickEventArgs e) => {
 
 				if (!UserName.Text.Equals("")) {
 					UsefullNumbers contact;
@@ -192,9 +203,11 @@ namespace MyHealthAndroid
 						contact.Name = UserName.Text; 
 						contact.Number = UserNumber.Text;
 					}
-					MyHealthDB.UsefullNumberManager.SaveUsefullNumbers(contact);
+					await MyHealthDB.DatabaseManager.SaveUsefullNumber(contact);
 					_contactAdapter = new HPUserfulNumberAdapter (this);
+					await _contactAdapter.loadData();
 					_commonListView.Adapter = _contactAdapter;
+					Toast.MakeText(this, "Updated usefull numbers list", ToastLength.Long).Show();
 				}
 
 			});

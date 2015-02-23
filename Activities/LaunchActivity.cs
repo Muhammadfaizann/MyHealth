@@ -33,6 +33,7 @@ namespace MyHealthAndroid
 			
 			alert.SetPositiveButton ("Agree", async (senderAlert, args) => {
 				if (!ifDatabaseExists(BaseContext)) {
+					Toast.MakeText(this.BaseContext, "Creating Databases and Registration", ToastLength.Long).Show();
 					await MyHealthDB.ServiceConsumer.CreateDatabase();
 					SaveDatabaseExits(BaseContext);
 					var myProfile = new Intent(this, typeof(MyProfileActivity));

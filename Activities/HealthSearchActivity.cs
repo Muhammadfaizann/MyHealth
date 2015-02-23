@@ -29,11 +29,14 @@ namespace MyHealthAndroid
 		private ExpandableListView _expandableDiseaseList;
 		private EditText _searchText;
 		private ArrayAdapter _listAdapter;
+		private DiseaseAdapter _customDiseaseAdapter;
 
-		private Dictionary<string, List<string>> dictGroup;
+		private Dictionary<string, List<Disease>> dictGroup;
 		private Dictionary<string, List<int?>> dictCatergoryConditionIds;
-		private List<String> recentDiseases;
+		private List<Disease> recentDiseases;
 		private List<Disease> diseases;
+
+		private Boolean _isRecentListDisplayed;
 
 		private CommonData model;
 
@@ -41,6 +44,8 @@ namespace MyHealthAndroid
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_health_search);
+
+			_isRecentListDisplayed = false;
 
 			SetCustomActionBar ();
 
@@ -51,8 +56,9 @@ namespace MyHealthAndroid
 
 			//_listAdapter = new ExpandableDataAdapter (this, model.getAllDiseases ());
 			diseases = await model.GetAllDiseases ();
-			_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,diseases.Select(x => x.Name).ToList<string>());
-			_diseaseList.Adapter = _listAdapter;
+			//_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,diseases.Select(x => x.Name).ToList<string>());
+			_customDiseaseAdapter = new DiseaseAdapter (this, diseases);
+			_diseaseList.Adapter = _customDiseaseAdapter; //_listAdapter;
 
 			_diseaseList.ItemClick += OnListItemClicked;
 
@@ -72,7 +78,8 @@ namespace MyHealthAndroid
 					ConditionId = conditionid,
 					CategoryId = cateogryid
 				});
-				DiseaseDetails.PutExtra ("diseaseName", item);
+				DiseaseDetails.PutExtra ("diseaseName", item.Name);
+				DiseaseDetails.PutExtra ("diseaseId", item.ID.Value);
 				StartActivity(DiseaseDetails);
 			};
 
@@ -91,17 +98,22 @@ namespace MyHealthAndroid
 			atozButton = FindViewById<Button> (Resource.Id.atozButton);
 			atozButton.Click += (object sender, EventArgs e) => {
 
-				_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem ,diseases.Select(x => x.Name).ToList<string>());
-				_diseaseList.Adapter = _listAdapter;
+				//_listAdapter = new ArrayAdapter<String> (this,Resource.Layout.SimpleListItem, diseases.Select(x => x.Name).ToList<string>());
+				_customDiseaseAdapter = new DiseaseAdapter(this, diseases); 
+				_diseaseList.Adapter = _customDiseaseAdapter; //_listAdapter;
 
 				_diseaseList.Visibility = ViewStates.Visible;
 				_expandableDiseaseList.Visibility = ViewStates.Gone;
+
+				_isRecentListDisplayed = false;
 			};
 
 			categoryButton = FindViewById<Button> (Resource.Id.categoriesButton);
 			categoryButton.Click += (object sender, EventArgs e) => {
 				_diseaseList.Visibility = ViewStates.Gone;
 				_expandableDiseaseList.Visibility = ViewStates.Visible;
+
+				_isRecentListDisplayed = false;
 			};
 
 			recentButton = FindViewById<Button> (Resource.Id.recentButton);
@@ -109,11 +121,14 @@ namespace MyHealthAndroid
 
 				GetRecentDiseases (this);
 
-				_listAdapter = new ArrayAdapter<String> (this, Resource.Layout.SimpleListItem, recentDiseases);
-				_diseaseList.Adapter = _listAdapter;
+				//_listAdapter = new ArrayAdapter<String> (this, Resource.Layout.SimpleListItem, recentDiseases.Select(d => d.Name).ToList());
+				_customDiseaseAdapter = new DiseaseAdapter(this, recentDiseases);
+				_diseaseList.Adapter = _customDiseaseAdapter; //new DiseaseAdapter(this, recentDiseases);//_listAdapter;
 
 				_diseaseList.Visibility = ViewStates.Visible;
 				_expandableDiseaseList.Visibility = ViewStates.Gone;
+
+				_isRecentListDisplayed = true;
 			};
 
 			//Get the recent DiseaseList onLoad
@@ -122,7 +137,6 @@ namespace MyHealthAndroid
 				Date = DateTime.Now,
 				Page = Convert.ToInt32(Pages.HealthSearch)
 			});
-
 		}
 			
 
@@ -137,16 +151,20 @@ namespace MyHealthAndroid
 
 		//------------------------ List Item Clicked ----------------------//
 		private async void OnListItemClicked (object sender, AdapterView.ItemClickEventArgs e) {
-			var dis = diseases.ElementAtOrDefault (e.Position);
-			var t = dis.Name;
-			SaveRecentDiseases(this, t);
+			Disease dis;
+			var selected = _customDiseaseAdapter.GetItem (e.Position) as WrapDiseaseClass;
+			if (_isRecentListDisplayed) {
+				dis = recentDiseases.Where(x => x.ID == selected.Id).FirstOrDefault();
+			} else {
+				dis = diseases.Where(x => x.ID == selected.Id).FirstOrDefault();
+			}
+			SaveRecentDiseases(this, dis);
 			var DiseaseDetails =  new Intent(this, typeof (DiseaseDetailActivity));
-			DiseaseDetails.PutExtra ("diseaseName", t);
-			DiseaseDetails.PutExtra ("diseaseId", dis.ID.ToString());
+			DiseaseDetails.PutExtra ("diseaseId", dis.ID.Value);
 			await LogManager.Log (new LogContent {
 				Date = DateTime.Now, 
-				ConditionId = dis.DiseaseCategoryID,
-				CategoryId = -1
+				ConditionId = dis.ID,
+				CategoryId = dis.DiseaseCategoryID
 			});
 			StartActivity(DiseaseDetails);
 		}
@@ -154,32 +172,44 @@ namespace MyHealthAndroid
 		//------------------------ Shared Preferences ----------------------//
 		private void GetRecentDiseases (Context _context) {
 			ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences (_context);
-			recentDiseases = (prefs.GetStringSet ("RecentDisease", null) == null) ? new List<String> () : prefs.GetStringSet ("RecentDisease", null).ToList<String>();
-			 
+			//recentDiseases = (prefs.GetStringSet ("RecentDisease", null) == null) ? new List<String> () : prefs.GetStringSet ("RecentDisease", null).ToList<String>();
+
+			Org.Json.JSONArray _arry = new Org.Json.JSONArray(prefs.GetString("RecentDisease", "[]"));
+			if (_arry.Length () > 0) {
+				List<int> list = new List<int> ();
+				for (int i = 0; i < _arry.Length (); i++) {
+					list.Add (_arry.GetInt (i));
+				}
+				recentDiseases = diseases.Where (d => list.Contains (d.ID.Value)).ToList ();
+			} else {
+				recentDiseases = new List<Disease> ();
+			}
 		}
 
-		private void SaveRecentDiseases (Context _context, String _key) {
+		private void SaveRecentDiseases (Context _context, Disease _diseaseKey) {
 			if (recentDiseases == null)
-				recentDiseases = new List<String> ();
-			var foundItem = recentDiseases.Where (i => i.Contains (_key));
+				recentDiseases = new List<Disease> ();
+			var foundItem = recentDiseases.Where (i => i.ID.Value.Equals (_diseaseKey.ID.Value));
 			if (foundItem.Count() == 0) {
 				if (recentDiseases.Count > 19) {
-					recentDiseases.Insert (0, _key);
+					recentDiseases.Insert (0, _diseaseKey);
 				} else {
-					recentDiseases.Add(_key);
+					recentDiseases.Add(_diseaseKey);
 				}
 			}
 			ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences (_context);
 			ISharedPreferencesEditor editor = prefs.Edit ();
 
-			editor.PutStringSet ("RecentDisease", recentDiseases);
+			Org.Json.JSONArray _arry = new Org.Json.JSONArray (recentDiseases.Select(d => d.ID.ToString()).ToList());
+
+			editor.PutString ("RecentDisease", _arry.ToString ());
 			editor.Apply ();
 		}
 
 		//------------------------ search items in list ----------------------//
 		private async Task<Boolean> CreateExpendableListData ()
 		{
-			dictGroup = new Dictionary<string, List<string>> ();
+			dictGroup = new Dictionary<string, List<Disease>> ();
 			dictCatergoryConditionIds = new Dictionary<string, List<int?>> ();
 
 			var diseases = await model.GetAllDiseases ();
@@ -192,14 +222,14 @@ namespace MyHealthAndroid
 				//split that string to integer array.
 				int[] diseaseIDs = ids.Split (new String[]{ "," }, StringSplitOptions.RemoveEmptyEntries).Select( x => Convert.ToInt32(x)).ToArray();
 
-				var foundItems = diseases.Where (i => diseaseIDs.Contains (i.ID.Value)).Select(x => x.Name).ToList (); // here you have the diseases on the selected category.
+				var foundItems = diseases.Where (i => diseaseIDs.Contains (i.ID.Value)).ToList (); // here you have the diseases on the selected category.
 				var diseaseId = diseases.Where (i => diseaseIDs.Contains (i.ID.Value)).Select(x => x.ID).ToList (); // here you have the diseases on the selected category.
 
 				if (foundItems != null && foundItems.Count() > 0) {
 					dictGroup.Add (category.CategoryName, foundItems);
 					dictCatergoryConditionIds.Add (category.ID.ToString(), diseaseId);
 				} else {
-					dictGroup.Add (category.CategoryName, new List<string>());
+					dictGroup.Add (category.CategoryName, new List<Disease>());
 					dictCatergoryConditionIds.Add (category.ID.ToString(), new List<int?>());
 				}
 			}
@@ -209,7 +239,13 @@ namespace MyHealthAndroid
 		//------------------------ search items in list ----------------------//
 		private void performSearchOnTextChange (object sender, global::Android.Text.TextChangedEventArgs e)
 		{
-			_listAdapter.Filter.InvokeFilter (_searchText.Text);
+			//_listAdapter.Filter.InvokeFilter (_searchText.Text);
+			List<Disease> list = diseases.Where (x => x.Name.ToLower().Contains (_searchText.Text.ToLower())).ToList(); //.Select (x => x.Name).ToList<String>();
+			//_listAdapter = new ArrayAdapter (this, Resource.Layout.SimpleListItem, list);
+			_customDiseaseAdapter = new DiseaseAdapter(this, list);//_listAdapter;
+			_diseaseList.Adapter = _customDiseaseAdapter;//new DiseaseAdapter (this, list);//_listAdapter;
+
+
 		}
 
 		//------------------------ menu item ----------------------//

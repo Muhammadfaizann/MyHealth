@@ -40,11 +40,12 @@ namespace MyHealthAndroid
 			_imageView = FindViewById<ImageView> (Resource.Id.diseaseDetailImage);
 			_webView = FindViewById<WebView> (Resource.Id.diseaseDetailWebView);
 
-			_selectedDiseases = Intent.GetStringExtra ("diseaseName");
-			var _selectedDiseaseId = Convert.ToInt32(Intent.GetStringExtra ("diseaseId"));
+			var _selectedDiseaseId = Intent.GetIntExtra ("diseaseId", -1);
 
 			if (_selectedDiseaseId > 0) {
 				var selectedDisease = await DatabaseManager.SelectDisease (_selectedDiseaseId);
+				this.Title = selectedDisease.Name;
+
 				await LogManager.Log<LogContent> (new LogContent () {
 					Date = DateTime.Now,
 					ConditionId = selectedDisease.ID,
@@ -54,13 +55,17 @@ namespace MyHealthAndroid
 				var selectedCpUser = await DatabaseManager.SelectCpUser (selectedDisease.CPUserId);
 
 				if (selectedCpUser != null) {
-					if(selectedCpUser.CharityLogo.Length > 0) {
 						// Convert bytes data into a Bitmap
-						Bitmap bmp = BitmapFactory.DecodeByteArray(selectedCpUser.CharityLogo, 0, selectedCpUser.CharityLogo.Length);
+						try {
+							if(selectedCpUser.CharityLogo.Length > 0) {
+								Bitmap bmp = BitmapFactory.DecodeByteArray(selectedCpUser.CharityLogo, 0, selectedCpUser.CharityLogo.Length);
+								_imageView.SetImageBitmap(bmp);
+							}
+						} catch (Exception ex) {
+							Console.WriteLine ("Image Load Exception : {0}", ex.ToString());
+						}
 						//ImageView imageView = new ImageView(ConversationsActivity.this);
 						// Set the Bitmap data to the ImageView
-						_imageView.SetImageBitmap(bmp);
-					}
 				}
 			}
 

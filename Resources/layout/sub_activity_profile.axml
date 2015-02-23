@@ -224,7 +224,7 @@
                 android:text="Save"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/saveBMIButton"
+                android:id="@+id/saveProfileButton"
                 android:layout_weight="0.6" />
             <Button
                 android:text="Calculate BMI"
