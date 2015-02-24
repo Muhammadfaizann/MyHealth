@@ -12,6 +12,8 @@ using Java.Util;
 using MyHealthDB.Logger;
 using MyHealthDB;
 using Android.Net;
+using Android.Preferences;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -19,6 +21,8 @@ namespace MyHealthAndroid
 		ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
+		private ISharedPreferences preferences;
+
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -26,16 +30,26 @@ namespace MyHealthAndroid
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Launch);
 
+			//Get the shared Preferences
+			preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
+
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
-				ShowAcceptanceDialog ();
+				bool isDeviceSynced = preferences.GetBoolean("applicationUpdated",false);
+				if (!isDeviceSynced) {
+					if (await SyncDevice ())
+						ShowAcceptanceDialog ();
+				} else {
+					ShowAcceptanceDialog ();
+				}
 			} else {
 				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 					Toast.MakeText (this, "Registering device", ToastLength.Long).Show();
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android")) {
-						ShowAcceptanceDialog ();
+						if(await SyncDevice())
+							ShowAcceptanceDialog ();
 					}
 				} else {
 					ShowConnectivityDialog ();
@@ -47,6 +61,25 @@ namespace MyHealthAndroid
 		{
 			base.OnPause ();
 		}
+
+		protected async Task<Boolean> SyncDevice ()
+		{
+			try {
+				ISharedPreferencesEditor editor = preferences.Edit();
+				Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
+				editor.PutBoolean("applicationUpdated", false);
+				editor.Apply();
+				await MyHealthDB.ServiceConsumer.SyncDevice();
+				Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
+				editor.PutBoolean("applicationUpdated", true);
+				editor.Apply();
+			} catch (Exception ex) {
+				Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();
+				return false;
+			}
+			return true;
+		}
+
 		//------------------------ Show Acceptance Dialog ----------------------//
 		private void ShowAcceptanceDialog() {
 			AlertDialog.Builder alert = new AlertDialog.Builder (this);

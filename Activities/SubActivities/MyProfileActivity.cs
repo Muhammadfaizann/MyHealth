@@ -168,7 +168,7 @@ namespace MyHealthAndroid
 			alert.SetTitle("BMI Calculation");
 			alert.SetMessage("your BMI is " + bmi.ToString());
 
-			alert.SetPositiveButton ("YES", (object senderAlert, DialogClickEventArgs Args) => {
+			alert.SetPositiveButton ("Ok", (object senderAlert, DialogClickEventArgs Args) => {
 
 			});
 

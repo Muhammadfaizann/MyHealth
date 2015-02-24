@@ -45,7 +45,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp" />
         <TextView
-            android:text="Matric Answer"
+            android:text="Metric Answer"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="50dp"

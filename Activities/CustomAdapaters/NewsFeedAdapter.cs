@@ -52,25 +52,26 @@ namespace MyHealthAndroid
 			NewsImage.SetImageBitmap (imageBitmap);
 			ActualNews.Text = _list [position].Description;
 
-			NewsImage.Clickable = true;
-			NewsImage.Click += (object sender, EventArgs e) => 
-			{
-				AlertDialog.Builder alert = new AlertDialog.Builder(_activity);
-				alert.SetTitle("Launch Browser");
-				alert.SetMessage("You will now be directed to external website, Do you want to proceed.");
+			if (!NewsImage.HasOnClickListeners) {
+				NewsImage.Clickable = true;
+				NewsImage.Click += (object sender, EventArgs e) => {
+					AlertDialog.Builder alert = new AlertDialog.Builder (_activity);
+					alert.SetTitle ("Launch Browser");
+					alert.SetMessage ("You will now be directed to external website, Do you want to proceed.");
 
-				alert.SetPositiveButton ("YES", (object senderAlert, DialogClickEventArgs Args) => {
-					var uri = Android.Net.Uri.Parse ( _list[position].Link);
-					var intent = new Intent (Intent.ActionView, uri); 
-					_activity.StartActivity (intent); 
-				});
+					alert.SetPositiveButton ("YES", (object senderAlert, DialogClickEventArgs Args) => {
+						var uri = Android.Net.Uri.Parse (_list [position].Link);
+						var intent = new Intent (Intent.ActionView, uri); 
+						_activity.StartActivity (intent); 
+					});
 
-				alert.SetNegativeButton ("NO", (object senderAlert, DialogClickEventArgs Args) => {
+					alert.SetNegativeButton ("NO", (object senderAlert, DialogClickEventArgs Args) => {
 
-				});
+					});
 
-				alert.Show();
-			};
+					alert.Show ();
+				};
+			}
 
 			return view;
 		}
