@@ -285,7 +285,7 @@ namespace MyHealth.DB.SQLiteAsync
 	}
 
 	//
-	// TODO: Bind to AsyncConnection.GetConnection instead so that delayed
+	// T O D O Bind to AsyncConnection.GetConnection instead so that delayed
 	// execution can still work after a Pool.Reset.
 	//
 	public class AsyncTableQuery<T>

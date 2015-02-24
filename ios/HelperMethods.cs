@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using System.Threading.Tasks;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,10 @@ namespace RCSI
 			}*/
 			RecentDiseases = new List<Disease> ();
 			return toReturn.ToArray ();
+		}
+
+		async public static Task<Boolean> CheckIfInternetAvailable() {
+			return true;
 		}
 	}
 }
