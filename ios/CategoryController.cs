@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using System.Threading.Tasks;
@@ -46,7 +46,7 @@ namespace RCSI
 		//public String[] _items = {"Obesity", "Depression", "Heart Attack", "Heart Bypass", "Heart Failure", "Heart Murmurs", "Heart Valve Infection",
 		//	"Diabeties", "Asthma", "Appendicitis", "Baby acne", "Burns", "Cold sores", "Dementia"};
 		private UITableView _tableView;
-		private List<Int32> _collapsedSections;
+		private List<nint> _collapsedSections;
 		CategoryController _controller;
 		private CommonData model = new CommonData();
 
@@ -114,7 +114,7 @@ namespace RCSI
 //			}
 
 
-			_collapsedSections = new List<int> ();
+			_collapsedSections = new List<nint> ();
 			for (int i = 0; i < Items.Keys.Count; i++) {
 				_collapsedSections.Add (i);
 			}
@@ -126,17 +126,17 @@ namespace RCSI
 		}
 
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return Items.Keys.Count;
 		}
 
-		public override int RowsInSection (UITableView tableview, int section)
+		public override nint RowsInSection (UITableView tableview, nint section)
 		{
 			if (_collapsedSections.Contains(section)) {
 				return 0;
 			}
-			String key = Items.Keys.ElementAt (section);
+			String key = Items.Keys.ToArray()[section];
 			return Items [key].Count ();
 		}
 
@@ -145,15 +145,15 @@ namespace RCSI
 			return Items.Keys.ElementAt (section);
 		}*/
 
-		public override float GetHeightForHeader (UITableView tableView, int section)
+		public override nfloat GetHeightForHeader (UITableView tableView, nint section)
 		{
 			return 30;
 		}
 
-		public override UIView GetViewForHeader (UITableView tableView, int section)
+		public override UIView GetViewForHeader (UITableView tableView, nint section)
 		{
 			var cell = (CategoryHeaderTableViewCell) tableView.DequeueReusableCell ("HeaderCell");
-			cell.UpdateCell (Items.Keys.ElementAt (section), section,_collapsedSections.Contains(section));
+			cell.UpdateCell (Items.Keys.ToArray()[section], Convert.ToInt16(section),_collapsedSections.Contains(section));
 			cell.ToggleSectionEvent += ToggleSections;
 
 
@@ -225,7 +225,7 @@ namespace RCSI
 
 	public void ToggleSections(object sender, EventArgs e)
 	{
-		int section = ((UIButton)sender).Tag;
+			nint section = (nint)((UIButton)sender).Tag;
 		if (_collapsedSections.Contains (section)) {
 			_collapsedSections.Remove (section);
 			} else {

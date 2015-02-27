@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace RCSI
@@ -13,19 +13,19 @@ namespace RCSI
 	partial class TopBarController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnSettings { get; set; }
+		UIKit.UIButton btnSettings { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnSync { get; set; }
+		UIKit.UIButton btnSync { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel lblSmartHealth { get; set; }
+		UIKit.UILabel lblSmartHealth { get; set; }
 
 		[Action ("goToSettings:")]
-		partial void goToSettings (MonoTouch.UIKit.UIButton sender);
+		partial void goToSettings (UIKit.UIButton sender);
 
 		[Action ("syncWithServer:")]
-		partial void syncWithServer (MonoTouch.Foundation.NSObject sender);
+		partial void syncWithServer (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

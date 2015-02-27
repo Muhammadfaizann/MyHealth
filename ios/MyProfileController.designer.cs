@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace RCSI
@@ -13,43 +13,43 @@ namespace RCSI
 	partial class MyProfileController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnCalBMI { get; set; }
+		UIKit.UIButton btnCalBMI { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnSave { get; set; }
+		UIKit.UIButton btnSave { get; set; }
 
 		/*[Outlet]
 		MonoTouch.UIKit.UIButton btnSyncWithServer { get; set; }*/
 
 		[Outlet]
-		MonoTouch.UIKit.UISwitch metricAnswer { get; set; }
+		UIKit.UISwitch metricAnswer { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtAge { get; set; }
+		UIKit.UITextField txtAge { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtBloodGroup { get; set; }
+		UIKit.UITextField txtBloodGroup { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtCounty { get; set; }
+		UIKit.UITextField txtCounty { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtGender { get; set; }
+		UIKit.UITextField txtGender { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtHeightFt { get; set; }
+		UIKit.UITextField txtHeightFt { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtHeightInc { get; set; }
+		UIKit.UITextField txtHeightInc { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtWeightLbs { get; set; }
+		UIKit.UITextField txtWeightLbs { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextField txtWeightSt { get; set; }
+		UIKit.UITextField txtWeightSt { get; set; }
 
 		[Action ("syncWithServer:")]
-		partial void syncWithServer (MonoTouch.Foundation.NSObject sender);
+		partial void syncWithServer (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

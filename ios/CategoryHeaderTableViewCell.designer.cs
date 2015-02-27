@@ -4,8 +4,8 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System;
 using System.CodeDom.Compiler;
 
@@ -15,10 +15,10 @@ namespace RCSI
 	partial class CategoryHeaderTableViewCell
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnImage { get; set; }
+		UIKit.UIButton btnImage { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnTitle { get; set; }
+		UIKit.UIButton btnTitle { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

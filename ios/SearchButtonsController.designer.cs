@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace RCSI
@@ -13,13 +13,13 @@ namespace RCSI
 	partial class SearchButtonsController
 	{
 		[Action ("aToZ:")]
-		partial void aToZ (MonoTouch.Foundation.NSObject sender);
+		partial void aToZ (Foundation.NSObject sender);
 
 		[Action ("category:")]
-		partial void category (MonoTouch.Foundation.NSObject sender);
+		partial void category (Foundation.NSObject sender);
 
 		[Action ("recent:")]
-		partial void recent (MonoTouch.Foundation.NSObject sender);
+		partial void recent (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

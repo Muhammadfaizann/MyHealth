@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
@@ -24,7 +24,7 @@ namespace RCSI
 			});
 		}
 
-		partial void goToIBTSSite (MonoTouch.UIKit.UIButton sender)
+		partial void goToIBTSSite (UIKit.UIButton sender)
 		{
 			UIApplication.SharedApplication.OpenUrl(NSUrl.FromString("http://www.giveblood.ie"));
 		}

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace RCSI
 {
@@ -15,31 +15,31 @@ namespace RCSI
 			this.values = values;
 		}
 
-		public override int GetComponentCount (UIPickerView picker)
+		public override nint GetComponentCount (UIPickerView picker)
 		{
 			return 1;
 		}
 
-		public override int GetRowsInComponent (UIPickerView picker, int component)
+		public override nint GetRowsInComponent (UIPickerView picker, nint component)
 		{
 			return values.Count;
 		}
 
-		public override string GetTitle (UIPickerView picker, int row, int component)
+		public override string GetTitle (UIPickerView picker, nint row, nint component)
 		{
-			return values[row].ToString ();
+			return values[Convert.ToInt16(row)].ToString ();
 		}
 
-		public override float GetRowHeight (UIPickerView picker, int component)
+		public override nfloat GetRowHeight (UIPickerView picker, nint component)
 		{
 			return 40f;
 		}
 
-		public override void Selected (UIPickerView picker, int row, int component)
+		public override void Selected (UIPickerView picker, nint row, nint component)
 		{
 			if (this.PickerChanged != null)
 			{
-				this.PickerChanged(this, new PickerChangedEventArgs{SelectedValue = values[row]});
+				this.PickerChanged(this, new PickerChangedEventArgs{SelectedValue = values[Convert.ToInt16(row)]});
 			}
 		}
 	}
@@ -48,7 +48,7 @@ namespace RCSI
 		public object SelectedValue {get;set;}
 	}
 
-	[MonoTouch.Foundation.Register ("MyButton")]
+	[Foundation.Register ("MyButton")]
 	class MyButton : UIButton {
 		UIView input_view;
 		UIView input_accessory_view;	

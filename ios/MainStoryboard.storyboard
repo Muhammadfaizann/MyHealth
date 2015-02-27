@@ -1891,7 +1891,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAK-YT-qT3">
-                                <rect key="frame" x="50" y="12" width="220" height="21"/>
+                                <rect key="frame" x="50" y="11" width="220" height="21"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -3220,17 +3220,17 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="d7X-KF-wE2"/>
-        <segue reference="Bd8-m9-a6L"/>
-        <segue reference="pUP-bJ-uxj"/>
-        <segue reference="ieJ-qS-8uR"/>
-        <segue reference="z1K-BO-snM"/>
-        <segue reference="HEM-63-IDz"/>
         <segue reference="t2P-ht-ckl"/>
         <segue reference="4eT-1G-X1E"/>
         <segue reference="Fev-iD-XTi"/>
         <segue reference="bLq-v0-Phx"/>
+        <segue reference="lZm-oX-n3i"/>
+        <segue reference="d7X-KF-wE2"/>
+        <segue reference="Bd8-m9-a6L"/>
+        <segue reference="pUP-bJ-uxj"/>
+        <segue reference="ieJ-qS-8uR"/>
         <segue reference="1ie-7M-p2n"/>
+        <segue reference="1Yp-Uk-96e"/>
         <segue reference="4hP-2Y-ELP"/>
         <segue reference="Cyj-fY-crD"/>
     </inferredMetricsTieBreakers>

@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System.Threading.Tasks;
 
 using MyHealthDB;
@@ -76,7 +76,7 @@ namespace RCSI
 
 		partial void goBack (UIButton sender)
 		{
-			this.NavigationController.PopViewControllerAnimated(true);
+			this.NavigationController.PopViewController(true);
 		}
 	}
 }

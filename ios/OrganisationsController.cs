@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using System.Threading.Tasks;
@@ -46,20 +46,20 @@ namespace RCSI
 		}
 
 		[Export ("searchBar:textDidChange:")]
-		public void TextChanged (MonoTouch.UIKit.UISearchBar searchBar, string searchText)
+		public void TextChanged (UIKit.UISearchBar searchBar, string searchText)
 		{
 			_organisationsContactSource.SearchItems = _organisationsContactSource._items.Where (h => h.Name.ToLower().Contains(searchText.ToLower())).ToList ();
 			this.tableView.ReloadData ();
 		}
 
 		[Export ("searchBarSearchButtonClicked:")]
-		public void SearchButtonClicked (MonoTouch.UIKit.UISearchBar searchBar)
+		public void SearchButtonClicked (UIKit.UISearchBar searchBar)
 		{
 			this.HideKeyboard ();
 		}
 
 		[Export ("searchDisplayController:didLoadSearchResultsTableView:")]
-		public void DidLoadSearchResults (MonoTouch.UIKit.UISearchDisplayController controller, MonoTouch.UIKit.UITableView tableView)
+		public void DidLoadSearchResults (UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
 		{
 			tableView.Frame = this.tableView.Frame;
 		}
@@ -82,12 +82,12 @@ namespace RCSI
 			_items = await model.GetOrgnisations ();
 		}
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return 1;
 		}
 
-		public override int RowsInSection (UITableView tableView, int section)
+		public override nint RowsInSection (UITableView tableView, nint section)
 		{
 			if (this.SearchItems == null) {
 				return _items.Count;

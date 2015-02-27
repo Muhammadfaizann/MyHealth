@@ -3,8 +3,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System.IO;
 using System.Linq;
 using MyHealthDB;
@@ -163,12 +163,12 @@ namespace RCSI
 			_controller = controller;
 		}
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return 1;
 		}
 
-		public override int RowsInSection (UITableView tableView, int section)
+		public override nint RowsInSection (UITableView tableView, nint section)
 		{
 			return _controller._numberList.Count;
 		}

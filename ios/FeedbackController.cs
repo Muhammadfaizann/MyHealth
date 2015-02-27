@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
@@ -32,7 +32,7 @@ namespace RCSI
 		}
 
 		FeedbackAlertViewDelegate alertDelegate;
-		async partial void saveTheFeeback (MonoTouch.Foundation.NSObject sender)
+		async partial void saveTheFeeback (Foundation.NSObject sender)
 		{
 			if (username.Text.Equals("") || useremail.Text.Equals("") || usermessage.Text.Equals(""))
 			{
@@ -62,7 +62,7 @@ namespace RCSI
 
 			// handling keyborad return and done key press event to hide keyboard
 			[Export ("textFieldShouldReturn:")]
-			public bool ShouldReturn (MonoTouch.UIKit.UITextField textField)
+			public bool ShouldReturn (UIKit.UITextField textField)
 			{
 				textField.ResignFirstResponder();
 				if (textField == _controller.username) {
@@ -84,11 +84,11 @@ namespace RCSI
 				_controller = controller;
 			}
 
-			public override void Clicked (UIAlertView alertview, int buttonIndex)
+			public override void Clicked (UIAlertView alertview, nint buttonIndex)
 			{
 				if (buttonIndex == 0) {
 					// on Ok button press return back to the contact listing screen
-					_controller.NavigationController.PopViewControllerAnimated (true);
+					_controller.NavigationController.PopViewController (true);
 				}
 			}
 		}
