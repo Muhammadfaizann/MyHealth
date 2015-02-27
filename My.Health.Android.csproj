@@ -41,7 +41,11 @@
     <DebugSymbols>true</DebugSymbols>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>/Users/awaiskhan/MyHealth.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>jupiter</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>TekEnable</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>jupiter</AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

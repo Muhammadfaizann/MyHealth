@@ -12,6 +12,7 @@ namespace MyHealthDB
 		{
 			foreach (SMtblCPCondition condition in AllConditions) 
 			{
+
 				await MyHealthDB.DatabaseManager.SaveDisease (new Disease {
 					ID = condition.Id,
 					Name = condition.Condition,
@@ -21,6 +22,7 @@ namespace MyHealthDB
 					PreventiveMeasures = condition.PreventiveMeasures,
 					SignAndSymptoms = condition.SignAndSymptoms,
 					CPUserId = condition.CPUserId,
+					Status = condition.ApproveStatus??1
 				});
 			}
 			return true;

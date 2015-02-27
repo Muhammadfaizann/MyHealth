@@ -66,11 +66,11 @@ namespace MyHealthAndroid
 		{
 			try {
 				ISharedPreferencesEditor editor = preferences.Edit();
-				Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
+				Toast.MakeText(this, "Initializing Application for the first time, Please wait.", ToastLength.Long).Show();
 				editor.PutBoolean("applicationUpdated", false);
 				editor.Apply();
 				await MyHealthDB.ServiceConsumer.SyncDevice();
-				Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
+				Toast.MakeText(this, "Application Initilaized Successfully.", ToastLength.Long).Show();
 				editor.PutBoolean("applicationUpdated", true);
 				editor.Apply();
 			} catch (Exception ex) {

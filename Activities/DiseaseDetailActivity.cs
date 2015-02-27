@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health")]			
+	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class DiseaseDetailActivity : Activity
 	{
 		private Button _backButton;
@@ -44,7 +44,7 @@ namespace MyHealthAndroid
 
 			if (_selectedDiseaseId > 0) {
 				var selectedDisease = await DatabaseManager.SelectDisease (_selectedDiseaseId);
-				this.Title = selectedDisease.Name;
+				_backButtonTitle = selectedDisease.Name;
 
 				await LogManager.Log<LogContent> (new LogContent () {
 					Date = DateTime.Now,
@@ -98,6 +98,25 @@ namespace MyHealthAndroid
 			ActionBar.SetDisplayShowTitleEnabled (false);
 			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
 			ActionBar.SetDisplayShowCustomEnabled (true);
+		}
+
+		//------------------------ menu item ----------------------//
+		public override bool OnCreateOptionsMenu (IMenu menu)
+		{
+			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
+			return base.OnCreateOptionsMenu (menu);
+		}
+
+		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
+		{
+			switch (item.ItemId) {
+
+			case Resource.Id.action_profile:
+				var newActivity = new Intent(this, typeof(MyProfileActivity));
+				StartActivity(newActivity);
+				break;
+			}
+			return base.OnMenuItemSelected (featureId, item);
 		}
 	}
 

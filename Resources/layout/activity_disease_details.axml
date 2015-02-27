@@ -7,7 +7,7 @@
     android:background="#ffffffff"
     tools:context="com.elevenvalues.rnitte.Speaker">
     <Button
-        android:text="Home"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton"

@@ -8,7 +8,7 @@ namespace MyHealthAndroid
 {
 	public class RSSFeedReader
 	{
-		public static List<FeedItem> ReadBBCRSSFeed(String url)
+		public static List<FeedItem> Read(String url)
 		{ 
 			List<FeedItem> feedItemsList = new List<FeedItem>();
 			try
@@ -38,7 +38,7 @@ namespace MyHealthAndroid
 					{
 						feedItem.PubDate = Convert.ToDateTime(itemNodes[i].SelectSingleNode("pubDate").InnerText);
 					}
-					if ((itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value != null)
+					if (itemNodes[i].SelectNodes("media:thumbnail", nsmgr).Count > 0 && (itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value != null)
 					{
 						feedItem.ImageUrl = (itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value;
 					}
