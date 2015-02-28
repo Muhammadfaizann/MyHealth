@@ -11,8 +11,18 @@ using UIKit;
 
 namespace RCSI
 {
+	public enum RssFeedType
+	{
+		BBCNews = 1,
+		PulseVoices = 2,
+		IrishHealth = 3,
+		irishTimes = 4,
+	}
+
 	public partial class BBCNewsFeedController : UIViewController
 	{
+		public RssFeedType SelectedRssFeedType { get; set; }
+
 		private BBCNewsFeedSource _bbcNewsFeedSource;
 		public BBCNewsFeedController (IntPtr handle) : base (handle)
 		{
@@ -32,11 +42,26 @@ namespace RCSI
 
 	public class BBCNewsFeedSource : UITableViewSource
 	{
-		List<FeedItem> _feedItemList = RSSManager.ReadRSSFeed ("http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#");
+		List<FeedItem> _feedItemList;
 		BBCNewsFeedController _controller;
 		public BBCNewsFeedSource (BBCNewsFeedController controller)
 		{
 			_controller = controller;
+
+			switch (_controller.SelectedRssFeedType) {
+			case RssFeedType.PulseVoices:
+				_feedItemList = RSSManager.ReadRSSFeed ("http://pulsevoices.org/index.php?format=feed&type=rss&title=Pulse-Voices%20from%20the%20Heart%20of%20Medicine%20-%20Welcome%20to%20Pulse-Voices%20from%20the%20Heart%20of%20Medicine");
+				break;
+			case RssFeedType.IrishHealth:
+				_feedItemList = RSSManager.ReadRSSFeed ("http://www.irishhealth.com/rss/ihfeed.php");
+				break;
+			case RssFeedType.irishTimes:
+				_feedItemList = RSSManager.ReadRSSFeed ("https://www.irishtimes.com/cmlink/irish-times-health-1.1364620");
+				break;
+			default:
+				_feedItemList = RSSManager.ReadRSSFeed ("http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#");
+				break;
+			}
 		}
 
 		public override nint NumberOfSections (UITableView tableView)

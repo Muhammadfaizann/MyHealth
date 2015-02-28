@@ -12,13 +12,13 @@ namespace RCSI
 	[Register ("FeedbackController")]
 	partial class FeedbackController
 	{
-		[Outlet]
+		//[Outlet]
 		UIKit.UITextField useremail { get; set; }
 
-		[Outlet]
+		//[Outlet]
 		UIKit.UITextField usermessage { get; set; }
 
-		[Outlet]
+		//[Outlet]
 		UIKit.UITextField username { get; set; }
 
 		[Action ("saveTheFeeback:")]
@@ -26,20 +26,20 @@ namespace RCSI
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (username != null) {
-				username.Dispose ();
-				username = null;
-			}
-
-			if (useremail != null) {
-				useremail.Dispose ();
-				useremail = null;
-			}
-
-			if (usermessage != null) {
-				usermessage.Dispose ();
-				usermessage = null;
-			}
+//			if (username != null) {
+//				username.Dispose ();
+//				username = null;
+//			}
+//
+//			if (useremail != null) {
+//				useremail.Dispose ();
+//				useremail = null;
+//			}
+//
+//			if (usermessage != null) {
+//				usermessage.Dispose ();
+//				usermessage = null;
+//			}
 		}
 	}
 }

@@ -164,6 +164,57 @@ namespace MyHealthDB
 			//TODO : Make a table and save successfull sync date. 
 			return true;
 		}
+
+		async public static Task<List<BloodSupply>> GetBloodDonationInfo(String url)
+		{ 
+			List<BloodSupply> bloodSupplyList = new List<BloodSupply>();
+			try
+			{
+				System.Net.WebRequest webRequest = System.Net.WebRequest.Create(url);
+				System.Net.WebResponse webResponse = await webRequest.GetResponseAsync();
+				Stream stream = webResponse.GetResponseStream();
+				System.Xml.XmlDocument xmlDocument = new System.Xml.XmlDocument();
+				xmlDocument.Load(stream);
+				System.Xml.XmlNamespaceManager nsmgr = new System.Xml.XmlNamespaceManager(xmlDocument.NameTable);
+				nsmgr.AddNamespace("media", xmlDocument.DocumentElement.GetNamespaceOfPrefix("media"));
+				System.Xml.XmlNodeList itemNodes = xmlDocument.SelectNodes("CurrentBloodSupply/BloodSupply");
+
+				for (int i = 0; i < itemNodes.Count; i++)
+				{
+					BloodSupply bloodSupplyItem = new BloodSupply();
+
+					if (itemNodes[i].SelectSingleNode("Type") != null)
+					{
+						bloodSupplyItem.BloodGroup = itemNodes[i].SelectSingleNode("Type").InnerText;
+					}
+					if (itemNodes[i].SelectSingleNode("SupplyDays") != null)
+					{
+						bloodSupplyItem.SupplyDays = itemNodes[i].SelectSingleNode("SupplyDays").InnerText;
+					}
+
+					bloodSupplyList.Add(bloodSupplyItem);
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+
+			return bloodSupplyList;		
+		}
+	}
+
+	public class BloodSupply
+	{
+		public String BloodGroup {
+			get;
+			set;
+		}
+
+		public String SupplyDays {
+			get;
+			set;
+		}
 	}
 }
 

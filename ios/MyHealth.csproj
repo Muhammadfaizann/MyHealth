@@ -184,6 +184,14 @@
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
     <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\images\a_minus.gif" />
+    <BundleResource Include="Resources\images\a_plus.gif" />
+    <BundleResource Include="Resources\images\ab_minus.gif" />
+    <BundleResource Include="Resources\images\ab_plus.gif" />
+    <BundleResource Include="Resources\images\b_minus.gif" />
+    <BundleResource Include="Resources\images\b_plus.gif" />
+    <BundleResource Include="Resources\images\o_minus.gif" />
+    <BundleResource Include="Resources\images\o_plus.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -317,6 +325,10 @@
     <Compile Include="HelperMethods.cs" />
     <Compile Include="reachability.cs" />
     <Compile Include="Reachability\reachability.cs" />
+    <Compile Include="FeedbackTableViewController.cs" />
+    <Compile Include="FeedbackTableViewController.designer.cs">
+      <DependentUpon>FeedbackTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />

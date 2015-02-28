@@ -63,8 +63,45 @@ namespace RCSI
 		}
 
 		public async static Task<Boolean> CheckIfInternetAvailable() {
-			return true;
+			var internetStatus = Reachability.InternetConnectionStatus ();
+			return internetStatus != NetworkStatus.NotReachable;
 		}
+
+		#region [Blood Supply Details]
+
+		public static void SaveBloodSupply(IList<BloodSupply> bloodSupplyList) {
+			var userDefs = NSUserDefaults.StandardUserDefaults;
+			NSMutableDictionary dict = new NSMutableDictionary ();
+
+			foreach (var item in bloodSupplyList) {
+				dict.Add ((NSString)item.BloodGroup, (NSString)item.SupplyDays);
+			}
+
+			userDefs ["BloodSupplyList"] = dict;
+
+			userDefs.Synchronize ();
+		}
+
+		public static IList<BloodSupply> GetBloodSupply() {
+			var userDefs = NSUserDefaults.StandardUserDefaults;
+
+			var dict = userDefs.DictionaryForKey("BloodSupplyList");
+
+			List<BloodSupply> toReturn = new List<BloodSupply> ();
+
+			if (dict != null) {
+				foreach (var item in dict) {
+					toReturn.Add (new BloodSupply() {
+						BloodGroup = item.Key.ToString(),
+						SupplyDays = item.Value.ToString()
+					});
+				}
+			}
+
+			return toReturn;
+		}
+
+		#endregion
 	}
 }
 

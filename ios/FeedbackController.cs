@@ -50,6 +50,21 @@ namespace RCSI
 			}
 		}
 
+		public override void PrepareForSegue (UIStoryboardSegue segue, NSObject sender)
+		{
+			base.PrepareForSegue (segue, sender);
+
+			if (segue.Identifier == "TextFields") {
+				var feedbackTable = (FeedbackTableViewController)segue.DestinationViewController;
+
+				var ftView = feedbackTable.View;
+
+				username = feedbackTable.txtUserName;
+				useremail = feedbackTable.txtEmail;
+				usermessage = feedbackTable.txtMessage;
+			}
+		}
+
 		private class FeedbackTexTFieldDelegate : UITextFieldDelegate
 		{
 			FeedbackController _controller;
