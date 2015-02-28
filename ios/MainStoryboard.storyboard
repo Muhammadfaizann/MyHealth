@@ -3069,7 +3069,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBT-8B-CS6">
-                                <rect key="frame" x="0.0" y="135" width="320" height="150"/>
+                                <rect key="frame" x="0.0" y="150" width="320" height="150"/>
                                 <connections>
                                     <segue destination="Pu6-tE-QlZ" kind="embed" identifier="TextFields" id="0fI-w3-sG9"/>
                                 </connections>

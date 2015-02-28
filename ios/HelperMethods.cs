@@ -35,13 +35,13 @@ namespace RCSI
 
 		public static void SaveRecentDiseases (int[] diseaseIds) {
 			var userDefs = NSUserDefaults.StandardUserDefaults;
-			NSMutableArray _arry = new NSMutableArray (); //(diseaseIds.Length);
+			NSMutableArray _arry = new NSMutableArray ();
 
 			foreach (int id in diseaseIds) {
-				//_arry.Add (NSNumber. id);
+				_arry.Add ((NSString)id.ToString());
 			}
 
-			//userDefs ["RecentDiseaseIds"] = _arry;
+			userDefs ["RecentDiseaseIds"] = _arry;
 
 			userDefs.Synchronize ();
 		}
@@ -58,7 +58,7 @@ namespace RCSI
 					toReturn.Add (Convert.ToInt32(item.ToString()));
 				}
 			}
-			RecentDiseases = new List<Disease> ();
+
 			return toReturn.ToArray ();
 		}
 

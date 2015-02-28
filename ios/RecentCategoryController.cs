@@ -27,6 +27,13 @@ namespace RCSI
 			this.tableView.ReloadData ();
 		}
 
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			((RecentCategorySource)this.tableView.Source)._items = HelperMethods.RecentDiseases;
+			this.tableView.ReloadData ();
+		}
+
 		public override void PrepareForSegue (UIStoryboardSegue segue, NSObject sender)
 		{
 			base.PrepareForSegue (segue, sender);
