@@ -192,6 +192,9 @@
     <BundleResource Include="Resources\images\b_plus.gif" />
     <BundleResource Include="Resources\images\o_minus.gif" />
     <BundleResource Include="Resources\images\o_plus.gif" />
+    <BundleResource Include="Resources\images\provinces.jpg" />
+    <BundleResource Include="Resources\css\map.css" />
+    <BundleResource Include="Resources\Provinces.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -342,6 +345,7 @@
     <Folder Include="CustomControls\" />
     <Folder Include="Content\" />
     <Folder Include="Reachability\" />
+    <Folder Include="Resources\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Heart.html" />

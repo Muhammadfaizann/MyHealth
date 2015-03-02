@@ -14,6 +14,8 @@ namespace RCSI
 {
 	public partial class HospitalsController : UIViewController
 	{
+		public int CountyId { get; set; }
+
 		private HospitalsContactSource _hospitalsContactSource;
 		public HospitalsController (IntPtr handle) : base (handle)
 		{
@@ -31,12 +33,12 @@ namespace RCSI
 			_hospitalsContactSource = new HospitalsContactSource (this);
 			await _hospitalsContactSource.UpdateData ();
 			this.tableView.Source = _hospitalsContactSource;
+			this.tableView.ReloadData ();
 
 			UITapGestureRecognizer gestureRecognizer = new UITapGestureRecognizer (HideKeyboard);
 			this.tableView.AddGestureRecognizer (gestureRecognizer);
 
 			this.tableView.Scrolled += (sender, e) => this.searchBar.ResignFirstResponder ();
-
 		}
 
 		public void HideKeyboard ()
@@ -45,9 +47,10 @@ namespace RCSI
 		}
 
 		[Export ("searchBar:textDidChange:")]
-		public void TextChanged (UIKit.UISearchBar searchBar, string searchText)
+		async public void TextChanged (UIKit.UISearchBar searchBar, string searchText)
 		{
-			_hospitalsContactSource.SearchItems = _hospitalsContactSource._items.Where (h => h.Name.ToLower().Contains(searchText.ToLower())).ToList ();
+			var items = await _hospitalsContactSource.AllHospitals();
+			_hospitalsContactSource.SearchItems = items.Where (h => h.Name.ToLower().Contains(searchText.ToLower())).ToList ();
 			this.tableView.ReloadData ();
 		}
 
@@ -62,13 +65,19 @@ namespace RCSI
 		{
 			tableView.Frame = this.tableView.Frame;
 		}
-
-
 	}
 
 	public class HospitalsContactSource : UITableViewSource
 	{
 		private CommonData model = new CommonData();
+		private List<Hospital> _allHospitals;
+		async public Task<List<Hospital>> AllHospitals() {
+				if (_allHospitals == null) {
+				_allHospitals = await DatabaseManager.SelectAllHospitals();
+			}
+
+			return _allHospitals;
+		}
 		public List<Hospital> _items; //Hospital.GetDefaultData();
 		public List<Hospital> SearchItems;
 		HospitalsController _controller;
@@ -80,7 +89,7 @@ namespace RCSI
 
 		public async Task UpdateData()
 		{
-			_items = await model.GetHospitalsInCounty (0);
+			_items = await model.GetHospitalsInCounty (_controller.CountyId);
 		}
 
 		public override nint NumberOfSections (UITableView tableView)

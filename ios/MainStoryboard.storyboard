@@ -3282,8 +3282,8 @@
                                     <segue destination="aff-np-Kij" kind="embed" id="IV2-q4-qxH"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please tap region to select" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcG-NQ-9P5">
-                                <rect key="frame" x="16" y="114" width="288" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Please tap region to select" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcG-NQ-9P5">
+                                <rect key="frame" x="16" y="111" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -3295,16 +3295,21 @@
                                     <segue destination="dFI-la-8fX" kind="embed" id="P8R-rx-VIT"/>
                                 </connections>
                             </containerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wui-bh-1he">
-                                <rect key="frame" x="5" y="140" width="310" height="310"/>
-                            </imageView>
+                            <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMC-uv-Hns">
+                                <rect key="frame" x="0.0" y="137" width="320" height="323"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XMC-uv-Hns" firstAttribute="top" secondItem="mcG-NQ-9P5" secondAttribute="bottom" constant="5" id="eT1-Ss-SpM"/>
+                            <constraint firstItem="NoG-jZ-8ma" firstAttribute="top" secondItem="XMC-uv-Hns" secondAttribute="bottom" id="fh3-cW-bXr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="i2I-Vw-mn4"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="imageView" destination="Wui-bh-1he" id="pRm-c3-Upj"/>
+                        <outlet property="webView" destination="XMC-uv-Hns" id="epQ-Lt-riY"/>
                         <segue destination="5Qk-7G-qat" kind="push" identifier="hospitalDetailsSegue" id="wHE-0Z-ByX"/>
                     </connections>
                 </viewController>
@@ -3395,18 +3400,18 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qc9-lI-5vB"/>
-        <segue reference="d7X-KF-wE2"/>
         <segue reference="Bd8-m9-a6L"/>
+        <segue reference="d7X-KF-wE2"/>
+        <segue reference="qc9-lI-5vB"/>
         <segue reference="ieJ-qS-8uR"/>
+        <segue reference="IV2-q4-qxH"/>
+        <segue reference="P8R-rx-VIT"/>
         <segue reference="cHC-HJ-2yT"/>
-        <segue reference="DZV-CO-UGj"/>
-        <segue reference="t2P-ht-ckl"/>
-        <segue reference="Fev-iD-XTi"/>
-        <segue reference="4eT-1G-X1E"/>
-        <segue reference="bLq-v0-Phx"/>
         <segue reference="4hP-2Y-ELP"/>
         <segue reference="Cyj-fY-crD"/>
-        <segue reference="C2s-nC-Kct"/>
+        <segue reference="t2P-ht-ckl"/>
+        <segue reference="4eT-1G-X1E"/>
+        <segue reference="Fev-iD-XTi"/>
+        <segue reference="bLq-v0-Phx"/>
     </inferredMetricsTieBreakers>
 </document>

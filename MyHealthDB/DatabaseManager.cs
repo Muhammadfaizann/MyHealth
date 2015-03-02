@@ -376,6 +376,11 @@ namespace MyHealthDB
 				Console.WriteLine ("New Disease Name : {0}", hospital.Name);
 			});
 		}
+
+		public async static Task<List<Hospital>> SelectHospitalsByCounty(int countyId)
+		{
+			return await dbConnection.Table<Hospital> ().Where (c => c.CountyID == countyId).ToListAsync ();
+		}
 		#endregion
 
 		#region[NewsChannels]
