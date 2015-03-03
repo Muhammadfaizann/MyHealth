@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
@@ -23,6 +23,16 @@ namespace RCSI
 				Date = DateTime.Now, 
 				Page = Convert.ToInt32(Pages.HealthNews)
 			});
+		}
+
+		public override void PrepareForSegue (UIStoryboardSegue segue, NSObject sender)
+		{
+			base.PrepareForSegue (segue, sender);
+			var destinationController = (BBCNewsFeedController)sender;
+			destinationController.SelectedRssFeedType = RssFeedType.BBCNews;
+//			if (segue.Identifier == "") {
+//				destinationController.SelectedRssFeedType = RssFeedType.IrishHealth;
+//			}
 		}
 	}
 }

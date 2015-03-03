@@ -4,8 +4,8 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System;
 using System.CodeDom.Compiler;
 
@@ -15,10 +15,10 @@ namespace RCSI
 	partial class AboutRCSIController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIImageView imageView { get; set; }
+		UIKit.UIImageView imageView { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIWebView webview { get; set; }
+		UIKit.UIWebView webview { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

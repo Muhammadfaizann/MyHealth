@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MyHealthDB;
 using System.Threading.Tasks;
@@ -89,8 +89,13 @@ namespace RCSI
 			
 		public async Task<List <Hospital>> GetHospitalsInCounty (int countyID) 
 		{
-			var hospitals = await MyHealthDB.DatabaseManager.SelectAllHospitals();
-//			var randId = new Random ();
+			List<Hospital> hospitals;
+			if (countyID < 1) {
+				hospitals = await MyHealthDB.DatabaseManager.SelectAllHospitals ();
+			} else {
+				hospitals = await MyHealthDB.DatabaseManager.SelectHospitalsByCounty (countyID);
+			}
+//			var randId = new Random (); 
 //			if (hospitals.Count <= 0) {
 //
 //				MyHealthDB.HospitalManager.SaveHospital (new Hospital {

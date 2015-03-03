@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MyHealthDB.Model;
 
 namespace MyHealthDB

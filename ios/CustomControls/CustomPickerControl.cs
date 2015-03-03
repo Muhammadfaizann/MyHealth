@@ -1,5 +1,5 @@
-﻿using System;
-using MonoTouch.UIKit;
+using System;
+using UIKit;
 
 namespace RCSI
 {
@@ -27,7 +27,7 @@ namespace RCSI
 
 			UIBarButtonItem doneButton = new UIBarButtonItem("Done",UIBarButtonItemStyle.Done,(s,e) =>
 				{
-					_txtField.Text = _pickerModel.values[_pickerView.SelectedRowInComponent (0)].ToString ();
+					_txtField.Text = _pickerModel.values[Convert.ToInt16(_pickerView.SelectedRowInComponent (0))].ToString ();
 					_txtField.ResignFirstResponder ();	
 
 

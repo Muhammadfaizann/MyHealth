@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace RCSI
 {
@@ -23,7 +23,7 @@ namespace RCSI
 
 		partial void goBack (UIButton sender)
 		{
-			this.ParentViewController.NavigationController.PopViewControllerAnimated(true);
+			this.ParentViewController.NavigationController.PopViewController(true);
 		}
 	}
 }

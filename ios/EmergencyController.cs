@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
@@ -27,7 +27,7 @@ namespace RCSI
 		
 			_emergencyContactSource = new EmergencyContactSource (this);
 			this.tableView.Source = _emergencyContactSource;
-
+			this.tableView.ReloadData ();
 
 			/*UITapGestureRecognizer gestureRecognizer = new UITapGestureRecognizer (HideKeyboard);
 			this.tableView.AddGestureRecognizer (gestureRecognizer);*/
@@ -47,12 +47,12 @@ namespace RCSI
 			_controller = controller;
 		}
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return 1;
 		}
 
-		public override int RowsInSection (UITableView tableView, int section)
+		public override nint RowsInSection (UITableView tableView, nint section)
 		{
 			return _items.GetLength(0);
 		}

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
+using System;
+using CoreGraphics;
 
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 
 namespace RCSI
 {
@@ -17,7 +17,7 @@ namespace RCSI
 		{
 		}
 
-		public override void Draw (RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			base.Draw (rect);
 			//var context = UIGraphics.CurrentGraphics ();

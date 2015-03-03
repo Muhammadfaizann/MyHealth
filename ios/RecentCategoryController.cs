@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using System.Collections.Generic;
 
@@ -24,6 +24,13 @@ namespace RCSI
 		{
 			base.ViewDidLoad ();
 			this.tableView.Source = new RecentCategorySource (this);
+			this.tableView.ReloadData ();
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			((RecentCategorySource)this.tableView.Source)._items = HelperMethods.RecentDiseases;
 			this.tableView.ReloadData ();
 		}
 
@@ -54,12 +61,12 @@ namespace RCSI
 			_items = HelperMethods.RecentDiseases;
 		}
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return 1;
 		}
 
-		public override int RowsInSection (UITableView tableView, int section)
+		public override nint RowsInSection (UITableView tableView, nint section)
 		{
 			return _items.Count;
 		}

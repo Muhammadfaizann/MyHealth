@@ -4,8 +4,8 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System;
 using System.CodeDom.Compiler;
 
@@ -15,13 +15,13 @@ namespace RCSI
 	partial class MyUsefulNumbersController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnAddNumber { get; set; }
+		UIKit.UIButton btnAddNumber { get; set; }
 
 //		[Outlet]
 //		MonoTouch.UIKit.UIButton btnSave { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView tableView { get; set; }
+		UIKit.UITableView tableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

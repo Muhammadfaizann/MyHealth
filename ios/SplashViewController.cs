@@ -2,32 +2,56 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace RCSI
 {
 	public partial class SplashViewController : UIViewController
 	{
-		Boolean DatabaseExists;
+		//Boolean DatabaseExists;
+		NetworkStatus remoteHostStatus, internetStatus, localWifiStatus;
 
 		public SplashViewController (IntPtr handle) : base (handle)
 		{
 		}
 
-		public override void ViewDidLoad ()
+		public async override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			//bool isAgree = NSUserDefaults.StandardUserDefaults.BoolForKey ("Agree");
 //			if (isAgree) {
 //				//PerformSegue ("Home", this);
 //			}
-			DatabaseExists = NSUserDefaults.StandardUserDefaults.BoolForKey ("DatabaseExists");
+//			DatabaseExists = NSUserDefaults.StandardUserDefaults.BoolForKey ("DatabaseExists");
+
+			remoteHostStatus = Reachability.RemoteHostStatus ();
+			internetStatus = Reachability.InternetConnectionStatus ();
+			localWifiStatus = Reachability.LocalWifiConnectionStatus ();
+
+			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) && (localWifiStatus != NetworkStatus.NotReachable);
+
+			await MyHealthDB.ServiceConsumer.CreateDatabase ();
+			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
+				ShowAcceptanceDialog ();
+			} else {
+				if (connected) {
+					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iOS")) {
+						ShowAcceptanceDialog ();
+					}
+				} else {
+					ShowConnectivityDialog ();
+				}
+			}
 		}
 
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
+		}
+
+		//------------------------ Get Device ID --------------------//
+		private void ShowAcceptanceDialog() {
 
 			UIAlertView dialog = new UIAlertView ();
 			dialog.Title = "Accept Terms of Use";
@@ -36,7 +60,7 @@ namespace RCSI
 			dialog.AddButton ("Agree");
 			dialog.CancelButtonIndex = 0;
 
-			dialog.Clicked += async (object sender, UIButtonEventArgs e) => {
+			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 
 				switch (e.ButtonIndex) {
 				case 0:
@@ -47,19 +71,34 @@ namespace RCSI
 					NSUserDefaults defs = NSUserDefaults.StandardUserDefaults;
 					defs.SetBool(true, "Agree");
 					defs.Synchronize();
-					if (DatabaseExists) {
-						PerformSegue ("Home", this);
-					} else {
-						var dbCreated = await MyHealthDB.ServiceConsumer.CreateDatabase("iOS");
-						if (dbCreated) {
+//					if (DatabaseExists) {
+//						PerformSegue ("Home", this);
+//					} else {
+						//var dbCreated = await MyHealthDB.ServiceConsumer.CreateDatabase("iOS");
+						//if (dbCreated) {
 							//NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;
 							//userDefaults.SetBool(true, "DatabaseExists");
 							//userDefaults.Synchronize();
 							PerformSegue("Home", this);
-						}
-					};
+						//}
+//					};
 					break;
 				}
+			};
+
+			dialog.Show ();
+		}
+
+
+		private void ShowConnectivityDialog () {
+			UIAlertView dialog = new UIAlertView ();
+			dialog.Title = "Connectivity Check";
+			dialog.Message = "Please make sure, Your device in connected to internet.";
+			dialog.AddButton ("Ok");
+
+			dialog.Clicked += async (object sender, UIButtonEventArgs e) => {
+				// don't agree leads in exit of application
+				NSThread.Exit();
 			};
 
 			dialog.Show ();

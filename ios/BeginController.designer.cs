@@ -4,8 +4,8 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System;
 using System.CodeDom.Compiler;
 
@@ -15,10 +15,10 @@ namespace RCSI
 	partial class BeginController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UISearchBar searchBar { get; set; }
+		UIKit.UISearchBar searchBar { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView tableView { get; set; }
+		UIKit.UITableView tableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

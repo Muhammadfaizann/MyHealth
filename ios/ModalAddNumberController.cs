@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using MyHealthDB;
 
@@ -84,7 +84,7 @@ namespace RCSI
 			#region [TextField Delegate Methods]
 
 			[Export ("textFieldShouldReturn:")]
-			public bool ShouldReturn (MonoTouch.UIKit.UITextField textField)
+			public bool ShouldReturn (UIKit.UITextField textField)
 			{
 				textField.ResignFirstResponder();
 				if (textField == _controller.txtTitle) {

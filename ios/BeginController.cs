@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using MyHealthDB;
 using System.Threading.Tasks;
 
@@ -64,20 +64,20 @@ namespace RCSI
 		}
 
 		[Export ("searchBar:textDidChange:")]
-		public void TextChanged (MonoTouch.UIKit.UISearchBar searchBar, string searchText)
+		public void TextChanged (UIKit.UISearchBar searchBar, string searchText)
 		{
 			_illnessSource.SearchItems = _illnessSource.disease.Where (i => i.Name.ToLower().Contains(searchText.ToLower())).ToArray ();
 			this.tableView.ReloadData ();
 		}
 
 		[Export ("searchBarSearchButtonClicked:")]
-		public void SearchButtonClicked (MonoTouch.UIKit.UISearchBar searchBar)
+		public void SearchButtonClicked (UIKit.UISearchBar searchBar)
 		{
 			this.HideKeyboard ();
 		}
 
 		[Export ("searchDisplayController:didLoadSearchResultsTableView:")]
-		public void DidLoadSearchResults (MonoTouch.UIKit.UISearchDisplayController controller, MonoTouch.UIKit.UITableView tableView)
+		public void DidLoadSearchResults (UIKit.UISearchDisplayController controller, UIKit.UITableView tableView)
 		{
 			tableView.Frame = this.tableView.Frame;
 		}
@@ -116,12 +116,12 @@ namespace RCSI
 			//diseaseNameList = disease.Select(x => x.Name).ToList<string>();
 		}
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return 1;
 		}
 
-		public override int RowsInSection (UITableView tableView, int section)
+		public override nint RowsInSection (UITableView tableView, nint section)
 		{
 			//if (this._controller.SearchDisplayController.SearchResultsTableView == tableView)
 			if (this.SearchItems == null) {
@@ -214,22 +214,25 @@ namespace RCSI
 			}
 		}
 
-		public override int NumberOfSections (UITableView tableView)
+		public override nint NumberOfSections (UITableView tableView)
 		{
 			return _items.Keys.Count;
 		}
 
-		public override int RowsInSection (UITableView tableView, int section)
+		public override nint RowsInSection (UITableView tableView, nint section)
 		{
-			return _items [_items.Keys.ElementAt (section)].Length;
+			//return (nint)_items [_items.Keys.ElementAt (section)].Length;
+			//return _items [_items.Keys.ElementAt (section)].Length;
+			var Keys = _items.Keys.ToArray();
+			return _items [Keys[section]].Length;
 		}
 
-		public override string[] SectionIndexTitles (UITableView tableView)
+		public override String[] SectionIndexTitles (UITableView tableView)
 		{
 			return indexTitles;
 		}
 
-		public override int SectionFor (UITableView tableView, string title, int atIndex)
+		public override nint SectionFor (UITableView tableView, string title, nint atIndex)
 		{
 			return _items.Keys.ToList ().IndexOf (title);
 		}

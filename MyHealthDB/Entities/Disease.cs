@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MyHealth.DB.SQLite;
 using MyHealthDB.Model;
 

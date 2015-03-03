@@ -2,8 +2,8 @@
 
 using System;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace RCSI
 {
@@ -20,7 +20,7 @@ namespace RCSI
 			var navigationController = this.ParentViewController.NavigationController;
 			if (this.ParentViewController.GetType().Equals(typeof(CategoryController)))
 			{
-				navigationController.PopViewControllerAnimated(false);
+				navigationController.PopViewController(false);
 			}
 			var currentController = this.ParentViewController as BeginController;
 			if (currentController == null
@@ -39,7 +39,7 @@ namespace RCSI
 			if (currentController != null
 				&& currentController.IsAtoZ)
 			{
-				navigationController.PopViewControllerAnimated(false);
+				navigationController.PopViewController(false);
 			}
 			if (!this.ParentViewController.GetType().Equals(typeof(CategoryController))) {
 				CategoryController viewController = (CategoryController)Storyboard.InstantiateViewController("CategoryViewController");
@@ -53,7 +53,7 @@ namespace RCSI
 			var navigationController = this.ParentViewController.NavigationController;
 			if (this.ParentViewController is IllnessDetailsController || this.ParentViewController is CategoryController)
 			{
-				navigationController.PopViewControllerAnimated(false);
+				navigationController.PopViewController(false);
 			}
 
 			if (!this.ParentViewController.GetType().Equals(typeof(RecentCategoryController))) {

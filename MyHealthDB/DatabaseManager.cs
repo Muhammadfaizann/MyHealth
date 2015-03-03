@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MyHealth.DB.SQLiteAsync;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,8 +75,8 @@ namespace MyHealthDB
 		#region[Register]
 		public async static Task<List<RegisteredDevice>> SelectAllDevices()
 		{
-			var counties = await dbConnection.Table<RegisteredDevice>().ToListAsync ();
-			return counties;
+			var devices = await dbConnection.Table<RegisteredDevice>().ToListAsync ();
+			return devices;
 		}
 
 		public async static Task<RegisteredDevice> SelectDevice()
@@ -384,6 +384,11 @@ namespace MyHealthDB
 			await dbConnection.DeleteAsync(hospital).ContinueWith(t => {
 				Console.WriteLine ("New Disease Name : {0}", hospital.Name);
 			});
+		}
+
+		public async static Task<List<Hospital>> SelectHospitalsByCounty(int countyId)
+		{
+			return await dbConnection.Table<Hospital> ().Where (c => c.CountyID == countyId).ToListAsync ();
 		}
 		#endregion
 

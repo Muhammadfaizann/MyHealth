@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace RCSI
@@ -12,34 +12,34 @@ namespace RCSI
 	[Register ("FeedbackController")]
 	partial class FeedbackController
 	{
-		[Outlet]
-		MonoTouch.UIKit.UITextField useremail { get; set; }
+		//[Outlet]
+		UIKit.UITextField useremail { get; set; }
 
-		[Outlet]
-		MonoTouch.UIKit.UITextField usermessage { get; set; }
+		//[Outlet]
+		UIKit.UITextField usermessage { get; set; }
 
-		[Outlet]
-		MonoTouch.UIKit.UITextField username { get; set; }
+		//[Outlet]
+		UIKit.UITextField username { get; set; }
 
 		[Action ("saveTheFeeback:")]
-		partial void saveTheFeeback (MonoTouch.Foundation.NSObject sender);
+		partial void saveTheFeeback (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (username != null) {
-				username.Dispose ();
-				username = null;
-			}
-
-			if (useremail != null) {
-				useremail.Dispose ();
-				useremail = null;
-			}
-
-			if (usermessage != null) {
-				usermessage.Dispose ();
-				usermessage = null;
-			}
+//			if (username != null) {
+//				username.Dispose ();
+//				username = null;
+//			}
+//
+//			if (useremail != null) {
+//				useremail.Dispose ();
+//				useremail = null;
+//			}
+//
+//			if (usermessage != null) {
+//				usermessage.Dispose ();
+//				usermessage = null;
+//			}
 		}
 	}
 }
