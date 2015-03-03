@@ -1,12 +1,10 @@
 ﻿<Properties StartupItem="My.Health.Android.csproj" GitUserInfo="UsingMD">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.FA46EWM02483" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Activities/CustomAdapaters/NewsChannelsAdapter.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MyHealth_AVD" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Activities/LaunchActivity.cs">
     <Files>
-      <File FileName="Activities/HealthNewsActivity.cs" Line="67" Column="67" />
-      <File FileName="Activities/NewsDetailActivity.cs" Line="75" Column="75" />
-      <File FileName="Activities/CustomAdapaters/NewsFeedAdapter.cs" Line="103" Column="103" />
-      <File FileName="Model/RSSFeedReader.cs" Line="36" Column="36" />
-      <File FileName="Activities/CustomAdapaters/NewsChannelsAdapter.cs" Line="26" Column="26" />
+      <File FileName="Activities/LaunchActivity.cs" Line="25" Column="25" />
+      <File FileName="Activities/SubActivities/MyProfileActivity.cs" Line="29" Column="29" />
+      <File FileName="Activities/SubActivities/MyBMI.cs" Line="2" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -22,10 +20,8 @@
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/RecentCategoryController.cs" line="22" column="1" />
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/IllnessDetailsController.cs" line="29" column="1" />
       <Breakpoint conditionExpression="disease.ID == 181" file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="191" column="1" />
-      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/NewsDetailActivity.cs" line="52" column="1" />
-      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/NewsDetailActivity.cs" line="28" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.My.Health.Android MonoForAntroid.PreferredDevice="Nexus 4" />
+  <MonoDevelop.Ide.ItemProperties.My.Health.Android MonoForAntroid.PreferredDevice="Nexus 5" />
 </Properties>

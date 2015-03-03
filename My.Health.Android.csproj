@@ -97,6 +97,7 @@
     <Compile Include="Activities\CustomAdapaters\HospitalsAdapter.cs" />
     <Compile Include="Model\SharedUserData.cs" />
     <Compile Include="Activities\CustomAdapaters\DiseaseAdapter.cs" />
+    <Compile Include="Activities\SubActivities\MyBMI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -197,6 +198,8 @@
     <AndroidResource Include="Resources\layout\sub_activity_profile.axml" />
     <AndroidResource Include="Resources\layout\actionbar_custom.axml" />
     <AndroidResource Include="Resources\drawable-xhdpi\blood.png" />
+    <AndroidResource Include="Resources\layout\sub_activity_mybmi.axml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bmi_status.png" />
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

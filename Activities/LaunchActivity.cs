@@ -88,7 +88,7 @@ namespace MyHealthAndroid
 
 			alert.SetCancelable (false);
 
-			alert.SetPositiveButton ("Agree", async (senderAlert, args) => {
+			alert.SetPositiveButton ("Agree",(senderAlert, args) => {
 				StartActivity (typeof(HomeActivity));
 			});
 
