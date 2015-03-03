@@ -197,7 +197,6 @@
     <AndroidResource Include="Resources\layout\sub_activity_feedback.axml" />
     <AndroidResource Include="Resources\layout\sub_activity_profile.axml" />
     <AndroidResource Include="Resources\layout\actionbar_custom.axml" />
-    <AndroidResource Include="Resources\drawable-xhdpi\blood.png" />
     <AndroidResource Include="Resources\layout\sub_activity_mybmi.axml" />
     <AndroidResource Include="Resources\drawable-xhdpi\bmi_status.png" />
   </ItemGroup>

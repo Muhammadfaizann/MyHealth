@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MyHealth_AVD" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Activities/LaunchActivity.cs">
     <Files>
-      <File FileName="Activities/LaunchActivity.cs" Line="25" Column="25" />
-      <File FileName="Activities/SubActivities/MyProfileActivity.cs" Line="29" Column="29" />
-      <File FileName="Activities/SubActivities/MyBMI.cs" Line="2" Column="2" />
+      <File FileName="Activities/LaunchActivity.cs" Line="1" Column="1" />
+      <File FileName="Activities/SubActivities/MyProfileActivity.cs" Line="1" Column="1" />
+      <File FileName="Activities/SubActivities/MyBMI.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
