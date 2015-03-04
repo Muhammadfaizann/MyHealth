@@ -22,16 +22,27 @@ namespace RCSI
 		{
 			lblName.Text = name;
 			btnWebsite.SetTitle( "Website: " + website, UIControlState.Normal);
+			btnWebsite.TouchUpInside += OpenWebSite;
 			btnTel.TouchUpInside += DialNumber;
 			btnTel.SetTitle( "Tel: " + tel, UIControlState.Normal);
-
 		}
 
 		public void DialNumber(object sender, EventArgs e)
 		{
 			string number = ((UIButton)sender).Title (UIControlState.Normal).Replace("Tel: ","").Trim().Replace (" ", "");
 			if(!string.IsNullOrEmpty(number))
-				UIApplication.SharedApplication.OpenUrl (new NSUrl ("tel:" + number));
+				UIApplication.SharedApplication.OpenUrl (new NSUrl ("telprompt://" + number));
+		}
+
+		public void OpenWebSite(object sender, EventArgs e)
+		{
+			string siteUrl = ((UIButton)sender).Title (UIControlState.Normal).Replace("Website: ","").Trim().Replace (" ", "");
+			if (!string.IsNullOrEmpty (siteUrl)) {
+				if (!siteUrl.StartsWith ("http://", StringComparison.InvariantCultureIgnoreCase)) {
+					siteUrl = "http://" + siteUrl;
+				}
+				UIApplication.SharedApplication.OpenUrl (new NSUrl (siteUrl));
+			}
 		}
 	}
 }
