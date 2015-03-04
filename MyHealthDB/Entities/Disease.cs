@@ -21,6 +21,7 @@ namespace MyHealthDB
 		public string MisSpelling { get; set; }
 		public int DiseaseCategoryID { get; set;}
 		public int CPUserId { get; set; }
+		public int Status{ get; set;}
 	}
 }
 

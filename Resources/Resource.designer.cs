@@ -72,16 +72,16 @@ namespace MyHealthAndroid
 			public const int arrow_top2nd = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int blood = 2130837507;
+			public const int blood2 = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int blood2 = 2130837508;
+			public const int bmi = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int bmi = 2130837509;
+			public const int BMI_chart = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int BMI_chart = 2130837510;
+			public const int bmi_status = 2130837510;
 			
 			// aapt resource value: 0x7f020007
 			public const int Cancer = 2130837511;
@@ -599,10 +599,13 @@ namespace MyHealthAndroid
 			public const int sub_activity_feedback = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int sub_activity_organ_donation = 2130903062;
+			public const int sub_activity_mybmi = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int sub_activity_profile = 2130903063;
+			public const int sub_activity_organ_donation = 2130903063;
+			
+			// aapt resource value: 0x7f030018
+			public const int sub_activity_profile = 2130903064;
 			
 			static Layout()
 			{

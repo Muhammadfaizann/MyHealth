@@ -190,13 +190,22 @@ namespace MyHealthDB
 		{
 			var selected = await dbConnection.Table<Disease> ().Where(x => x.ID == disease.ID).FirstOrDefaultAsync();
 			if (selected == null) {
-				await dbConnection.InsertAsync (disease).ContinueWith (t => {
-					Console.WriteLine ("New Disease Name : {0}", disease.Name);
-				});
+				if (disease.Status != 5) { //for the first time if there is deleted condition then do not insert it.
+					await dbConnection.InsertAsync (disease).ContinueWith (t => {
+						Console.WriteLine ("New Disease Name : {0}", disease.Name);
+					});
+				}
 			} else {
-				await dbConnection.UpdateAsync (disease).ContinueWith (t => {
-					Console.WriteLine ("Updated Disease Name : {0}", disease.Name);
-				});
+
+				if (disease.Status == 5) { //if deleted category is synced then delete it from local
+					await dbConnection.DeleteAsync (selected).ContinueWith (t => {
+						Console.WriteLine ("Deleted Disease Name : {0}", disease.Name);
+					});
+				} else {
+					await dbConnection.UpdateAsync (disease).ContinueWith (t => {
+						Console.WriteLine ("Updated Disease Name : {0}", disease.Name);
+					});
+				}
 			}
 		}
 

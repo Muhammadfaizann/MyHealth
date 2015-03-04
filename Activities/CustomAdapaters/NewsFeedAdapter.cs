@@ -15,15 +15,41 @@ namespace MyHealthAndroid
 		private Activity _activity;
 
 		//constructor
-		public NewsFeedAdapter (Activity activity)
+		public NewsFeedAdapter (Activity activity, RssFeedName feed)
 		{
 			_activity = activity;
-			_list = RSSFeedReader.ReadBBCRSSFeed ("http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#");
+
+			string feedUrl;
+			switch (feed) 
+			{
+				case RssFeedName.BBC:
+					feedUrl = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#";
+					break;
+				case RssFeedName.IrishHealth:
+					feedUrl = "http://www.irishhealth.com/rss/ihfeed.php";
+					break;
+				case RssFeedName.IrishTimesHealth:
+					feedUrl = "https://www.irishtimes.com/cmlink/irish-times-health-1.1364620";
+					break;
+				case RssFeedName.PULSE:
+					feedUrl = "http://pulsevoices.org/index.php?format=feed&type=rss&title=Pulse-Voices%20from%20the%20Heart%20of%20Medicine%20-%20Welcome%20to%20Pulse-Voices%20from%20the%20Heart%20of%20Medicine";
+					break;
+				default:
+					feedUrl = "http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#";
+					break;
+			}
+
+			_list = RSSFeedReader.Read (feedUrl);
 		}
 			
 		//count of rows in ListView
 		public override int Count {
 			get { return _list.Count; }
+		}
+
+		public List<FeedItem> ItemList
+		{
+			get { return _list; }
 		}
 
 		public override Java.Lang.Object GetItem (int position) {
@@ -46,31 +72,13 @@ namespace MyHealthAndroid
 			var NewsImage = view.FindViewById<ImageView> (Resource.Id.newsImageView);
 			var ActualNews = view.FindViewById<TextView> (Resource.Id.actualNews);
 
-			NewsDate.Text = _list [position].PubDate.ToString();
+
+
+			NewsDate.Text =  (_list [position].PubDate == null || _list [position].PubDate == DateTime.MinValue) ? "" : _list [position].PubDate.ToString();
 			Headline.Text = _list [position].Title;
 			var imageBitmap = GetImageBitmapFromUrl (_list[position].ImageUrl);
 			NewsImage.SetImageBitmap (imageBitmap);
 			ActualNews.Text = _list [position].Description;
-
-			NewsImage.Clickable = true;
-			NewsImage.Click += (object sender, EventArgs e) => 
-			{
-				AlertDialog.Builder alert = new AlertDialog.Builder(_activity);
-				alert.SetTitle("Launch Browser");
-				alert.SetMessage("You will now be directed to external website, Do you want to proceed.");
-
-				alert.SetPositiveButton ("YES", (object senderAlert, DialogClickEventArgs Args) => {
-					var uri = Android.Net.Uri.Parse ( _list[position].Link);
-					var intent = new Intent (Intent.ActionView, uri); 
-					_activity.StartActivity (intent); 
-				});
-
-				alert.SetNegativeButton ("NO", (object senderAlert, DialogClickEventArgs Args) => {
-
-				});
-
-				alert.Show();
-			};
 
 			return view;
 		}
@@ -78,10 +86,12 @@ namespace MyHealthAndroid
 		private Bitmap GetImageBitmapFromUrl(string url) 
 		{
 			Bitmap imageBitmap = null;
-			using (var webClient = new WebClient ()) {
-				var imageBytes = webClient.DownloadData (url);
-				if (imageBytes != null && imageBytes.Length > 0) {
-					imageBitmap = BitmapFactory.DecodeByteArray (imageBytes, 0, imageBytes.Length);
+			if (url != null) {
+				using (var webClient = new WebClient ()) {
+					var imageBytes = webClient.DownloadData (url);
+					if (imageBytes != null && imageBytes.Length > 0) {
+						imageBitmap = BitmapFactory.DecodeByteArray (imageBytes, 0, imageBytes.Length);
+					}
 				}
 			}
 			return imageBitmap;

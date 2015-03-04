@@ -127,10 +127,10 @@ namespace MyHealthAndroid
 				Page = Convert.ToInt32(Pages.MyUsefulNumbers)
 			});
 
+
 			_addNumberButton = FindViewById<Button> (Resource.Id.addContactButton);
 			//_saveNumberButton = FindViewById<Button> (Resource.Id.saveContactButton);
 			//_saveNumberButton.Visibility = ViewStates.Invisible;
-
 			_addNumberButton.Click += onAddButtonClicked;
 			//_saveNumberButton.Click += onSaveButtonClicked;
 		}

@@ -218,7 +218,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetHeightFeets () {
 			var data = new List<String> ();
-			for (int i = 1; i <= 12; i++) {
+			for (int i = 1; i <= 8; i++) {
 				data.Add (i.ToString () + " feet");
 			}
 			return data;

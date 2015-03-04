@@ -87,7 +87,8 @@ namespace MyHealthDB.Helper
 									</head>
 									<body> <div style=""padding: 5px; font-family: Arial"">");
 				if (!string.IsNullOrEmpty(selectedDisease.Name))
-					htmlString.AppendFormat ("<h3><p style='color:#E11937;'>{0}</p></h3> ", selectedDisease.Name);
+					//htmlString.AppendFormat ("<h3><p style='color:#E11937;'>{0}</p></h3> ", selectedDisease.Name);
+					htmlString.AppendFormat ("<h3><p style='color:#E11937;'>What is it?</p></h3> ");
 
 				if (!string.IsNullOrEmpty(selectedDisease.Description))
 					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.Description);

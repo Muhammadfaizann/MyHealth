@@ -69,6 +69,8 @@ namespace MyHealthAndroid
 			syncButton = FindViewById<Button> (Resource.Id.syncButton);
 			saveButton = FindViewById<Button> (Resource.Id.saveProfileButton);
 
+
+			syncButton.Visibility = ViewStates.Invisible;
 			syncButton.Click += async (object sender, EventArgs e) => {
 				try {
 					ISharedPreferencesEditor editor = preferences.Edit();
@@ -164,15 +166,19 @@ namespace MyHealthAndroid
 				bmi = Math.Round(((weight1 + weight2) / ((height1 + height2) * (height1 + height2))) * 703,2);
 			}
 
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.SetTitle("BMI Calculation");
-			alert.SetMessage("your BMI is " + bmi.ToString());
+//			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//			alert.SetTitle("BMI Calculation");
+//			alert.SetMessage("your BMI is " + bmi.ToString());
+//
+//			alert.SetPositiveButton ("Ok", (object senderAlert, DialogClickEventArgs Args) => {
+//
+//			});
+//
+//			alert.Show();
 
-			alert.SetPositiveButton ("YES", (object senderAlert, DialogClickEventArgs Args) => {
-
-			});
-
-			alert.Show();
+			var activity = new Intent (this, typeof(MyBMI));
+			activity.PutExtra ("MyBMI", bmi.ToString());
+			StartActivity (activity);
 
 		}
 

@@ -1,251 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:minWidth="25px"
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/textView1"
-    android:id="@+id/scrollView1">
-    <RelativeLayout
+    android:id="@+id/linearLayout1">
+    <Button
+        android:text="Home"
+        android:id="@+id/backButton"
+        android:background="#ffff1937"
+        android:drawableLeft="@drawable/arrow_top2nd"
+        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#ffffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#ffffffff"
-        tools:context="com.elevenvalues.rnitte.Speaker"
-        android:id="@+id/relativeLayout1">
-        <Button
-            android:text="Home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/backButton"
-            android:background="#ffff1937"
-            android:drawableLeft="@drawable/arrow_top2nd"
-            android:textSize="18dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_alignParentTop="true"
-            android:textColor="#ffffffff"
-            android:textColorHighlight="#ffffffff" />
-        <TextView
-            android:text="Please enter your information below"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/backButton"
-            android:id="@+id/textView1"
-            android:textColor="#ff333333"
-            android:gravity="center"
-            android:layout_margin="10dp" />
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView1"
-            android:id="@+id/matricToggleButton"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp" />
-        <TextView
-            android:text="Matric Answer"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/textView2"
-            android:textColor="#ff333333"
-            android:layout_toLeftOf="@id/matricToggleButton"
-            android:layout_below="@id/textView1"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView2"
-            android:id="@+id/heightComponentLayout">
-            <TextView
-                android:text="Height"
-                android:id="@+id/textView3"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="#ff333333"
-                android:layout_marginLeft="15dp"
-                android:gravity="center"
-                android:layout_marginRight="25dp" />
-            <Spinner
-                android:id="@+id/heightFeetSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
-            <Spinner
-                android:id="@+id/heightInchSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/heightComponentLayout"
-            android:id="@+id/weightComponentLayout">
-            <TextView
-                android:text="Weight"
-                android:id="@+id/textView4"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="#ff333333"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:layout_marginRight="25dp" />
-            <Spinner
-                android:id="@+id/weightKiloSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
-            <Spinner
-                android:id="@+id/weightGramSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/weightComponentLayout"
-            android:id="@+id/countryComponentLayout">
-            <TextView
-                android:text="Countries"
-                android:id="@+id/textView5"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="#ff333333"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:layout_marginRight="25dp" />
-            <Spinner
-                android:id="@+id/countrySpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/countryComponentLayout"
-            android:id="@+id/ageComponentLayout">
-            <TextView
-                android:text="Age Range"
-                android:id="@+id/textView6"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="#ff333333"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:layout_marginRight="25dp" />
-            <Spinner
-                android:id="@+id/ageSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ageComponentLayout"
-            android:id="@+id/genderComponentLayout">
-            <TextView
-                android:text="Gender"
-                android:id="@+id/textView7"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="#ff333333"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:layout_marginRight="25dp" />
-            <Spinner
-                android:id="@+id/genderSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/genderComponentLayout"
-            android:id="@+id/bloodgroupComponentLayout">
-            <TextView
-                android:text="Blood Group"
-                android:id="@+id/textView8"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="#ff333333"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:layout_marginRight="25dp" />
-            <Spinner
-                android:id="@+id/bloodGroupSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/bloodgroupComponentLayout"
-            android:id="@+id/buttonsComponentLayout">
-            <Button
-                android:text="Save"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/saveProfileButton"
-                android:layout_weight="0.6" />
-            <Button
-                android:text="Calculate BMI"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/calculateBMIButton"
-                android:layout_weight="0.5" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
+        android:layout_below="@id/textView1"
+        android:id="@+id/scrollView1">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/buttonsComponentLayout"
-            android:id="@+id/testlayoutforawhile">
-            <Button
-                android:text="Sync With Server"
+            android:orientation="vertical"
+            android:background="#ffffffff"
+            tools:context="com.elevenvalues.rnitte.Speaker"
+            android:id="@+id/relativeLayout1">
+            <TextView
+                android:text="Please enter your information below"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/backButton"
+                android:id="@+id/textView1"
+                android:textColor="#ff333333"
+                android:gravity="center"
+                android:layout_margin="10dp" />
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView1"
+                android:id="@+id/matricToggleButton"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
+            <TextView
+                android:text="Metric Answer"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/textView2"
+                android:textColor="#ff333333"
+                android:layout_toLeftOf="@id/matricToggleButton"
+                android:layout_below="@id/textView1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView2"
+                android:id="@+id/heightComponentLayout">
+                <TextView
+                    android:text="Height"
+                    android:id="@+id/textView3"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="#ff333333"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center"
+                    android:layout_marginRight="25dp" />
+                <Spinner
+                    android:id="@+id/heightFeetSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+                <Spinner
+                    android:id="@+id/heightInchSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/heightComponentLayout"
+                android:id="@+id/weightComponentLayout">
+                <TextView
+                    android:text="Weight"
+                    android:id="@+id/textView4"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="#ff333333"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_marginRight="25dp" />
+                <Spinner
+                    android:id="@+id/weightKiloSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+                <Spinner
+                    android:id="@+id/weightGramSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/weightComponentLayout"
+                android:id="@+id/countryComponentLayout">
+                <TextView
+                    android:text="Countries"
+                    android:id="@+id/textView5"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="#ff333333"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_marginRight="25dp" />
+                <Spinner
+                    android:id="@+id/countrySpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/countryComponentLayout"
+                android:id="@+id/ageComponentLayout">
+                <TextView
+                    android:text="Age Range"
+                    android:id="@+id/textView6"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="#ff333333"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_marginRight="25dp" />
+                <Spinner
+                    android:id="@+id/ageSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ageComponentLayout"
+                android:id="@+id/genderComponentLayout">
+                <TextView
+                    android:text="Gender"
+                    android:id="@+id/textView7"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="#ff333333"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_marginRight="25dp" />
+                <Spinner
+                    android:id="@+id/genderSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/genderComponentLayout"
+                android:id="@+id/bloodgroupComponentLayout">
+                <TextView
+                    android:text="Blood Group"
+                    android:id="@+id/textView8"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="#ff333333"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_marginRight="25dp" />
+                <Spinner
+                    android:id="@+id/bloodGroupSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bloodgroupComponentLayout"
+                android:id="@+id/buttonsComponentLayout">
+                <Button
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/saveProfileButton"
+                    android:layout_weight="0.6" />
+                <Button
+                    android:text="Calculate BMI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/calculateBMIButton"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/syncButton" />
-        </LinearLayout>
-    </RelativeLayout>
-</ScrollView>
+                android:layout_below="@id/buttonsComponentLayout"
+                android:id="@+id/testlayoutforawhile">
+                <Button
+                    android:text="Sync With Server"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/syncButton" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
