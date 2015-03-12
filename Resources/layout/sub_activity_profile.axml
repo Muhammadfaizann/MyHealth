@@ -127,7 +127,7 @@
                 android:layout_below="@id/weightComponentLayout"
                 android:id="@+id/countryComponentLayout">
                 <TextView
-                    android:text="Countries"
+                    android:text="Counties"
                     android:id="@+id/textView5"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_width="wrap_content"

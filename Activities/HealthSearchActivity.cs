@@ -103,7 +103,10 @@ namespace MyHealthAndroid
 				_diseaseList.Adapter = _customDiseaseAdapter; //_listAdapter;
 
 				_diseaseList.Visibility = ViewStates.Visible;
+
 				_expandableDiseaseList.Visibility = ViewStates.Gone;
+
+				_searchText.Visibility = ViewStates.Visible;
 
 				_isRecentListDisplayed = false;
 			};
@@ -114,6 +117,7 @@ namespace MyHealthAndroid
 				_expandableDiseaseList.Visibility = ViewStates.Visible;
 
 				_isRecentListDisplayed = false;
+				_searchText.Visibility = ViewStates.Gone;
 			};
 
 			recentButton = FindViewById<Button> (Resource.Id.recentButton);
@@ -129,6 +133,7 @@ namespace MyHealthAndroid
 				_expandableDiseaseList.Visibility = ViewStates.Gone;
 
 				_isRecentListDisplayed = true;
+				_searchText.Visibility = ViewStates.Gone;
 			};
 
 			//Get the recent DiseaseList onLoad

@@ -345,38 +345,10 @@ namespace RCSI
 
 		public List<String> GetCountries () {
 			var data = new List<String> ();
-				data.Add ("Antrim");
-				data.Add ("Armagh");
-				data.Add ("Carlow");
-				data.Add ("Cavan");
-				data.Add ("Clare");
-				data.Add ("Cork");
-				data.Add ("Derry");
-				data.Add ("Donegal");
-				data.Add ("Down");
-				data.Add ("Dublin");
-				data.Add ("Fermanagh");
-				data.Add ("Galway");
-				data.Add ("Kerry");
-				data.Add ("Kildare");
-				data.Add ("Kilkenny");
-				data.Add ("Laois");
-				data.Add ("Leitrim");
-				data.Add ("Limerick");
-				data.Add ("Longford");
-				data.Add ("Louth");
-				data.Add ("Mayo");
-				data.Add ("Meath");
-				data.Add ("Monaghan");
-				data.Add ("Offaly");
-				data.Add ("Roscommon");
-				data.Add ("Sligo");
-				data.Add ("Tipperary");
-				data.Add ("Tyrone");
-				data.Add ("Waterford");
-				data.Add ("Westmeath");
-				data.Add ("Wexford");
-				data.Add ("Wicklow");
+			data.Add ("Leinster");
+			data.Add ("Ulster");
+			data.Add ("Munster");
+			data.Add ("Connacht");
 			return data;
 		}
 	}

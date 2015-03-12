@@ -33,6 +33,8 @@ namespace MyHealthAndroid
 			//Get the shared Preferences
 			preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
 
+
+
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
 				bool isDeviceSynced = preferences.GetBoolean("applicationUpdated",false);
@@ -40,11 +42,13 @@ namespace MyHealthAndroid
 					if (await SyncDevice ())
 						ShowAcceptanceDialog ();
 				} else {
+									
 					ShowAcceptanceDialog ();
 				}
 			} else {
 				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
+
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 					Toast.MakeText (this, "Registering device", ToastLength.Long).Show();
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android")) {
@@ -62,16 +66,23 @@ namespace MyHealthAndroid
 			base.OnPause ();
 		}
 
-		protected async Task<Boolean> SyncDevice ()
+		protected async Task<Boolean> SyncDevice (bool ShowMessage=true)
 		{
 			try {
 				ISharedPreferencesEditor editor = preferences.Edit();
-				Toast.MakeText(this, "Initializing Application for the first time, Please wait.", ToastLength.Long).Show();
+				if(ShowMessage){
+					Toast.MakeText(this, "Initializing Application for the first time, Please wait.", ToastLength.Long).Show();
+				}
 				editor.PutBoolean("applicationUpdated", false);
 				editor.Apply();
 				await MyHealthDB.ServiceConsumer.SyncDevice();
-				Toast.MakeText(this, "Application Initilaized Successfully.", ToastLength.Long).Show();
+				if(ShowMessage)
+				{
+					Toast.MakeText(this, "Application Initilaized Successfully.", ToastLength.Long).Show();
+				}
 				editor.PutBoolean("applicationUpdated", true);
+				editor.PutString("LastSyncDate", DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss"));
+
 				editor.Apply();
 			} catch (Exception ex) {
 				Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();

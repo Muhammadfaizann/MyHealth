@@ -24,6 +24,7 @@ namespace MyHealthAndroid{
 		private ImageButton healthProBtn;
 		private ImageButton healthNewsBtn;
 		private ImageButton helpBtn;
+		private Button impNotice;
 
 		protected async override void OnCreate (Bundle bundle)
 		{
@@ -36,6 +37,9 @@ namespace MyHealthAndroid{
 			healthProBtn = FindViewById<ImageButton> (Resource.Id.healthProfessionalBtn);
 			healthNewsBtn = FindViewById<ImageButton> (Resource.Id.healthNewsBtn);
 			helpBtn = FindViewById<ImageButton> (Resource.Id.helpBtn);
+			impNotice = FindViewById<Button> (Resource.Id.impNotice);
+
+			impNotice.Selected = true;
 
 			searchBtn.Click += (object sender, EventArgs e) => 
 			{
@@ -67,14 +71,26 @@ namespace MyHealthAndroid{
 			});
 
 			var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext);
+			ISharedPreferencesEditor editor = preferences.Edit();
 			if (!preferences.GetBoolean ("applicationUpdated", false)) {
-				Toast.MakeText (this, "Please Sync with latest data.", ToastLength.Long).Show ();
+				//Toast.MakeText (this, "Please Sync with latest data.", ToastLength.Long).Show ();
 				StartActivity (new Intent (this, typeof(MyProfileActivity)));
 			} else {
 				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
 				if ((activeConnection != null) && activeConnection.IsConnected) {
-					await LogManager.SyncAllLogs ();
+
+					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
+					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
+
+					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
+					if (TotalHours > 1) {
+						await MyHealthDB.ServiceConsumer.SyncDevice ();
+						editor.PutString("LastSyncDate", DateTime.Now.ToString("dd-MMM-yyyy"));
+						editor.Apply ();
+					} else {
+						await LogManager.SyncAllLogs ();
+					}
 				}
 			}
 

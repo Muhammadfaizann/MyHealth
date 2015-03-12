@@ -13,6 +13,7 @@ using Android.Widget;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using Android.Preferences;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
@@ -106,12 +107,12 @@ namespace MyHealthAndroid
 			};
 
 			calculateBMIButton.Click += CalculateBMI;
-			matricToggleButton.Click += (object sender, EventArgs e) => {
-				SetSpinnersAdapter (matricToggleButton.Checked);
+			matricToggleButton.Click += async (object sender, EventArgs e) => {
+				await SetSpinnersAdapter (matricToggleButton.Checked);
 			};
 
 			//populate the spinners
-			SetSpinnersAdapter (false);
+			await SetSpinnersAdapter (false);
 
 			//chcek to see where this activity was launched from
 			var ifFromLaunch = Intent.GetBooleanExtra ("fromLaunchAvtivity", false);
@@ -183,7 +184,7 @@ namespace MyHealthAndroid
 		}
 
 		//------------------------------------- Set Spinners Data -------------------------------------//
-		private void SetSpinnersAdapter (Boolean Matric)
+		private async Task SetSpinnersAdapter (Boolean Matric)
 		{
 			if (!Matric) {
 				HeightUnitBig = _data.GetHeightFeets ();
@@ -196,7 +197,7 @@ namespace MyHealthAndroid
 				WeightUnitBig = _data.GetWeightKilograms();
 				WeightUnitSmall = _data.GetWeightGrams ();
 			}
-			var CountryList = _data.GetCountries ();
+			var CountryList = await _data.GetCountries ();
 			var AgeList = _data.GetAgeList ();
 			var GenderList = _data.GetGenderList ();
 			var BloodGroupList = _data.GetBloodGroups ();
@@ -226,7 +227,7 @@ namespace MyHealthAndroid
 
 			weightGramSpinner.SetSelection (preferences.GetInt ("weightGramSpinnerPos", 0));
 
-			countrySpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, CountryList);
+			countrySpinner.Adapter = new ArrayAdapter<String> (this, Android.Resource.Layout.SimpleSpinnerDropDownItem, CountryList.Select(x => x.Name).ToList());
 			countrySpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
 				var I = CountryList[e.Position];
 			};

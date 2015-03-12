@@ -143,7 +143,7 @@ namespace MyHealthDB
 		#region[County]
 		public async static Task<List<County>> SelectAllCounties()
 		{
-			var counties = await dbConnection.Table<County>().ToListAsync ();
+			var counties = await dbConnection.Table<County>().OrderBy(t=>t.Name).ToListAsync ();
 			return counties;
 		}
 
@@ -177,7 +177,7 @@ namespace MyHealthDB
 		#region[Disease]
 		public async static Task<List<Disease>> SelectAllDiseases()
 		{
-			var diseases = await dbConnection.Table<Disease>().ToListAsync ();
+			var diseases = await dbConnection.Table<Disease>().OrderBy(t=>t.Name).ToListAsync ();
 			return diseases;
 		}
 
@@ -220,7 +220,7 @@ namespace MyHealthDB
 		#region[DiseaseCategory]
 		public async static Task<List<DiseaseCategory>> SelectAllDiseaseCategories()
 		{
-			var diseaseCategory = await dbConnection.Table<DiseaseCategory>().ToListAsync ();
+			var diseaseCategory = await dbConnection.Table<DiseaseCategory>().OrderBy(t=>t.CategoryName).ToListAsync ();
 			return diseaseCategory;
 		}
 
@@ -288,7 +288,7 @@ namespace MyHealthDB
 		#region[EmergencyContacts]
 		public async static Task<List<EmergencyContacts>> SelectAllEmergencyContacts()
 		{
-			var contacts = await dbConnection.Table<EmergencyContacts>().ToListAsync ();
+			var contacts = await dbConnection.Table<EmergencyContacts>().OrderBy(t=>t.Name).ToListAsync ();
 			return contacts;
 		}
 
@@ -322,7 +322,7 @@ namespace MyHealthDB
 		#region[HelpData]
 		public async static Task<List<HelpData>> SelectAllHelpData()
 		{
-			var counties = await dbConnection.Table<HelpData>().ToListAsync ();
+			var counties = await dbConnection.Table<HelpData>().OrderBy(t=>t.Name).ToListAsync ();
 			return counties;
 		}
 
@@ -356,7 +356,7 @@ namespace MyHealthDB
 		#region[Hospital]
 		public async static Task<List<Hospital>> SelectAllHospitals()
 		{
-			var counties = await dbConnection.Table<Hospital>().ToListAsync ();
+			var counties = await dbConnection.Table<Hospital>().OrderBy(t=>t.Name).ToListAsync ();
 			return counties;
 		}
 
@@ -388,14 +388,14 @@ namespace MyHealthDB
 
 		public async static Task<List<Hospital>> SelectHospitalsByCounty(int countyId)
 		{
-			return await dbConnection.Table<Hospital> ().Where (c => c.CountyID == countyId).ToListAsync ();
+			return await dbConnection.Table<Hospital> ().Where (c => c.CountyID == countyId).OrderBy(t=>t.Name).ToListAsync ();
 		}
 		#endregion
 
 		#region[NewsChannels]
 		public async static Task<List<NewsChannels>> SelectAllNewsChannels()
 		{
-			var counties = await dbConnection.Table<NewsChannels>().ToListAsync ();
+			var counties = await dbConnection.Table<NewsChannels>().OrderBy(t=>t.Name).ToListAsync ();
 			return counties;
 		}
 
@@ -429,7 +429,7 @@ namespace MyHealthDB
 		#region[Organisation]
 		public async static Task<List<Organisation>> SelectAllOrganisations()
 		{
-			var counties = await dbConnection.Table<Organisation>().ToListAsync ();
+			var counties = await dbConnection.Table<Organisation>().OrderBy(t=>t.Name).ToListAsync ();
 			return counties;
 		}
 
