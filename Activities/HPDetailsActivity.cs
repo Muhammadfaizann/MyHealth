@@ -19,6 +19,7 @@ using Android.Graphics;
 
 namespace MyHealthAndroid
 {
+	public delegate void ShowHospitalsEventHandler(int province);
 	[Activity (Label = "My Health")]			
 	public class HPDetailsActivity : Activity
 	{
@@ -142,20 +143,30 @@ namespace MyHealthAndroid
 			_imageView = FindViewById<ImageView> (Resource.Id.simpleDetailImage);
 
 			if (resourceName.Equals ("Hospitals")) {
-				_webView.Visibility = ViewStates.Invisible;
-				_imageView.SetImageResource (Resource.Drawable.map_large);
-				_imageView.Clickable = true;
+				//_webView.Visibility = ViewStates.Invisible;
+				//_imageView.SetImageResource (Resource.Drawable.map_large);
+				//_imageView.Clickable = true;
+				_imageView.Visibility = ViewStates.Gone;
+
+				MyWebViewClient _webClient = new MyWebViewClient ();
+				_webClient.OnShowHospitals += (int province) => {
+					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
+					intent.PutExtra("province", province);
+					StartActivity(intent);
+				};
+				_webView.SetWebViewClient (_webClient);
+				_webView.LoadUrl ("file:///android_asset/Content/Provinces.html");
 
 				await LogManager.Log ( new LogUsage {
 					Date = DateTime.Now,
 					Page = Convert.ToInt32(Pages.Hospitals)
 				});
 
-				_imageView.Click += (object sender, EventArgs e) => {
+				/*_imageView.Click += (object sender, EventArgs e) => {
 					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
 					intent.PutExtra("county", "somecounty");
 					StartActivity(intent);
-				};
+				};*/
 
 			} else {
 
@@ -259,5 +270,37 @@ namespace MyHealthAndroid
 			return base.OnMenuItemSelected (featureId, item);
 		}
 	}
+
+	public class MyWebViewClient : WebViewClient
+	{
+
+		public event ShowHospitalsEventHandler OnShowHospitals;
+
+
+		public override bool ShouldOverrideUrlLoading (WebView view, string url)
+		{
+			Int32 province = Convert.ToInt32 (url.Substring(url.IndexOf("?") + 1));
+			if (OnShowHospitals != null) {
+				OnShowHospitals (province);
+			}
+			return true;
+		}
+
+		/*public override void OnPageStarted (WebView view, string url, Android.Graphics.Bitmap favicon)
+		{
+			base.OnPageStarted (view, url, favicon);
+		}
+
+		public override void OnPageFinished (WebView view, string url)
+		{
+			base.OnPageFinished (view, url);
+		}
+
+		public override void OnReceivedError (WebView view, ClientError errorCode, string description, string failingUrl)
+		{
+			base.OnReceivedError (view, errorCode, description, failingUrl);
+		}*/
+	}
+
 }
 

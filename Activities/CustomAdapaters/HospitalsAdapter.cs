@@ -24,8 +24,8 @@ namespace MyHealthAndroid
 			//_list = _model.GetHospitalsInCounty (0);
 		}
 
-		public async Task loadData () {
-			_list = await _model.GetHospitalsInCounty (0);
+		public async Task loadData (int province) {
+			_list = await _model.GetHospitalsInCounty (province);
 		}
 
 		//count of rows in ListView

@@ -133,7 +133,7 @@
             android:textColor="#ffffffff"
             android:textColorHighlight="#ffffffff" />
         <Button
-            android:text="Diabetes Awareness week"
+            android:text="Diabetes Awareness week will be held on 25th Dec 2015"
             android:layout_span="3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

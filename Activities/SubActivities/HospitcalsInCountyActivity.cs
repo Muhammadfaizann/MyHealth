@@ -31,8 +31,11 @@ namespace MyHealthAndroid
 
 			SetContentView (Resource.Layout.activity_hp_details_table);
 			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);
+
+			var _selectedProvince = Intent.GetIntExtra ("province", -1);
+
 			var hospitalAdapter = new HospitalsAdapter (this);
-			await hospitalAdapter.loadData ();
+			await hospitalAdapter.loadData (_selectedProvince);
 			_commonListView.Adapter = hospitalAdapter;
 			SetCustomActionBar ();
 
