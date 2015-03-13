@@ -58,6 +58,9 @@ namespace RCSI
 			case RssFeedType.irishTimes:
 				_feedItemList = RSSManager.ReadRSSFeed ("https://www.irishtimes.com/cmlink/irish-times-health-1.1364620");
 				break;
+			case RssFeedType.BBCNews:
+				_feedItemList = RSSManager.ReadRSSFeed ("http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#");
+				break;
 			default:
 				_feedItemList = RSSManager.ReadRSSFeed ("http://feeds.bbci.co.uk/news/health/rss.xml?edition=uk#");
 				break;
@@ -90,7 +93,7 @@ namespace RCSI
 			cell.Layer.BorderColor = UIColor.FromRGB(233,239,239).CGColor;
 			cell.BackgroundColor = UIColor.FromRGB(233,239,239);
 			cell.IndentationWidth = 2.0f;
-			((UILabel)cell.ViewWithTag (100)).Text = Math.Round(DateTime.Now.Subtract(_feedItemList [indexPath.Row].PubDate).TotalHours).ToString() + " hours ago";
+			((UILabel)cell.ViewWithTag (100)).Text = (_feedItemList [indexPath.Row].PubDate == null || _feedItemList [indexPath.Row].PubDate == DateTime.MinValue ? "" : Math.Round(DateTime.Now.Subtract(_feedItemList [indexPath.Row].PubDate).TotalHours).ToString() + " hours ago");
 			((UILabel)cell.ViewWithTag (100)).TextColor = UIColor.Gray;
 			((UITextView)cell.ViewWithTag (101)).Text = _feedItemList [indexPath.Row].Title;
 			((UITextView)cell.ViewWithTag (101)).TextColor = UIColor.FromRGB (72, 95, 98);
@@ -98,13 +101,15 @@ namespace RCSI
 			((UITextView)cell.ViewWithTag (102)).Text = _feedItemList [indexPath.Row].Description;
 			((UITextView)cell.ViewWithTag (102)).TextColor = UIColor.FromRGB (160, 160, 160);
 			((UITextView)cell.ViewWithTag (102)).BackgroundColor = UIColor.FromRGB (233, 239, 239);
-			NSUrl nsUrl = new NSUrl(_feedItemList [indexPath.Row].ImageUrl);
-			NSData data = NSData.FromUrl(nsUrl);
-			try {
-				var myImage = new UIImage(data); 
-				((UIImageView)cell.ViewWithTag (103)).Image = myImage;
-			} catch (Exception ex) {
-				Console.WriteLine ("Image Loaded Exception : {0}", ex.ToString());
+			if (!string.IsNullOrEmpty (_feedItemList [indexPath.Row].ImageUrl)) {
+				NSUrl nsUrl = new NSUrl (_feedItemList [indexPath.Row].ImageUrl);
+				NSData data = NSData.FromUrl (nsUrl);
+				try {
+					var myImage = new UIImage (data); 
+					((UIImageView)cell.ViewWithTag (103)).Image = myImage;
+				} catch (Exception ex) {
+					Console.WriteLine ("Image Loaded Exception : {0}", ex.ToString ());
+				}
 			}
 			return cell;
 		}
@@ -172,7 +177,7 @@ namespace RCSI
 					{
 						feedItem.PubDate = Convert.ToDateTime(itemNodes[i].SelectSingleNode("pubDate").InnerText);
 					}
-					if ((itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value != null)
+					if (itemNodes[i].SelectNodes("media:thumbnail", nsmgr).Count > 0 && (itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value != null)
 					{
 						feedItem.ImageUrl = (itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value;
 					}

@@ -1,12 +1,10 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Xamarin Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using UIKit;
-using System;
 using System.CodeDom.Compiler;
 
 namespace RCSI
@@ -14,28 +12,30 @@ namespace RCSI
 	[Register ("HomeController")]
 	partial class HomeController
 	{
+		[Outlet]
+		UIKit.UILabel lblImportantNoticeMessage { get; set; }
+
 		[Action ("begin_clicked:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void begin_clicked (UIButton sender);
+		partial void begin_clicked (UIKit.UIButton sender);
 
 		[Action ("contacts_clicked:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void contacts_clicked (UIButton sender);
+		partial void contacts_clicked (UIKit.UIButton sender);
 
 		[Action ("goBack:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void goBack (UIButton sender);
+		partial void goBack (UIKit.UIButton sender);
 
 		[Action ("myProfile_clicked:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void myProfile_clicked (UIButton sender);
+		partial void myProfile_clicked (UIKit.UIButton sender);
 
 		[Action ("next_clicked:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void next_clicked (UIButton sender);
-
+		partial void next_clicked (UIKit.UIButton sender);
+		
 		void ReleaseDesignerOutlets ()
 		{
+			if (lblImportantNoticeMessage != null) {
+				lblImportantNoticeMessage.Dispose ();
+				lblImportantNoticeMessage = null;
+			}
 		}
 	}
 }

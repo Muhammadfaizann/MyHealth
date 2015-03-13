@@ -28,8 +28,33 @@ namespace RCSI
 		public override void PrepareForSegue (UIStoryboardSegue segue, NSObject sender)
 		{
 			base.PrepareForSegue (segue, sender);
-			var destinationController = (BBCNewsFeedController)sender;
-			destinationController.SelectedRssFeedType = RssFeedType.BBCNews;
+
+			var controller = segue.DestinationViewController as BBCNewsFeedController;
+		
+			if (controller != null) 
+			{
+				switch (segue.Identifier.ToLower()) {
+				case "bbc":
+					controller.SelectedRssFeedType = RssFeedType.BBCNews;
+					controller.Title = "BBC Medical News";
+					break;
+				case "pulse":
+					controller.SelectedRssFeedType = RssFeedType.PulseVoices;
+					controller.Title = "Pulse News";
+					break;
+				case "irishhealth":
+					controller.SelectedRssFeedType = RssFeedType.IrishHealth;
+					controller.Title = "Irish Health News";
+					break;
+				case "irishtimes":
+					controller.SelectedRssFeedType = RssFeedType.irishTimes;
+					controller.Title = "Irish Times News";
+					break;
+
+				}
+
+			}
+
 //			if (segue.Identifier == "") {
 //				destinationController.SelectedRssFeedType = RssFeedType.IrishHealth;
 //			}

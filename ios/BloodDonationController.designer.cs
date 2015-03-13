@@ -31,6 +31,9 @@ namespace RCSI
 		UIKit.UILabel bPlus { get; set; }
 
 		[Outlet]
+		UIKit.UILabel lblDateMessage { get; set; }
+
+		[Outlet]
 		UIKit.UILabel oMinus { get; set; }
 
 		[Outlet]
@@ -41,34 +44,14 @@ namespace RCSI
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (oPlus != null) {
-				oPlus.Dispose ();
-				oPlus = null;
+			if (lblDateMessage != null) {
+				lblDateMessage.Dispose ();
+				lblDateMessage = null;
 			}
 
-			if (oMinus != null) {
-				oMinus.Dispose ();
-				oMinus = null;
-			}
-
-			if (aPlus != null) {
-				aPlus.Dispose ();
-				aPlus = null;
-			}
-
-			if (aMinus != null) {
-				aMinus.Dispose ();
-				aMinus = null;
-			}
-
-			if (bPlus != null) {
-				bPlus.Dispose ();
-				bPlus = null;
-			}
-
-			if (bMinus != null) {
-				bMinus.Dispose ();
-				bMinus = null;
+			if (abMinus != null) {
+				abMinus.Dispose ();
+				abMinus = null;
 			}
 
 			if (abPlus != null) {
@@ -76,9 +59,34 @@ namespace RCSI
 				abPlus = null;
 			}
 
-			if (abMinus != null) {
-				abMinus.Dispose ();
-				abMinus = null;
+			if (aMinus != null) {
+				aMinus.Dispose ();
+				aMinus = null;
+			}
+
+			if (aPlus != null) {
+				aPlus.Dispose ();
+				aPlus = null;
+			}
+
+			if (bMinus != null) {
+				bMinus.Dispose ();
+				bMinus = null;
+			}
+
+			if (bPlus != null) {
+				bPlus.Dispose ();
+				bPlus = null;
+			}
+
+			if (oMinus != null) {
+				oMinus.Dispose ();
+				oMinus = null;
+			}
+
+			if (oPlus != null) {
+				oPlus.Dispose ();
+				oPlus = null;
 			}
 		}
 	}

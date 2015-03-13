@@ -70,6 +70,8 @@ namespace MyHealthDB
 			await dbConnection.CreateTablesAsync<LogContent, LogExternalLink, LogFeedback, LogUsage> ();
 
 			await dbConnection.CreateTablesAsync<CpUser, AboutUs> ();
+
+			await dbConnection.CreateTableAsync<ImportantNotice> ();
 		}
 
 		#region[Register]
@@ -177,7 +179,7 @@ namespace MyHealthDB
 		#region[Disease]
 		public async static Task<List<Disease>> SelectAllDiseases()
 		{
-			var diseases = await dbConnection.Table<Disease>().OrderBy(t=>t.Name).ToListAsync ();
+			var diseases = await dbConnection.Table<Disease>().OrderBy(d => d.Name).ToListAsync ();
 			return diseases;
 		}
 
@@ -490,6 +492,45 @@ namespace MyHealthDB
 		{
 			await dbConnection.DeleteAsync(number).ContinueWith(t => {
 				Console.WriteLine ("New Disease Name : {0}", number.Name);
+			});
+		}
+		#endregion
+
+		#region[ImportantNotice]
+		public async static Task<List<ImportantNotice>> SelectAllImportantNotice()
+		{
+			var counties = await dbConnection.Table<ImportantNotice>().ToListAsync ();
+			return counties;
+		}
+
+		public async static Task<ImportantNotice> SelectImportantNotice(int id)
+		{
+			return await dbConnection.Table<ImportantNotice> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task<ImportantNotice> SelectImportantNotice(DateTime date)
+		{
+			return await dbConnection.Table<ImportantNotice> ().Where (c => date >= c.StartDate && date <= c.EndDate).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveImportantNotice(ImportantNotice number)
+		{
+			var selected = await dbConnection.Table<ImportantNotice> ().Where(x => x.ID == number.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (number).ContinueWith (t => {
+					Console.WriteLine ("New ImportantNotice Name : {0}", number.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (number).ContinueWith (t => {
+					Console.WriteLine ("Updated ImportantNotice Name : {0}", number.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteImportantNotice(ImportantNotice number)
+		{
+			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+				Console.WriteLine ("New ImportantNotice Name : {0}", number.Name);
 			});
 		}
 		#endregion

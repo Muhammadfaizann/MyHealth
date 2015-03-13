@@ -184,17 +184,17 @@
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
     <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\images\a_minus.gif" />
-    <BundleResource Include="Resources\images\a_plus.gif" />
-    <BundleResource Include="Resources\images\ab_minus.gif" />
-    <BundleResource Include="Resources\images\ab_plus.gif" />
-    <BundleResource Include="Resources\images\b_minus.gif" />
-    <BundleResource Include="Resources\images\b_plus.gif" />
-    <BundleResource Include="Resources\images\o_minus.gif" />
-    <BundleResource Include="Resources\images\o_plus.gif" />
     <BundleResource Include="Resources\images\provinces.jpg" />
     <BundleResource Include="Resources\css\map.css" />
     <BundleResource Include="Resources\Provinces.html" />
+    <BundleResource Include="Resources\images\a_minus.png" />
+    <BundleResource Include="Resources\images\a_plus.png" />
+    <BundleResource Include="Resources\images\ab_minus.png" />
+    <BundleResource Include="Resources\images\ab_plus.png" />
+    <BundleResource Include="Resources\images\b_minus.png" />
+    <BundleResource Include="Resources\images\b_plus.png" />
+    <BundleResource Include="Resources\images\o_minus.png" />
+    <BundleResource Include="Resources\images\o_plus.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -326,7 +326,6 @@
       <DependentUpon>SearchButtonsController.cs</DependentUpon>
     </Compile>
     <Compile Include="HelperMethods.cs" />
-    <Compile Include="reachability.cs" />
     <Compile Include="Reachability\reachability.cs" />
     <Compile Include="FeedbackTableViewController.cs" />
     <Compile Include="FeedbackTableViewController.designer.cs">

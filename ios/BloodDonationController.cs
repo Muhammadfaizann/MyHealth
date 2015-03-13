@@ -28,6 +28,8 @@ namespace RCSI
 			if (await HelperMethods.CheckIfInternetAvailable()) {
 				try {
 					bloodSupplyList = await ServiceConsumer.GetBloodDonationInfo ("http://www.giveblood.ie/clinicsxml.aspx?blood=1");
+					// adding new item for fetch date from service to be displayed in label
+					bloodSupplyList.Add(new BloodSupply { BloodGroup = "FETCHDATE", SupplyDays = DateTime.Now.Date.ToString("dd MMM yyyy") });
 					HelperMethods.SaveBloodSupply (bloodSupplyList);
 				} catch {
 					bloodSupplyList = HelperMethods.GetBloodSupply ();
@@ -60,6 +62,10 @@ namespace RCSI
 					break;
 				case "AB-":
 					abMinus.Text = bloodSupply.SupplyDays;
+					break;
+
+				case "FETCHDATE":
+					lblDateMessage.Text = String.Format ("The below blood levels have been refreshed {0}", bloodSupply.SupplyDays);
 					break;
 				}
 			}
