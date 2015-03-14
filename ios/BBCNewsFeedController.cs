@@ -95,12 +95,26 @@ namespace RCSI
 			cell.IndentationWidth = 2.0f;
 			((UILabel)cell.ViewWithTag (100)).Text = (_feedItemList [indexPath.Row].PubDate == null || _feedItemList [indexPath.Row].PubDate == DateTime.MinValue ? "" : Math.Round(DateTime.Now.Subtract(_feedItemList [indexPath.Row].PubDate).TotalHours).ToString() + " hours ago");
 			((UILabel)cell.ViewWithTag (100)).TextColor = UIColor.Gray;
-			((UITextView)cell.ViewWithTag (101)).Text = _feedItemList [indexPath.Row].Title;
-			((UITextView)cell.ViewWithTag (101)).TextColor = UIColor.FromRGB (72, 95, 98);
-			((UITextView)cell.ViewWithTag (101)).BackgroundColor = UIColor.FromRGB (233, 239, 239);
-			((UITextView)cell.ViewWithTag (102)).Text = _feedItemList [indexPath.Row].Description;
-			((UITextView)cell.ViewWithTag (102)).TextColor = UIColor.FromRGB (160, 160, 160);
-			((UITextView)cell.ViewWithTag (102)).BackgroundColor = UIColor.FromRGB (233, 239, 239);
+
+			UITextView lblTitle = ((UITextView)cell.ViewWithTag (101));
+			lblTitle.UserInteractionEnabled = false;
+			lblTitle.Text = _feedItemList [indexPath.Row].Title;
+			lblTitle.TextColor = UIColor.FromRGB (72, 95, 98);
+			lblTitle.BackgroundColor = UIColor.FromRGB (233, 239, 239);
+
+			UITextView lblDescription = ((UITextView)cell.ViewWithTag (102));
+			lblDescription.UserInteractionEnabled = false;
+//			lblDescription.Text = _feedItemList [indexPath.Row].Description;
+			lblDescription.TextColor = UIColor.FromRGB (160, 160, 160);
+			lblDescription.BackgroundColor = UIColor.FromRGB (233, 239, 239);
+
+			NSError error = null;
+			NSString str = new NSString (_feedItemList [indexPath.Row].Description);
+			NSAttributedStringDocumentAttributes importParams = new NSAttributedStringDocumentAttributes();
+			importParams.DocumentType = NSDocumentType.HTML;
+			NSAttributedString attrString = new NSAttributedString (str.Encode (NSStringEncoding.UTF8), importParams, ref error);
+			lblDescription.AttributedText = attrString;
+
 			if (!string.IsNullOrEmpty (_feedItemList [indexPath.Row].ImageUrl)) {
 				NSUrl nsUrl = new NSUrl (_feedItemList [indexPath.Row].ImageUrl);
 				NSData data = NSData.FromUrl (nsUrl);
@@ -111,6 +125,7 @@ namespace RCSI
 					Console.WriteLine ("Image Loaded Exception : {0}", ex.ToString ());
 				}
 			}
+
 			return cell;
 		}
 
