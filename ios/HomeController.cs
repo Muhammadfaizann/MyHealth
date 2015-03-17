@@ -91,54 +91,29 @@ namespace RCSI
 
 			lblImportantNoticeMessage.RemoveFromSuperview ();
 
-			FirstTimeInstall = NSUserDefaults.StandardUserDefaults.BoolForKey ("MyHealthFirstInstall");
-			UIAlertView _alert = new UIAlertView (null, "Internet is not accessible, please check your device settings and try again", null, "Ok", null);
-			if (!FirstTimeInstall) {
-				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
-				var isRegistered = await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ();
-				if (!isRegistered) {
-					_alert.Clicked += async (object sender, UIButtonEventArgs e) => {
-						// no internet connection leads in exit of application
-						NSThread.Exit();
-					};
-					var isInternetAvailable = await HelperMethods.CheckIfInternetAvailable ();
-					if (!isInternetAvailable) {
-						_alert.Show();
-					}
-					isRegistered =  await MyHealthDB.ServiceConsumer.RegisterDevice (Guid.NewGuid().ToString());
-					if (!isRegistered) {
-						_alert.Message = "Unable to register device, please try again later";
-						_alert.Show();
-					}
-				}
 
-				var userDefs = NSUserDefaults.StandardUserDefaults;
-				string strLastSyncDate = userDefs.StringForKey ("LastSyncDate");
-				if (!string.IsNullOrEmpty (strLastSyncDate)) {
-					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
-					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
-					if (TotalHours > 24) {
-						await MyHealthDB.ServiceConsumer.SyncDevice ();
-						userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
-					}
-				}
-				else {
-					var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
-					if (!isSyncSuccessful) {
-						_alert.Message = "Unable to Sync device with server, please try again later";
-						_alert.Show ();
-					} else {
-						userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
-					}
-				}
+//			var isRegistered = await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ();
+//			if (!isRegistered) {
+//				_alert.Clicked += async (object sender, UIButtonEventArgs e) => {
+//					// no internet connection leads in exit of application
+//					NSThread.Exit ();
+//				};
+//				var isInternetAvailable = await HelperMethods.CheckIfInternetAvailable ();
+//				if (!isInternetAvailable) {
+//					_alert.Show ();
+//				}
+//				isRegistered = await MyHealthDB.ServiceConsumer.RegisterDevice ("iOS");
+//				if (!isRegistered) {
+//					_alert.Message = "Unable to register device, please try again later";
+//					_alert.Show ();
+//				}
+//			}
 
-				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-			}
 
-			await LogManager.Log<LogUsage> (new LogUsage (){ 
+			await LogManager.Log<LogUsage> (new LogUsage () { 
 				Date = DateTime.Now, 
-				Page = Convert.ToInt32(Pages.Home)
+				Page = Convert.ToInt32 (Pages.Home)
 			});
 
 			await this.SetupImportantNotice ();
