@@ -20,7 +20,7 @@ using Android.Graphics;
 namespace MyHealthAndroid
 {
 	public delegate void ShowHospitalsEventHandler(int province);
-	[Activity (Label = "My Health")]			
+	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class HPDetailsActivity : Activity
 	{
 		private HPData _caller;

@@ -510,7 +510,7 @@ namespace MyHealthDB
 
 		public async static Task<ImportantNotice> SelectImportantNotice(DateTime date)
 		{
-			return await dbConnection.Table<ImportantNotice> ().Where (c => date >= c.StartDate && date <= c.EndDate).FirstOrDefaultAsync ();
+			return await dbConnection.Table<ImportantNotice> ().Where (c => date >= c.StartDate && date <= c.EndDate).OrderByDescending(n=>n.StartDate).FirstOrDefaultAsync ();
 		}
 
 		public async static Task SaveImportantNotice(ImportantNotice number)

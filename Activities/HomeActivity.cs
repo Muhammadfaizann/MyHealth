@@ -15,6 +15,8 @@ using Android.Preferences;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using Android.Net;
+using Android.Graphics;
+using Android.Content.Res;
 
 namespace MyHealthAndroid{
 	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -80,6 +82,11 @@ namespace MyHealthAndroid{
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 
+					var importantNotice = await DatabaseManager.SelectImportantNotice(DateTime.Now.Date);
+					if (impNotice != null) {
+						impNotice.Text = importantNotice.Name;
+						impNotice.SetBackgroundColor (Color.ParseColor (importantNotice.NoticeColor));
+					}
 					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 
