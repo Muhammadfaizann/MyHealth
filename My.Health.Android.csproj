@@ -241,7 +241,9 @@
     <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.woff" />
     <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
     <AndroidAsset Include="Assets\Content\Provinces.html" />
-    <AndroidAsset Include="Assets\css\map.css" />
     <AndroidAsset Include="Assets\Content\provinces.jpg" />
+    <AndroidAsset Include="Assets\Content\ios-orientationchange-fix.min.js" />
+    <AndroidAsset Include="Assets\Content\jquery.min.js" />
+    <AndroidAsset Include="Assets\Content\jquery.rwdImageMaps.min.js" />
   </ItemGroup>
 </Project>

@@ -1,14 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width">
 <title>Untitled Document</title>
-<link href="css/map.css" rel="stylesheet" type="text/css" />
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="ios-orientationchange-fix.min.js"></script>
+<style>
+div {
+		width: 100%;
+	}
+img[usemap] {
+		border: none;
+		height: auto;
+		max-width: 100%;
+		width: auto;
+	}
+</style>
 </head>
 
 <body>
-<div class="map"> <img src="provinces.jpg" border="0" usemap="#Map" alt="Map" width="100%" />
+<div> <img src="provinces.jpg" border="0" width="640" height="802" usemap="#Map" alt="Map" width="100%" />
   <map name="Map" id="Map">
     <area shape="poly" coords="357,298,346,284,335,267,296,236,292,215,250,171,216,160,210,145,206,126,208,108,220,94,231,71,290,25,364,2,497,28,574,154,539,249,487,279,418,305,386,309" href="/?2" alt="Ulster" />
 
@@ -18,5 +31,13 @@
     <area shape="poly" coords="428,626,436,680,402,691,258,773,168,800,94,779,67,777,57,747,37,711,31,654,55,631,98,625,105,574,142,545,173,489,210,497,281,517,292,491,314,491" href="/?3" alt="Munster" />
   </map>
 </div>
+<script src="jquery.min.js"></script>
+<script src="jquery.rwdImageMaps.min.js"></script>
+<script language="javascript">
+$(document).ready(function(e) {
+	$('img[usemap]').rwdImageMaps();	
+});
+</script>
 </body>
 </html>
+

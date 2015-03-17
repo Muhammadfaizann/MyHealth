@@ -1,10 +1,11 @@
 ﻿<Properties StartupItem="My.Health.Android.csproj" GitUserInfo="UsingMD">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.FA46EWM02483" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Activities/HPDetailsActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Content/Provinces.html">
     <Files>
-      <File FileName="Activities/HPDetailsActivity.cs" Line="3" Column="3" />
+      <File FileName="Activities/HPDetailsActivity.cs" Line="1" Column="1" />
       <File FileName="ios/HospitalsMapController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Content/Provinces.html" Line="29" Column="29" />
+      <File FileName="Assets/Content/Provinces.html" Line="35" Column="35" />
+      <File FileName="Assets/css/map.css" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -20,7 +21,6 @@
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/RecentCategoryController.cs" line="22" column="1" />
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/IllnessDetailsController.cs" line="29" column="1" />
       <Breakpoint conditionExpression="disease.ID == 181" file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="191" column="1" />
-      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HPDetailsActivity.cs" line="272" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

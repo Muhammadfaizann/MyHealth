@@ -147,7 +147,7 @@ namespace MyHealthAndroid
 				//_imageView.SetImageResource (Resource.Drawable.map_large);
 				//_imageView.Clickable = true;
 				_imageView.Visibility = ViewStates.Gone;
-
+				_webView.Settings.JavaScriptEnabled = true;
 				MyWebViewClient _webClient = new MyWebViewClient ();
 				_webClient.OnShowHospitals += (int province) => {
 					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
@@ -155,6 +155,7 @@ namespace MyHealthAndroid
 					StartActivity(intent);
 				};
 				_webView.SetWebViewClient (_webClient);
+				_webView.SetWebChromeClient (new WebChromeClient ());
 				_webView.LoadUrl ("file:///android_asset/Content/Provinces.html");
 
 				await LogManager.Log ( new LogUsage {
