@@ -94,8 +94,10 @@ namespace MyHealthDB
 				obj = await _service.GetAboutUs ();
 				content = await obj.Content.ReadAsStringAsync ();
 				List<AboutUs> aboutus = JsonConvert.DeserializeObject<List<AboutUs>> (content);
-				if (await UpdateDBManager.UpdateAboutUs (aboutus [0])) {
-					Console.WriteLine ("About us was updated. ");
+				if (aboutus != null && aboutus.Count > 0 ) {
+					if (await UpdateDBManager.UpdateAboutUs (aboutus [0])) {
+						Console.WriteLine ("About us was updated. ");
+					}
 				}
 
 				//call the service for updates.
@@ -153,6 +155,13 @@ namespace MyHealthDB
 				List<SMtblCpUser> _allCpUsers = JsonConvert.DeserializeObject<List<SMtblCpUser>>(content);
 				if (await UpdateDBManager.UpdateCpUsers (_allCpUsers)) {
 					Console.WriteLine ("\n CpUsers are updated.");
+				}
+
+				obj = await _service.GetImportantNotices ();
+				content = await obj.Content.ReadAsStringAsync();
+				List<SMtblHealthImportantNotice> _allImportantNotices = JsonConvert.DeserializeObject<List<SMtblHealthImportantNotice>>(content);
+				if (await UpdateDBManager.UpdateImportantNotices (_allImportantNotices)) {
+					Console.WriteLine ("\n ImportantNotice are updated.");
 				}
 					
 				obj = await _service.GoodBye();

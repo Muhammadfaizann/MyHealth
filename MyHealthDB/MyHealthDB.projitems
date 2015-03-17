@@ -64,6 +64,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblCpUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\CpUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\AboutUs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblHealthImportantNotice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\ImportantNotice.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />

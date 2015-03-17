@@ -134,6 +134,23 @@ namespace MyHealthDB
 			}
 			return true;
 		}
+
+		public async static Task<Boolean> UpdateImportantNotices (List<SMtblHealthImportantNotice> allImportantNotices)
+		{
+			foreach (SMtblHealthImportantNotice importantNotice in allImportantNotices) 
+			{
+				await MyHealthDB.DatabaseManager.SaveImportantNotice (new ImportantNotice {
+					ID = importantNotice.Id,
+					Name = importantNotice.Name,
+					StartDate = importantNotice.StartDate,
+					EndDate = importantNotice.EndDate,
+					LastUpdatedDate = importantNotice.LastUpdatedDate,
+					isArchived = importantNotice.isArchived,
+					NoticeColor = importantNotice.NoticeColor
+				});
+			}
+			return true;
+		}
 	}
 }
 

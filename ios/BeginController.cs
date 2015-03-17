@@ -37,6 +37,8 @@ namespace RCSI
 			var recentDiseasesIds = HelperMethods.GetRecentDiseases ();
 			if (recentDiseasesIds != null && recentDiseasesIds.Count () > 0) {
 				HelperMethods.RecentDiseases = _illnessSource.disease.Where (d => recentDiseasesIds.Contains (d.ID.Value)).ToList ();
+			} else {
+				HelperMethods.RecentDiseases = new List<Disease> ();
 			}
 			if (this.IsAtoZ) {
 				this.tableView.TableHeaderView.RemoveFromSuperview ();
