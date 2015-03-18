@@ -35,7 +35,8 @@ namespace RCSI
 			UIAlertView _alert = new UIAlertView (null, "Internet is not accessible, please check your device settings and try again", null, "Ok", null);
 			_alert.Clicked += (object sender, UIButtonEventArgs e) => {
 				// no internet connection leads in exit of application
-				NSThread.Exit ();
+				//NSThread.Exit ();
+				exit(0);
 			};
 			var userDefs = NSUserDefaults.StandardUserDefaults;
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
@@ -103,6 +104,8 @@ namespace RCSI
 		{
 			base.ViewDidAppear (animated);
 		}
+		[System.Runtime.InteropServices.DllImport("__Internal", EntryPoint = "exit")]
+		public static extern void exit(int status);
 
 		//------------------------ Get Device ID --------------------//
 		private void ShowAcceptanceDialog() {
@@ -119,7 +122,9 @@ namespace RCSI
 				switch (e.ButtonIndex) {
 				case 0:
 					// don't agree leads in exit of application
-					NSThread.Exit();
+//					NSThread.Exit();
+					exit(0);
+//					NSThread.MainThread.Exit(0);
 					break;
 				case 1:
 					NSUserDefaults defs = NSUserDefaults.StandardUserDefaults;
@@ -150,9 +155,10 @@ namespace RCSI
 			dialog.Message = "Please make sure, Your device in connected to internet.";
 			dialog.AddButton ("Ok");
 
-			dialog.Clicked += async (object sender, UIButtonEventArgs e) => {
+			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 				// don't agree leads in exit of application
-				NSThread.Exit();
+				//NSThread.Exit();
+				exit(0);
 			};
 
 			dialog.Show ();
