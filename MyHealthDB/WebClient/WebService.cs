@@ -35,6 +35,11 @@ namespace MyHealthDB.Service
 			return await Client.GetAsync("api/v1/Condition/GetConditionCategories");
 		}
 
+		public async Task<HttpResponseMessage> GetAllProvince ()
+		{
+			return await Client.GetAsync ("api/v1/MyHealth/Province/GetAll");
+		}
+
 		public async Task<HttpResponseMessage> GetAllCounty ()
 		{
 			return await Client.GetAsync ("api/v1/MyHealth/County/GetAll");

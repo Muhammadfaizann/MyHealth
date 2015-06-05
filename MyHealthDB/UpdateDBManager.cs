@@ -59,6 +59,18 @@ namespace MyHealthDB
 			return true;
 		}
 
+		public async static Task<Boolean> UpdateProvince (List<SMtblProvince> AllProvinces)
+		{
+			foreach (SMtblProvince province in AllProvinces) 
+			{
+				await MyHealthDB.DatabaseManager.SaveProvince (new Province {
+					ID = province.Id,
+					Name = province.Name
+				});
+			}
+			return true;
+		}
+
 		public async static Task<Boolean> UpdateCounty (List<SMtblCounty> AllCounties)
 		{
 			foreach (SMtblCounty county in AllCounties) 
@@ -66,7 +78,8 @@ namespace MyHealthDB
 				await MyHealthDB.DatabaseManager.SaveCounty (new County {
 					ID = county.Id,
 					Name = county.Name,
-					Description = county.Description
+					Description = county.Description,
+					ProvinceId = county.ProvinceId
 				});
 			}
 			return true;

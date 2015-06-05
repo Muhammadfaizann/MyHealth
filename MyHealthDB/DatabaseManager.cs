@@ -47,6 +47,8 @@ namespace MyHealthDB
 			//var db = new SQLiteAsyncConnection(DatabaseRepository.DatabaseFilePath);
 			await dbConnection.CreateTableAsync<RegisteredDevice> ();
 
+			await dbConnection.CreateTableAsync<Province> ();
+
 			await dbConnection.CreateTableAsync<County> ();
 
 			await dbConnection.CreateTableAsync<Disease> ();
@@ -142,6 +144,44 @@ namespace MyHealthDB
 		}
 		#endregion
 
+		#region[Province]
+		public async static Task<List<Province>> SelectAllProvinces()
+		{
+			return await dbConnection.Table<Province> ().OrderBy (t => t.Name).ToListAsync ();
+		}
+
+		public async static Task<Province> SelectProvince(int id)
+		{
+			return await dbConnection.Table<Province> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task<Province> SelectProvince(string name)
+		{
+			return await dbConnection.Table<Province> ().Where (c => c.Name == name).FirstOrDefaultAsync ();
+		}
+
+		public async static Task SaveProvince(Province province)
+		{
+			var selected = await dbConnection.Table<Province> ().Where(x => x.ID == province.ID).FirstOrDefaultAsync();
+			if (selected == null) {
+				await dbConnection.InsertAsync (province).ContinueWith (t => {
+					Console.WriteLine ("New province Name : {0}", province.Name);
+				});
+			} else {
+				await dbConnection.UpdateAsync (province).ContinueWith (t => {
+					Console.WriteLine ("Updated province Name : {0}", province.Name);
+				});
+			}
+		}
+
+		public async static Task DeleteProvince(Province province)
+		{
+			await dbConnection.DeleteAsync(province).ContinueWith(t => {
+				Console.WriteLine ("deleted province Name : {0}", province.Name);
+			});
+		}
+		#endregion
+
 		#region[County]
 		public async static Task<List<County>> SelectAllCounties()
 		{
@@ -152,6 +192,11 @@ namespace MyHealthDB
 		public async static Task<County> SelectCounty(int id)
 		{
 			return await dbConnection.Table<County> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+		}
+
+		public async static Task<List<County>> SelectCountiesByProvince(int provinceId)
+		{
+			return await dbConnection.Table<County> ().Where (h => h.ProvinceId == provinceId).ToListAsync ();
 		}
 
 		public async static Task SaveCounty(County county)
@@ -171,7 +216,7 @@ namespace MyHealthDB
 		public async static Task DeleteCounty(County county)
 		{
 			await dbConnection.DeleteAsync(county).ContinueWith(t => {
-				Console.WriteLine ("New County Name : {0}", county.Name);
+				Console.WriteLine ("deleted County Name : {0}", county.Name);
 			});
 		}
 		#endregion
@@ -391,6 +436,21 @@ namespace MyHealthDB
 		public async static Task<List<Hospital>> SelectHospitalsByCounty(int countyId)
 		{
 			return await dbConnection.Table<Hospital> ().Where (c => c.CountyID == countyId).OrderBy(t=>t.Name).ToListAsync ();
+		}
+
+		/// <summary>
+		/// Selects the hospitals by province.
+		/// </summary>
+		/// <returns>The hospitals by province.</returns>
+		/// <param name="provinceId">Province identifier.</param>
+		public async static Task<List<Hospital>> SelectHospitalsByProvince(int provinceId)
+		{
+			// get counties in the province
+			var counties = await SelectCountiesByProvince (provinceId);
+			// read there ids only
+			var countyIds = counties.Select (c => c.ID).ToArray ();
+			// get by hospitals by county ids
+			return await dbConnection.Table<Hospital> ().Where (c => countyIds.Contains(c.CountyID)).OrderBy(t=>t.Name).ToListAsync ();
 		}
 		#endregion
 
