@@ -970,6 +970,12 @@
                                     <action selector="goToSettings:" destination="bcj-FC-MPX" eventType="touchUpInside" id="tVx-ui-lmQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uel-XS-mBI">
+                                <rect key="frame" x="237" y="6" width="32" height="32"/>
+                                <state key="normal" backgroundImage="images/sync.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -980,6 +986,7 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="btnSettings" destination="EZG-ew-h6p" id="BR2-C0-KLE"/>
+                        <outlet property="btnSync" destination="Uel-XS-mBI" id="EXd-cX-Y6C"/>
                         <outlet property="lblSmartHealth" destination="oP2-sj-Kn1" id="pOL-5u-RUs"/>
                     </connections>
                 </viewController>
@@ -3521,18 +3528,18 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="A41-SV-vy3"/>
-        <segue reference="Bd8-m9-a6L"/>
+        <segue reference="lZm-oX-n3i"/>
         <segue reference="d7X-KF-wE2"/>
-        <segue reference="ieJ-qS-8uR"/>
+        <segue reference="Bd8-m9-a6L"/>
         <segue reference="GC2-UO-hIM"/>
+        <segue reference="A41-SV-vy3"/>
         <segue reference="pUP-bJ-uxj"/>
-        <segue reference="Cyj-fY-crD"/>
-        <segue reference="4hP-2Y-ELP"/>
-        <segue reference="4eT-1G-X1E"/>
+        <segue reference="ieJ-qS-8uR"/>
         <segue reference="t2P-ht-ckl"/>
-        <segue reference="QfT-6d-8AS"/>
+        <segue reference="4eT-1G-X1E"/>
         <segue reference="Fev-iD-XTi"/>
         <segue reference="bLq-v0-Phx"/>
+        <segue reference="4hP-2Y-ELP"/>
+        <segue reference="Cyj-fY-crD"/>
     </inferredMetricsTieBreakers>
 </document>

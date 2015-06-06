@@ -34,14 +34,27 @@ namespace RCSI
 				lblSmartHealth.UserInteractionEnabled = true;
 				lblSmartHealth.AddGestureRecognizer (labelTap);
 
-			if (btnSync != null)
-			btnSync.TouchUpInside += async (object sender, EventArgs e) => {
-				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+			if (btnSync != null) {
+				btnSync.TouchUpInside += async (object sender, EventArgs e) => {
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
-				await MyHealthDB.ServiceConsumer.SyncDevice ();
+					await MyHealthDB.ServiceConsumer.SyncDevice ();
 
-				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-			};
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+				};
+			}
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			if (btnSync != null) {
+				if (this.ParentViewController != null && this.ParentViewController.GetType () == typeof(HomeController)) {
+					btnSync.Hidden = false;
+				} else {
+					btnSync.Hidden = true;
+				}
+			}
 		}
 
 		partial void goToSettings (UIButton sender)
