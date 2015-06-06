@@ -17,6 +17,8 @@ namespace MyHealthDB
 		public String Description { get; set;}
 		public double Longitude { get; set; }
 		public double Lattitude { get; set;}
+
+		public Int32 ProvinceId { get; set; }
 	}
 }
 

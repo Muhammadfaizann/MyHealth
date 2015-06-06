@@ -42,7 +42,7 @@ namespace RCSI
 			var selectedCpUser = await DatabaseManager.SelectCpUser (SelectedDisease.CPUserId);
 			if (selectedCpUser != null) {
 				try {
-					if (selectedCpUser.CharityLogo.Length > 0) {
+					if (selectedCpUser.CharityLogo != null && selectedCpUser.CharityLogo.Length > 0) {
 						this.imageView.Image = UIImage.LoadFromData (NSData.FromArray (selectedCpUser.CharityLogo));
 					}
 				} catch (Exception ex) {

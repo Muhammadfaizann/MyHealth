@@ -122,6 +122,13 @@ namespace MyHealthDB
 					Console.WriteLine ("\n DiseasesForCategory are updated. \n");
 				}
 
+				obj = await _service.GetAllProvince ();
+				content = await obj.Content.ReadAsStringAsync();
+				List<SMtblProvince> _AllProvinces = JsonConvert.DeserializeObject<List<SMtblProvince>>(content);
+				if (await UpdateDBManager.UpdateProvince (_AllProvinces)) {
+					Console.WriteLine ("\n All Provinces are updated. \n");
+				}
+
 				obj = await _service.GetAllCounty ();
 				content = await obj.Content.ReadAsStringAsync();
 				List<SMtblCounty> _AllCounties = JsonConvert.DeserializeObject<List<SMtblCounty>>(content);

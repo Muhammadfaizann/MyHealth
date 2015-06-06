@@ -31,17 +31,72 @@ namespace RCSI
 
 			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) && (localWifiStatus != NetworkStatus.NotReachable);
 
+			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+			UIAlertView _alert = new UIAlertView (null, "Internet is not accessible, please check your device settings and try again", null, "Ok", null);
+			_alert.Clicked += (object sender, UIButtonEventArgs e) => {
+				// no internet connection leads in exit of application
+				//NSThread.Exit ();
+				exit(0);
+			};
+			var userDefs = NSUserDefaults.StandardUserDefaults;
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
-				ShowAcceptanceDialog ();
+				string strLastSyncDate = userDefs.StringForKey ("LastSyncDate");
+				if (!string.IsNullOrEmpty (strLastSyncDate)) {
+					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
+					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
+					if (TotalHours > 24) {
+						if (connected) {
+							MyHealthDB.ServiceConsumer.SyncDevice ().ContinueWith ((t) => {
+								if (t.Result) {
+									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
+									userDefs.Synchronize ();
+								}
+								UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+							});
+						} else {
+							UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+						}
+					} else {
+						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+					}
+					ShowAcceptanceDialog ();
+				} else {
+					if (connected) {
+						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
+						if (!isSyncSuccessful) {
+							_alert.Message = "Unable to Sync device with server, please try again later";
+							_alert.Show ();
+						} else {
+							userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
+							userDefs.Synchronize ();
+
+							ShowAcceptanceDialog ();
+						}
+					} else {
+						ShowConnectivityDialog ();
+					}
+
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+				}
 			} else {
 				if (connected) {
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iOS")) {
-						ShowAcceptanceDialog ();
+						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
+						if (!isSyncSuccessful) {
+							_alert.Message = "Unable to Sync device with server, please try again later";
+							_alert.Show ();
+						} else {
+							userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
+							userDefs.Synchronize ();
+
+							ShowAcceptanceDialog ();
+						}
 					}
 				} else {
 					ShowConnectivityDialog ();
 				}
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 			}
 		}
 
@@ -49,6 +104,8 @@ namespace RCSI
 		{
 			base.ViewDidAppear (animated);
 		}
+		[System.Runtime.InteropServices.DllImport("__Internal", EntryPoint = "exit")]
+		public static extern void exit(int status);
 
 		//------------------------ Get Device ID --------------------//
 		private void ShowAcceptanceDialog() {
@@ -65,7 +122,9 @@ namespace RCSI
 				switch (e.ButtonIndex) {
 				case 0:
 					// don't agree leads in exit of application
-					NSThread.Exit();
+//					NSThread.Exit();
+					exit(0);
+//					NSThread.MainThread.Exit(0);
 					break;
 				case 1:
 					NSUserDefaults defs = NSUserDefaults.StandardUserDefaults;
@@ -96,9 +155,10 @@ namespace RCSI
 			dialog.Message = "Please make sure, Your device in connected to internet.";
 			dialog.AddButton ("Ok");
 
-			dialog.Clicked += async (object sender, UIButtonEventArgs e) => {
+			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 				// don't agree leads in exit of application
-				NSThread.Exit();
+				//NSThread.Exit();
+				exit(0);
 			};
 
 			dialog.Show ();
