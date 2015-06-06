@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -241,7 +241,7 @@
                                     <constraint firstAttribute="centerY" secondItem="2j3-MK-RRo" secondAttribute="centerY" id="shQ-OY-3p6"/>
                                 </constraints>
                             </view>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-2R-i1b">
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-2R-i1b">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Diabetes Awareness week" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jb-dd-0kj">
@@ -696,10 +696,10 @@
             </objects>
             <point key="canvasLocation" x="696" y="-694"/>
         </scene>
-        <!--News-->
+        <!--Health News-->
         <scene sceneID="n4b-Pj-Vya">
             <objects>
-                <viewController title="News" id="uLf-KX-Pmj" sceneMemberID="viewController">
+                <viewController title="Health News" id="uLf-KX-Pmj" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="irh-BH-V14"/>
                         <viewControllerLayoutGuide type="bottom" id="F5W-zK-SOv"/>
@@ -3521,17 +3521,17 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="d7X-KF-wE2"/>
+        <segue reference="A41-SV-vy3"/>
         <segue reference="Bd8-m9-a6L"/>
-        <segue reference="pUP-bJ-uxj"/>
-        <segue reference="xaa-uC-k01"/>
-        <segue reference="XV2-r9-2e3"/>
+        <segue reference="d7X-KF-wE2"/>
         <segue reference="ieJ-qS-8uR"/>
-        <segue reference="4hP-2Y-ELP"/>
+        <segue reference="GC2-UO-hIM"/>
+        <segue reference="pUP-bJ-uxj"/>
         <segue reference="Cyj-fY-crD"/>
-        <segue reference="QfT-6d-8AS"/>
-        <segue reference="t2P-ht-ckl"/>
+        <segue reference="4hP-2Y-ELP"/>
         <segue reference="4eT-1G-X1E"/>
+        <segue reference="t2P-ht-ckl"/>
+        <segue reference="QfT-6d-8AS"/>
         <segue reference="Fev-iD-XTi"/>
         <segue reference="bLq-v0-Phx"/>
     </inferredMetricsTieBreakers>

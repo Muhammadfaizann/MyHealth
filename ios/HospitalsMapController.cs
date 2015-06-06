@@ -2,15 +2,18 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 using Foundation;
 using UIKit;
+
+using MyHealthDB;
 
 namespace RCSI
 {
 	public partial class HospitalsMapController : UIViewController
 	{
-		private int _countyId;
+		private int _provinceId;
 
 		public HospitalsMapController (IntPtr handle) : base (handle)
 		{
@@ -42,9 +45,12 @@ namespace RCSI
 			// you need to implement this method depending on your criteria
 			if (navigationType.Equals(UIWebViewNavigationType.LinkClicked))
 			{
-				_countyId = Convert.ToInt32(request.Url.Query);
-
-				PerformSegue("hospitalDetailsSegue", this);
+				var provinceName = request.Url.Query;
+				DatabaseManager.SelectProvince (provinceName)
+					.ContinueWith((r) => {
+						_provinceId = r.Result.ID.Value;
+						PerformSegue("hospitalDetailsSegue", this);
+					}, TaskScheduler.FromCurrentSynchronizationContext());
 
 				return false;
 			}
@@ -59,7 +65,7 @@ namespace RCSI
 
 			if (segue.Identifier == "hospitalDetailsSegue") {
 				var destCont = (HospitalsController)segue.DestinationViewController;
-				destCont.CountyId = _countyId;
+				destCont.ProvinceId = _provinceId;
 			}
 		}
 	}

@@ -14,7 +14,7 @@ namespace RCSI
 {
 	public partial class HospitalsController : UIViewController
 	{
-		public int CountyId { get; set; }
+		public int ProvinceId { get; set; }
 
 		private HospitalsContactSource _hospitalsContactSource;
 		public HospitalsController (IntPtr handle) : base (handle)
@@ -89,7 +89,8 @@ namespace RCSI
 
 		public async Task UpdateData()
 		{
-			_items = await model.GetHospitalsInCounty (_controller.CountyId);
+			//_items = await model.GetHospitalsInCounty (_controller.ProvinceId);
+			_items = await DatabaseManager.SelectHospitalsByProvince (_controller.ProvinceId);
 		}
 
 		public override nint NumberOfSections (UITableView tableView)

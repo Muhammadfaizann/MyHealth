@@ -157,6 +157,7 @@ namespace MyHealthDB
 
 		public async static Task<Province> SelectProvince(string name)
 		{
+			//name = name.Trim ().ToUpper ();
 			return await dbConnection.Table<Province> ().Where (c => c.Name == name).FirstOrDefaultAsync ();
 		}
 
