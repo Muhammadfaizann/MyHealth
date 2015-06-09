@@ -1507,7 +1507,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="L95-z2-Bcg" kind="push" id="8a5-q4-vQO"/>
+                                            <segue destination="L95-z2-Bcg" kind="push" identifier="CalculateBMI" id="8a5-q4-vQO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDH-hQ-LMP">
@@ -2907,8 +2907,8 @@
                                 <rect key="frame" x="0.0" y="108" width="320" height="352"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </containerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images/BMI_chart.GIF" translatesAutoresizingMaskIntoConstraints="NO" id="0hj-sg-fGU">
-                                <rect key="frame" x="20" y="140" width="280" height="280"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images/BMI_chart.png" translatesAutoresizingMaskIntoConstraints="NO" id="0hj-sg-fGU">
+                                <rect key="frame" x="10" y="128" width="300" height="312"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -3315,19 +3315,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecentCategoryCell" textLabel="Ajt-HQ-7Lu" rowHeight="25" style="IBUITableViewCellStyleDefault" id="E1U-Bl-IGt">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecentCategoryCell" textLabel="Ajt-HQ-7Lu" style="IBUITableViewCellStyleDefault" id="E1U-Bl-IGt">
                                         <rect key="frame" x="0.0" y="22" width="320" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E1U-Bl-IGt" id="iMS-dD-1MA">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="24.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeA-Rn-l4L">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ajt-HQ-7Lu">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="24.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
@@ -3336,12 +3330,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="TeA-Rn-l4L" firstAttribute="centerY" secondItem="Ajt-HQ-7Lu" secondAttribute="centerY" id="Jan-BI-39H"/>
-                                                <constraint firstItem="TeA-Rn-l4L" firstAttribute="leading" secondItem="iMS-dD-1MA" secondAttribute="leading" id="gkR-bz-dGf"/>
-                                                <constraint firstItem="TeA-Rn-l4L" firstAttribute="top" secondItem="Ajt-HQ-7Lu" secondAttribute="top" id="uLR-bY-BPa"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="TeA-Rn-l4L" secondAttribute="trailing" constant="-41" id="y9D-y4-KyP"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -3488,7 +3476,7 @@
     </scenes>
     <resources>
         <image name="Default.png" width="320" height="480"/>
-        <image name="images/BMI_chart.GIF" width="2202" height="1771"/>
+        <image name="images/BMI_chart.png" width="320" height="480"/>
         <image name="images/Dropdown2.png" width="110" height="28"/>
         <image name="images/Next.png" width="30" height="29"/>
         <image name="images/RCSI.jpg" width="250" height="140"/>
@@ -3528,18 +3516,18 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lZm-oX-n3i"/>
+        <segue reference="Cyj-fY-crD"/>
+        <segue reference="4hP-2Y-ELP"/>
         <segue reference="d7X-KF-wE2"/>
         <segue reference="Bd8-m9-a6L"/>
         <segue reference="GC2-UO-hIM"/>
-        <segue reference="A41-SV-vy3"/>
         <segue reference="pUP-bJ-uxj"/>
         <segue reference="ieJ-qS-8uR"/>
-        <segue reference="t2P-ht-ckl"/>
         <segue reference="4eT-1G-X1E"/>
+        <segue reference="FhL-8v-kcB"/>
         <segue reference="Fev-iD-XTi"/>
+        <segue reference="t2P-ht-ckl"/>
+        <segue reference="QfT-6d-8AS"/>
         <segue reference="bLq-v0-Phx"/>
-        <segue reference="4hP-2Y-ELP"/>
-        <segue reference="Cyj-fY-crD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -197,6 +197,7 @@
     <BundleResource Include="Resources\images\b_plus.png" />
     <BundleResource Include="Resources\images\o_minus.png" />
     <BundleResource Include="Resources\images\o_plus.png" />
+    <BundleResource Include="Resources\images\BMI_chart.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

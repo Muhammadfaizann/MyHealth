@@ -244,8 +244,18 @@ namespace RCSI
 
 				bmi = Math.Round(((weight1 + weight2) / ((height1 + height2) * (height1 + height2))) * 703,2);
 			}
-			UIAlertView alert = new UIAlertView ("BMI Calculation", "your BMI is " + bmi.ToString(), null, "OK",null);
+			UIAlertView alert = new UIAlertView ("BMI Calculation", "your BMI is " + bmi.ToString(), null, "OK", null);
 			alert.Show ();
+
+			PerformSegue ("CalculateBMI", this);
+		}
+
+		public override void PrepareForSegue (UIStoryboardSegue segue, NSObject sender)
+		{
+			base.PrepareForSegue (segue, sender);
+			if (segue.Identifier == "CalculateBMI") {
+				//segue.DestinationViewController
+			}
 		}
 
 		private void MetricAnswerValueChanged(object sender, EventArgs e)
