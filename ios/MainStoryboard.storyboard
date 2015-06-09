@@ -1438,17 +1438,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwN-8y-XYF">
-                                        <rect key="frame" x="10" y="410" width="145" height="30"/>
-                                        <color key="backgroundColor" red="0.46274509803921571" green="0.59215686274509804" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Zo9-Wa-Wc7"/>
-                                        </constraints>
-                                        <state key="normal" title="Save">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EAE-Dx-ql1">
                                         <rect key="frame" x="213" y="54" width="51" height="31"/>
                                     </switch>
@@ -1510,7 +1499,18 @@
                                             <segue destination="L95-z2-Bcg" kind="push" identifier="CalculateBMI" id="8a5-q4-vQO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDH-hQ-LMP">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwN-8y-XYF">
+                                        <rect key="frame" x="10" y="410" width="145" height="30"/>
+                                        <color key="backgroundColor" red="0.46274509803921571" green="0.59215686274509804" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Zo9-Wa-Wc7"/>
+                                        </constraints>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDH-hQ-LMP">
                                         <rect key="frame" x="165" y="410" width="145" height="30"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.59215686270000001" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Calculate BMI">
@@ -1976,14 +1976,14 @@
                                     <segue destination="ocS-ZI-MhW" kind="embed" identifier="NavBar" id="bLq-v0-Phx"/>
                                 </connections>
                             </containerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kjv-b6-ZRe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kjv-b6-ZRe">
                                 <rect key="frame" x="74" y="118" width="172" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="PLB-Oo-eD5"/>
                                 </constraints>
                             </imageView>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rb7-Yp-P5D">
-                                <rect key="frame" x="0.0" y="189" width="320" height="379"/>
+                                <rect key="frame" x="0.0" y="183" width="320" height="385"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
@@ -1992,7 +1992,7 @@
                             <constraint firstItem="Rb7-Yp-P5D" firstAttribute="leading" secondItem="tPi-KD-aMk" secondAttribute="leading" id="3T8-PG-vqY"/>
                             <constraint firstAttribute="trailing" secondItem="Leu-7p-dRl" secondAttribute="trailing" id="5qW-37-bXF"/>
                             <constraint firstAttribute="trailing" secondItem="kjv-b6-ZRe" secondAttribute="trailing" constant="74" id="PHF-hc-8ht"/>
-                            <constraint firstItem="Rb7-Yp-P5D" firstAttribute="top" secondItem="kjv-b6-ZRe" secondAttribute="bottom" constant="8" id="QVN-Ny-v2m"/>
+                            <constraint firstItem="Rb7-Yp-P5D" firstAttribute="top" secondItem="kjv-b6-ZRe" secondAttribute="bottom" constant="2" id="QVN-Ny-v2m"/>
                             <constraint firstItem="Leu-7p-dRl" firstAttribute="top" secondItem="Zn0-0p-031" secondAttribute="bottom" id="TYP-9q-doY"/>
                             <constraint firstAttribute="trailing" secondItem="Rb7-Yp-P5D" secondAttribute="trailing" id="WqD-Yh-O8C"/>
                             <constraint firstAttribute="trailing" secondItem="Zn0-0p-031" secondAttribute="trailing" id="Xaf-4J-IHw"/>
@@ -3314,25 +3314,6 @@
                                 <rect key="frame" x="0.0" y="108" width="320" height="372"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecentCategoryCell" textLabel="Ajt-HQ-7Lu" style="IBUITableViewCellStyleDefault" id="E1U-Bl-IGt">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E1U-Bl-IGt" id="iMS-dD-1MA">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="24.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ajt-HQ-7Lu">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="24.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -3516,18 +3497,18 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Cyj-fY-crD"/>
-        <segue reference="4hP-2Y-ELP"/>
-        <segue reference="d7X-KF-wE2"/>
+        <segue reference="b6u-1L-jhN"/>
         <segue reference="Bd8-m9-a6L"/>
+        <segue reference="d7X-KF-wE2"/>
         <segue reference="GC2-UO-hIM"/>
         <segue reference="pUP-bJ-uxj"/>
-        <segue reference="ieJ-qS-8uR"/>
-        <segue reference="4eT-1G-X1E"/>
-        <segue reference="FhL-8v-kcB"/>
-        <segue reference="Fev-iD-XTi"/>
-        <segue reference="t2P-ht-ckl"/>
-        <segue reference="QfT-6d-8AS"/>
+        <segue reference="d9K-Wr-HS4"/>
+        <segue reference="xMV-Mi-8uH"/>
+        <segue reference="ylC-Kd-IHH"/>
         <segue reference="bLq-v0-Phx"/>
+        <segue reference="ieJ-qS-8uR"/>
+        <segue reference="pOP-ci-0bn"/>
+        <segue reference="4hP-2Y-ELP"/>
+        <segue reference="Cyj-fY-crD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -44,6 +44,7 @@ namespace RCSI
 				try {
 					if (selectedCpUser.CharityLogo != null && selectedCpUser.CharityLogo.Length > 0) {
 						this.imageView.Image = UIImage.LoadFromData (NSData.FromArray (selectedCpUser.CharityLogo));
+						this.imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
 					}
 				} catch (Exception ex) {
 					Console.WriteLine ("Image Load Exception : {0}", ex.ToString());

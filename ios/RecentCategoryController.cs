@@ -88,7 +88,7 @@ namespace RCSI
 			return cell;
 		}
 
-		async public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+		public override async void RowSelected (UITableView tableView, NSIndexPath indexPath)
 		{
 			var dis = _items [indexPath.Row];
 			await LogManager.Log (new LogContent { 
