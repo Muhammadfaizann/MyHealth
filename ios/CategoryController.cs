@@ -90,7 +90,9 @@ namespace RCSI
 					Items.Add (category.CategoryName, foundItems.ToArray());
 					//dictCatergoryConditionIds.Add (category.ID.ToString(), diseaseId);
 				} else {
-					Items.Add (category.CategoryName, new List<Disease>().ToArray());
+					if (!Items.ContainsKey (category.CategoryName)) {
+						Items.Add (category.CategoryName, new List<Disease> ().ToArray ());
+					}
 					//dictCatergoryConditionIds.Add (category.ID.ToString(), new List<int?>());
 				}
 			}

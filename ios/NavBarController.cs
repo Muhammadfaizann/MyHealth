@@ -25,5 +25,12 @@ namespace RCSI
 		{
 			this.ParentViewController.NavigationController.PopViewController(true);
 		}
+
+		partial void btnShareClicked (NSObject sender)
+		{
+			if (this.ParentViewController.GetType().Equals(typeof(IllnessDetailsController))) {
+				((IllnessDetailsController)this.ParentViewController).btnShareClick();
+			}
+		}
 	}
 }

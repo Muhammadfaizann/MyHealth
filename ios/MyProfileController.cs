@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using Foundation;
 using UIKit;
@@ -44,34 +45,34 @@ namespace RCSI
 
 			metricAnswer.ValueChanged += MetricAnswerValueChanged;
 
-			_cpcFt = new CustomPickerControl (txtHeightFt, GetPickerModelData(comboType.Feet));
+			_cpcFt = new CustomPickerControl (txtHeightFt, await GetPickerModelData(comboType.Feet));
 			_cpcFt.SetPicker ();
 
-			_cpcInch = new CustomPickerControl (txtHeightInc, GetPickerModelData(comboType.Inches));
+			_cpcInch = new CustomPickerControl (txtHeightInc, await GetPickerModelData(comboType.Inches));
 			_cpcInch.SetPicker ();
 
-			_cpcSt = new CustomPickerControl (txtWeightSt, GetPickerModelData(comboType.Stones));
+			_cpcSt = new CustomPickerControl (txtWeightSt, await GetPickerModelData(comboType.Stones));
 			_cpcSt.SetPicker ();
 
-			_cpcLbs= new CustomPickerControl (txtWeightLbs, GetPickerModelData(comboType.lbs));
+			_cpcLbs= new CustomPickerControl (txtWeightLbs, await GetPickerModelData(comboType.lbs));
 			_cpcLbs.SetPicker ();
 
-			CustomPickerControl cpcCounty = new CustomPickerControl (txtCounty, GetPickerModelData(comboType.County));
+			CustomPickerControl cpcCounty = new CustomPickerControl (txtCounty, await GetPickerModelData(comboType.County));
 			cpcCounty.SetPicker ();
 
-			CustomPickerControl cpcAge = new CustomPickerControl (txtAge, GetPickerModelData(comboType.Age));
+			CustomPickerControl cpcAge = new CustomPickerControl (txtAge, await GetPickerModelData(comboType.Age));
 			cpcAge.SetPicker ();
 
-			CustomPickerControl cpcGender = new CustomPickerControl (txtGender, GetPickerModelData(comboType.Gender));
+			CustomPickerControl cpcGender = new CustomPickerControl (txtGender, await GetPickerModelData(comboType.Gender));
 			cpcGender.SetPicker ();
 
-			CustomPickerControl cpcBloodGroup = new CustomPickerControl (txtBloodGroup, GetPickerModelData(comboType.BloodGroup));
+			CustomPickerControl cpcBloodGroup = new CustomPickerControl (txtBloodGroup, await GetPickerModelData(comboType.BloodGroup));
 			cpcBloodGroup.SetPicker ();
 
-			 _cpcMetre = new CustomPickerControl (txtHeightFt, GetPickerModelData(comboType.Metre));
-			 _cpcCms = new CustomPickerControl (txtHeightInc, GetPickerModelData(comboType.Cms));
-			 _cpcKgs = new CustomPickerControl (txtWeightSt, GetPickerModelData(comboType.Kg));
-			 _cpcGram = new CustomPickerControl (txtWeightLbs, GetPickerModelData(comboType.g));
+			 _cpcMetre = new CustomPickerControl (txtHeightFt, await GetPickerModelData(comboType.Metre));
+			 _cpcCms = new CustomPickerControl (txtHeightInc, await GetPickerModelData(comboType.Cms));
+			 _cpcKgs = new CustomPickerControl (txtWeightSt, await GetPickerModelData(comboType.Kg));
+			 _cpcGram = new CustomPickerControl (txtWeightLbs, await GetPickerModelData(comboType.g));
 
 			btnCalBMI.TouchUpInside += CalculateBMI;
 
@@ -360,7 +361,7 @@ namespace RCSI
 			}
 		}
 
-		private PickerModel GetPickerModelData(comboType type )
+		private async Task<PickerModel> GetPickerModelData(comboType type )
 		{
 			List<string> data = new List<string> ();
 			if (type.Equals (comboType.Feet)) 
@@ -437,10 +438,13 @@ namespace RCSI
 			}
 			if (type.Equals (comboType.County)) 
 			{
-				data.Add ("Leinster");
-				data.Add ("Ulster");
-				data.Add ("Munster");
-				data.Add ("Connacht");
+//				data.Add ("Leinster");
+//				data.Add ("Ulster");
+//				data.Add ("Munster");
+//				data.Add ("Connacht");
+
+				var counties = await DatabaseManager.SelectAllCounties();
+				data = counties.Select(c => c.Name).ToList();
 			}
 			return new PickerModel (data);
 		}

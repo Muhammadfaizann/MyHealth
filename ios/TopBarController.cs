@@ -45,9 +45,9 @@ namespace RCSI
 			}
 		}
 
-		public override void ViewDidAppear (bool animated)
+		public override void ViewWillAppear (bool animated)
 		{
-			base.ViewDidAppear (animated);
+			base.ViewWillAppear (animated);
 			if (btnSync != null) {
 				if (this.ParentViewController != null && this.ParentViewController.GetType () == typeof(HomeController)) {
 					btnSync.Hidden = false;

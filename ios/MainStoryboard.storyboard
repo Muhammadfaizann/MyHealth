@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -127,8 +127,8 @@
                                             <segue destination="eXn-5X-WTI" kind="push" id="6yV-qD-vfE"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYX-No-CS1">
-                                        <rect key="frame" x="24" y="132" width="110" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Condition's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYX-No-CS1">
+                                        <rect key="frame" x="10" y="132" width="146" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="DYD-2W-doR"/>
                                         </constraints>
@@ -149,7 +149,7 @@
                                             <segue destination="WVG-UV-8W6" kind="push" identifier="Contacts" id="Qr4-yy-Be6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Professions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPF-2i-xaA">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health Service's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPF-2i-xaA">
                                         <rect key="frame" x="168" y="132" width="145" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -195,7 +195,7 @@
                                     <constraint firstItem="iPJ-io-Wqu" firstAttribute="trailing" secondItem="unG-oe-bLu" secondAttribute="trailing" constant="2" id="2bW-SI-K23"/>
                                     <constraint firstItem="al8-f3-KgW" firstAttribute="leading" secondItem="IUC-vj-TIl" secondAttribute="trailing" constant="66" id="4mR-0Q-rqY"/>
                                     <constraint firstItem="al8-f3-KgW" firstAttribute="trailing" secondItem="yYL-EF-1wp" secondAttribute="trailing" id="6Dk-Fa-8cg"/>
-                                    <constraint firstItem="IUC-vj-TIl" firstAttribute="leading" secondItem="bYX-No-CS1" secondAttribute="leading" constant="8" id="6wv-DZ-o0Q"/>
+                                    <constraint firstItem="IUC-vj-TIl" firstAttribute="leading" secondItem="bYX-No-CS1" secondAttribute="leading" constant="22" id="6wv-DZ-o0Q"/>
                                     <constraint firstItem="al8-f3-KgW" firstAttribute="centerX" secondItem="zPF-2i-xaA" secondAttribute="centerX" id="8Gq-1V-eM0"/>
                                     <constraint firstItem="yYL-EF-1wp" firstAttribute="centerX" secondItem="BR9-ue-Gcb" secondAttribute="centerX" id="90z-aS-dkx"/>
                                     <constraint firstItem="unG-oe-bLu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bYX-No-CS1" secondAttribute="bottom" constant="5" id="9GO-LC-2gC"/>
@@ -211,14 +211,14 @@
                                     <constraint firstItem="bYX-No-CS1" firstAttribute="top" secondItem="IUC-vj-TIl" secondAttribute="bottom" constant="7" id="Pmr-WY-lc6"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iPJ-io-Wqu" secondAttribute="bottom" constant="5" id="RYD-zX-HPc"/>
                                     <constraint firstItem="al8-f3-KgW" firstAttribute="leading" secondItem="yYL-EF-1wp" secondAttribute="leading" id="Vfn-1D-PRx"/>
-                                    <constraint firstItem="zPF-2i-xaA" firstAttribute="leading" secondItem="bYX-No-CS1" secondAttribute="trailing" constant="34" id="XdD-Ub-AkV"/>
-                                    <constraint firstItem="bYX-No-CS1" firstAttribute="trailing" secondItem="IUC-vj-TIl" secondAttribute="trailing" constant="7" id="fzg-PI-u9k"/>
+                                    <constraint firstItem="zPF-2i-xaA" firstAttribute="leading" secondItem="bYX-No-CS1" secondAttribute="trailing" constant="12" id="XdD-Ub-AkV"/>
+                                    <constraint firstItem="bYX-No-CS1" firstAttribute="trailing" secondItem="IUC-vj-TIl" secondAttribute="trailing" constant="29" id="fzg-PI-u9k"/>
                                     <constraint firstAttribute="trailing" secondItem="al8-f3-KgW" secondAttribute="trailing" constant="32" id="gyL-qS-6pt"/>
                                     <constraint firstItem="yYL-EF-1wp" firstAttribute="bottom" secondItem="unG-oe-bLu" secondAttribute="bottom" id="hXU-V3-BKk"/>
                                     <constraint firstItem="BR9-ue-Gcb" firstAttribute="top" secondItem="yYL-EF-1wp" secondAttribute="bottom" constant="10" id="izV-xK-Zf6"/>
-                                    <constraint firstItem="unG-oe-bLu" firstAttribute="trailing" secondItem="bYX-No-CS1" secondAttribute="trailing" constant="-7" id="o56-1u-934"/>
+                                    <constraint firstItem="unG-oe-bLu" firstAttribute="trailing" secondItem="bYX-No-CS1" secondAttribute="trailing" constant="-29" id="o56-1u-934"/>
                                     <constraint firstItem="zPF-2i-xaA" firstAttribute="baseline" secondItem="bYX-No-CS1" secondAttribute="baseline" id="oqI-OI-seR"/>
-                                    <constraint firstItem="bYX-No-CS1" firstAttribute="leading" secondItem="unG-oe-bLu" secondAttribute="leading" constant="-8" id="sDM-tm-Tft"/>
+                                    <constraint firstItem="bYX-No-CS1" firstAttribute="leading" secondItem="unG-oe-bLu" secondAttribute="leading" constant="-22" id="sDM-tm-Tft"/>
                                     <constraint firstItem="IUC-vj-TIl" firstAttribute="top" secondItem="al8-f3-KgW" secondAttribute="top" id="svC-nB-0oj"/>
                                     <constraint firstItem="IUC-vj-TIl" firstAttribute="leading" secondItem="hha-OV-UPB" secondAttribute="leading" constant="32" id="z1L-e9-h6y"/>
                                     <constraint firstItem="unG-oe-bLu" firstAttribute="height" secondItem="IUC-vj-TIl" secondAttribute="height" id="zQG-A8-Lgb"/>
@@ -241,7 +241,7 @@
                                     <constraint firstAttribute="centerY" secondItem="2j3-MK-RRo" secondAttribute="centerY" id="shQ-OY-3p6"/>
                                 </constraints>
                             </view>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-2R-i1b">
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-2R-i1b">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Diabetes Awareness week" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jb-dd-0kj">
@@ -287,10 +287,10 @@
             </objects>
             <point key="canvasLocation" x="-310" y="-348"/>
         </scene>
-        <!--Contacts-->
+        <!--Health Service's-->
         <scene sceneID="Heo-LA-YJh">
             <objects>
-                <viewController title="Contacts" id="WVG-UV-8W6" sceneMemberID="viewController">
+                <viewController title="Health Service's" id="WVG-UV-8W6" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n2R-gf-ccv"/>
                         <viewControllerLayoutGuide type="bottom" id="649-3f-9D7"/>
@@ -1628,10 +1628,10 @@
             </objects>
             <point key="canvasLocation" x="267" y="657"/>
         </scene>
-        <!--Health Search-->
+        <!--Health Condition's-->
         <scene sceneID="sn0-Cq-gbp">
             <objects>
-                <viewController storyboardIdentifier="BeginViewController" title="Health Search" id="eXn-5X-WTI" customClass="BeginController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BeginViewController" title="Health Condition's" id="eXn-5X-WTI" customClass="BeginController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z6f-cy-KIe"/>
                         <viewControllerLayoutGuide type="bottom" id="MuE-XW-zqv"/>
@@ -2080,6 +2080,9 @@
                                 <state key="normal" image="images/share.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnShareClicked:" destination="ocS-ZI-MhW" eventType="touchUpInside" id="thk-Q0-D97"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.098039215690000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -3497,18 +3500,18 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="b6u-1L-jhN"/>
-        <segue reference="Bd8-m9-a6L"/>
+        <segue reference="lZm-oX-n3i"/>
         <segue reference="d7X-KF-wE2"/>
-        <segue reference="GC2-UO-hIM"/>
-        <segue reference="pUP-bJ-uxj"/>
+        <segue reference="ylC-Kd-IHH"/>
         <segue reference="d9K-Wr-HS4"/>
         <segue reference="xMV-Mi-8uH"/>
-        <segue reference="ylC-Kd-IHH"/>
         <segue reference="bLq-v0-Phx"/>
         <segue reference="ieJ-qS-8uR"/>
-        <segue reference="pOP-ci-0bn"/>
-        <segue reference="4hP-2Y-ELP"/>
+        <segue reference="8cl-mc-Fug"/>
         <segue reference="Cyj-fY-crD"/>
+        <segue reference="4hP-2Y-ELP"/>
+        <segue reference="CrY-eu-6k5"/>
+        <segue reference="C2s-nC-Kct"/>
+        <segue reference="pUP-bJ-uxj"/>
     </inferredMetricsTieBreakers>
 </document>

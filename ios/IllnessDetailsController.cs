@@ -16,7 +16,7 @@ namespace RCSI
 	public partial class IllnessDetailsController : UIViewController
 	{
 		public Disease SelectedDisease;
-		public Int32 SelectedDiseaseId{ get; set; }
+		public Int32 SelectedDiseaseId { get; set; }
 
 		public IllnessDetailsController (IntPtr handle) : base (handle)
 		{
@@ -91,6 +91,10 @@ namespace RCSI
 
 			// this.OpenInExternalBrowser(request) returned false -> let the UIWebView load the request
 			return true;
+		}
+
+		public void btnShareClick () {
+			var name = SelectedDisease.Name;
 		}
 	}
 }
