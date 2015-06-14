@@ -65,7 +65,7 @@ namespace RCSI
 					break;
 
 				case "FETCHDATE":
-					lblDateMessage.Text = String.Format ("The below blood levels have been refreshed {0}", bloodSupply.SupplyDays);
+					lblDateMessage.Text = String.Format ("Refreshed on {0}", bloodSupply.SupplyDays);
 					break;
 				}
 			}
