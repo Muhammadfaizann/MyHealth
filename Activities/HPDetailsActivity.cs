@@ -2,25 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.Webkit;
-using MyHealthDB;
-using System.Threading.Tasks;
-using MyHealthDB.Logger;
-using MyHealthDB.Helper;
 using Android.Graphics;
+using Android.OS;
+using Android.Views;
+using Android.Webkit;
+using Android.Widget;
+using MyHealthDB;
+using MyHealthDB.Helper;
+using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
 	public delegate void ShowHospitalsEventHandler(int province);
-	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class HPDetailsActivity : Activity
 	{
 		private HPData _caller;
@@ -149,9 +147,9 @@ namespace MyHealthAndroid
 				_imageView.Visibility = ViewStates.Gone;
 				_webView.Settings.JavaScriptEnabled = true;
 				MyWebViewClient _webClient = new MyWebViewClient ();
-				_webClient.OnShowHospitals += (int province) => {
+				_webClient.OnShowHospitals += (int provinceId) => {
 					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
-					intent.PutExtra("province", province);
+					intent.PutExtra("provinceId", provinceId);
 					StartActivity(intent);
 				};
 				_webView.SetWebViewClient (_webClient);
@@ -274,16 +272,19 @@ namespace MyHealthAndroid
 
 	public class MyWebViewClient : WebViewClient
 	{
-
 		public event ShowHospitalsEventHandler OnShowHospitals;
-
 
 		public override bool ShouldOverrideUrlLoading (WebView view, string url)
 		{
-			Int32 province = Convert.ToInt32 (url.Substring(url.IndexOf("?") + 1));
-			if (OnShowHospitals != null) {
-				OnShowHospitals (province);
-			}
+			var provinceName = url.Substring(url.IndexOf("?") + 1);
+			DatabaseManager.SelectProvince (provinceName)
+				.ContinueWith((r) => {
+					var provinceId = r.Result.ID.Value;
+
+					if (OnShowHospitals != null) {
+						OnShowHospitals (provinceId);
+					}
+				}, TaskScheduler.FromCurrentSynchronizationContext());
 			return true;
 		}
 

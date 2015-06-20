@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class DiseaseDetailActivity : Activity
 	{
 		private Button _backButton;

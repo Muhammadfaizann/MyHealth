@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
 	<color name="white_opaque">#FFFFFFFF</color>
+	<color name="red_opaque">#ffC90C30</color>
   	<style name="Theme.Splash" parent="android:Theme">
-  		<item name="android:windowBackground">@color/white_opaque</item>
-  		<item name="android:colorBackground">@color/white_opaque</item>
+  		<item name="android:windowBackground">@color/red_opaque</item>
+  		<item name="android:colorBackground">@color/red_opaque</item>
     	<item name="android:windowNoTitle">true</item>
   	</style>
 </resources>

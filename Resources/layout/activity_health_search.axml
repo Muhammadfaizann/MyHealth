@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true"
     tools:context="com.elevenvalues.rnitte.Speaker">
     <Button
-        android:text="Home"
+        android:text="Health Condition's"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchText"
-        android:hint="Search"
+        android:hint="Health Condition's"
         android:textColor="#ff000000"
         android:textColorHighlight="#ffbdbdbd"
         android:textColorHint="#ff949494"

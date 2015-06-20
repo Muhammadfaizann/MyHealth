@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.Net;
 using Android.OS;
-using Android.Runtime;
+using Android.Preferences;
+
 using Android.Views;
 using Android.Widget;
 using MyHealth.Android;
-using Android.Preferences;
-
 using MyHealthDB;
 using MyHealthDB.Logger;
-using Android.Net;
-using Android.Graphics;
-using Android.Content.Res;
 
 namespace MyHealthAndroid{
-	[Activity (Label = "My Health" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class HomeActivity : Activity
 	{
 		private ImageButton searchBtn;

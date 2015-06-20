@@ -1,22 +1,15 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Webkit;
-using MyHealthDB;
-using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health")]			
+	[Activity (Label = "MyHealth")]			
 	public class HospitalsInCountyActivity : Activity
 	{
 		//private CommonData _model;
@@ -32,10 +25,10 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.activity_hp_details_table);
 			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);
 
-			var _selectedProvince = Intent.GetIntExtra ("province", -1);
+			var selectedProvinceId = Intent.GetIntExtra ("provinceId", -1);
 
 			var hospitalAdapter = new HospitalsAdapter (this);
-			await hospitalAdapter.loadData (_selectedProvince);
+			await hospitalAdapter.loadData (selectedProvinceId);
 			_commonListView.Adapter = hospitalAdapter;
 			SetCustomActionBar ();
 

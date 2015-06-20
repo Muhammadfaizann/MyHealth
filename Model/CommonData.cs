@@ -40,13 +40,13 @@ namespace MyHealthAndroid
 			return categories; 
 		}
 
-		public Task<List<Disease>> GetAllDiseases () 
+		public async Task<List<Disease>> GetAllDiseases () 
 		{
 //			String[] _items = {"Obesity", "Depression", "Heart Attack", "Lung Cancer","Heart Bypass",
 //				"Heart Failure", "Heart Murmurs", "Heart Valve Infection","Diabeties", "Asthma", 
 //				"Appendicitis", "Baby acne", "Burns", "Cold sores", "Dementia"};
 
-			var disease = MyHealthDB.DatabaseManager.SelectAllDiseases ();
+			var disease = await MyHealthDB.DatabaseManager.SelectAllDiseases ();
 //			var randId = new Random ();
 //			if (disease.Count <= 0) {
 //				for (int count= 0; count < _items.Length; count++) {

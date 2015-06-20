@@ -31,7 +31,7 @@
         android:scaleType="center"
         android:minWidth="25dp" />
     <TextView
-        android:text="Days of Blood Left as of 20th June 2014"
+        android:text="Refreshed on 20 Jun 2015"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

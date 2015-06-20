@@ -4,10 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:background="#ffC90C30">
     <ImageView
         android:src="@drawable/Default_2x"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView1" />
+        android:id="@+id/imageView1"
+        android:background="#ffC90C30" />
 </LinearLayout>

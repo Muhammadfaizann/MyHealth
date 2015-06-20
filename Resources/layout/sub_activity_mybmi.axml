@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayout1"
-    android:background="#ffffffff">
+    android:background="#ffffffff"
+    android:paddingBottom="10dp">
     <Button
         android:text="Home"
         android:id="@+id/backButton"
@@ -24,5 +25,9 @@
         android:src="@drawable/bmi_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView1" />
+        android:id="@+id/imageView1"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp" />
 </LinearLayout>

@@ -1,19 +1,15 @@
 ﻿using System;
 
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Runtime;
+using Android.Net;
+using Android.OS;
+using Android.Preferences;
+using Android.Telephony;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
-using Xamarin;
-using Android.Telephony;
 using Java.Util;
-using MyHealthDB.Logger;
-using MyHealthDB;
-using Android.Net;
-using Android.Preferences;
-using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {

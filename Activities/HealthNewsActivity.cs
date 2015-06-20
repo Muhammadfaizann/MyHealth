@@ -1,13 +1,10 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MyHealthAndroid;
@@ -17,7 +14,7 @@ using MyHealthDB.Logger;
 
 namespace MyHealth.Android
 {
-	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class HealthNewsActivity : Activity
 	{
 		private Button backButton;
@@ -47,7 +44,7 @@ namespace MyHealth.Android
 
 			// back button
 			backButton = FindViewById<Button> (Resource.Id.backButton);
-			backButton.Text = "News";
+			backButton.Text = "Health News";
 			backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();

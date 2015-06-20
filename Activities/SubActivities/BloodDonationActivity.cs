@@ -19,10 +19,10 @@ using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class BloodDonationActivity : Activity
 	{
-		private EditText _bloodDonationLabel;
+		//private EditText _bloodDonationLabel;
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -46,10 +46,7 @@ namespace MyHealthAndroid
 				});
 			};
 
-
-
-
-	// back button
+			// back button
 			var _backButton = FindViewById<Button> (Resource.Id.backButton);
 			_backButton.Text = "Blood Donation";
 			_backButton.Click += (object sender, EventArgs e) => 
@@ -75,17 +72,17 @@ namespace MyHealthAndroid
 			IList<BloodSupply> bloodSupplyList;
 			var connectivityManager = (ConnectivityManager) GetSystemService (ConnectivityService);
 			var activeConnection = connectivityManager.ActiveNetworkInfo;
-			string lastUpdatedText = "";
 			if ((activeConnection != null) && activeConnection.IsConnected) {
 				try {
 					bloodSupplyList = await ServiceConsumer.GetBloodDonationInfo ("http://www.giveblood.ie/clinicsxml.aspx?blood=1");
-					lastUpdatedText = "Days of Blood Left as of " + DateTime.Now.ToString("dd MMM yyyy");
-					SaveBloodSupply (bloodSupplyList,lastUpdatedText);
+					// adding new item for fetch date from service to be displayed in label
+					bloodSupplyList.Add(new BloodSupply { BloodGroup = "FETCHDATE", SupplyDays = DateTime.Now.Date.ToString("dd MMM yyyy") });
+					SaveBloodSupply (bloodSupplyList);
 				} catch {
-					bloodSupplyList = GetBloodSupply (out lastUpdatedText);
+					bloodSupplyList = GetBloodSupply ();
 				}
 			} else {
-				bloodSupplyList = GetBloodSupply (out lastUpdatedText);
+				bloodSupplyList = GetBloodSupply ();
 			}
 			foreach (var bloodSupply in bloodSupplyList) {
 				switch (bloodSupply.BloodGroup.ToUpper ()) {
@@ -113,15 +110,19 @@ namespace MyHealthAndroid
 				case "AB-":
 					abMinus.Text = bloodSupply.SupplyDays;
 					break;
+
+				case "FETCHDATE":
+					_bloodDonationLabel.Text = "Refreshed on " + bloodSupply.SupplyDays;
+					break;
 				}
 			}
-			_bloodDonationLabel.Text = lastUpdatedText;
+			//_bloodDonationLabel.Text = lastUpdatedText;
 		}
 
 		//------------------------ custom activity ----------------------//
 		#region [Blood Supply Details]
 
-		public static void SaveBloodSupply(IList<BloodSupply> bloodSupplyList, string lastUpdatedText) {
+		public static void SaveBloodSupply(IList<BloodSupply> bloodSupplyList) {
 			ISharedPreferences prefs = Application.Context.GetSharedPreferences ("MyHealthAppPrefs", FileCreationMode.Private);//PreferenceManager.GetDefaultSharedPreferences (_context);
 			ISharedPreferencesEditor editor = prefs.Edit ();
 
@@ -130,17 +131,13 @@ namespace MyHealthAndroid
 			foreach (var item in bloodSupplyList) {
 				dict.Add (item.BloodGroup + ":" + item.SupplyDays);
 			}
-				
-			editor.PutStringSet ("BloodSupplyList", dict);
 
-			if (!string.IsNullOrEmpty (lastUpdatedText)) {
-				editor.PutString ("LastUpdatedText", lastUpdatedText);
-			}
+			editor.PutStringSet ("BloodSupplyList", dict);
 
 			editor.Apply ();
 		}
 
-		public static IList<BloodSupply> GetBloodSupply(out string lastUpdatedText) {
+		public static IList<BloodSupply> GetBloodSupply() {
 			ISharedPreferences prefs = Application.Context.GetSharedPreferences("MyHealthAppPrefs", FileCreationMode.Private);
 			var dict = prefs.GetStringSet ("BloodSupplyList", new List<string>());
 
@@ -155,7 +152,6 @@ namespace MyHealthAndroid
 					});
 				}
 			}
-			lastUpdatedText = prefs.GetString ("LastUpdatedText","");
 			return toReturn;
 		}
 

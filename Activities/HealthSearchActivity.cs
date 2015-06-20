@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Preferences;
@@ -17,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health" , ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class HealthSearchActivity : Activity
 	{
 		private Button backButton;
@@ -88,7 +86,7 @@ namespace MyHealthAndroid
 
 			// back button
 			backButton = FindViewById<Button> (Resource.Id.backButton);
-			backButton.Text = "Health Search";
+			backButton.Text = "Health Condition's";
 			backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();
@@ -234,7 +232,9 @@ namespace MyHealthAndroid
 					dictGroup.Add (category.CategoryName, foundItems);
 					dictCatergoryConditionIds.Add (category.ID.ToString(), diseaseId);
 				} else {
-					dictGroup.Add (category.CategoryName, new List<Disease>());
+					if (!dictGroup.ContainsKey (category.CategoryName)) {
+						dictGroup.Add (category.CategoryName, new List<Disease> ());
+					}
 					dictCatergoryConditionIds.Add (category.ID.ToString(), new List<int?>());
 				}
 			}

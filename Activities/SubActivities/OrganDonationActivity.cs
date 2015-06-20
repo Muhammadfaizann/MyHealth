@@ -17,7 +17,7 @@ using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class OrganDonationActivity : Activity
 	{
 		protected async override void OnCreate (Bundle bundle)

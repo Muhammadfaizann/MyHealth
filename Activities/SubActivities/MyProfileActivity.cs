@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
-	[Activity (Label = "My Health", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class MyProfileActivity : Activity
 	{
 		private CommonData _data;
@@ -71,7 +71,7 @@ namespace MyHealthAndroid
 			saveButton = FindViewById<Button> (Resource.Id.saveProfileButton);
 
 
-			syncButton.Visibility = ViewStates.Invisible;
+			syncButton.Visibility = ViewStates.Gone;
 			syncButton.Click += async (object sender, EventArgs e) => {
 				try {
 					ISharedPreferencesEditor editor = preferences.Edit();

@@ -1,11 +1,11 @@
 ﻿using System;
-using Android.Widget;
 using System.Collections.Generic;
-using Android.App;
-using Android.Views;
-using Android.Content;
-using MyHealthDB;
 using System.Threading.Tasks;
+using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Widget;
+using MyHealthDB;
 using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
@@ -24,8 +24,8 @@ namespace MyHealthAndroid
 			//_list = _model.GetHospitalsInCounty (0);
 		}
 
-		public async Task loadData (int province) {
-			_list = await _model.GetHospitalsInCounty (province);
+		public async Task loadData (int provinceId) {
+			_list = await DatabaseManager.SelectHospitalsByProvince (provinceId);
 		}
 
 		//count of rows in ListView
