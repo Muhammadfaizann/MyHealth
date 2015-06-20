@@ -85,7 +85,7 @@ namespace MyHealthAndroid
 
 			//implement the back button 
 			_backButton = FindViewById<Button> (Resource.Id.backButton);
-			_backButton.Text = (data.DisplayName.Equals("Hospitals")) ? "Counties" : data.DisplayName;
+			_backButton.Text = data.DisplayName;
 			_backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();

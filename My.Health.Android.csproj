@@ -200,14 +200,16 @@
     <AndroidResource Include="Resources\layout\sub_activity_mybmi.axml" />
     <AndroidResource Include="Resources\drawable-xhdpi\bmi_status.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\blood.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\a_minus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\a_plus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ab_minus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ab_plus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\b_minus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\b_plus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\o_minus.gif" />
-    <AndroidResource Include="Resources\drawable-xhdpi\o_plus.gif" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon_60_2x.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Default_2x.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\a_minus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\a_plus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_minus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ab_plus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\b_minus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\b_plus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\o_minus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\o_plus.png" />
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

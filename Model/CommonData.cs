@@ -218,7 +218,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetHeightFeets () {
 			var data = new List<String> ();
-			for (int i = 1; i <= 8; i++) {
+			for (int i = 0; i <= 8; i++) {
 				data.Add (i.ToString () + " feet");
 			}
 			return data;
@@ -226,7 +226,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetHeightInches () {
 			var data = new List<String> ();
-			for (int i = 1; i < 12; i++) {
+			for (int i = 0; i < 12; i++) {
 				data.Add (i.ToString () + " in");
 			}
 			return data;
@@ -234,7 +234,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetHeightMeters () {
 			var data = new List<String> ();
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 0; i <= 5; i++) {
 				data.Add (i.ToString () + " m");
 			}
 			return data;
@@ -242,7 +242,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetHeightCentimeters () {
 			var data = new List<String> ();
-			for (int i = 1; i < 100; i++) {
+			for (int i = 0; i < 100; i++) {
 				data.Add (i.ToString () + " cm");
 			}
 			return data;
@@ -250,7 +250,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetWeightStones () {
 			var data = new List<String> ();
-			for (int i = 1; i <= 100; i++) {
+			for (int i = 0; i <= 100; i++) {
 				data.Add (i.ToString () + " st");
 			}
 			return data;
@@ -258,7 +258,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetWeightPounds () {
 			var data = new List<String> ();
-			for (int i = 1; i < 14; i++) {
+			for (int i = 0; i < 14; i++) {
 				data.Add (i.ToString () + " lbs");
 			}
 			return data;
@@ -266,7 +266,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetWeightKilograms () {
 			var data = new List<String> ();
-			for (int i = 1; i <= 500; i++) {
+			for (int i = 0; i <= 500; i++) {
 				data.Add (i.ToString () + " kg");
 			}
 			return data;
@@ -274,7 +274,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetWeightGrams () {
 			var data = new List<String> ();
-			for (int i = 1; i < 1000; i++) {
+			for (int i = 0; i < 1000; i++) {
 				data.Add (i.ToString () + " g");
 			}
 			return data;

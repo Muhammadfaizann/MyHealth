@@ -83,7 +83,7 @@ namespace MyHealthAndroid{
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 
 					var importantNotice = await DatabaseManager.SelectImportantNotice(DateTime.Now.Date);
-					if (impNotice != null) {
+					if (importantNotice != null) {
 						impNotice.Text = importantNotice.Name;
 						impNotice.SetBackgroundColor (Color.ParseColor (importantNotice.NoticeColor));
 					}
