@@ -95,6 +95,14 @@ namespace RCSI
 
 		public void btnShareClick () {
 			var name = SelectedDisease.Name;
+
+			var item = UIActivity.FromObject (name);
+			var activityItems = new NSObject[] { item };
+			UIActivity[] applicationActivities = null;
+
+			var activityController = new UIActivityViewController (activityItems, applicationActivities);
+
+			this.NavigationController.PresentViewController (activityController, true, null);
 		}
 	}
 }
