@@ -137,6 +137,13 @@ namespace MyHealthAndroid
 			ActionBar.SetDisplayShowTitleEnabled (false);
 			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
 			ActionBar.SetDisplayShowCustomEnabled (true);
+
+			var txtAppTitle = ActionBar.CustomView.FindViewById (Resource.Id.txtAppTitle);
+			if (txtAppTitle.LayoutParameters is ViewGroup.MarginLayoutParams) {
+				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) txtAppTitle.LayoutParameters;
+				p.RightMargin = 45;
+				txtAppTitle.RequestLayout();
+			}
 		}
 
 		//------------------------------------- Calculate BMI -------------------------------------//

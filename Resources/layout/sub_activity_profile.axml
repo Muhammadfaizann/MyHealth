@@ -24,7 +24,6 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textView1"
         android:id="@+id/scrollView1">
         <RelativeLayout
             android:layout_width="match_parent"

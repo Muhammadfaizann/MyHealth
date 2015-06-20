@@ -16,7 +16,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/textView1"
+        android:id="@+id/txtAppTitle"
         android:layout_weight="20"
         android:gravity="center" />
 </LinearLayout>

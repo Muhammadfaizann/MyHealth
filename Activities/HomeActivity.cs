@@ -12,6 +12,7 @@ using Android.Widget;
 using MyHealth.Android;
 using MyHealthDB;
 using MyHealthDB.Logger;
+using System.Threading.Tasks;
 
 namespace MyHealthAndroid{
 	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
@@ -98,7 +99,6 @@ namespace MyHealthAndroid{
 
 		}
 
-
 		//------------------------ custom activity ----------------------//
 		public void SetCustomActionBar () 
 		{
@@ -106,12 +106,19 @@ namespace MyHealthAndroid{
 			ActionBar.SetDisplayShowTitleEnabled (false);
 			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
 			ActionBar.SetDisplayShowCustomEnabled (true);
+
+			var txtAppTitle = ActionBar.CustomView.FindViewById (Resource.Id.txtAppTitle);
+			if (txtAppTitle.LayoutParameters is ViewGroup.MarginLayoutParams) {
+				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) txtAppTitle.LayoutParameters;
+				p.LeftMargin = 60;
+				txtAppTitle.RequestLayout();
+			}
 		}
 
 		//------------------------ menu item ----------------------//
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
-			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
+			MenuInflater.Inflate (Resource.Menu.main_activity_actions_with_sync, menu);
 			return base.OnCreateOptionsMenu (menu);
 		}
 
@@ -121,7 +128,27 @@ namespace MyHealthAndroid{
 				
 			case Resource.Id.action_profile:
 				var newActivity = new Intent(this, typeof(MyProfileActivity));
-				StartActivity(newActivity);
+				StartActivity (newActivity);
+				break;
+			case Resource.Id.action_sync:
+				
+				try {
+					// Get the shared Preferences
+					var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
+					ISharedPreferencesEditor editor = preferences.Edit();
+					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
+					editor.PutBoolean("applicationUpdated", false);
+					editor.Apply();
+					ServiceConsumer.SyncDevice()
+						.ContinueWith((r) => {
+							Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
+							editor.PutBoolean("applicationUpdated", true);
+							editor.Apply();
+						}, TaskScheduler.FromCurrentSynchronizationContext());
+				} catch (Exception ex) {
+					Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();
+				}
+
 				break;
 			}
 			return base.OnMenuItemSelected (featureId, item);
