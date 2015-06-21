@@ -39,9 +39,9 @@ namespace MyHealthAndroid
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 			var view = convertView ?? _activity.LayoutInflater.Inflate (
-				Resource.Layout.row_news_table, parent, false);
-			var contactName = view.FindViewById<TextView> (Resource.Id.newsChannelName);
-			var contactImage = view.FindViewById<ImageView> (Resource.Id.newsChannelImage);
+				Resource.Layout.row_help_table, parent, false);
+			var contactName = view.FindViewById<TextView> (Resource.Id.title);
+			var contactImage = view.FindViewById<ImageView> (Resource.Id.helpIcon);
 
 			contactName.Text = _list [position].HelpName;
 			contactImage.SetImageResource (_list [position].HelpIcon);

@@ -47,10 +47,10 @@ namespace MyHealthAndroid
 			var view = convertView ?? _activity.LayoutInflater.Inflate (
 				Resource.Layout.row_news_table, parent, false);
 			var contactName = view.FindViewById<TextView> (Resource.Id.newsChannelName);
-			var contactImage = view.FindViewById<ImageView> (Resource.Id.newsChannelImage);
+			//var contactImage = view.FindViewById<ImageView> (Resource.Id.newsChannelImage);
 
 			contactName.Text = ChannelList [position].Name;
-			contactImage.SetImageResource (ChannelList [position].resourceID);
+			//contactImage.SetImageResource (ChannelList [position].resourceID);
 
 			return view;
 		}
