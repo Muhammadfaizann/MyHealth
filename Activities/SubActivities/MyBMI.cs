@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
-using MyHealthDB;
-using MyHealthDB.Logger;
-using Android.Preferences;
+using Android.Widget;
+using Android.Views;
 
 namespace MyHealthAndroid
 {
@@ -21,9 +14,10 @@ namespace MyHealthAndroid
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
-		
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.sub_activity_mybmi);
+
+			SetCustomActionBar ();
 
 			var bmi = Intent.GetStringExtra ("MyBMI");
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -51,7 +45,13 @@ namespace MyHealthAndroid
 			ActionBar.SetDisplayShowTitleEnabled (false);
 			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
 			ActionBar.SetDisplayShowCustomEnabled (true);
+
+			var txtAppTitle = ActionBar.CustomView.FindViewById (Resource.Id.txtAppTitle);
+			if (txtAppTitle.LayoutParameters is ViewGroup.MarginLayoutParams) {
+				ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) txtAppTitle.LayoutParameters;
+				p.RightMargin = 45;
+				txtAppTitle.RequestLayout();
+			}
 		}
 	}
 }
-

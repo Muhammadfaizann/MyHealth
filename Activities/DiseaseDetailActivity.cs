@@ -71,7 +71,6 @@ namespace MyHealthAndroid
 
 			var htmlString = await MyHealthDB.Helper.Helper.BuildHtmlForDisease (_selectedDiseaseId);
 			if (!string.IsNullOrEmpty(htmlString)) {
-				//_imageView.SetImageResource (Resource.Drawable.Cancer);
 				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
 			} else if (_selectedDiseases.Contains ("Heart") || _selectedDiseases.Contains ("heart")) {
 				_imageView.SetImageResource (Resource.Drawable.ihf);
@@ -130,15 +129,23 @@ namespace MyHealthAndroid
 
 		public override bool ShouldOverrideUrlLoading (WebView view, string url)
 		{
-			LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
+			var builder = new AlertDialog.Builder(_activity);
+			builder.SetMessage("This link will take you to an external website, Do you want to Proceed?");
+			builder.SetCancelable(false);
+			builder.SetPositiveButton ("OK", (senderAlert, args) => {
+				LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
 
-			// launch another Activity that handles URLs
-			Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse (url));
-			_activity.StartActivity (intent);
+				// launch another Activity that handles URLs
+				Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse (url));
+				_activity.StartActivity (intent);
+			});
+			builder.SetNegativeButton ("Cancel", (senderAlert, args) => {
+				//perform your own task for this conditional button click
+			} );
+			builder.Show();
 
 			base.ShouldOverrideUrlLoading (view, url);
 			return true;
 		}
 	}
 }
-

@@ -7,18 +7,16 @@ namespace MyHealthAndroid
 {
 	public class CommonData
 	{
-	
 		public CommonData ()
 		{
 
 		}
 
-
 		public async Task<List<DiseaseCategory>> GetAllCategory () 
 		{
 //			String[] _indexTitles = {@"Cancer", @"Diabeties", @"Heart", @"Obessity"};
 
-			var categories = await MyHealthDB.DatabaseManager.SelectAllDiseaseCategories ();
+			var categories = await DatabaseManager.SelectAllDiseaseCategories ();
 
 //			if (categories.Count <= 0) {
 //				for (int count= 0; count < _indexTitles.Length; count++) {
@@ -35,7 +33,6 @@ namespace MyHealthAndroid
 
 		public async Task<List<DiseasesForCategory>> GetAllDiseasesForCategory () 
 		{
-		
 			var categories = await MyHealthDB.DatabaseManager.SelectAllDiseasesForCategory ();
 			return categories; 
 		}
