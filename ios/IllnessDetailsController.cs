@@ -94,10 +94,11 @@ namespace RCSI
 		}
 
 		public void btnShareClick () {
-			var name = SelectedDisease.Name;
-
+			var name = "I have just researched \"" + SelectedDisease.Name + "\" to find out more please download the MyHealth app from myhealthapp.ie";
+			var url = NSUrl.FromString ("http://myhealthapp.ie");
+			//var item = UIActivity.FromObject (name);
 			var item = UIActivity.FromObject (name);
-			var activityItems = new NSObject[] { item };
+			var activityItems = new NSObject[] { item, url };
 			UIActivity[] applicationActivities = null;
 
 			var activityController = new UIActivityViewController (activityItems, applicationActivities);
