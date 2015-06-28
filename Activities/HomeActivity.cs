@@ -24,9 +24,9 @@ namespace MyHealthAndroid{
 		private ImageButton helpBtn;
 		private Button impNotice;
 
-		protected async override void OnCreate (Bundle bundle)
+		protected async override void OnCreate (Bundle savedInstanceState)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate (savedInstanceState);
 			SetContentView (Resource.Layout.Home);
 
 			SetCustomActionBar ();

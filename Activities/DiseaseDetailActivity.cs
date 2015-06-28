@@ -16,6 +16,7 @@ using Android.Graphics;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using System.Threading.Tasks;
+using Android.Content.PM;
 
 namespace MyHealthAndroid
 {
@@ -87,6 +88,87 @@ namespace MyHealthAndroid
 				base.OnBackPressed();
 			};
 
+			var shareButton = FindViewById<ImageButton> (Resource.Id.shareButton);
+			shareButton.Click += (object sender, EventArgs e) => {
+				/*Intent sharingIntent = new Intent(Android.Content.Intent.ActionSend);
+				sharingIntent.SetType("text/plain");
+
+				String shareBody = "I have just researched \"" + _backButtonTitle + "\" to find out more please download the MyHealth app from myhealthapp.ie";
+
+				sharingIntent.PutExtra(Android.Content.Intent.ExtraSubject, "Subject Here");
+				sharingIntent.PutExtra(Android.Content.Intent.ExtraText, shareBody);
+
+
+				/*Boolean facebookAppFound = false;
+				IList<ResolveInfo> matches = PackageManager.QueryIntentActivities(sharingIntent, 0);
+				foreach (ResolveInfo info in matches) {
+					if (info.ActivityInfo.PackageName.ToLower().StartsWith("com.facebook.katana")) {
+						sharingIntent.SetPackage(info.ActivityInfo.PackageName);
+						facebookAppFound = true;
+						//break;
+					}
+				}***
+
+				//StartActivity(Intent.CreateChooser(sharingIntent, "Share via"));*/
+
+				String shareBody = "I have just researched \"" + _backButtonTitle + "\" to find out more please download the MyHealth app from http://myhealthapp.ie";
+				String shareSubject = _backButtonTitle + " - MyHealth app";
+
+				Intent emailIntent = new Intent();
+				emailIntent.SetAction(Intent.ActionSend);
+				// Native email client doesn't currently support HTML, but it doesn't hurt to try in case they fix it
+				emailIntent.PutExtra(Intent.ExtraText, shareBody);
+				emailIntent.PutExtra(Intent.ExtraSubject, shareSubject);
+				emailIntent.SetType("message/rfc822");
+
+				Intent sendIntent = new Intent(Intent.ActionSend);     
+				sendIntent.SetType("text/plain");
+
+				Intent openInChooser = Intent.CreateChooser(emailIntent, "Share via");
+
+				var resInfo = PackageManager.QueryIntentActivities(sendIntent, 0);
+				List<LabeledIntent> intentList = new List<LabeledIntent>();
+				for (int i = 0; i < resInfo.Count; i++) {
+					// Extract the label, append it, and repackage it in a LabeledIntent
+					ResolveInfo ri = resInfo.ElementAt(i);
+					String packageName = ri.ActivityInfo.PackageName;
+					if(packageName.Contains("android.email")) {
+						emailIntent.SetPackage(packageName);
+					} else if(packageName.Contains("twitter") || packageName.Contains("facebook") || packageName.Contains("mms") || packageName.Contains("android.gm")) {
+						Intent intent = new Intent();
+						intent.SetComponent(new ComponentName(packageName, ri.ActivityInfo.Name));
+						intent.SetAction(Intent.ActionSend);
+						intent.SetType("text/plain");
+						if(packageName.Contains("twitter")) {
+							intent.PutExtra(Intent.ExtraText, shareBody);
+						} else if(packageName.Contains("facebook")) {
+							// Warning: Facebook IGNORES our text. They say "These fields are intended for users to express themselves. Pre-filling these fields erodes the authenticity of the user voice."
+							// One workaround is to use the Facebook SDK to post, but that doesn't allow the user to choose how they want to share. We can also make a custom landing page, and the link
+							// will show the <meta content ="..."> text from that page with our link in Facebook.
+							intent.PutExtra(Intent.ExtraTitle, shareSubject);
+							intent.PutExtra(Intent.ExtraSubject, shareSubject);
+							intent.PutExtra(Android.Content.Intent.ExtraText, shareBody);
+							//intent.PutExtra(Intent.ExtraText, "http://myhealthapp.ie");
+							//intent.PutExtra(
+						} else if(packageName.Contains("mms")) {
+							intent.PutExtra(Intent.ExtraText, shareBody);
+						} else if(packageName.Contains("android.gm")) { // If Gmail shows up twice, try removing this else-if clause and the reference to "android.gm" above
+							intent.PutExtra(Intent.ExtraText, shareBody);
+							intent.PutExtra(Intent.ExtraSubject, shareSubject);
+							intent.SetType("message/rfc822");
+						}
+
+						intentList.Add(new LabeledIntent(intent, packageName, ri.LoadLabel(PackageManager), ri.Icon));
+					}
+				}
+
+				// convert intentList to array
+				LabeledIntent[] extraIntents = intentList.ToArray();	// new LabeledIntent[ intentList.Count ]);
+
+				openInChooser.PutExtra(Intent.ExtraInitialIntents, extraIntents);
+				StartActivity(openInChooser);
+			};
+
 			_webView.SetWebViewClient(new MyHealthWebViewClient(this));
 		}
 
@@ -129,20 +211,27 @@ namespace MyHealthAndroid
 
 		public override bool ShouldOverrideUrlLoading (WebView view, string url)
 		{
-			var builder = new AlertDialog.Builder(_activity);
-			builder.SetMessage("This link will take you to an external website, Do you want to Proceed?");
-			builder.SetCancelable(false);
-			builder.SetPositiveButton ("OK", (senderAlert, args) => {
+			var alert = new AlertDialog.Builder (_activity);
+			alert.SetTitle ("");
+			alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
+
+			alert.SetCancelable (false);
+
+			alert.SetPositiveButton ("OK",(senderAlert, args) => {
 				LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
 
 				// launch another Activity that handles URLs
 				Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse (url));
 				_activity.StartActivity (intent);
 			});
-			builder.SetNegativeButton ("Cancel", (senderAlert, args) => {
+
+			alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
 				//perform your own task for this conditional button click
-			} );
-			builder.Show();
+			});
+			//run the alert in UI thread to display in the screen
+			_activity.RunOnUiThread (() => {
+				alert.Show ();
+			});
 
 			base.ShouldOverrideUrlLoading (view, url);
 			return true;
