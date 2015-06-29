@@ -212,6 +212,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\o_plus.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\sync.png" />
     <AndroidResource Include="Resources\menu\main_activity_actions_with_sync.xml" />
+    <AndroidResource Include="Resources\layout\row_help_table.xml" />
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
