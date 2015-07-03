@@ -29,7 +29,7 @@
     <TextView
         android:text="aslkdjfhlakshflkashdfalkshdflkjashldkjfhalkdfhkljashdfkljahsdfkljhakldfhakshdfkj,.mxzbncvioeyrjhvckjelhscvlkjasheihql\aslkdjfhlakshflkashdfalkshdflkjashldkjfhalkdfhkljashdfkljahsdfkljhakldfhakshdfkj,.mxzbncvioeyrjhvckjelhscvlkjasheihql\aslkdjfhlakshflkashdfalkshdflkjashldkjfhalkdfhkljashdfkljahsdfkljhakldfhakshdfkj,.mxzbncvioeyrjhvckjelhscvlkjasheihql\aslkdjfhlakshflkashdfalkshdflkjashldkjfhalkdfhkljashdfkljahsdfkljhakldfhakshdfkj,.mxzbncvioeyrjhvckjelhscvlkjasheihql\aslkdjfhlakshflkashdfalkshdflkjashldkjfhalkdfhkljashdfkljahsdfkljhakldfhakshdfkj,.mxzbncvioeyrjhvckjelhscvlkjasheihql\"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:id="@+id/actualNews"
         android:textColor="#ff333333"
         android:paddingTop="15dp"

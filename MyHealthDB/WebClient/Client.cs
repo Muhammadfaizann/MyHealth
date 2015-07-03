@@ -9,7 +9,7 @@ namespace MyHealthDB.WebClient
 {
 	public class Client
 	{
-		private static string baseURL = "http://devrcsiapi.tekenable-test.com:83/";
+		private static string baseURL = "http://myhealthapp.ie/MyHealth_Webservices/";	//http://devrcsiapi.tekenable-test.com:83/";
 
 		public async static Task<HttpResponseMessage> GetAsync(string url, bool anonymous = false)
 		{

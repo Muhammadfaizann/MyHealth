@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.Widget;
 using System.Collections.Generic;
 using Android.App;
@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Content;
 using Android.Graphics;
 using System.Net;
+using Android.Text;
 
 namespace MyHealthAndroid
 {
@@ -13,11 +14,13 @@ namespace MyHealthAndroid
 	{
 		private List<FeedItem> _list;
 		private Activity _activity;
+		private RssFeedName _feed;
 
 		//constructor
 		public NewsFeedAdapter (Activity activity, RssFeedName feed)
 		{
 			_activity = activity;
+			_feed = feed;
 
 			string feedUrl;
 			switch (feed) 
@@ -78,7 +81,11 @@ namespace MyHealthAndroid
 			Headline.Text = _list [position].Title;
 			var imageBitmap = GetImageBitmapFromUrl (_list[position].ImageUrl);
 			NewsImage.SetImageBitmap (imageBitmap);
-			ActualNews.Text = _list [position].Description;
+			if (_feed == RssFeedName.PULSE) {
+				ActualNews.SetText (Html.FromHtml (_list [position].Description), TextView.BufferType.Spannable);
+			} else {
+				ActualNews.Text = _list [position].Description;
+			}
 
 			return view;
 		}
