@@ -25,6 +25,8 @@ namespace RCSI
 			});
 
 			IList<BloodSupply> bloodSupplyList;
+			bloodSupplyList = HelperMethods.GetBloodSupply ();
+			this.SetLabels (bloodSupplyList);
 			if (await HelperMethods.CheckIfInternetAvailable()) {
 				try {
 					bloodSupplyList = await ServiceConsumer.GetBloodDonationInfo ("http://www.giveblood.ie/clinicsxml.aspx?blood=1");
@@ -34,9 +36,17 @@ namespace RCSI
 				} catch {
 					bloodSupplyList = HelperMethods.GetBloodSupply ();
 				}
-			} else {
-				bloodSupplyList = HelperMethods.GetBloodSupply ();
+				this.SetLabels (bloodSupplyList);
 			}
+		}
+
+		partial void goToIBTSSite (UIKit.UIButton sender)
+		{
+			UIApplication.SharedApplication.OpenUrl(NSUrl.FromString("http://www.giveblood.ie"));
+		}
+
+		private void SetLabels (IList<BloodSupply> bloodSupplyList)
+		{
 			foreach (var bloodSupply in bloodSupplyList) {
 				switch (bloodSupply.BloodGroup.ToUpper ()) {
 				case "O+":
@@ -69,11 +79,6 @@ namespace RCSI
 					break;
 				}
 			}
-		}
-
-		partial void goToIBTSSite (UIKit.UIButton sender)
-		{
-			UIApplication.SharedApplication.OpenUrl(NSUrl.FromString("http://www.giveblood.ie"));
 		}
 	}
 }

@@ -110,7 +110,7 @@ namespace RCSI
 				heightMeter = txtHeightFt.Text;
 				heightCM = txtHeightInc.Text;
 				weightKg = txtWeightSt.Text;
-				weightg = txtWeightSt.Text;
+				weightg = txtWeightLbs.Text;
 			} else {
 				char[] separators = {'.', ' '};
 				// calculating height in meter and centimeter
@@ -295,7 +295,6 @@ namespace RCSI
 
 				if (!string.IsNullOrEmpty (txtWeightSt.Text) || !string.IsNullOrEmpty (txtWeightLbs.Text)) 
 				{
-
 					if (string.IsNullOrEmpty (txtWeightSt.Text)) 
 					{
 						txtWeightSt.Text = "0 st";
@@ -312,18 +311,16 @@ namespace RCSI
 						txtWeightLbs.Text = Math.Round((kg - Convert.ToDouble(txtWeightSt.Text.Split (separators,2) [0])) * 1000).ToString() + " g";
 					}
 				}
-
 			} 
 			else 
 			{
-				_cpcFt.SetPicker () ;
-				_cpcInch.SetPicker () ;
+				_cpcFt.SetPicker ();
+				_cpcInch.SetPicker ();
 				_cpcSt.SetPicker ();
-				_cpcLbs.SetPicker () ;
+				_cpcLbs.SetPicker ();
 
 				if (!string.IsNullOrEmpty (txtHeightFt.Text) || !string.IsNullOrEmpty (txtHeightInc.Text)) 
 				{
-
 					if (string.IsNullOrEmpty (txtHeightFt.Text)) 
 					{
 						txtHeightFt.Text = "0 m";
@@ -334,7 +331,6 @@ namespace RCSI
 						txtHeightInc.Text = "0 cm";
 					}
 
-
 					feet = (Convert.ToDouble (txtHeightFt.Text.Split (separators, 2) [0]) * 100 + Convert.ToDouble (txtHeightInc.Text.Split (separators, 2) [0])) * 0.0328084;
 					txtHeightFt.Text = feet.ToString ().Split (separators, 2) [0] + " feet";
 					txtHeightInc.Text = Math.Round((feet - Convert.ToDouble(txtHeightFt.Text.Split (separators,2) [0])) * 12).ToString() + " in";
@@ -342,7 +338,6 @@ namespace RCSI
 
 				if (!string.IsNullOrEmpty (txtWeightSt.Text) || !string.IsNullOrEmpty (txtWeightLbs.Text)) 
 				{
-
 					if (string.IsNullOrEmpty (txtWeightSt.Text)) 
 					{
 						txtWeightSt.Text = "0 kg";
@@ -357,7 +352,6 @@ namespace RCSI
 					txtWeightSt.Text = stone.ToString ().Split (separators,2) [0] + " st";
 					txtWeightLbs.Text = Math.Round((stone - Convert.ToDouble(txtWeightSt.Text.Split (separators,2) [0])) * 14).ToString() + " lbs";
 				}
-
 			}
 		}
 

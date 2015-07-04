@@ -1394,7 +1394,7 @@
                                     <segue destination="dFI-la-8fX" kind="embed" identifier="NavBar" id="b6u-1L-jhN"/>
                                 </connections>
                             </containerView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qI-iB-HgO">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0qI-iB-HgO">
                                 <rect key="frame" x="0.0" y="108" width="320" height="352"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please enter your information below" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5c-WO-Qpt">
@@ -1448,7 +1448,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="images/Dropdown2.png" translatesAutoresizingMaskIntoConstraints="NO" id="CUf-aa-j4V">
-                                        <rect key="frame" x="198" y="150" width="85" height="30"/>
+                                        <rect key="frame" x="198" y="150" width="85" height="32"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1478,27 +1478,14 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="images/dropDown.png" translatesAutoresizingMaskIntoConstraints="NO" id="fDe-bN-Mn8">
-                                        <rect key="frame" x="113" y="359" width="120" height="30"/>
+                                        <rect key="frame" x="113" y="359" width="120" height="32"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="ohD-ao-gfP"/>
+                                            <constraint firstAttribute="height" constant="32" id="ohD-ao-gfP"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELe-MY-JoP">
-                                        <rect key="frame" x="287" y="124" width="25" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="X2H-8w-yxA"/>
-                                            <constraint firstAttribute="width" constant="25" id="gdf-is-gQ3"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="images/Next.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="L95-z2-Bcg" kind="push" identifier="CalculateBMI" id="8a5-q4-vQO"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwN-8y-XYF">
                                         <rect key="frame" x="10" y="410" width="145" height="30"/>
                                         <color key="backgroundColor" red="0.46274509803921571" green="0.59215686274509804" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
@@ -1518,7 +1505,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="images/Dropdown2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nv3-WY-U5t">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="images/Dropdown2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nv3-WY-U5t">
                                         <rect key="frame" x="113" y="92" width="80" height="32"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1528,7 +1515,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="images/Dropdown2.png" translatesAutoresizingMaskIntoConstraints="NO" id="NYA-RS-htM">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="images/Dropdown2.png" translatesAutoresizingMaskIntoConstraints="NO" id="NYA-RS-htM">
                                         <rect key="frame" x="113" y="150" width="80" height="32"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1550,7 +1537,6 @@
                                     <constraint firstAttribute="trailing" secondItem="aDH-hQ-LMP" secondAttribute="trailing" constant="10" id="IR8-00-Ovo"/>
                                     <constraint firstItem="fDe-bN-Mn8" firstAttribute="top" secondItem="SZn-eZ-alX" secondAttribute="bottom" constant="22" id="Iaq-BV-M2K"/>
                                     <constraint firstItem="EAE-Dx-ql1" firstAttribute="top" secondItem="N5c-WO-Qpt" secondAttribute="bottom" constant="13" id="Iwo-BY-LrS"/>
-                                    <constraint firstItem="ELe-MY-JoP" firstAttribute="top" secondItem="N5c-WO-Qpt" secondAttribute="bottom" constant="83" id="KV5-OR-Gr9"/>
                                     <constraint firstItem="Nv3-WY-U5t" firstAttribute="trailing" secondItem="NYA-RS-htM" secondAttribute="trailing" id="M7N-E1-8LN"/>
                                     <constraint firstItem="N5c-WO-Qpt" firstAttribute="top" secondItem="0qI-iB-HgO" secondAttribute="top" constant="20" symbolic="YES" id="ODN-js-fV3"/>
                                     <constraint firstItem="CUf-aa-j4V" firstAttribute="leading" secondItem="ALD-1q-gM4" secondAttribute="leading" id="OFo-h3-pGb"/>
@@ -1559,12 +1545,10 @@
                                     <constraint firstItem="0XX-1m-wQM" firstAttribute="baseline" secondItem="6ym-o3-Ijc" secondAttribute="baseline" constant="-1" id="Rgh-cK-c97"/>
                                     <constraint firstItem="XlH-es-vbu" firstAttribute="centerY" secondItem="EAE-Dx-ql1" secondAttribute="centerY" id="Sn3-Gr-deT"/>
                                     <constraint firstAttribute="trailing" secondItem="SZn-eZ-alX" secondAttribute="trailing" constant="87" id="V3k-oE-PFj"/>
-                                    <constraint firstAttribute="bottom" secondItem="KwN-8y-XYF" secondAttribute="bottom" constant="20" symbolic="YES" id="VJa-cT-dqV"/>
-                                    <constraint firstItem="KwN-8y-XYF" firstAttribute="top" secondItem="fDe-bN-Mn8" secondAttribute="bottom" constant="21" id="Vgv-ZW-cbE"/>
+                                    <constraint firstItem="KwN-8y-XYF" firstAttribute="top" secondItem="fDe-bN-Mn8" secondAttribute="bottom" constant="19" id="Vgv-ZW-cbE"/>
                                     <constraint firstItem="NH1-S4-Aed" firstAttribute="top" secondItem="XlH-es-vbu" secondAttribute="bottom" constant="16" id="Xc6-k0-IEY"/>
-                                    <constraint firstAttribute="trailing" secondItem="ELe-MY-JoP" secondAttribute="trailing" constant="8" id="YHh-2j-ck2"/>
                                     <constraint firstItem="Oy5-6t-MKm" firstAttribute="centerX" secondItem="JI2-Mr-rL3" secondAttribute="centerX" id="aB7-po-6uK"/>
-                                    <constraint firstItem="CUf-aa-j4V" firstAttribute="baseline" secondItem="NYA-RS-htM" secondAttribute="baseline" constant="-1" id="bsh-AP-5Xd"/>
+                                    <constraint firstItem="CUf-aa-j4V" firstAttribute="baseline" secondItem="NYA-RS-htM" secondAttribute="baseline" id="bsh-AP-5Xd"/>
                                     <constraint firstItem="6ym-o3-Ijc" firstAttribute="leading" secondItem="0XX-1m-wQM" secondAttribute="trailing" constant="6" id="c6J-8O-OnA"/>
                                     <constraint firstItem="XlH-es-vbu" firstAttribute="leading" secondItem="0qI-iB-HgO" secondAttribute="leading" constant="20" symbolic="YES" id="cGb-gU-MKq"/>
                                     <constraint firstItem="aDH-hQ-LMP" firstAttribute="leading" secondItem="KwN-8y-XYF" secondAttribute="trailing" constant="10" id="dKx-On-ji1"/>
@@ -1576,6 +1560,7 @@
                                     <constraint firstItem="6ym-o3-Ijc" firstAttribute="top" secondItem="NYA-RS-htM" secondAttribute="bottom" constant="22" id="kCs-Uy-AaI"/>
                                     <constraint firstItem="2Wd-xV-M87" firstAttribute="top" secondItem="0XX-1m-wQM" secondAttribute="bottom" constant="31" id="lfO-rf-nhO"/>
                                     <constraint firstAttribute="trailing" secondItem="6ym-o3-Ijc" secondAttribute="trailing" constant="87" id="o6k-xL-v8v"/>
+                                    <constraint firstItem="Nv3-WY-U5t" firstAttribute="top" secondItem="XlH-es-vbu" secondAttribute="bottom" constant="12" id="oeA-Aa-BjT"/>
                                     <constraint firstItem="SZn-eZ-alX" firstAttribute="top" secondItem="uCn-Y3-15A" secondAttribute="bottom" constant="18" id="pFy-Zn-Ter"/>
                                     <constraint firstItem="uCn-Y3-15A" firstAttribute="leading" secondItem="2Wd-xV-M87" secondAttribute="trailing" constant="6" id="ppc-Ld-FRy"/>
                                     <constraint firstAttribute="trailing" secondItem="uCn-Y3-15A" secondAttribute="trailing" constant="87" id="rUm-1P-pkd"/>
@@ -1587,7 +1572,7 @@
                                     <constraint firstItem="74v-2u-pl7" firstAttribute="top" secondItem="JI2-Mr-rL3" secondAttribute="bottom" constant="32" id="uE8-dA-V5a"/>
                                     <constraint firstItem="Nv3-WY-U5t" firstAttribute="baseline" secondItem="ALD-1q-gM4" secondAttribute="baseline" id="uQp-Ie-TMC"/>
                                     <constraint firstItem="0XX-1m-wQM" firstAttribute="top" secondItem="Oy5-6t-MKm" secondAttribute="bottom" constant="32" id="vlz-Uv-mdQ"/>
-                                    <constraint firstItem="CUf-aa-j4V" firstAttribute="bottom" secondItem="NYA-RS-htM" secondAttribute="bottom" constant="-2" id="wZi-i8-ac1"/>
+                                    <constraint firstItem="CUf-aa-j4V" firstAttribute="bottom" secondItem="NYA-RS-htM" secondAttribute="bottom" id="wZi-i8-ac1"/>
                                     <constraint firstItem="uCn-Y3-15A" firstAttribute="top" secondItem="6ym-o3-Ijc" secondAttribute="bottom" constant="19" id="xX0-Lu-fF2"/>
                                     <constraint firstItem="ALD-1q-gM4" firstAttribute="bottom" secondItem="Nv3-WY-U5t" secondAttribute="bottom" id="zeF-jl-rBJ"/>
                                 </constraints>
@@ -1622,6 +1607,7 @@
                         <outlet property="txtHeightInc" destination="ALD-1q-gM4" id="dN0-f0-5qy"/>
                         <outlet property="txtWeightLbs" destination="CUf-aa-j4V" id="ZdV-pP-jKb"/>
                         <outlet property="txtWeightSt" destination="NYA-RS-htM" id="efV-5m-Peu"/>
+                        <segue destination="L95-z2-Bcg" kind="push" identifier="CalculateBMI" id="Ath-Sv-ZM5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxt-XH-Uew" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3462,7 +3448,6 @@
         <image name="Default.png" width="320" height="480"/>
         <image name="images/BMI_chart.png" width="320" height="480"/>
         <image name="images/Dropdown2.png" width="110" height="28"/>
-        <image name="images/Next.png" width="30" height="29"/>
         <image name="images/RCSI.jpg" width="250" height="140"/>
         <image name="images/RCSI.png" width="125" height="125"/>
         <image name="images/a_minus.png" width="320" height="480"/>
@@ -3500,18 +3485,18 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lZm-oX-n3i"/>
         <segue reference="d7X-KF-wE2"/>
-        <segue reference="ylC-Kd-IHH"/>
         <segue reference="d9K-Wr-HS4"/>
+        <segue reference="ylC-Kd-IHH"/>
         <segue reference="xMV-Mi-8uH"/>
         <segue reference="bLq-v0-Phx"/>
         <segue reference="ieJ-qS-8uR"/>
+        <segue reference="b6u-1L-jhN"/>
+        <segue reference="pOP-ci-0bn"/>
         <segue reference="8cl-mc-Fug"/>
+        <segue reference="1ie-7M-p2n"/>
         <segue reference="Cyj-fY-crD"/>
         <segue reference="4hP-2Y-ELP"/>
-        <segue reference="CrY-eu-6k5"/>
-        <segue reference="C2s-nC-Kct"/>
         <segue reference="pUP-bJ-uxj"/>
     </inferredMetricsTieBreakers>
 </document>
