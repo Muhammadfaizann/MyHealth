@@ -26,7 +26,7 @@ namespace MyHealthAndroid
 		private ListView _diseaseList;
 		private ExpandableListView _expandableDiseaseList;
 		private EditText _searchText;
-		private ArrayAdapter _listAdapter;
+		//private ArrayAdapter _listAdapter;
 		private DiseaseAdapter _customDiseaseAdapter;
 
 		private Dictionary<string, List<Disease>> dictGroup;
@@ -76,6 +76,9 @@ namespace MyHealthAndroid
 					ConditionId = conditionid,
 					CategoryId = cateogryid
 				});
+
+				SaveRecentDiseases(this, item);
+
 				DiseaseDetails.PutExtra ("diseaseName", item.Name);
 				DiseaseDetails.PutExtra ("diseaseId", item.ID.Value);
 				StartActivity(DiseaseDetails);
@@ -160,8 +163,8 @@ namespace MyHealthAndroid
 				dis = recentDiseases.Where(x => x.ID == selected.Id).FirstOrDefault();
 			} else {
 				dis = diseases.Where(x => x.ID == selected.Id).FirstOrDefault();
+				SaveRecentDiseases(this, dis);
 			}
-			SaveRecentDiseases(this, dis);
 			var DiseaseDetails =  new Intent(this, typeof (DiseaseDetailActivity));
 			DiseaseDetails.PutExtra ("diseaseId", dis.ID.Value);
 			await LogManager.Log (new LogContent {

@@ -1,28 +1,23 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Net;
 using Android.OS;
-using Android.Runtime;
+
 using Android.Views;
 using Android.Widget;
-
 using MyHealthDB;
 using MyHealthDB.Logger;
-using Android.Net;
-using System.Collections;
-using System.Threading.Tasks;
 
 namespace MyHealthAndroid
 {
 	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class BloodDonationActivity : Activity
 	{
-		//private EditText _bloodDonationLabel;
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -59,17 +54,10 @@ namespace MyHealthAndroid
 
 		private async Task UpdateBloodSupplyList() 
 		{
-			var oPlus = FindViewById<TextView> (Resource.Id.oplusLabel);
-			var oMinus = FindViewById<TextView> (Resource.Id.ominusLabel);
-			var aPlus = FindViewById<TextView> (Resource.Id.aplusLabel);
-			var aMinus = FindViewById<TextView> (Resource.Id.aminusLabel);
-			var bPlus = FindViewById<TextView> (Resource.Id.bplusLabel);
-			var bMinus = FindViewById<TextView> (Resource.Id.bminusLabel);
-			var abPlus = FindViewById<TextView> (Resource.Id.abplusLabel);
-			var abMinus = FindViewById<TextView> (Resource.Id.abminusLabel);
-			var _bloodDonationLabel = FindViewById<TextView> (Resource.Id.bloodDonationLabel);
-
 			IList<BloodSupply> bloodSupplyList;
+			bloodSupplyList = GetBloodSupply ();
+			this.SetLables (bloodSupplyList);
+
 			var connectivityManager = (ConnectivityManager) GetSystemService (ConnectivityService);
 			var activeConnection = connectivityManager.ActiveNetworkInfo;
 			if ((activeConnection != null) && activeConnection.IsConnected) {
@@ -81,9 +69,22 @@ namespace MyHealthAndroid
 				} catch {
 					bloodSupplyList = GetBloodSupply ();
 				}
-			} else {
-				bloodSupplyList = GetBloodSupply ();
+				this.SetLables (bloodSupplyList);
 			}
+		}
+
+		private void SetLables (IList<BloodSupply> bloodSupplyList)
+		{
+			var oPlus = FindViewById<TextView> (Resource.Id.oplusLabel);
+			var oMinus = FindViewById<TextView> (Resource.Id.ominusLabel);
+			var aPlus = FindViewById<TextView> (Resource.Id.aplusLabel);
+			var aMinus = FindViewById<TextView> (Resource.Id.aminusLabel);
+			var bPlus = FindViewById<TextView> (Resource.Id.bplusLabel);
+			var bMinus = FindViewById<TextView> (Resource.Id.bminusLabel);
+			var abPlus = FindViewById<TextView> (Resource.Id.abplusLabel);
+			var abMinus = FindViewById<TextView> (Resource.Id.abminusLabel);
+			var _bloodDonationLabel = FindViewById<TextView> (Resource.Id.bloodDonationLabel);
+
 			foreach (var bloodSupply in bloodSupplyList) {
 				switch (bloodSupply.BloodGroup.ToUpper ()) {
 				case "O+":
@@ -116,7 +117,6 @@ namespace MyHealthAndroid
 					break;
 				}
 			}
-			//_bloodDonationLabel.Text = lastUpdatedText;
 		}
 
 		//------------------------ custom activity ----------------------//
