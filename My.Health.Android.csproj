@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\BitBucket\RCSI\MyHealth_Android_Develop\documents\RCSIMyHealth.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>RCSIMyHealth</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>RCSI MyHealth</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>RCSIMyHealth</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -40,11 +44,10 @@
     <ConsolePause>false</ConsolePause>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSigningKeyStore>D:\Tekenable\Projects\RCSI_Android_Develop\documents\MyHealth.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>jupiter</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>TEKenable</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>jupiter</AndroidSigningKeyPass>
+    <AndroidSigningKeyStore>C:\BitBucket\RCSI\MyHealth_Android_Develop\documents\MyHealth.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>RCSIMyHealth</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>RCSI MyHealth</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>RCSIMyHealth</AndroidSigningKeyPass>
     <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
@@ -214,6 +217,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable\buttons_states.axml" />
+    <AndroidResource Include="Resources\layout\actionbar_custom_home.axml" />
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

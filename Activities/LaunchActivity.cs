@@ -71,7 +71,7 @@ namespace MyHealthAndroid
 				}
 				editor.PutBoolean("applicationUpdated", false);
 				editor.Apply();
-				await MyHealthDB.ServiceConsumer.SyncDevice();
+				await MyHealthDB.ServiceConsumer.SyncDevice(DateTime.Now);
 				if(ShowMessage)
 				{
 					Toast.MakeText(this, "Application Initilaized Successfully.", ToastLength.Long).Show();
@@ -89,23 +89,42 @@ namespace MyHealthAndroid
 
 		//------------------------ Show Acceptance Dialog ----------------------//
 		private void ShowAcceptanceDialog() {
-			AlertDialog.Builder alert = new AlertDialog.Builder (this);
-			alert.SetTitle ("Accept Terms of Use");
-			alert.SetMessage ("Read our terms and conditions");
+			bool isAccepted = preferences.GetBoolean("isAccepted",false);
+			if (!isAccepted) {
+				AlertDialog.Builder alert = new AlertDialog.Builder (this);
+				alert.SetTitle ("Accept Terms of Use");
+				//alert.SetMessage ("Read our terms and conditions");
 
-			alert.SetCancelable (false);
+				alert.SetCancelable (false);
 
-			alert.SetPositiveButton ("Agree",(senderAlert, args) => {
+				alert.SetPositiveButton ("Agree", (senderAlert, args) => {
+					var accepted = preferences.Edit();
+					accepted.PutBoolean("isAccepted",true);
+					accepted.Commit();
+					StartActivity (typeof(HomeActivity));
+				});
+
+				alert.SetNegativeButton ("Don't Agree", (senderAlert, args) => {
+					System.Environment.Exit (0);
+				});
+
+				alert.SetNeutralButton ("Read Our T&Cs", (senderAlert, args) => {
+					//var uri = "http://myhealthapp.ie/terms.html";
+					//var intent = new Intent (Intent.ActionView, uri); 
+					//this.StartActivity (intent);
+					Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse ("http://myhealthapp.ie/terms.html"));
+					StartActivity (intent);
+					//StartActivity(type:UrlQuerySanitizer("www.google.com"));
+					System.Environment.Exit (0);
+				});
+
+				//run the alert in UI thread to display in the screen
+				RunOnUiThread (() => {
+					alert.Show ();
+				});
+			} else {
 				StartActivity (typeof(HomeActivity));
-			});
-
-			alert.SetNegativeButton ("Don't Agree", (senderAlert, args) => {
-				System.Environment.Exit (0);
-			});
-			//run the alert in UI thread to display in the screen
-			RunOnUiThread (() => {
-				alert.Show ();
-			});
+			}
 		}
 		private void ShowConnectivityDialog()
 		{

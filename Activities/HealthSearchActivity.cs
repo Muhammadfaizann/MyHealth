@@ -89,7 +89,7 @@ namespace MyHealthAndroid
 
 			// back button
 			backButton = FindViewById<Button> (Resource.Id.backButton);
-			backButton.Text = "Health Condition's";
+			backButton.Text = "Health Conditions";
 			backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();

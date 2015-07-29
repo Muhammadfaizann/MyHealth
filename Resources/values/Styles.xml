@@ -8,4 +8,12 @@
   		<item name="android:colorBackground">@color/red_opaque</item>
     	<item name="android:windowNoTitle">true</item>
   	</style>
+
+  	<style name="MyHealthTheme" parent="android:Theme.Holo.Light">
+  		<item name="android:actionBarStyle">@style/CustomActionBar</item>
+  	</style>
+  	<style name="CustomActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+  		<item name="android:background">@color/white_opaque</item>
+  	</style>
+
 </resources>

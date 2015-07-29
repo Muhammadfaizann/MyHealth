@@ -10,6 +10,7 @@ using MyHealthDB;
 using MyHealthDB.Model;
 using MyHealthDB.Service;
 using MyHealthDB.Logger;
+using Android;
 
 
 namespace MyHealthDB
@@ -38,7 +39,9 @@ namespace MyHealthDB
 			string UserName = "Name" + DateTime.Now.Ticks.ToString();
 			string Type = device; //DateTime.Now.Second % 2 == 0 ? "Android" : "IPhone";
 			string Hash = Helper.Helper.GetRegistrationMD5(DeviceId, Type, UserName);
-			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash);
+			//HC
+			string OSVersion = Android.OS.Build.VERSION.SdkInt.ToString();
+			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash, OSVersion);
 			content = await obj.Content.ReadAsStringAsync();
 			SMApplicationUsersApp _SMtblRegisterDevice = JsonConvert.DeserializeObject<SMApplicationUsersApp>(content);
 			if (_SMtblRegisterDevice.DEVICE_ID.ToLower () == DeviceId.ToLower ()) {
@@ -65,7 +68,7 @@ namespace MyHealthDB
 		}
 
 		// create this as a generic function to get //
-		public async static Task<Boolean> SyncDevice ()
+		public async static Task<Boolean> SyncDevice (DateTime syncDate)
 		{
 			_service = new WebService ();
 
@@ -77,7 +80,7 @@ namespace MyHealthDB
 //			if (AllDevices.Count < 1)
 //				return false;
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
-			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + syncDate);
 
 			try {
 				//the initial hand shake

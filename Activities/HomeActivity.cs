@@ -88,7 +88,7 @@ namespace MyHealthAndroid{
 
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
 					if (TotalHours > 1) {
-						await MyHealthDB.ServiceConsumer.SyncDevice ();
+						await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						editor.PutString("LastSyncDate", DateTime.Now.ToString("dd-MMM-yyyy"));
 						editor.Apply ();
 					} else {
@@ -104,7 +104,7 @@ namespace MyHealthAndroid{
 		{
 			ActionBar.SetDisplayShowHomeEnabled (false);
 			ActionBar.SetDisplayShowTitleEnabled (false);
-			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom_home);
 			ActionBar.SetDisplayShowCustomEnabled (true);
 
 			var txtAppTitle = ActionBar.CustomView.FindViewById (Resource.Id.txtAppTitle);
@@ -135,11 +135,13 @@ namespace MyHealthAndroid{
 				try {
 					// Get the shared Preferences
 					var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
+					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
+					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 					ISharedPreferencesEditor editor = preferences.Edit();
 					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", false);
 					editor.Apply();
-					ServiceConsumer.SyncDevice()
+					ServiceConsumer.SyncDevice(LastSyncDate)
 						.ContinueWith((r) => {
 							Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
 							editor.PutBoolean("applicationUpdated", true);

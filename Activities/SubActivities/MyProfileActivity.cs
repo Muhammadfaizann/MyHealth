@@ -74,6 +74,9 @@ namespace MyHealthAndroid
 			syncButton = FindViewById<Button> (Resource.Id.syncButton);
 			saveButton = FindViewById<Button> (Resource.Id.saveProfileButton);
 
+			string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
+			DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
+
 			syncButton.Visibility = ViewStates.Gone;
 			syncButton.Click += async (object sender, EventArgs e) => {
 				try {
@@ -81,7 +84,7 @@ namespace MyHealthAndroid
 					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", false);
 					editor.Apply();
-					await MyHealthDB.ServiceConsumer.SyncDevice();
+					await MyHealthDB.ServiceConsumer.SyncDevice(LastSyncDate);
 					Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", true);
 					editor.Apply();

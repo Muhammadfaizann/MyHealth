@@ -41,7 +41,7 @@ namespace MyHealth.Android
 
 			// back button
 			backButton = FindViewById<Button> (Resource.Id.backButton);
-			backButton.Text = "Health Service's";
+			backButton.Text = "Health Services";
 			backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();
