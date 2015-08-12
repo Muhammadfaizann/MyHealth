@@ -87,10 +87,14 @@ namespace MyHealthAndroid{
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
-					if (TotalHours > 1) {
-						await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
+					//double TotalMinutes = DateTime.Now.Subtract (LastSyncDate).TotalMinutes;
+					if (TotalHours > 24) {
+						//Toast.MakeText(this, "It is now longer then 5 minutes", ToastLength.Long).Show();
+						//await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
+						await MyHealthDB.ServiceConsumer.SyncDevice ();
 						editor.PutString("LastSyncDate", DateTime.Now.ToString("dd-MMM-yyyy"));
 						editor.Apply ();
+						Toast.MakeText(this, "Your device is updated", ToastLength.Long).Show();
 					} else {
 						await LogManager.SyncAllLogs ();
 					}
@@ -141,7 +145,8 @@ namespace MyHealthAndroid{
 					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", false);
 					editor.Apply();
-					ServiceConsumer.SyncDevice(LastSyncDate)
+					//ServiceConsumer.SyncDevice(LastSyncDate)
+					ServiceConsumer.SyncDevice ()
 						.ContinueWith((r) => {
 							Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
 							editor.PutBoolean("applicationUpdated", true);

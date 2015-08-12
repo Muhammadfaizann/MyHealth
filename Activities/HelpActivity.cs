@@ -43,10 +43,10 @@ namespace MyHealthAndroid
 					newActivity = new Intent(this, typeof(FeedbackActivity));
 						StartActivity(newActivity);
 						break;
-					case 3:
-					newActivity = new Intent(this, typeof(MyProfileActivity));
-						StartActivity(newActivity);
-						break;
+					//case 3:
+					//newActivity = new Intent(this, typeof(MyProfileActivity));
+						//StartActivity(newActivity);
+						//break;
 				}
 			};
 

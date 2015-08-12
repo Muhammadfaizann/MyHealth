@@ -68,7 +68,8 @@ namespace MyHealthDB
 		}
 
 		// create this as a generic function to get //
-		public async static Task<Boolean> SyncDevice (DateTime syncDate)
+		public async static Task<Boolean> SyncDevice ()
+		//public async static Task<Boolean> SyncDevice ()
 		{
 			_service = new WebService ();
 
@@ -80,7 +81,8 @@ namespace MyHealthDB
 //			if (AllDevices.Count < 1)
 //				return false;
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
-			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + syncDate);
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+			//Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + syncDate.Day);
 
 			try {
 				//the initial hand shake

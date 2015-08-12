@@ -10,6 +10,7 @@ using Android.Telephony;
 using Android.Views;
 using Android.Widget;
 using Java.Util;
+using System.Threading;
 
 namespace MyHealthAndroid
 {
@@ -71,7 +72,8 @@ namespace MyHealthAndroid
 				}
 				editor.PutBoolean("applicationUpdated", false);
 				editor.Apply();
-				await MyHealthDB.ServiceConsumer.SyncDevice(DateTime.Now);
+				//await MyHealthDB.ServiceConsumer.SyncDevice(DateTime.Now);
+				await MyHealthDB.ServiceConsumer.SyncDevice();
 				if(ShowMessage)
 				{
 					Toast.MakeText(this, "Application Initilaized Successfully.", ToastLength.Long).Show();

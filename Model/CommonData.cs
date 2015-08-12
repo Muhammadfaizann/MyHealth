@@ -209,7 +209,7 @@ namespace MyHealthAndroid
 			help.Add(new HelpData("Blood Donation", Resource.Drawable.blood));
 			help.Add(new HelpData("Organ Donors", Resource.Drawable.donor));
 			help.Add (new HelpData("Feedback", Resource.Drawable.Feedback));
-			help.Add (new HelpData ("My BMI", Resource.Drawable.bmi));
+			//help.Add (new HelpData ("My BMI", Resource.Drawable.bmi));
 			return help;
 		}
 

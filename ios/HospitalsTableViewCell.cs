@@ -42,6 +42,7 @@ namespace RCSI
 					siteUrl = "http://" + siteUrl;
 				}
 				UIApplication.SharedApplication.OpenUrl (new NSUrl (siteUrl));
+
 			}
 		}
 	}

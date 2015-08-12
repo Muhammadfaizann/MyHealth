@@ -84,7 +84,8 @@ namespace MyHealthAndroid
 					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", false);
 					editor.Apply();
-					await MyHealthDB.ServiceConsumer.SyncDevice(LastSyncDate);
+					//await MyHealthDB.ServiceConsumer.SyncDevice(LastSyncDate);
+					await MyHealthDB.ServiceConsumer.SyncDevice ();
 					Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", true);
 					editor.Apply();
