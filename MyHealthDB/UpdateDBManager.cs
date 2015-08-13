@@ -94,7 +94,8 @@ namespace MyHealthDB
 					Name = hospital.Name,
 					PhoneNumber = hospital.Number.ToString(),
 					URL = hospital.Website,
-					CountyID = hospital.countyId
+					CountyID = hospital.countyId,
+					isArchived = hospital.isArchived
 				});
 			}
 			return true;
@@ -108,7 +109,8 @@ namespace MyHealthDB
 					ID = number.Id,
 					Name = number.Name,
 					PhoneNumber = number.Number.ToString(),
-					Description = number.Description
+					Description = number.Description,
+					isArchived = number.isArchived
 				});
 			}
 			return true;
@@ -122,7 +124,8 @@ namespace MyHealthDB
 					ID = organisation.Id,
 					Name = organisation.Name,
 					PhoneNumber = organisation.Number.ToString(),
-					URL = organisation.Website
+					URL = organisation.Website,
+					isArchived = organisation.isArchived
 				});
 			}
 			return true;

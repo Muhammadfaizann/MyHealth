@@ -16,6 +16,7 @@ namespace MyHealthDB
 		public String Name { get; set; }
 		public String Description { get; set; }
 		public String PhoneNumber { get; set;}
+		public bool? isArchived { get; set;}
 	}
 }
 

@@ -24,6 +24,7 @@ namespace MyHealthDB
 		public String Name { get; set; }
 		public String PhoneNumber { get; set; }
 		public String URL { get; set;}
+		public bool? isArchived { get; set;}
 	}
 }
 

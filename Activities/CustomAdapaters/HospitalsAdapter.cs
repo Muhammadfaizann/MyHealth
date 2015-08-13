@@ -80,9 +80,11 @@ namespace MyHealthAndroid
 						Date = DateTime.Now, 
 						Link = orgnisationWebsite.Text
 					});
+					CloseActivity()
 				});
 
 				alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
+					CloseActivity()
 					//perform your own task for this conditional button click
 				});
 				//run the alert in UI thread to display in the screen
@@ -99,6 +101,11 @@ namespace MyHealthAndroid
 			};
 
 			return view;
+		}
+
+		private void CloseActivity()
+		{
+			_activity.Finish();
 		}
 	}
 }

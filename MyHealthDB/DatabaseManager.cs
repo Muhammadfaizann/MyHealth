@@ -349,13 +349,21 @@ namespace MyHealthDB
 		{
 			var selected = await dbConnection.Table<EmergencyContacts> ().Where(x => x.ID == contacts.ID).FirstOrDefaultAsync();
 			if (selected == null) {
-				await dbConnection.InsertAsync (contacts).ContinueWith (t => {
-					Console.WriteLine ("New Disease Name : {0}", contacts.Name);
-				});
+				if (contacts.isArchived != true) {
+					await dbConnection.InsertAsync (contacts).ContinueWith (t => {
+						Console.WriteLine ("New Contact Name : {0}", contacts.Name);
+					});
+				}
 			} else {
-				await dbConnection.UpdateAsync (contacts).ContinueWith (t => {
-					Console.WriteLine ("Updated Disease Name : {0}", contacts.Name);
-				});
+				if (contacts.isArchived == true) {
+					await dbConnection.DeleteAsync (selected).ContinueWith (t => {
+						Console.WriteLine ("Delete Contact Name : {0}", contacts.Name);
+					});
+				} else {
+					await dbConnection.UpdateAsync (contacts).ContinueWith (t => {
+						Console.WriteLine ("Updated Contact Name : {0}", contacts.Name);
+					});
+				}
 			}
 		}
 
@@ -417,13 +425,21 @@ namespace MyHealthDB
 		{
 			var selected = await dbConnection.Table<Hospital> ().Where(x => x.ID == hospital.ID).FirstOrDefaultAsync();
 			if (selected == null) {
-				await dbConnection.InsertAsync (hospital).ContinueWith (t => {
-					Console.WriteLine ("New Disease Name : {0}", hospital.Name);
-				});
+				if (hospital.isArchived != true) {
+					await dbConnection.InsertAsync (hospital).ContinueWith (t => {
+						Console.WriteLine ("New Disease Name : {0}", hospital.Name);
+					});
+				}
 			} else {
-				await dbConnection.UpdateAsync (hospital).ContinueWith (t => {
-					Console.WriteLine ("Updated Disease Name : {0}", hospital.Name);
-				});
+				if (hospital.isArchived == true) {
+					await dbConnection.DeleteAsync (selected).ContinueWith (t => {
+						Console.WriteLine ("Delete Disease Name : {0}", hospital.Name);
+					});
+				} else {
+					await dbConnection.UpdateAsync (hospital).ContinueWith (t => {
+						Console.WriteLine ("Updated Disease Name : {0}", hospital.Name);
+					});
+				}
 			}
 		}
 
@@ -505,13 +521,21 @@ namespace MyHealthDB
 		{
 			var selected = await dbConnection.Table<Organisation> ().Where(x => x.ID == organisation.ID).FirstOrDefaultAsync();
 			if (selected == null) {
-				await dbConnection.InsertAsync (organisation).ContinueWith (t => {
-					Console.WriteLine ("New Disease Name : {0}", organisation.Name);
-				});
+				if (organisation.isArchived != true) {
+					await dbConnection.InsertAsync (organisation).ContinueWith (t => {
+						Console.WriteLine ("New organisation Name : {0}", organisation.Name);
+					});
+				}
 			} else {
-				await dbConnection.UpdateAsync (organisation).ContinueWith (t => {
-					Console.WriteLine ("Updated Disease Name : {0}", organisation.Name);
-				});
+				if (organisation.isArchived == true) {
+					await dbConnection.DeleteAsync (selected).ContinueWith (t => {
+						Console.WriteLine ("Delete organisation Name : {0}", organisation.Name);
+					});
+				} else {
+					await dbConnection.UpdateAsync (organisation).ContinueWith (t => {
+							Console.WriteLine ("Updated organisation Name : {0}", organisation.Name);
+					});
+				}
 			}
 		}
 

@@ -63,7 +63,8 @@ namespace MyHealthAndroid
 
 			orgnisationWebsite.Clickable = true;
 			orgnisationWebsite.Click += (object sender, EventArgs e) => {	
-				var alert = new AlertDialog.Builder (_activity);
+				//var alert = new AlertDialog.Builder (_activity);
+				AlertDialog.Builder alert = new AlertDialog.Builder (_activity);
 				alert.SetTitle ("");
 				alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
 
@@ -79,23 +80,27 @@ namespace MyHealthAndroid
 						Date = DateTime.Now,
 						Link = orgnisationWebsite.Text
 					});
+					CloseActivity();
 				});
 
 				alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
+					CloseActivity();
+
 					//perform your own task for this conditional button click
 				});
-				_activity.RunOnUiThread (() => {
-					alert.Show ();
-				});
-
-				
-
-
-				
-
+				Dialog dialog = alert.Create();
+				dialog.Show();
+				//_activity.RunOnUiThread (() => {
+				//	alert.Show ();
+				//});
 			};
 
 			return view;
+		}
+
+		private void CloseActivity()
+		{
+			_activity.Finish();
 		}
 	}
 }
