@@ -18,6 +18,15 @@ namespace RCSI
 		[GeneratedCode ("iOS Designer", "1.0")]
 		partial void saveTheFeeback (UIButton sender);
 
+		[Outlet]
+		UIKit.UITextField username { get; set; }
+
+		[Outlet]
+		UIKit.UITextField useremail { get; set; }
+
+		[Outlet]
+		UIKit.UITextField usermessage { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 		}

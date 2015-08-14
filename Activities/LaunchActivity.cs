@@ -48,7 +48,8 @@ namespace MyHealthAndroid
 
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 					Toast.MakeText (this, "Registering device", ToastLength.Long).Show();
-					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android")) {
+
+					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android", Android.OS.Build.VERSION.SdkInt.ToString())) {
 						if(await SyncDevice())
 							ShowAcceptanceDialog ();
 					}

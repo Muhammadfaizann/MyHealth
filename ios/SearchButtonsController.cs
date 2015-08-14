@@ -13,7 +13,7 @@ namespace RCSI
 		{
 		}
 
-		partial void aToZ (NSObject sender)
+		partial void aToZ (UIButton sender)
 		{
 			//UIStoryboard storyboard = UIStoryboard.FromName("Main", null);
 
@@ -32,7 +32,7 @@ namespace RCSI
 			}
 		}
 
-		partial void category (NSObject sender)
+		partial void category (UIButton sender)
 		{
 			var currentController = this.ParentViewController as BeginController;
 			var navigationController = this.ParentViewController.NavigationController;
@@ -47,7 +47,7 @@ namespace RCSI
 			}
 		}
 
-		partial void recent (NSObject sender)
+		partial void recent (UIButton sender)
 		{
 
 			var navigationController = this.ParentViewController.NavigationController;

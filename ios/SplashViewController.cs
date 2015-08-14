@@ -93,7 +93,9 @@ namespace RCSI
 				}
 			} else {
 				if (connected) {
-					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iPhone")) {
+					string OSVer = UIDevice.CurrentDevice.SystemVersion;
+					string OSVersion = OSVer.Replace (".", "-");
+					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iPhone", OSVersion)) {
 						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
 						//var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						if (!isSyncSuccessful) {

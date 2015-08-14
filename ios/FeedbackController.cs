@@ -32,7 +32,7 @@ namespace RCSI
 		}
 
 		FeedbackAlertViewDelegate alertDelegate;
-		async partial void saveTheFeeback (Foundation.NSObject sender)
+		async partial void saveTheFeeback (UIButton sender)
 		{
 			if (username.Text.Equals("") || useremail.Text.Equals("") || usermessage.Text.Equals(""))
 			{

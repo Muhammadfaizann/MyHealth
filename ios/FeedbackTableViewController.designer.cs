@@ -5,9 +5,7 @@
 // Manual changes to this file will not be maintained.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace RCSI
 {
@@ -15,27 +13,26 @@ namespace RCSI
 	partial class FeedbackTableViewController
 	{
 		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField txtEmail { get; set; }
+		public UIKit.UITextField txtEmail { get; private set; }
 
 		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField txtMessage { get; set; }
+		public UIKit.UITextField txtMessage { get; private set; }
 
 		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UITextField txtUserName { get; set; }
-
+		public UIKit.UITextField txtUserName { get; private set; }
+		
 		void ReleaseDesignerOutlets ()
 		{
 			if (txtEmail != null) {
 				txtEmail.Dispose ();
 				txtEmail = null;
 			}
+
 			if (txtMessage != null) {
 				txtMessage.Dispose ();
 				txtMessage = null;
 			}
+
 			if (txtUserName != null) {
 				txtUserName.Dispose ();
 				txtUserName = null;

@@ -24,7 +24,9 @@ namespace RCSI
 		{
 			lblName.Text = name;
 			btnWebsite.SetTitle( "Website: " + website, UIControlState.Normal);
+			btnWebsite.TouchUpInside -= OpenWebSite;
 			btnWebsite.TouchUpInside += OpenWebSite;
+			btnTel.TouchUpInside -= DialNumber;
 			btnTel.TouchUpInside += DialNumber;
 			btnTel.SetTitle( "Tel: " + tel, UIControlState.Normal);
 
@@ -39,7 +41,6 @@ namespace RCSI
 
 		public void OpenWebSite(object sender, EventArgs e)
 		{
-
 			string siteUrl = ((UIButton)sender).Title (UIControlState.Normal).Replace("Website: ","").Trim().Replace (" ", "");
 			if (!string.IsNullOrEmpty (siteUrl)) {
 				if (!siteUrl.StartsWith ("http://", StringComparison.InvariantCultureIgnoreCase)) {

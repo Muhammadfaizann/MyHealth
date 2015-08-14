@@ -62,45 +62,43 @@ namespace MyHealthAndroid
 			};
 
 			orgnisationWebsite.Clickable = true;
-			orgnisationWebsite.Click += (object sender, EventArgs e) => {	
-				//var alert = new AlertDialog.Builder (_activity);
-				AlertDialog.Builder alert = new AlertDialog.Builder (_activity);
-				alert.SetTitle ("");
-				alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
-
-				alert.SetCancelable (false);
-
-				alert.SetPositiveButton ("OK",(senderAlert, args) => {
-					//LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
-
-					var uri = Android.Net.Uri.Parse (orgnisationWebsite.Text);
-					var intent = new Intent (Intent.ActionView, uri); 
-					_activity.StartActivity (intent); 
-					LogManager.Log<LogExternalLink>( new LogExternalLink {
-						Date = DateTime.Now,
-						Link = orgnisationWebsite.Text
-					});
-					CloseActivity();
-				});
-
-				alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
-					CloseActivity();
-
-					//perform your own task for this conditional button click
-				});
-				Dialog dialog = alert.Create();
-				dialog.Show();
-				//_activity.RunOnUiThread (() => {
-				//	alert.Show ();
-				//});
-			};
+			orgnisationWebsite.Click += onWebsiteClicked;
 
 			return view;
 		}
 
-		private void CloseActivity()
+		private void onWebsiteClicked (object sender, EventArgs e)
 		{
-			_activity.Finish();
+			string siteUrl = ((TextView)sender).Text.Replace("Website: ","").Trim().Replace (" ", "");
+
+			//var alert = new AlertDialog.Builder (_activity);
+			AlertDialog.Builder alert = new AlertDialog.Builder (_activity);
+			alert.SetTitle ("");
+			alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
+
+			alert.SetCancelable (false);
+
+			alert.SetPositiveButton ("OK",(senderAlert, args) => {
+				//LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
+
+				var uri = Android.Net.Uri.Parse (siteUrl);
+				var intent = new Intent (Intent.ActionView, uri); 
+				_activity.StartActivity (intent); 
+				LogManager.Log<LogExternalLink>( new LogExternalLink {
+					Date = DateTime.Now,
+					Link = siteUrl
+				});
+			});
+
+			alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
+
+				//perform your own task for this conditional button click
+			});
+			Dialog dialog = alert.Create();
+			dialog.Show();
+			//_activity.RunOnUiThread (() => {
+			//	alert.Show ();
+			//});
 		}
 	}
 }

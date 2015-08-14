@@ -10,8 +10,6 @@ using MyHealthDB;
 using MyHealthDB.Model;
 using MyHealthDB.Service;
 using MyHealthDB.Logger;
-using Android;
-
 
 namespace MyHealthDB
 {
@@ -30,7 +28,7 @@ namespace MyHealthDB
 			return true;
 		}
 
-		public async static Task<Boolean> RegisterDevice (String device)
+		public async static Task<Boolean> RegisterDevice (String device, string OSVersion)
 		{
 			_service = new WebService ();
 			obj = new HttpResponseMessage();
@@ -40,7 +38,7 @@ namespace MyHealthDB
 			string Type = device; //DateTime.Now.Second % 2 == 0 ? "Android" : "IPhone";
 			string Hash = Helper.Helper.GetRegistrationMD5(DeviceId, Type, UserName);
 			//HC
-			string OSVersion = Android.OS.Build.VERSION.SdkInt.ToString();
+
 			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash, OSVersion);
 			content = await obj.Content.ReadAsStringAsync();
 			SMApplicationUsersApp _SMtblRegisterDevice = JsonConvert.DeserializeObject<SMApplicationUsersApp>(content);
