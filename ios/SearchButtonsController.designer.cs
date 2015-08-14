@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace RCSI
 {
@@ -13,14 +15,17 @@ namespace RCSI
 	partial class SearchButtonsController
 	{
 		[Action ("aToZ:")]
-		partial void aToZ (Foundation.NSObject sender);
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void aToZ (UIButton sender);
 
 		[Action ("category:")]
-		partial void category (Foundation.NSObject sender);
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void category (UIButton sender);
 
 		[Action ("recent:")]
-		partial void recent (Foundation.NSObject sender);
-		
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void recent (UIButton sender);
+
 		void ReleaseDesignerOutlets ()
 		{
 		}

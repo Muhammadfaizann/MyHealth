@@ -4,6 +4,8 @@ using System;
 
 using Foundation;
 using UIKit;
+using MyHealthDB;
+using CoreGraphics;
 
 namespace RCSI
 {
@@ -24,12 +26,12 @@ namespace RCSI
 //				//PerformSegue ("Home", this);
 //			}
 //			DatabaseExists = NSUserDefaults.StandardUserDefaults.BoolForKey ("DatabaseExists");
-
+			//LoadingOverlay loadingOverlay;
 			remoteHostStatus = Reachability.RemoteHostStatus ();
 			internetStatus = Reachability.InternetConnectionStatus ();
 			localWifiStatus = Reachability.LocalWifiConnectionStatus ();
 
-			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) && (localWifiStatus != NetworkStatus.NotReachable);
+			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
 
 			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 			UIAlertView _alert = new UIAlertView (null, "Internet is not accessible, please check your device settings and try again", null, "Ok", null);
@@ -39,11 +41,20 @@ namespace RCSI
 				exit(0);
 			};
 			var userDefs = NSUserDefaults.StandardUserDefaults;
+			//var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
+			//if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
+			//	bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
+			//}
+			// show the loading overlay on the UI thread using the correct orientation sizing
+			//this. = new LoadingOverlay (bounds);
+			//this.View.Add ( this.LoadView );
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
+			//loadingOverlay.Hide ();
+			DateTime LastSyncDate = DateTime.Now;
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
 				string strLastSyncDate = userDefs.StringForKey ("LastSyncDate");
 				if (!string.IsNullOrEmpty (strLastSyncDate)) {
-					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
+					LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
 					if (TotalHours > 24) {
 						if (connected) {
@@ -64,6 +75,7 @@ namespace RCSI
 				} else {
 					if (connected) {
 						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
+						//var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						if (!isSyncSuccessful) {
 							_alert.Message = "Unable to Sync device with server, please try again later";
 							_alert.Show ();
@@ -81,8 +93,9 @@ namespace RCSI
 				}
 			} else {
 				if (connected) {
-					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iOS")) {
+					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iPhone")) {
 						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
+						//var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						if (!isSyncSuccessful) {
 							_alert.Message = "Unable to Sync device with server, please try again later";
 							_alert.Show ();
@@ -109,45 +122,57 @@ namespace RCSI
 
 		//------------------------ Get Device ID --------------------//
 		private void ShowAcceptanceDialog() {
+			bool isAgree = NSUserDefaults.StandardUserDefaults.BoolForKey ("Agree");
+			if (!isAgree) {
+				UIAlertView dialog = new UIAlertView ();
+				dialog.Title = "Accept Terms of Use";
+				//UIKit.UIButton btnWebsite;
+				var url = "http://myhealthapp.ie/terms.html";
+				//dialog.Message = "Read our terms and conditions" + url;
+				dialog.AddButton ("Don't Agree");
+				dialog.AddButton ("Agree");
+				dialog.AddButton ("Read Our T&Cs");
+				dialog.CancelButtonIndex = 0;
 
-			UIAlertView dialog = new UIAlertView ();
-			dialog.Title = "Accept Terms of Use";
-			dialog.Message = "Read our terms and conditions";
-			dialog.AddButton ("Don't Agree");
-			dialog.AddButton ("Agree");
-			dialog.CancelButtonIndex = 0;
+				dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 
-			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
+					switch (e.ButtonIndex) {
+					case 0:
+						// don't agree leads in exit of application
+	//					NSThread.Exit();
+						exit (0);
+	//					NSThread.MainThread.Exit(0);
+						break;
+					case 1:
+						NSUserDefaults defs = NSUserDefaults.StandardUserDefaults;
+						defs.SetBool (true, "Agree");
+						defs.Synchronize ();
+	//					if (DatabaseExists) {
+	//						PerformSegue ("Home", this);
+	//					} else {
+							//var dbCreated = await MyHealthDB.ServiceConsumer.CreateDatabase("iOS");
+							//if (dbCreated) {
+								//NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;
+								//userDefaults.SetBool(true, "DatabaseExists");
+								//userDefaults.Synchronize();
+						PerformSegue ("Home", this);
+							//}
+	//					};
+						break;
+					case 2:
+						UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://myhealthapp.ie/terms.html"));
+						exit (0);
+						break;
+					}
+				};
 
-				switch (e.ButtonIndex) {
-				case 0:
-					// don't agree leads in exit of application
-//					NSThread.Exit();
-					exit(0);
-//					NSThread.MainThread.Exit(0);
-					break;
-				case 1:
-					NSUserDefaults defs = NSUserDefaults.StandardUserDefaults;
-					defs.SetBool(true, "Agree");
-					defs.Synchronize();
-//					if (DatabaseExists) {
-//						PerformSegue ("Home", this);
-//					} else {
-						//var dbCreated = await MyHealthDB.ServiceConsumer.CreateDatabase("iOS");
-						//if (dbCreated) {
-							//NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;
-							//userDefaults.SetBool(true, "DatabaseExists");
-							//userDefaults.Synchronize();
-							PerformSegue("Home", this);
-						//}
-//					};
-					break;
-				}
-			};
+				dialog.Show ();
+			} else {
+				PerformSegue ("Home", this);
+			}
 
-			dialog.Show ();
 		}
-
+		
 
 		private void ShowConnectivityDialog () {
 			UIAlertView dialog = new UIAlertView ();
@@ -168,6 +193,11 @@ namespace RCSI
 		private string GetDeviceID ()
 		{
 			return "";
+		}
+
+		public void OpenWebSite(object sender, EventArgs e)
+		{
+			UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://myhealthapp.ie/terms.html"));
 		}
 	}
 }

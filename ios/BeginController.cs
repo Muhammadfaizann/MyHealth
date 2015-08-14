@@ -68,7 +68,7 @@ namespace RCSI
 		[Export ("searchBar:textDidChange:")]
 		public void TextChanged (UIKit.UISearchBar searchBar, string searchText)
 		{
-			_illnessSource.SearchItems = _illnessSource.disease.Where (i => i.Name.ToLower().Contains(searchText.ToLower())).ToArray ();
+			_illnessSource.SearchItems = _illnessSource.disease.Where (i => i.Name.ToLower().Contains(searchText.ToLower()) || i.MisSpelling == null ?  i.Name.ToLower().Contains(searchText.ToLower()) : i.MisSpelling.ToLower().Contains(searchText.ToLower())).ToArray ();
 			this.tableView.ReloadData ();
 		}
 

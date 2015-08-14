@@ -37,9 +37,13 @@ namespace RCSI
 			if (btnSync != null) {
 				btnSync.TouchUpInside += async (object sender, EventArgs e) => {
 					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
-
-					await MyHealthDB.ServiceConsumer.SyncDevice ();
-
+					var userDefs = NSUserDefaults.StandardUserDefaults;
+					string strLastSyncDate = userDefs.StringForKey ("LastSyncDate");
+					if (!string.IsNullOrEmpty (strLastSyncDate)) {
+						DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
+						//await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
+						await MyHealthDB.ServiceConsumer.SyncDevice ();
+					}
 					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 				};
 			}

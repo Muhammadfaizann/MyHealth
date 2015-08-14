@@ -92,7 +92,7 @@ namespace MyHealthDB
 				await MyHealthDB.DatabaseManager.SaveHospital (new Hospital {
 					ID = hospital.Id,
 					Name = hospital.Name,
-					PhoneNumber = hospital.Number.ToString(),
+					PhoneNumber = hospital.Number,
 					URL = hospital.Website,
 					CountyID = hospital.countyId
 				});
@@ -121,7 +121,7 @@ namespace MyHealthDB
 				await MyHealthDB.DatabaseManager.SaveOrganisation (new Organisation {
 					ID = organisation.Id,
 					Name = organisation.Name,
-					PhoneNumber = organisation.Number.ToString(),
+					PhoneNumber = organisation.Number,
 					URL = organisation.Website
 				});
 			}

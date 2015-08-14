@@ -4,6 +4,8 @@ using System;
 
 using Foundation;
 using UIKit;
+using MyHealthDB.Logger;
+using MyHealthDB;
 
 namespace RCSI
 {
@@ -41,7 +43,21 @@ namespace RCSI
 				if (!siteUrl.StartsWith ("http://", StringComparison.InvariantCultureIgnoreCase)) {
 					siteUrl = "http://" + siteUrl;
 				}
-				UIApplication.SharedApplication.OpenUrl (new NSUrl (siteUrl));
+				UIAlertView alert = new UIAlertView ("Alert", "This link will take you to an external website, Do you want to Proceed?", null, "OK", new string[] {"Cancel"});
+				alert.Clicked += (s, b) => {
+					if(b.ButtonIndex == 0) {
+						LogManager.Log<LogExternalLink> (new LogExternalLink (){ 
+							Date = DateTime.Now, 
+							Link = siteUrl
+								
+						});
+						// open in Safari
+						UIApplication.SharedApplication.OpenUrl (new NSUrl (siteUrl));
+					}
+					// return false so the UIWebView won't load the web page
+				};
+				alert.Show();
+				alert.Dispose ();
 			}
 		}
 	}

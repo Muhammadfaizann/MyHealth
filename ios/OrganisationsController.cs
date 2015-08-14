@@ -37,7 +37,7 @@ namespace RCSI
 			UITapGestureRecognizer gestureRecognizer = new UITapGestureRecognizer (HideKeyboard);
 			this.tableView.AddGestureRecognizer (gestureRecognizer);
 
-			this.tableView.Scrolled += (sender, e) => this.searchBar.ResignFirstResponder ();
+			//this.tableView.Scrolled += (sender, e) => this.searchBar.ResignFirstResponder ();
 		}
 
 		public void HideKeyboard ()

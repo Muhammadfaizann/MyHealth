@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace RCSI
 {
@@ -40,54 +42,11 @@ namespace RCSI
 		UIKit.UILabel oPlus { get; set; }
 
 		[Action ("goToIBTSSite:")]
-		partial void goToIBTSSite (UIKit.UIButton sender);
-		
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void goToIBTSSite (UIButton sender);
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (lblDateMessage != null) {
-				lblDateMessage.Dispose ();
-				lblDateMessage = null;
-			}
-
-			if (abMinus != null) {
-				abMinus.Dispose ();
-				abMinus = null;
-			}
-
-			if (abPlus != null) {
-				abPlus.Dispose ();
-				abPlus = null;
-			}
-
-			if (aMinus != null) {
-				aMinus.Dispose ();
-				aMinus = null;
-			}
-
-			if (aPlus != null) {
-				aPlus.Dispose ();
-				aPlus = null;
-			}
-
-			if (bMinus != null) {
-				bMinus.Dispose ();
-				bMinus = null;
-			}
-
-			if (bPlus != null) {
-				bPlus.Dispose ();
-				bPlus = null;
-			}
-
-			if (oMinus != null) {
-				oMinus.Dispose ();
-				oMinus = null;
-			}
-
-			if (oPlus != null) {
-				oPlus.Dispose ();
-				oPlus = null;
-			}
 		}
 	}
 }

@@ -181,7 +181,7 @@ namespace RCSI
 
 		public async  Task<List<Organisation>> GetOrgnisations()
 		{
-			var organisations = await MyHealthDB.DatabaseManager.SelectAllOrganisations ();
+			var _items = await MyHealthDB.DatabaseManager.SelectAllOrganisations ();
 //			if (organisations.Count <= 0) {
 //				MyHealthDB.OrganisationManager.SaveOrganisation (new Organisation {
 //					ID = 0,
@@ -210,7 +210,7 @@ namespace RCSI
 //
 //				organisations = MyHealthDB.OrganisationManager.GetAllOrganisations ();
 //			}
-			return organisations;	
+			return _items;	
 		}
 
 		public async Task<List<NewsChannels>> GetAllChannels ()

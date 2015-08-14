@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{519CF0A5-37DC-451F-8909-86E945044746}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SmartHealth</RootNamespace>
+    <RootNamespace>RCSI MyHealth</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>RCSI</AssemblyName>
     <ProductVersion>8.0.30703</ProductVersion>
@@ -58,13 +58,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer: Jessica Halligan (3NADA2BL7J)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Royal College of Surgeons in Ireland (G6GYXXM25C)</CodesignKey>
     <IpaPackageName>
     </IpaPackageName>
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <CodesignProvision>a2270221-7a7a-4f1c-b5df-be2417f091a8</CodesignProvision>
+    <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchSdkVersion>8.2</MtouchSdkVersion>
     <MtouchProfiling>true</MtouchProfiling>
@@ -216,6 +216,7 @@
     <BundleResource Include="Resources\Icon-76.png" />
     <BundleResource Include="Resources\Icon-76%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

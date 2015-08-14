@@ -27,7 +27,7 @@ namespace RCSI
 
 			AboutUs aboutus = await MyHealthDB.DatabaseManager.SelectAboutUs (0);
 			string htmlString = Helper.BuildHtmlForAboutUs(aboutus);
-
+			 
 			//webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
 
 			//String fileName = "Content/AboutRCSI.html";
@@ -37,8 +37,8 @@ namespace RCSI
 			//webview.LoadRequest (new NSUrlRequest (new NSUrl(localHtmlUrl, false)));
 			webview.ScalesPageToFit = false;
 
-			imageView.Image = new UIImage (NSData.FromArray (aboutus.mainImage));//UIImage.FromFile ("images/RCSI_Front_Building_1.jpg");
-
+			imageView.Image = UIImage.LoadFromData (NSData.FromArray (aboutus.mainImage));//UIImage.FromFile ("images/RCSI_Front_Building_1.jpg");
+			imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
 			//webview.BackgroundColor = UIColor.Clear;
 			//webview.Opaque = false;
 			//webview.InsertSubview (new UIImageView(UIImage.FromBundle("images/RCSI_Front_Building_1.jpg")),0);

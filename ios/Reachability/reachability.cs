@@ -127,7 +127,7 @@ public static class Reachability
         return NetworkStatus.ReachableViaWiFiNetwork;
     }
 
-    public static NetworkStatus InternetConnectionStatus()
+    /*public static NetworkStatus InternetConnectionStatus()
     {
         NetworkReachabilityFlags flags;
         bool defaultNetworkAvailable = IsNetworkAvailable(out flags);
@@ -140,7 +140,21 @@ public static class Reachability
         else if (flags == 0)
             return NetworkStatus.NotReachable;
         return NetworkStatus.ReachableViaWiFiNetwork;
-    }
+    }*/
+	public static NetworkStatus InternetConnectionStatus ()
+	{
+		NetworkReachabilityFlags flags;
+		bool defaultNetworkAvailable = IsNetworkAvailable (out flags);
+		if (defaultNetworkAvailable) {
+			if (flags.HasFlag (NetworkReachabilityFlags.IsWWAN)) {
+				return NetworkStatus.ReachableViaCarrierDataNetwork;
+			} else {
+				return NetworkStatus.ReachableViaWiFiNetwork;
+			}
+		} else {
+			return NetworkStatus.NotReachable;
+		}
+	}
 
     public static NetworkStatus LocalWifiConnectionStatus()
     {

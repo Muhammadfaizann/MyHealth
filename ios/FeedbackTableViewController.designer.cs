@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace RCSI
 {
@@ -13,26 +15,27 @@ namespace RCSI
 	partial class FeedbackTableViewController
 	{
 		[Outlet]
-		public UIKit.UITextField txtEmail { get; private set; }
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextField txtEmail { get; set; }
 
 		[Outlet]
-		public UIKit.UITextField txtMessage { get; private set; }
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextField txtMessage { get; set; }
 
 		[Outlet]
-		public UIKit.UITextField txtUserName { get; private set; }
-		
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITextField txtUserName { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (txtEmail != null) {
 				txtEmail.Dispose ();
 				txtEmail = null;
 			}
-
 			if (txtMessage != null) {
 				txtMessage.Dispose ();
 				txtMessage = null;
 			}
-
 			if (txtUserName != null) {
 				txtUserName.Dispose ();
 				txtUserName = null;

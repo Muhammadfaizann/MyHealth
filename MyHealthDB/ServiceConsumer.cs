@@ -10,6 +10,9 @@ using MyHealthDB;
 using MyHealthDB.Model;
 using MyHealthDB.Service;
 using MyHealthDB.Logger;
+using UIKit;
+using System.Drawing;
+using CoreGraphics;
 
 
 namespace MyHealthDB
@@ -37,8 +40,10 @@ namespace MyHealthDB
 			string DeviceId = Guid.NewGuid().ToString();
 			string UserName = "Name" + DateTime.Now.Ticks.ToString();
 			string Type = device; //DateTime.Now.Second % 2 == 0 ? "Android" : "IPhone";
+			string OSVer = UIDevice.CurrentDevice.SystemVersion;
+			string OSVersion = OSVer.Replace (".", "-");
 			string Hash = Helper.Helper.GetRegistrationMD5(DeviceId, Type, UserName);
-			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash);
+			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash, OSVersion);
 			content = await obj.Content.ReadAsStringAsync();
 			SMApplicationUsersApp _SMtblRegisterDevice = JsonConvert.DeserializeObject<SMApplicationUsersApp>(content);
 			if (_SMtblRegisterDevice.DEVICE_ID.ToLower () == DeviceId.ToLower ()) {
@@ -232,5 +237,8 @@ namespace MyHealthDB
 			set;
 		}
 	}
+
+
+
 }
 

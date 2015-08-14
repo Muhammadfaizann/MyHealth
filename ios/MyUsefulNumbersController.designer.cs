@@ -5,9 +5,9 @@
 // Manual changes to this file will not be maintained.
 //
 using Foundation;
-using UIKit;
 using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace RCSI
 {
@@ -17,14 +17,16 @@ namespace RCSI
 		[Outlet]
 		UIKit.UIButton btnAddNumber { get; set; }
 
-//		[Outlet]
-//		MonoTouch.UIKit.UIButton btnSave { get; set; }
-
 		[Outlet]
-		UIKit.UITableView tableView { get; set; }
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITableView tableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (tableView != null) {
+				tableView.Dispose ();
+				tableView = null;
+			}
 		}
 	}
 }

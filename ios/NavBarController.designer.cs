@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace RCSI
 {
@@ -16,17 +18,15 @@ namespace RCSI
 		UIKit.UILabel lblTitle { get; set; }
 
 		[Action ("btnShareClicked:")]
-		partial void btnShareClicked (Foundation.NSObject sender);
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void btnShareClicked (UIButton sender);
 
 		[Action ("goBack:")]
-		partial void goBack (UIKit.UIButton sender);
-		
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void goBack (UIButton sender);
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (lblTitle != null) {
-				lblTitle.Dispose ();
-				lblTitle = null;
-			}
 		}
 	}
 }

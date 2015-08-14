@@ -360,7 +360,7 @@ namespace RCSI
 			List<string> data = new List<string> ();
 			if (type.Equals (comboType.Feet)) 
 			{
-				for (int i = 1; i <= 12; i++) {
+				for (int i = 1; i <= 8; i++) {
 					data.Add (i.ToString () + " feet");
 				}
 			}
@@ -390,7 +390,7 @@ namespace RCSI
 			}
 			else if (type.Equals (comboType.g)) 
 			{
-				for (int i = 1; i < 1000; i++) {
+				for (int i = 100; i < 1000; i++) {
 					data.Add (i.ToString () + " g");
 				}
 			}

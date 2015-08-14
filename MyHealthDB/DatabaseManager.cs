@@ -492,8 +492,8 @@ namespace MyHealthDB
 		#region[Organisation]
 		public async static Task<List<Organisation>> SelectAllOrganisations()
 		{
-			var counties = await dbConnection.Table<Organisation>().OrderBy(t=>t.Name).ToListAsync ();
-			return counties;
+			var organisations = await dbConnection.Table<Organisation>().OrderBy(t=>t.Name).ToListAsync ();
+			return organisations;
 		}
 
 		public async static Task<Organisation> SelectOrganisation(int id)
