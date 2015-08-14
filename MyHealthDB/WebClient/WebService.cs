@@ -75,9 +75,9 @@ namespace MyHealthDB.Service
 			return await Client.GetAsync ("api/v1/MyHealth/ImportantNotice/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash)
+		public async Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash, string OSVersion)
 		{
-			var url = string.Format ("api/v1/Application/RegisterMe/{0}/{1}/{2}/{3}", DeviceId, Type, UserName, Hash);
+			var url = string.Format ("api/v1/Application/RegisterMe/{0}/{1}/{2}/{3}/{4}", DeviceId, Type, UserName, Hash, OSVersion);
 			return await Client.GetAsync (url, true);
 		}
 

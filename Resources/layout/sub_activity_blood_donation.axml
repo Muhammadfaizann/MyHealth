@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton"
-        android:background="#ffff1937"
+        android:background="#E11937"
         android:drawableLeft="@drawable/arrow_top2nd"
         android:textSize="18dp"
         android:paddingLeft="10dp"
@@ -196,7 +196,7 @@
             android:layout_marginLeft="25dp" />
     </LinearLayout>
     <Button
-        android:text="Click here for IBTS Web Site"
+        android:text="Click here for IBTS Website"
         android:id="@+id/bloodDonationLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

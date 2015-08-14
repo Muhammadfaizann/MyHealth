@@ -10,9 +10,7 @@ using MyHealthDB;
 using MyHealthDB.Model;
 using MyHealthDB.Service;
 using MyHealthDB.Logger;
-using UIKit;
-using System.Drawing;
-using CoreGraphics;
+using Android;
 
 
 namespace MyHealthDB
@@ -40,9 +38,9 @@ namespace MyHealthDB
 			string DeviceId = Guid.NewGuid().ToString();
 			string UserName = "Name" + DateTime.Now.Ticks.ToString();
 			string Type = device; //DateTime.Now.Second % 2 == 0 ? "Android" : "IPhone";
-			string OSVer = UIDevice.CurrentDevice.SystemVersion;
-			string OSVersion = OSVer.Replace (".", "-");
 			string Hash = Helper.Helper.GetRegistrationMD5(DeviceId, Type, UserName);
+			//HC
+			string OSVersion = Android.OS.Build.VERSION.SdkInt.ToString();
 			obj = await _service.RegisterDevice(DeviceId, Type, UserName, Hash, OSVersion);
 			content = await obj.Content.ReadAsStringAsync();
 			SMApplicationUsersApp _SMtblRegisterDevice = JsonConvert.DeserializeObject<SMApplicationUsersApp>(content);
@@ -71,6 +69,7 @@ namespace MyHealthDB
 
 		// create this as a generic function to get //
 		public async static Task<Boolean> SyncDevice ()
+		//public async static Task<Boolean> SyncDevice ()
 		{
 			_service = new WebService ();
 
@@ -83,6 +82,7 @@ namespace MyHealthDB
 //				return false;
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+			//Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + syncDate.Day);
 
 			try {
 				//the initial hand shake
@@ -237,8 +237,5 @@ namespace MyHealthDB
 			set;
 		}
 	}
-
-
-
 }
 

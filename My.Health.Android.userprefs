@@ -1,11 +1,9 @@
 ﻿<Properties StartupItem="My.Health.Android.csproj" GitUserInfo="UsingMD">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Content/Provinces.html">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.AVD_for_Galaxy_Nexus_by_Google" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Model\CommonData.cs">
     <Files>
-      <File FileName="Activities/HPDetailsActivity.cs" Line="1" Column="1" />
-      <File FileName="ios/HospitalsMapController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Content/Provinces.html" Line="35" Column="35" />
-      <File FileName="Assets/css/map.css" Line="1" Column="1" />
+      <File FileName="ios\MainStoryboard.storyboard" Line="2612" Column="140" />
+      <File FileName="Model\CommonData.cs" Line="212" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -21,8 +19,13 @@
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/RecentCategoryController.cs" line="22" column="1" />
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/IllnessDetailsController.cs" line="29" column="1" />
       <Breakpoint conditionExpression="disease.ID == 181" file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="191" column="1" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="72" column="52" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="68" column="1" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="78" column="1" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="24" column="1" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="93" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.My.Health.Android MonoForAntroid.PreferredDevice="Nexus 4" />
+  <MonoDevelop.Ide.ItemProperties.My.Health.Android AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>

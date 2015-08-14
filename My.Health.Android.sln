@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Health.Android", "My.Hea
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MyHealthDB", "MyHealthDB\MyHealthDB.shproj", "{8892DED7-FE9E-4620-A868-C3E9CC2517E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCSI MyHealth", "ios\RCSI MyHealth.csproj", "{519CF0A5-37DC-451F-8909-86E945044746}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHealth", "ios\MyHealth.csproj", "{519CF0A5-37DC-451F-8909-86E945044746}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

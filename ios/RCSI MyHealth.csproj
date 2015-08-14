@@ -361,14 +361,6 @@
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Resources\images\" />
-    <Folder Include="Models\" />
-    <Folder Include="CustomControls\" />
-    <Folder Include="Content\" />
-    <Folder Include="Reachability\" />
-    <Folder Include="Resources\css\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\Heart.html" />
     <Content Include="Content\OrganDonor.html" />
     <Content Include="Content\AboutRCSI.html" />

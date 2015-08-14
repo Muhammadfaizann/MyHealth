@@ -89,7 +89,7 @@ namespace MyHealthAndroid
 
 			// back button
 			backButton = FindViewById<Button> (Resource.Id.backButton);
-			backButton.Text = "Health Condition's";
+			backButton.Text = "Health Conditions";
 			backButton.Click += (object sender, EventArgs e) => 
 			{
 				base.OnBackPressed();
@@ -248,7 +248,8 @@ namespace MyHealthAndroid
 		private void performSearchOnTextChange (object sender, global::Android.Text.TextChangedEventArgs e)
 		{
 			//_listAdapter.Filter.InvokeFilter (_searchText.Text);
-			List<Disease> list = diseases.Where (x => x.Name.ToLower().Contains (_searchText.Text.ToLower())).ToList(); //.Select (x => x.Name).ToList<String>();
+			//List<Disease> list = diseases.Where (x => x.Name.ToLower().Contains (_searchText.Text.ToLower())).ToList();
+			List<Disease> list = diseases.Where (x => x.Name.ToLower().Contains (_searchText.Text.ToLower()) || x.MisSpelling == null ? x.Name.ToLower().Contains (_searchText.Text.ToLower()) : x.MisSpelling.Trim().ToLower().Contains (_searchText.Text.ToLower())).ToList(); //.Select (x => x.Name).ToList<String>();
 			//_listAdapter = new ArrayAdapter (this, Resource.Layout.SimpleListItem, list);
 			_customDiseaseAdapter = new DiseaseAdapter(this, list);//_listAdapter;
 			_diseaseList.Adapter = _customDiseaseAdapter;//new DiseaseAdapter (this, list);//_listAdapter;

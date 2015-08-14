@@ -87,10 +87,14 @@ namespace MyHealthAndroid{
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
-					if (TotalHours > 1) {
+					//double TotalMinutes = DateTime.Now.Subtract (LastSyncDate).TotalMinutes;
+					if (TotalHours > 24) {
+						//Toast.MakeText(this, "It is now longer then 5 minutes", ToastLength.Long).Show();
+						//await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						await MyHealthDB.ServiceConsumer.SyncDevice ();
 						editor.PutString("LastSyncDate", DateTime.Now.ToString("dd-MMM-yyyy"));
 						editor.Apply ();
+						Toast.MakeText(this, "Your device is updated", ToastLength.Long).Show();
 					} else {
 						await LogManager.SyncAllLogs ();
 					}
@@ -104,7 +108,7 @@ namespace MyHealthAndroid{
 		{
 			ActionBar.SetDisplayShowHomeEnabled (false);
 			ActionBar.SetDisplayShowTitleEnabled (false);
-			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
+			ActionBar.SetCustomView (Resource.Layout.actionbar_custom_home);
 			ActionBar.SetDisplayShowCustomEnabled (true);
 
 			var txtAppTitle = ActionBar.CustomView.FindViewById (Resource.Id.txtAppTitle);
@@ -135,11 +139,14 @@ namespace MyHealthAndroid{
 				try {
 					// Get the shared Preferences
 					var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
+					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
+					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 					ISharedPreferencesEditor editor = preferences.Edit();
 					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
 					editor.PutBoolean("applicationUpdated", false);
 					editor.Apply();
-					ServiceConsumer.SyncDevice()
+					//ServiceConsumer.SyncDevice(LastSyncDate)
+					ServiceConsumer.SyncDevice ()
 						.ContinueWith((r) => {
 							Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
 							editor.PutBoolean("applicationUpdated", true);

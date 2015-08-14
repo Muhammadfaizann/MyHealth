@@ -9,11 +9,11 @@
     android:focusableInTouchMode="true"
     tools:context="com.elevenvalues.rnitte.Speaker">
     <Button
-        android:text="Health Condition's"
+        android:text="Health Conditions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton"
-        android:background="#ffff1937"
+        android:background="#E11937"
         android:drawableLeft="@drawable/arrow_top2nd"
         android:textSize="18dp"
         android:paddingLeft="10dp"
@@ -50,7 +50,7 @@
         android:text="Search Options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffff1937"
+        android:background="#E11937"
         android:textSize="18dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

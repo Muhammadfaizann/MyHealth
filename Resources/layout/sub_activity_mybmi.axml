@@ -12,7 +12,7 @@
     <Button
         android:text="Home"
         android:id="@+id/backButton"
-        android:background="#ffff1937"
+        android:background="#E11937"
         android:drawableLeft="@drawable/arrow_top2nd"
         android:textSize="18dp"
         android:paddingLeft="10dp"

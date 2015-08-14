@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton"
-        android:background="#ffff1937"
+        android:background="#E11937"
         android:textSize="18dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -33,18 +33,20 @@
                 android:layout_weight="0.5">
                 <ImageButton
                     android:id="@+id/healthSearchBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="116.4dp"
+                    android:layout_height="114.0dp"
                     android:scaleType="fitXY"
                     android:background="@drawable/buttons_states"
                     android:src="@drawable/Search1"
-                    android:layout_centerInParent="true"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:fitsSystemWindows="true"
+                    android:layout_marginRight="0.0dp"
+                    android:layout_centerInParent="true" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Health Condition's"
+                    android:text="Health Conditions"
                     android:textColor="#ff000000"
                     android:layout_below="@+id/healthSearchBtn"
                     android:layout_centerHorizontal="true"
@@ -57,8 +59,8 @@
                 android:id="@+id/frameLayout2">
                 <ImageButton
                     android:id="@+id/healthProfessionalBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="118.2dp"
+                    android:layout_height="114.0dp"
                     android:background="@drawable/buttons_states"
                     android:scaleType="fitXY"
                     android:src="@drawable/Contact"
@@ -68,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:text="Health Service's"
+                    android:text="Health Services"
                     android:textColor="#ff000000"
                     android:textStyle="normal"
                     android:id="@+id/textView3"
@@ -88,8 +90,8 @@
                 android:layout_weight="0.5">
                 <ImageButton
                     android:id="@+id/healthNewsBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="116.9dp"
+                    android:layout_height="114.0dp"
                     android:background="@drawable/buttons_states"
                     android:scaleType="fitXY"
                     android:src="@drawable/news_updates"
@@ -111,8 +113,8 @@
                 android:layout_weight="0.5">
                 <ImageButton
                     android:id="@+id/helpBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="119.6dp"
+                    android:layout_height="114.0dp"
                     android:background="@drawable/buttons_states"
                     android:scaleType="fitXY"
                     android:src="@drawable/help"
@@ -136,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/backButton"
-            android:background="#ffff1937"
+            android:background="#E11937"
             android:textSize="18dp"
             android:textColor="#ffffffff"
             android:textColorHighlight="#ffffffff" />
