@@ -55,16 +55,20 @@ namespace MyHealthAndroid
 			orgnisationWebsite.Text = _list[position].URL;
 
 			orgnisationNumber.Clickable = true;
-			orgnisationNumber.Click += (object sender, EventArgs e) => {
-				var uri = Android.Net.Uri.Parse ("tel:" + orgnisationNumber.Text);
-				var intent = new Intent (Intent.ActionView, uri); 
-				_activity.StartActivity (intent); 
-			};
+			orgnisationNumber.Click -= onNumberClicked;
+			orgnisationNumber.Click += onNumberClicked;
 
 			orgnisationWebsite.Clickable = true;
+			orgnisationWebsite.Click -= onWebsiteClicked;
 			orgnisationWebsite.Click += onWebsiteClicked;
 
 			return view;
+		}
+
+		private void onNumberClicked (object sender, EventArgs e) => {
+			var uri = Android.Net.Uri.Parse ("tel:" + ((TextView)sender).Text);
+			var intent = new Intent (Intent.ActionView, uri); 
+			_activity.StartActivity (intent); 
 		}
 
 		private void onWebsiteClicked (object sender, EventArgs e)
