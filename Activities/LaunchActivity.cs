@@ -19,6 +19,7 @@ namespace MyHealthAndroid
 	public class LaunchActivity : Activity
 	{
 		private ISharedPreferences preferences;
+		private ProgressDialog progressDialog;
 
 		protected async override void OnCreate (Bundle bundle)
 		{
@@ -28,18 +29,26 @@ namespace MyHealthAndroid
 			SetContentView (Resource.Layout.Launch);
 
 			//Get the shared Preferences
-			preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
+			preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext);
 
-
+			progressDialog = new ProgressDialog (this);
+			progressDialog.Indeterminate = true;
+			progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+			progressDialog.SetTitle ("Initializing, Please Wait...");
+			progressDialog.SetMessage("Verifying Data...");
+			progressDialog.SetCancelable(false);
+			progressDialog.Show();
 
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
+			progressDialog.SetMessage("Checking Device Registration...");
+
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
 				bool isDeviceSynced = preferences.GetBoolean("applicationUpdated",false);
 				if (!isDeviceSynced) {
+					progressDialog.SetMessage("Synching Data With Server...");
 					if (await SyncDevice ())
 						ShowAcceptanceDialog ();
 				} else {
-									
 					ShowAcceptanceDialog ();
 				}
 			} else {
@@ -49,7 +58,9 @@ namespace MyHealthAndroid
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 					Toast.MakeText (this, "Registering device", ToastLength.Long).Show();
 
+					progressDialog.SetMessage("Registering Device With Server...");
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android", Android.OS.Build.VERSION.SdkInt.ToString())) {
+						progressDialog.SetMessage("Synching Data With Server...");
 						if(await SyncDevice())
 							ShowAcceptanceDialog ();
 					}
@@ -57,34 +68,32 @@ namespace MyHealthAndroid
 					ShowConnectivityDialog ();
 				}
 			}
+
+			if (progressDialog.IsShowing) {
+				progressDialog.Dismiss ();
 			}
+		}
 			
 		protected override void OnPause()
 		{
 			base.OnPause ();
 		}
 
-		protected async Task<Boolean> SyncDevice (bool ShowMessage=true)
+		protected async Task<Boolean> SyncDevice ()
 		{
 			try {
-				ISharedPreferencesEditor editor = preferences.Edit();
-				if(ShowMessage){
-					Toast.MakeText(this, "Initializing Application for the first time, Please wait.", ToastLength.Long).Show();
-				}
-				editor.PutBoolean("applicationUpdated", false);
-				editor.Apply();
+				ISharedPreferencesEditor editor = preferences.Edit ();
+				editor.PutBoolean ("applicationUpdated", false);
+				editor.Apply ();
 				//await MyHealthDB.ServiceConsumer.SyncDevice(DateTime.Now);
-				await MyHealthDB.ServiceConsumer.SyncDevice();
-				if(ShowMessage)
-				{
-					Toast.MakeText(this, "Application Initilaized Successfully.", ToastLength.Long).Show();
-				}
-				editor.PutBoolean("applicationUpdated", true);
-				editor.PutString("LastSyncDate", DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss"));
+				await MyHealthDB.ServiceConsumer.SyncDevice ();
 
-				editor.Apply();
+				editor.PutBoolean ("applicationUpdated", true);
+				editor.PutString ("LastSyncDate", DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"));
+
+				editor.Apply ();
 			} catch (Exception ex) {
-				Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();
+				Toast.MakeText (this, ex.ToString (), ToastLength.Long).Show ();
 				return false;
 			}
 			return true;
@@ -92,6 +101,8 @@ namespace MyHealthAndroid
 
 		//------------------------ Show Acceptance Dialog ----------------------//
 		private void ShowAcceptanceDialog() {
+			progressDialog.Dismiss ();
+
 			bool isAccepted = preferences.GetBoolean("isAccepted",false);
 			if (!isAccepted) {
 				AlertDialog.Builder alert = new AlertDialog.Builder (this);
@@ -143,6 +154,7 @@ namespace MyHealthAndroid
 
 			//run the alert in UI thread to display in the screen
 			RunOnUiThread (() => {
+				progressDialog.Dismiss ();
 				alert.Show ();
 			});
 		}

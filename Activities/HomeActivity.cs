@@ -88,6 +88,15 @@ namespace MyHealthAndroid{
 
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
 					//double TotalMinutes = DateTime.Now.Subtract (LastSyncDate).TotalMinutes;
+
+					ProgressDialog progressDialog = new ProgressDialog (this);
+					progressDialog.Indeterminate = true;
+					progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+					progressDialog.SetTitle ("Please Wait...");
+					progressDialog.SetMessage("Synching Data With Server...");
+					progressDialog.SetCancelable(false);
+					progressDialog.Show();
+
 					if (TotalHours > 24) {
 						//Toast.MakeText(this, "It is now longer then 5 minutes", ToastLength.Long).Show();
 						//await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
@@ -98,9 +107,10 @@ namespace MyHealthAndroid{
 					} else {
 						await LogManager.SyncAllLogs ();
 					}
+
+					progressDialog.Dismiss ();
 				}
 			}
-
 		}
 
 		//------------------------ custom activity ----------------------//
@@ -135,31 +145,40 @@ namespace MyHealthAndroid{
 				StartActivity (newActivity);
 				break;
 			case Resource.Id.action_sync:
-				
+
+				ProgressDialog progressDialog = new ProgressDialog (this);
+				progressDialog.Indeterminate = true;
+				progressDialog.SetProgressStyle (ProgressDialogStyle.Spinner);
+				progressDialog.SetTitle ("Please Wait...");
+				progressDialog.SetMessage ("Synching Data With Server...");
+				progressDialog.SetCancelable (false);
+				progressDialog.Show ();
+
 				try {
 					// Get the shared Preferences
 					var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
-					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
+					string strLastSyncDate = preferences.GetString ("LastSyncDate", DateTime.MinValue.ToString ("dd-MMM-yyyy HH:mm:ss"));
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
-					ISharedPreferencesEditor editor = preferences.Edit();
-					Toast.MakeText(this, "Updating database, Please wait.", ToastLength.Long).Show();
-					editor.PutBoolean("applicationUpdated", false);
-					editor.Apply();
+					ISharedPreferencesEditor editor = preferences.Edit ();
+
+					editor.PutBoolean ("applicationUpdated", false);
+					editor.Apply ();
 					//ServiceConsumer.SyncDevice(LastSyncDate)
 					ServiceConsumer.SyncDevice ()
-						.ContinueWith((r) => {
-							Toast.MakeText(this, "Successfully updated the system.", ToastLength.Long).Show();
-							editor.PutBoolean("applicationUpdated", true);
-							editor.Apply();
-						}, TaskScheduler.FromCurrentSynchronizationContext());
+						.ContinueWith ((r) => {
+							progressDialog.Dismiss ();
+							Toast.MakeText (this, "Successfully updated the system.", ToastLength.Long).Show ();
+							editor.PutBoolean ("applicationUpdated", true);
+							editor.Apply ();
+						},
+						TaskScheduler.FromCurrentSynchronizationContext ());
 				} catch (Exception ex) {
-					Toast.MakeText(this, ex.ToString(), ToastLength.Long).Show();
+					progressDialog.Dismiss ();
+					Toast.MakeText (this, ex.ToString (), ToastLength.Long).Show ();
 				}
-
 				break;
 			}
 			return base.OnMenuItemSelected (featureId, item);
 		}
 	}
 }
-

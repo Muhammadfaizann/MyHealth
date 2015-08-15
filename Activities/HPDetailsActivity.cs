@@ -32,10 +32,8 @@ namespace MyHealthAndroid
 
 		private HPUserfulNumberAdapter _contactAdapter;
 
-
 		protected async override void OnCreate (Bundle bundle)
 		{
-
 			base.OnCreate (bundle);
 			_model = new CommonData ();
 			_caller = _model.GetHealthProfessionals().ElementAt(Intent.GetIntExtra("callerCellPosition",0));
@@ -66,19 +64,15 @@ namespace MyHealthAndroid
 			case 1:
 				await setLayoutWithTable (data.DisplayName);
 				break;
-
 			case 2:
 				await setSimpleLayout (data.DisplayName);
 				break;
-
 			case 3:
 				await setLayoutWithTableContacts ();
 				break;
-
 			case 4:
 				await setSimpleLayout (data.DisplayName);
 				break;
-
 			}
 
 			//implement the back button 
@@ -126,7 +120,6 @@ namespace MyHealthAndroid
 				Page = Convert.ToInt32(Pages.MyUsefulNumbers)
 			});
 
-
 			_addNumberButton = FindViewById<Button> (Resource.Id.addContactButton);
 			//_saveNumberButton = FindViewById<Button> (Resource.Id.saveContactButton);
 			//_saveNumberButton.Visibility = ViewStates.Invisible;
@@ -168,12 +161,13 @@ namespace MyHealthAndroid
 				};*/
 
 			} else {
-
 				AboutUs aboutus = await MyHealthDB.DatabaseManager.SelectAboutUs (0);
 				string htmlString = Helper.BuildHtmlForAboutUs(aboutus);
 
 				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
-				_imageView.SetImageBitmap(BitmapFactory.DecodeByteArray(aboutus.mainImage,0,aboutus.mainImage.Length));
+				if (aboutus.mainImage != null && aboutus.mainImage.Length > 0) {
+					_imageView.SetImageBitmap (BitmapFactory.DecodeByteArray (aboutus.mainImage, 0, aboutus.mainImage.Length));
+				}
 
 				await LogManager.Log (new LogUsage {
 					Date = DateTime.Now,
@@ -204,7 +198,6 @@ namespace MyHealthAndroid
 		{
 			//var contactList = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
 
 			//pass the contactsList from where you call this function. 
 			alert.SetTitle("Add / Edit Contact");
