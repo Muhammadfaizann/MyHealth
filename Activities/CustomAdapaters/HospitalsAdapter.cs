@@ -55,58 +55,56 @@ namespace MyHealthAndroid
 			orgnisationWebsite.Text = _list[position].URL;
 
 			orgnisationNumber.Clickable = true;
-			orgnisationNumber.Click += (object sender, EventArgs e) => {
-				var uri = Android.Net.Uri.Parse ("tel:" + orgnisationNumber.Text);
-				var intent = new Intent (Intent.ActionView, uri); 
-				_activity.StartActivity (intent); 
-			};
+			orgnisationNumber.Click -= onNumberClicked;
+			orgnisationNumber.Click += onNumberClicked;
 
 			orgnisationWebsite.Clickable = true;
-			orgnisationWebsite.Click += (object sender, EventArgs e) => {
-
-				var alert = new AlertDialog.Builder (_activity);
-				alert.SetTitle ("");
-				alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
-
-				alert.SetCancelable (false);
-
-				alert.SetPositiveButton ("OK",(senderAlert, args) => {
-					//LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
-
-					var uri = Android.Net.Uri.Parse (orgnisationWebsite.Text);
-					var intent = new Intent (Intent.ActionView, uri); 
-					_activity.StartActivity (intent); 
-					LogManager.Log<LogExternalLink>( new LogExternalLink {
-						Date = DateTime.Now, 
-						Link = orgnisationWebsite.Text
-					});
-					CloseActivity()
-				});
-
-				alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
-					CloseActivity()
-					//perform your own task for this conditional button click
-				});
-				//run the alert in UI thread to display in the screen
-				_activity.RunOnUiThread (() => {
-					alert.Show ();
-				});
-				//var uri = Android.Net.Uri.Parse (orgnisationWebsite.Text);
-				//var intent = new Intent (Intent.ActionView, uri); 
-				//_activity.StartActivity (intent); 
-				//await LogManager.Log<LogExternalLink> (new LogExternalLink {
-				//	Date = DateTime.Now, 
-				//	Link = orgnisationWebsite.Text
-				//});
-			};
+			orgnisationWebsite.Click -= onWebsiteClicked;
+			orgnisationWebsite.Click += onWebsiteClicked;
 
 			return view;
 		}
 
-		private void CloseActivity()
+		private void onNumberClicked (object sender, EventArgs e) {
+			var uri = Android.Net.Uri.Parse ("tel:" + ((TextView)sender).Text);
+			var intent = new Intent (Intent.ActionView, uri); 
+			_activity.StartActivity (intent); 
+		}
+
+		private void onWebsiteClicked (object sender, EventArgs e)
 		{
-			_activity.Finish();
+			var alert = new AlertDialog.Builder (_activity);
+			alert.SetTitle ("");
+			alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
+
+			alert.SetCancelable (false);
+
+			alert.SetPositiveButton ("OK",(senderAlert, args) => {
+				//LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
+
+			var uri = Android.Net.Uri.Parse (((TextView)sender).Text);
+				var intent = new Intent (Intent.ActionView, uri); 
+				_activity.StartActivity (intent); 
+				LogManager.Log<LogExternalLink>( new LogExternalLink {
+					Date = DateTime.Now, 
+				Link = ((TextView)sender).Text
+				});
+			});
+
+			alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
+				//perform your own task for this conditional button click
+			});
+			//run the alert in UI thread to display in the screen
+			_activity.RunOnUiThread (() => {
+				alert.Show ();
+			});
+			//var uri = Android.Net.Uri.Parse (orgnisationWebsite.Text);
+			//var intent = new Intent (Intent.ActionView, uri); 
+			//_activity.StartActivity (intent); 
+			//await LogManager.Log<LogExternalLink> (new LogExternalLink {
+			//	Date = DateTime.Now, 
+			//	Link = orgnisationWebsite.Text
+			//});
 		}
 	}
 }
-

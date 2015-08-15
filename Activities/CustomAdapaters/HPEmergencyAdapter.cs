@@ -54,17 +54,20 @@ namespace MyHealthAndroid
 			emergencyNumber.Text = _list [position].PhoneNumber.ToString(); //_list[position , 2];
 
 			emergencyNumber.Clickable = true;
-			emergencyNumber.Click += (object sender, EventArgs e) => {
-				var uri = Android.Net.Uri.Parse ("tel:" + emergencyNumber.Text);
-				var intent = new Intent (Intent.ActionView, uri); 
-				_activity.StartActivity (intent); 
-			};
+			emergencyNumber.Click -= onNumberClicked;
+			emergencyNumber.Click += onNumberClicked;
 
 //			if (_contactList [position].PhotoId == null) {
 //				contactImage = view.FindViewById<ImageView> (Resource.Id.ContactImage);
 //				contactImage.SetImageResource (Resource.Drawable.contactImage);
 //			}  
 			return view;
+		}
+
+		private void onNumberClicked (object sender, EventArgs e) {
+			var uri = Android.Net.Uri.Parse ("tel:" + ((TextView)sender).Text);
+			var intent = new Intent (Intent.ActionView, uri); 
+			_activity.StartActivity (intent); 
 		}
 	}
 }

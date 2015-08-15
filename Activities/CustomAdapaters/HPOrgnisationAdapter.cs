@@ -65,7 +65,7 @@ namespace MyHealthAndroid
 			return view;
 		}
 
-		private void onNumberClicked (object sender, EventArgs e) => {
+		private void onNumberClicked (object sender, EventArgs e) {
 			var uri = Android.Net.Uri.Parse ("tel:" + ((TextView)sender).Text);
 			var intent = new Intent (Intent.ActionView, uri); 
 			_activity.StartActivity (intent); 

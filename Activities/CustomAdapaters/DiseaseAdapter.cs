@@ -28,7 +28,6 @@ namespace MyHealthAndroid
 
 			var disease = diseaseList [position];
 			return new WrapDiseaseClass () { Id = disease.ID };
-			return null;
 		}
 
 		public override long GetItemId (int position) {
