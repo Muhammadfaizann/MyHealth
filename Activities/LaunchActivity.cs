@@ -14,7 +14,7 @@ using System.Threading;
 
 namespace MyHealthAndroid
 {
-	[Activity(Theme = "@style/Theme.Splash", MainLauncher = true, NoHistory = true,
+	[Activity(Theme = "@style/MyHealthTheme.Splash", MainLauncher = true, NoHistory = true,
 		ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class LaunchActivity : Activity
 	{
@@ -56,9 +56,8 @@ namespace MyHealthAndroid
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
 
 				if ((activeConnection != null) && activeConnection.IsConnected) {
-					Toast.MakeText (this, "Registering device", ToastLength.Long).Show();
+					progressDialog.SetMessage("Registering Device...");
 
-					progressDialog.SetMessage("Registering Device With Server...");
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android", Android.OS.Build.VERSION.SdkInt.ToString())) {
 						progressDialog.SetMessage("Synching Data With Server...");
 						if(await SyncDevice())

@@ -3,7 +3,7 @@
 	<color name="white_opaque">#FFFFFFFF</color>
 	<color name="red_opaque">#ffC90C30</color>
 	<color name="btn_pressed">#ff84D3EF</color>
-  	<style name="Theme.Splash" parent="android:Theme">
+  	<style name="MyHealthTheme.Splash" parent="android:Theme.Holo.Light">
   		<item name="android:windowBackground">@color/red_opaque</item>
   		<item name="android:colorBackground">@color/red_opaque</item>
     	<item name="android:windowNoTitle">true</item>

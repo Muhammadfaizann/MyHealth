@@ -33,12 +33,37 @@
         android:textColorLink="#ff313131"
         android:layout_below="@+id/backButton"
         android:drawableRight="@drawable/search_small" />
-    <ListView
-        android:id="@+id/diseaseList"
+    <LinearLayout
+        android:id="@+id/indexListContainer"
         android:layout_width="match_parent"
-        android:layout_above="@+id/searchOptions"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
         android:layout_below="@+id/searchText"
-        android:layout_height="wrap_content" />
+        android:layout_above="@+id/searchOptions">
+        <ListView
+            android:id="@+id/diseaseList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/side_index"
+            android:scrollbars="none"
+            android:visibility="gone">
+            <LinearLayout
+                android:id="@+id/side_index_layout"
+                android:layout_width="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_height="fill_parent"
+                android:background="#c3c3c3"
+                android:alpha="0.5"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
     <ExpandableListView
         android:id="@+id/expandableDiseaseList"
         android:layout_width="match_parent"
