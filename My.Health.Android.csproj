@@ -218,6 +218,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable\buttons_states.axml" />
     <AndroidResource Include="Resources\layout\actionbar_custom_home.axml" />
+    <AndroidResource Include="Resources\layout\side_index_item.axml" />
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
