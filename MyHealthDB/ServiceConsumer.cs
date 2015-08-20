@@ -221,7 +221,35 @@ namespace MyHealthDB
 
 			return bloodSupplyList;		
 		}
+
+		public async static Task<Boolean> SendMyProfileData (MyProfile myprofile)
+		{
+			var service = new WebService ();
+			var obj = new HttpResponseMessage();
+			//uncomment the line below to input dummy data
+			//await inputFakeData ();
+
+			var AllDevices = await DatabaseManager.SelectAllDevices ();
+			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+
+			//the initial hand shake
+			obj = await service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
+			content = await obj.Content.ReadAsStringAsync();
+			SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
+			Helper.Helper.Hash = _SMHandShake.Hash;
+			if (_SMHandShake.StatusId != 1) {
+				Console.WriteLine ("HandShake was rejected");
+				return false;
+			}
+				myprofile.DeviceId = Helper.Helper.DeviceId;
+				obj = await service.PostMyProfileData (myprofile);
+				content = await obj.Content.ReadAsStringAsync ();
+				return true;
+		}
 	}
+
+
 
 	public class BloodSupply
 	{

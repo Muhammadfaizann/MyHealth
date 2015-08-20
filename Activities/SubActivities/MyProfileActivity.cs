@@ -15,6 +15,7 @@ using MyHealthDB.Logger;
 using Android.Preferences;
 using System.Threading.Tasks;
 using Android.Views.InputMethods;
+using Android.Net;
 
 namespace MyHealthAndroid
 {
@@ -94,7 +95,7 @@ namespace MyHealthAndroid
 				}
 			};
 
-			saveButton.Click += (object sender, EventArgs e) => {
+			saveButton.Click += async (object sender, EventArgs e) => {
 				/*ISharedPreferencesEditor editor = preferences.Edit();
 
 				editor.PutBoolean ("IsMetricSelected", isMetric);
@@ -404,7 +405,7 @@ namespace MyHealthAndroid
 			SetSpinnersAdapter (isMetric);
 		}
 
-		public void Save_Click(object sender, EventArgs e) {
+		public async void Save_Click(object sender, EventArgs e) {
 			// hide the keyboard if opened
 			InputMethodManager imm = (InputMethodManager)this.GetSystemService(Context.InputMethodService);
 			if (imm.IsAcceptingText) {
@@ -490,7 +491,25 @@ namespace MyHealthAndroid
 			editor.PutString("BloodGroup", bloodGroupSelected);
 
 			editor.Apply();
+			MyProfile myprofile = new MyProfile ();
+			myprofile.AgeRange = ageSelected;
+			myprofile.County = selectedCounty;
+			myprofile.Gender = genderSelected;
+			myprofile.BloodGroup = bloodGroupSelected;
+			myprofile.Height_Metre = Convert.ToInt32 (heightMeter.Replace (" m", String.Empty));
+			myprofile.Height_Centimetre = Convert.ToInt32 (heightCM.Replace (" cm", String.Empty));
+			myprofile.Weight_Kg = Convert.ToInt32 (weightKg.Replace (" kg", String.Empty));
+			myprofile.Weight_Grams = Convert.ToInt32 (weightg.Replace (" g", String.Empty));;
+			//myprofile.ApplicationId = 
+			//myprofile.Save ();
+			var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
+			var activeConnection = connectivityManager.ActiveNetworkInfo;
 
+			if ((activeConnection != null) && activeConnection.IsConnected) {
+				Toast.MakeText(this.BaseContext, "Sending Data", ToastLength.Long).Show();
+				bool sent = await MyHealthDB.ServiceConsumer.SendMyProfileData (myprofile);
+				//Toast.MakeText(this.BaseContext, sent.ToString(), ToastLength.Long).Show();
+			}
 			Toast.MakeText(this.BaseContext, "Profile Saved", ToastLength.Long).Show();
 		}
 	}

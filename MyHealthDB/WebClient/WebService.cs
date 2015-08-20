@@ -81,6 +81,13 @@ namespace MyHealthDB.Service
 			return await Client.GetAsync (url, true);
 		}
 
+		public async Task<HttpResponseMessage> PostMyProfileData(MyProfile data)
+		{
+			string url = string.Format("api/v1/MyHealth/MyProfile/PostData");
+			return await Client.Post(data,url);
+
+		}
+
 		public async Task<HttpResponseMessage> PostLogContent(List<LogContent> data)
 		{
 			string url = string.Format("api/v1/LogContent/PostAll");
