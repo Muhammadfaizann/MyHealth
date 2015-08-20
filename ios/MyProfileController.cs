@@ -27,6 +27,7 @@ namespace RCSI
 		CustomPickerControl _cpcInch ;
 		CustomPickerControl  _cpcSt;
 		CustomPickerControl _cpcLbs;
+		NetworkStatus remoteHostStatus, internetStatus, localWifiStatus;
 
 		public MyProfileController (IntPtr handle) : base (handle)
 		{
@@ -90,7 +91,7 @@ namespace RCSI
 			};
 		}
 
-		private void SaveProfile () {
+		private async void SaveProfile () {
 			var userDefs = NSUserDefaults.StandardUserDefaults;
 			String heightMeter, heightCM,
 				weightKg, weightg,
@@ -165,6 +166,24 @@ namespace RCSI
 			userDefs.SetBool (metricAnswer.On, "ProfileUnitIsMetric");
 
 			userDefs.Synchronize ();
+
+			MyProfile myprofile = new MyProfile ();
+			myprofile.AgeRange = ageRange;
+			myprofile.County = county;
+			myprofile.Gender = gender;
+			myprofile.BloodGroup = bloodGroup;
+			myprofile.Height_Metre = Convert.ToInt32(heightMeter.Replace(" m", String.Empty));
+			myprofile.Height_Centimetre = Convert.ToInt32(heightCM.Replace(" cm", String.Empty));
+			myprofile.Weight_Kg = Convert.ToInt32(weightKg.Replace(" kg", String.Empty));
+			myprofile.Weight_Grams = Convert.ToInt32(weightg.Replace(" g", String.Empty));
+
+			remoteHostStatus = Reachability.RemoteHostStatus ();
+			internetStatus = Reachability.InternetConnectionStatus ();
+			localWifiStatus = Reachability.LocalWifiConnectionStatus ();
+			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
+			if (connected) {
+				await MyHealthDB.ServiceConsumer.SendMyProfileData (myprofile);
+			}
 
 			UIAlertView alert = new UIAlertView (null, "Profile saved successfully", null, "OK",null);
 			alert.Show ();
@@ -421,6 +440,7 @@ namespace RCSI
 			}
 			if (type.Equals (comboType.BloodGroup)) 
 			{
+				data.Add ("Not Known");
 				data.Add ("O Negative");
 				data.Add ("O Positive");
 				data.Add ("A Negative");

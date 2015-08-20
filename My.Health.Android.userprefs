@@ -1,16 +1,6 @@
-﻿<Properties StartupItem="My.Health.Android.csproj" GitUserInfo="UsingMD">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.1991c259" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Activities\SubActivities\MyProfileActivity.cs">
-    <Files>
-      <File FileName="Activities\SubActivities\MyProfileActivity.cs" Line="505" Column="58" />
-      <File FileName="Activities\LaunchActivity.cs" Line="1" Column="1" />
-      <File FileName="Activities\HomeActivity.cs" Line="103" Column="54" />
-      <File FileName="MyHealthDB\Entities\MyProfile.cs" Line="20" Column="4" />
-      <File FileName="MyHealthDB\ServiceConsumer.cs" Line="246" Column="36" />
-      <File FileName="MyHealthDB\WebClient\WebService.cs" Line="84" Column="3" />
-      <File FileName="MyHealthDB\Model\SMtblMyProfile.cs" Line="18" Column="37" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+﻿<Properties StartupItem="ios/RCSI MyHealth.csproj" GitUserInfo="UsingMD">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.Tekenable Tekenable’s iPhone" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="650" column="1" />
@@ -24,15 +14,15 @@
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/RecentCategoryController.cs" line="22" column="1" />
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/IllnessDetailsController.cs" line="29" column="1" />
       <Breakpoint conditionExpression="disease.ID == 181" file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="191" column="1" />
-      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="72" column="52" />
-      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="68" column="1" />
-      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="78" column="1" />
-      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="93" column="1" />
+      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HPDetailsActivity.cs" line="272" column="1" />
+      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/RecentCategoryController.cs" line="77" column="1" />
+      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/SearchButtonsController.cs" line="37" column="1" />
+      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/SearchButtonsController.cs" line="20" column="1" />
+      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/SearchButtonsController.cs" line="53" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <DisabledProjects>
-    <String>ios\RCSI MyHealth.csproj</String>
+    <String>My.Health.Android.csproj</String>
   </DisabledProjects>
-  <MonoDevelop.Ide.ItemProperties.My.Health.Android AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>

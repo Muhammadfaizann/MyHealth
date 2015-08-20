@@ -7,11 +7,13 @@ using UIKit;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
+using System.Collections.Generic;
 
 namespace RCSI
 {
 	public partial class NewsController : UITableViewController
 	{
+		NetworkStatus remoteHostStatus, internetStatus, localWifiStatus;
 		public NewsController (IntPtr handle) : base (handle)
 		{
 		}
@@ -30,30 +32,56 @@ namespace RCSI
 			base.PrepareForSegue (segue, sender);
 
 			var controller = segue.DestinationViewController as BBCNewsFeedController;
-		
-			if (controller != null) 
-			{
-				switch (segue.Identifier.ToLower()) {
-				case "bbc":
-					controller.SelectedRssFeedType = RssFeedType.BBCNews;
-					controller.Title = "BBC Medical News";
-					break;
-				case "pulse":
-					controller.SelectedRssFeedType = RssFeedType.PulseVoices;
-					controller.Title = "Pulse News";
-					break;
-				case "irishhealth":
-					controller.SelectedRssFeedType = RssFeedType.IrishHealth;
-					controller.Title = "Irish Health News";
-					break;
-				case "irishtimes":
-					controller.SelectedRssFeedType = RssFeedType.irishTimes;
-					controller.Title = "Irish Times News";
-					break;
+			remoteHostStatus = Reachability.RemoteHostStatus ();
+			internetStatus = Reachability.InternetConnectionStatus ();
+			localWifiStatus = Reachability.LocalWifiConnectionStatus ();
+			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
+			if (connected) {
+				if (controller != null) {
+					switch (segue.Identifier.ToLower ()) {
+					case "bbc":
+						controller.SelectedRssFeedType = RssFeedType.BBCNews;
+						controller.Title = "BBC Medical News";
+						break;
+					case "pulse":
+						controller.SelectedRssFeedType = RssFeedType.PulseVoices;
+						controller.Title = "Pulse News";
+						break;
+					case "irishhealth":
+						controller.SelectedRssFeedType = RssFeedType.IrishHealth;
+						controller.Title = "Irish Health News";
+						break;
+					case "irishtimes":
+						controller.SelectedRssFeedType = RssFeedType.irishTimes;
+						controller.Title = "Irish Times News";
+						break;
+
+					}
 
 				}
+			}else{
+				//UIAlertView alert = new UIAlertView (null, "No Internet Access", null, "OK",null);
+				//alert.Show ();
+				//List<FeedItem> _feedItemList;
+				//FeedItem feedItem = new FeedItem();
+				//feedItem.Title = "No Internet Access";
+				//feedItem.Description = "No Internet Access";
+				//feedItem.Link = "";
+				//feedItem.PubDate = DateTime.Now;
+				//feedItem.ImageUrl = "";
+				//_feedItemList = RSSManager.ReadRSSFeed (feedItem);
+				//RssFeedType feedItem = new RssFeedType();
+				//feedItem.Title = "No Internet Access";
+				//feedItem.Description = "No Internet Access";
+				//feedItem.Link = "";
+				//feedItem.PubDate = DateTime.Now;
+				//feedItem.ImageUrl = "";
+
+				//controller.SelectedRssFeedType = feedItem;
+				//controller.Title = "No Internet Access";
 
 			}
+
 
 //			if (segue.Identifier == "") {
 //				destinationController.SelectedRssFeedType = RssFeedType.IrishHealth;

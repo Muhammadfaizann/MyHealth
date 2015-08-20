@@ -23,6 +23,7 @@ namespace RCSI
 	{
 		public RssFeedType SelectedRssFeedType { get; set; }
 
+
 		private BBCNewsFeedSource _bbcNewsFeedSource;
 		public BBCNewsFeedController (IntPtr handle) : base (handle)
 		{
@@ -161,52 +162,53 @@ namespace RCSI
 
 	public class RSSManager
 	{
+		
 
 		public static List<FeedItem> ReadRSSFeed(String url)
 		{ 
 			List<FeedItem> feedItemsList = new List<FeedItem>();
-			try
-			{
-				WebRequest webRequest = WebRequest.Create(url);
-				WebResponse webResponse = webRequest.GetResponse();
-				Stream stream = webResponse.GetResponseStream();
-				XmlDocument xmlDocument = new XmlDocument();
-				xmlDocument.Load(stream);
-				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDocument.NameTable);
-				nsmgr.AddNamespace("media", xmlDocument.DocumentElement.GetNamespaceOfPrefix("media"));
-				XmlNodeList itemNodes = xmlDocument.SelectNodes("rss/channel/item");
+			NetworkStatus remoteHostStatus, internetStatus, localWifiStatus;
 
-				for (int i = 0; i < itemNodes.Count; i++)
-				{
-					FeedItem feedItem = new FeedItem();
+			remoteHostStatus = Reachability.RemoteHostStatus ();
+			internetStatus = Reachability.InternetConnectionStatus ();
+			localWifiStatus = Reachability.LocalWifiConnectionStatus ();
+			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
+			if (connected) {
+				
+				try {
+					WebRequest webRequest = WebRequest.Create (url);
+					WebResponse webResponse = webRequest.GetResponse ();
+					Stream stream = webResponse.GetResponseStream ();
+					XmlDocument xmlDocument = new XmlDocument ();
+					xmlDocument.Load (stream);
+					XmlNamespaceManager nsmgr = new XmlNamespaceManager (xmlDocument.NameTable);
+					nsmgr.AddNamespace ("media", xmlDocument.DocumentElement.GetNamespaceOfPrefix ("media"));
+					XmlNodeList itemNodes = xmlDocument.SelectNodes ("rss/channel/item");
 
-					if (itemNodes[i].SelectSingleNode("title") != null)
-					{
-						feedItem.Title = itemNodes[i].SelectSingleNode("title").InnerText;
-					}
-					if (itemNodes[i].SelectSingleNode("link") != null)
-					{
-						feedItem.Link = itemNodes[i].SelectSingleNode("link").InnerText;
-					}
-					if (itemNodes[i].SelectSingleNode("pubDate") != null)
-					{
-						feedItem.PubDate = Convert.ToDateTime(itemNodes[i].SelectSingleNode("pubDate").InnerText);
-					}
-					if (itemNodes[i].SelectNodes("media:thumbnail", nsmgr).Count > 0 && (itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value != null)
-					{
-						feedItem.ImageUrl = (itemNodes[i].SelectNodes("media:thumbnail", nsmgr)[0]).Attributes["url"].Value;
-					}
-					if (itemNodes[i].SelectSingleNode("description") != null)
-					{
-						feedItem.Description = itemNodes[i].SelectSingleNode("description").InnerText;
-					}
+					for (int i = 0; i < itemNodes.Count; i++) {
+						FeedItem feedItem = new FeedItem ();
 
-					feedItemsList.Add(feedItem);
+						if (itemNodes [i].SelectSingleNode ("title") != null) {
+							feedItem.Title = itemNodes [i].SelectSingleNode ("title").InnerText;
+						}
+						if (itemNodes [i].SelectSingleNode ("link") != null) {
+							feedItem.Link = itemNodes [i].SelectSingleNode ("link").InnerText;
+						}
+						if (itemNodes [i].SelectSingleNode ("pubDate") != null) {
+							feedItem.PubDate = Convert.ToDateTime (itemNodes [i].SelectSingleNode ("pubDate").InnerText);
+						}
+						if (itemNodes [i].SelectNodes ("media:thumbnail", nsmgr).Count > 0 && (itemNodes [i].SelectNodes ("media:thumbnail", nsmgr) [0]).Attributes ["url"].Value != null) {
+							feedItem.ImageUrl = (itemNodes [i].SelectNodes ("media:thumbnail", nsmgr) [0]).Attributes ["url"].Value;
+						}
+						if (itemNodes [i].SelectSingleNode ("description") != null) {
+							feedItem.Description = itemNodes [i].SelectSingleNode ("description").InnerText;
+						}
+
+						feedItemsList.Add (feedItem);
+					}
+				} catch (Exception) {
+					throw;
 				}
-			}
-			catch (Exception)
-			{
-				throw;
 			}
 
 			return feedItemsList;		
