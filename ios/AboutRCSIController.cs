@@ -27,7 +27,7 @@ namespace RCSI
 
 			AboutUs aboutus = await MyHealthDB.DatabaseManager.SelectAboutUs (0);
 			string htmlString = Helper.BuildHtmlForAboutUs(aboutus);
-			 
+
 			//webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
 
 			//String fileName = "Content/AboutRCSI.html";

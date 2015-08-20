@@ -7,12 +7,14 @@ using UIKit;
 using MyHealthDB;
 using CoreGraphics;
 
+
 namespace RCSI
 {
 	public partial class SplashViewController : UIViewController
 	{
 		//Boolean DatabaseExists;
 		NetworkStatus remoteHostStatus, internetStatus, localWifiStatus;
+		protected LoadingOverlay loadingOverlay = null;
 
 		public SplashViewController (IntPtr handle) : base (handle)
 		{
@@ -21,12 +23,15 @@ namespace RCSI
 		public async override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
+			this.loadingOverlay = new LoadingOverlay (bounds);
+			this.View.Add ( this.loadingOverlay );
 			//bool isAgree = NSUserDefaults.StandardUserDefaults.BoolForKey ("Agree");
 //			if (isAgree) {
 //				//PerformSegue ("Home", this);
 //			}
 //			DatabaseExists = NSUserDefaults.StandardUserDefaults.BoolForKey ("DatabaseExists");
-			//LoadingOverlay loadingOverlay;
+
 			remoteHostStatus = Reachability.RemoteHostStatus ();
 			internetStatus = Reachability.InternetConnectionStatus ();
 			localWifiStatus = Reachability.LocalWifiConnectionStatus ();
@@ -41,15 +46,8 @@ namespace RCSI
 				exit(0);
 			};
 			var userDefs = NSUserDefaults.StandardUserDefaults;
-			//var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
-			//if (UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.SharedApplication.StatusBarOrientation == UIInterfaceOrientation.LandscapeRight) {
-			//	bounds.Size = new CGSize(bounds.Size.Height, bounds.Size.Width);
-			//}
-			// show the loading overlay on the UI thread using the correct orientation sizing
-			//this. = new LoadingOverlay (bounds);
-			//this.View.Add ( this.LoadView );
+
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
-			//loadingOverlay.Hide ();
 			DateTime LastSyncDate = DateTime.Now;
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
 				string strLastSyncDate = userDefs.StringForKey ("LastSyncDate");
@@ -71,6 +69,7 @@ namespace RCSI
 					} else {
 						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 					}
+					loadingOverlay.Hide ();
 					ShowAcceptanceDialog ();
 				} else {
 					if (connected) {
@@ -82,10 +81,11 @@ namespace RCSI
 						} else {
 							userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
 							userDefs.Synchronize ();
-
+							loadingOverlay.Hide ();
 							ShowAcceptanceDialog ();
 						}
 					} else {
+						loadingOverlay.Hide ();
 						ShowConnectivityDialog ();
 					}
 

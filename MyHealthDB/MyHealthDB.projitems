@@ -68,8 +68,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\ImportantNotice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Province.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblProvince.cs" />
+<<<<<<< Upstream, based on origin/MyHealth_Android_Develop
     <Compile Include="$(MSBuildThisFileDirectory)Entities\MyProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblMyProfile.cs" />
+=======
+    <Compile Include="$(MSBuildThisFileDirectory)LoadingOverlay.cs" />
+>>>>>>> dd462da Loading on start up fixed
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />

@@ -945,11 +945,11 @@
                         <viewControllerLayoutGuide type="bottom" id="YR7-k9-YW9"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="OOW-Ce-kIp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images/RCSI.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wBd-DE-0qh">
-                                <rect key="frame" x="11" y="0.0" width="78" height="44"/>
+                                <rect key="frame" x="11" y="0.0" width="41" height="44"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyHealth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-sj-Kn1">
                                 <rect key="frame" x="70" y="11" width="180" height="21"/>
@@ -1007,7 +1007,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images/RCSI.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="aRg-Fb-G5P">
-                                <rect key="frame" x="11" y="0.0" width="78" height="44"/>
+                                <rect key="frame" x="11" y="0.0" width="43" height="44"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyHealth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yZ-Nz-PaW">
                                 <rect key="frame" x="70" y="11" width="180" height="21"/>
@@ -1054,7 +1054,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images/RCSI.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0aB-le-813">
-                                <rect key="frame" x="11" y="0.0" width="78" height="44"/>
+                                <rect key="frame" x="11" y="0.0" width="42" height="44"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyHealth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Z6-mB-jjs">
                                 <rect key="frame" x="70" y="11" width="180" height="21"/>
@@ -3192,10 +3192,14 @@
                                 </connections>
                             </containerView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xzU-NN-osf">
-                                <rect key="frame" x="0.0" y="106" width="320" height="180"/>
+                                <rect key="frame" x="28" y="116" width="263" height="160"/>
+                                <constraints>
+                                    <constraint id="73" firstAttribute="width" constant="263"/>
+                                    <constraint id="74" firstAttribute="height" constant="160"/>
+                                </constraints>
                             </imageView>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNN-ke-aQU">
-                                <rect key="frame" x="0.0" y="284" width="320" height="176"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNN-ke-aQU" misplaced="YES">
+                                <rect key="frame" x="0.0" y="276" width="320" height="184"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
@@ -3204,18 +3208,16 @@
                             <constraint firstItem="ClW-iG-pQC" firstAttribute="trailing" secondItem="Ybs-gS-Pgb" secondAttribute="trailing" id="2cr-nA-LNp"/>
                             <constraint firstItem="ClW-iG-pQC" firstAttribute="top" secondItem="Ybs-gS-Pgb" secondAttribute="bottom" id="3pp-qA-zHa"/>
                             <constraint firstAttribute="trailing" secondItem="Ybs-gS-Pgb" secondAttribute="trailing" id="6YZ-83-CA3"/>
-                            <constraint firstItem="xzU-NN-osf" firstAttribute="top" secondItem="ClW-iG-pQC" secondAttribute="bottom" constant="-2" id="7Lg-NX-cxm"/>
-                            <constraint firstAttribute="trailing" secondItem="xzU-NN-osf" secondAttribute="trailing" id="CKd-u1-spf"/>
                             <constraint firstItem="ClW-iG-pQC" firstAttribute="leading" secondItem="Ybs-gS-Pgb" secondAttribute="leading" id="M3j-ec-CHG"/>
                             <constraint firstItem="Ybs-gS-Pgb" firstAttribute="top" secondItem="oTs-zR-eH5" secondAttribute="top" constant="20" symbolic="YES" id="Mcv-Ng-n0L"/>
-                            <constraint firstItem="uNN-ke-aQU" firstAttribute="top" secondItem="xzU-NN-osf" secondAttribute="bottom" constant="-2" id="QLo-bb-sfW"/>
                             <constraint firstItem="uNN-ke-aQU" firstAttribute="top" secondItem="ClW-iG-pQC" secondAttribute="bottom" constant="176" id="X4U-DI-1Cb"/>
-                            <constraint firstItem="xzU-NN-osf" firstAttribute="leading" secondItem="oTs-zR-eH5" secondAttribute="leading" id="Xbr-bk-sDF"/>
                             <constraint firstItem="uNN-ke-aQU" firstAttribute="leading" secondItem="oTs-zR-eH5" secondAttribute="leading" id="fXe-9A-hnC"/>
                             <constraint firstAttribute="trailing" secondItem="uNN-ke-aQU" secondAttribute="trailing" id="j9u-Nl-IMl"/>
                             <constraint firstItem="Ybs-gS-Pgb" firstAttribute="leading" secondItem="oTs-zR-eH5" secondAttribute="leading" id="k51-QO-zSE"/>
                             <constraint firstAttribute="bottom" secondItem="uNN-ke-aQU" secondAttribute="bottom" id="rjJ-MU-Nqo"/>
                             <constraint firstItem="ClW-iG-pQC" firstAttribute="top" secondItem="oTs-zR-eH5" secondAttribute="top" constant="64" id="sjO-vZ-rcR"/>
+                            <constraint id="75" constant="28" firstItem="xzU-NN-osf" firstAttribute="leading" secondItem="oTs-zR-eH5" secondAttribute="leading"/>
+                            <constraint id="76" constant="116" firstItem="xzU-NN-osf" firstAttribute="top" secondItem="oTs-zR-eH5" secondAttribute="top"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bqz-wd-nDl"/>
@@ -3427,9 +3429,9 @@
     </scenes>
     <resources>
         <image name="Default.png" width="320" height="480"/>
-        <image name="images/BMI_chart.png" width="320" height="333"/>
+        <image name="images/BMI_chart.png" width="358" height="430"/>
         <image name="images/Dropdown2.png" width="110" height="28"/>
-        <image name="images/RCSI.jpg" width="250" height="140"/>
+        <image name="images/RCSI.jpg" width="70" height="100"/>
         <image name="images/RCSI.png" width="125" height="125"/>
         <image name="images/a_minus.png" width="45" height="45"/>
         <image name="images/a_plus.png" width="45" height="45"/>
@@ -3492,6 +3494,8 @@
         <image name="Icon-40.png" width="40" height="40"/>
         <image name="Icon-76.png" width="76" height="76"/>
         <image name="Icon-Small-40.png" width="80" height="80"/>
+        <image name="images/RCSI_Old.jpg" width="250" height="140"/>
+        <image name="images/BMI_chart_Old.png" width="320" height="333"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -24,7 +24,9 @@ namespace RCSI
 		{
 			lblName.Text = name;
 			btnWebsite.SetTitle( "Website: " + website, UIControlState.Normal);
+			btnWebsite.TouchUpInside -= OpenWebSite;
 			btnWebsite.TouchUpInside += OpenWebSite;
+			btnTel.TouchUpInside -= DialNumber;
 			btnTel.TouchUpInside += DialNumber;
 			btnTel.SetTitle( "Tel: " + tel, UIControlState.Normal);
 		}

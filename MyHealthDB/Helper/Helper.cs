@@ -60,7 +60,7 @@ namespace MyHealthDB.Helper
 			htmlString.Append (@"<head><link rel=""stylesheet"" type=""text/css"" href=""css/bootstrap.min.css"">
 										<script type=""text/javascript"" src=""js/bootstrap.min.js""></script>
 									</head>
-									<body> <div style=""padding: 5px"">");
+									<body> <div style=""padding: 5px; font-family: Arial;"">");
 
 			htmlString.AppendFormat ("<h3>{0}</h3> <div>{1}</div>",
 				info.Title,
