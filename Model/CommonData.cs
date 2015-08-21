@@ -296,6 +296,7 @@ namespace MyHealthAndroid
 
 		public List<String> GetBloodGroups () {
 			var data = new List<String> ();
+				data.Add ("Not Known");
 				data.Add ("O Negative");
 				data.Add ("O Positive");
 				data.Add ("A Negative");

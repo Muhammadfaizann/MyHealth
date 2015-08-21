@@ -1,4 +1,4 @@
-﻿<Properties StartupItem="ios/RCSI MyHealth.csproj" GitUserInfo="UsingMD">
+<Properties StartupItem="ios/RCSI MyHealth.csproj" GitUserInfo="UsingMD">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.Tekenable Tekenable’s iPhone" />
   <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -25,4 +25,5 @@
   <DisabledProjects>
     <String>My.Health.Android.csproj</String>
   </DisabledProjects>
+
 </Properties>

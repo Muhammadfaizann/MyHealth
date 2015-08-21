@@ -303,11 +303,11 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080046
 			public const int abplusLabel = 2131230790;
 			
-			// aapt resource value: 0x7f08006e
-			public const int action_profile = 2131230830;
-			
 			// aapt resource value: 0x7f08006f
-			public const int action_sync = 2131230831;
+			public const int action_profile = 2131230831;
+			
+			// aapt resource value: 0x7f080070
+			public const int action_sync = 2131230832;
 			
 			// aapt resource value: 0x7f080037
 			public const int actualNews = 2131230775;
@@ -315,11 +315,11 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080016
 			public const int addContactButton = 2131230742;
 			
-			// aapt resource value: 0x7f080060
-			public const int ageComponentLayout = 2131230816;
+			// aapt resource value: 0x7f080061
+			public const int ageComponentLayout = 2131230817;
 			
-			// aapt resource value: 0x7f080062
-			public const int ageSpinner = 2131230818;
+			// aapt resource value: 0x7f080063
+			public const int ageSpinner = 2131230819;
 			
 			// aapt resource value: 0x7f080048
 			public const int aminusLabel = 2131230792;
@@ -333,17 +333,20 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080002
 			public const int backButton = 2131230722;
 			
-			// aapt resource value: 0x7f08003c
-			public const int bloodDonationLabel = 2131230780;
+			// aapt resource value: 0x7f08004b
+			public const int bloodDonationLabel = 2131230795;
 			
 			// aapt resource value: 0x7f08004a
 			public const int bloodDonationLink = 2131230794;
 			
-			// aapt resource value: 0x7f080068
-			public const int bloodGroupSpinner = 2131230824;
+			// aapt resource value: 0x7f08003c
+			public const int bloodDonationTitle = 2131230780;
 			
-			// aapt resource value: 0x7f080066
-			public const int bloodgroupComponentLayout = 2131230822;
+			// aapt resource value: 0x7f080069
+			public const int bloodGroupSpinner = 2131230825;
+			
+			// aapt resource value: 0x7f080067
+			public const int bloodgroupComponentLayout = 2131230823;
 			
 			// aapt resource value: 0x7f080043
 			public const int bminusLabel = 2131230787;
@@ -354,11 +357,11 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080040
 			public const int bplusLabel = 2131230784;
 			
-			// aapt resource value: 0x7f080069
-			public const int buttonsComponentLayout = 2131230825;
+			// aapt resource value: 0x7f08006a
+			public const int buttonsComponentLayout = 2131230826;
 			
-			// aapt resource value: 0x7f08006b
-			public const int calculateBMIButton = 2131230827;
+			// aapt resource value: 0x7f08006c
+			public const int calculateBMIButton = 2131230828;
 			
 			// aapt resource value: 0x7f080011
 			public const int categoriesButton = 2131230737;
@@ -369,11 +372,11 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08001b
 			public const int contactNumberInput = 2131230747;
 			
-			// aapt resource value: 0x7f08005d
-			public const int countryComponentLayout = 2131230813;
+			// aapt resource value: 0x7f08005e
+			public const int countryComponentLayout = 2131230814;
 			
-			// aapt resource value: 0x7f08005f
-			public const int countrySpinner = 2131230815;
+			// aapt resource value: 0x7f080060
+			public const int countrySpinner = 2131230816;
 			
 			// aapt resource value: 0x7f080004
 			public const int diseaseDetailImage = 2131230724;
@@ -399,14 +402,14 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08000e
 			public const int expandableDiseaseList = 2131230734;
 			
-			// aapt resource value: 0x7f08004d
-			public const int feedbackUserEmail = 2131230797;
-			
 			// aapt resource value: 0x7f08004e
-			public const int feedbackUserMessage = 2131230798;
+			public const int feedbackUserEmail = 2131230798;
 			
-			// aapt resource value: 0x7f08004c
-			public const int feedbackUserName = 2131230796;
+			// aapt resource value: 0x7f08004f
+			public const int feedbackUserMessage = 2131230799;
+			
+			// aapt resource value: 0x7f08004d
+			public const int feedbackUserName = 2131230797;
 			
 			// aapt resource value: 0x7f08003b
 			public const int firstLine = 2131230779;
@@ -414,11 +417,11 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08001f
 			public const int frameLayout2 = 2131230751;
 			
-			// aapt resource value: 0x7f080063
-			public const int genderComponentLayout = 2131230819;
+			// aapt resource value: 0x7f080064
+			public const int genderComponentLayout = 2131230820;
 			
-			// aapt resource value: 0x7f080065
-			public const int genderSpinner = 2131230821;
+			// aapt resource value: 0x7f080066
+			public const int genderSpinner = 2131230822;
 			
 			// aapt resource value: 0x7f080022
 			public const int healthNewsBtn = 2131230754;
@@ -435,14 +438,14 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08001e
 			public const int healthSearchBtn = 2131230750;
 			
-			// aapt resource value: 0x7f080056
-			public const int heightComponentLayout = 2131230806;
-			
 			// aapt resource value: 0x7f080057
-			public const int heightFeetSpinner = 2131230807;
+			public const int heightComponentLayout = 2131230807;
 			
 			// aapt resource value: 0x7f080058
-			public const int heightInchSpinner = 2131230808;
+			public const int heightFeetSpinner = 2131230808;
+			
+			// aapt resource value: 0x7f080059
+			public const int heightInchSpinner = 2131230809;
 			
 			// aapt resource value: 0x7f080023
 			public const int helpBtn = 2131230755;
@@ -486,11 +489,11 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080009
 			public const int indexListContainer = 2131230729;
 			
-			// aapt resource value: 0x7f080050
-			public const int linearLayout1 = 2131230800;
+			// aapt resource value: 0x7f080051
+			public const int linearLayout1 = 2131230801;
 			
-			// aapt resource value: 0x7f080054
-			public const int matricToggleButton = 2131230804;
+			// aapt resource value: 0x7f080055
+			public const int matricToggleButton = 2131230805;
 			
 			// aapt resource value: 0x7f080039
 			public const int newsChannelName = 2131230777;
@@ -513,8 +516,8 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08003e
 			public const int oplusLabel = 2131230782;
 			
-			// aapt resource value: 0x7f080051
-			public const int organDonationWebView = 2131230801;
+			// aapt resource value: 0x7f080052
+			public const int organDonationWebView = 2131230802;
 			
 			// aapt resource value: 0x7f08002e
 			public const int orgnisationName = 2131230766;
@@ -528,8 +531,8 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080012
 			public const int recentButton = 2131230738;
 			
-			// aapt resource value: 0x7f08004b
-			public const int relativeLayout1 = 2131230795;
+			// aapt resource value: 0x7f08004c
+			public const int relativeLayout1 = 2131230796;
 			
 			// aapt resource value: 0x7f080047
 			public const int rowfour = 2131230791;
@@ -543,14 +546,14 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080041
 			public const int rowtwo = 2131230785;
 			
-			// aapt resource value: 0x7f08004f
-			public const int saveFeedback = 2131230799;
+			// aapt resource value: 0x7f080050
+			public const int saveFeedback = 2131230800;
 			
-			// aapt resource value: 0x7f08006a
-			public const int saveProfileButton = 2131230826;
+			// aapt resource value: 0x7f08006b
+			public const int saveProfileButton = 2131230827;
 			
-			// aapt resource value: 0x7f080052
-			public const int scrollView1 = 2131230802;
+			// aapt resource value: 0x7f080053
+			public const int scrollView1 = 2131230803;
 			
 			// aapt resource value: 0x7f08000a
 			public const int searchOptions = 2131230730;
@@ -576,8 +579,8 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080018
 			public const int simpleWebView = 2131230744;
 			
-			// aapt resource value: 0x7f08006d
-			public const int syncButton = 2131230829;
+			// aapt resource value: 0x7f08006e
+			public const int syncButton = 2131230830;
 			
 			// aapt resource value: 0x7f08001c
 			public const int tableButtons = 2131230748;
@@ -585,32 +588,32 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f08001d
 			public const int tableRow1 = 2131230749;
 			
-			// aapt resource value: 0x7f08006c
-			public const int testlayoutforawhile = 2131230828;
+			// aapt resource value: 0x7f08006d
+			public const int testlayoutforawhile = 2131230829;
 			
-			// aapt resource value: 0x7f080053
-			public const int textView1 = 2131230803;
+			// aapt resource value: 0x7f080054
+			public const int textView1 = 2131230804;
 			
-			// aapt resource value: 0x7f080055
-			public const int textView2 = 2131230805;
+			// aapt resource value: 0x7f080056
+			public const int textView2 = 2131230806;
 			
 			// aapt resource value: 0x7f080021
 			public const int textView3 = 2131230753;
 			
-			// aapt resource value: 0x7f08005a
-			public const int textView4 = 2131230810;
+			// aapt resource value: 0x7f08005b
+			public const int textView4 = 2131230811;
 			
-			// aapt resource value: 0x7f08005e
-			public const int textView5 = 2131230814;
+			// aapt resource value: 0x7f08005f
+			public const int textView5 = 2131230815;
 			
-			// aapt resource value: 0x7f080061
-			public const int textView6 = 2131230817;
+			// aapt resource value: 0x7f080062
+			public const int textView6 = 2131230818;
 			
-			// aapt resource value: 0x7f080064
-			public const int textView7 = 2131230820;
+			// aapt resource value: 0x7f080065
+			public const int textView7 = 2131230821;
 			
-			// aapt resource value: 0x7f080067
-			public const int textView8 = 2131230823;
+			// aapt resource value: 0x7f080068
+			public const int textView8 = 2131230824;
 			
 			// aapt resource value: 0x7f08002a
 			public const int title = 2131230762;
@@ -624,14 +627,14 @@ namespace MyHealthAndroid
 			// aapt resource value: 0x7f080025
 			public const int txtSmall = 2131230757;
 			
-			// aapt resource value: 0x7f080059
-			public const int weightComponentLayout = 2131230809;
+			// aapt resource value: 0x7f08005a
+			public const int weightComponentLayout = 2131230810;
+			
+			// aapt resource value: 0x7f08005d
+			public const int weightGramSpinner = 2131230813;
 			
 			// aapt resource value: 0x7f08005c
-			public const int weightGramSpinner = 2131230812;
-			
-			// aapt resource value: 0x7f08005b
-			public const int weightKiloSpinner = 2131230811;
+			public const int weightKiloSpinner = 2131230812;
 			
 			static Id()
 			{
