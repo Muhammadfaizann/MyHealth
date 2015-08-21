@@ -100,16 +100,16 @@ namespace MyHealthDB.Helper
 					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.Description);
 
 				if (!string.IsNullOrEmpty (selectedDisease.SignAndSymptoms))
-					htmlString.AppendFormat ("<p style='color:#E11937;'><strong>Sign and Symtoms</strong></p> <div>{0}</div> ", selectedDisease.SignAndSymptoms);
+					htmlString.AppendFormat ("<br/><p style='color:#E11937;'><strong>Sign and Symtoms</strong></p> <div>{0}</div> ", selectedDisease.SignAndSymptoms);
 
 				if (!string.IsNullOrEmpty(selectedDisease.PreventiveMeasures))
-					htmlString.AppendFormat ("<div style=''>{0}</div> ", selectedDisease.PreventiveMeasures);
+					htmlString.AppendFormat ("<br/><div style=''>{0}</div> ", selectedDisease.PreventiveMeasures);
 
 				if (selectedCpUser != null) {
 					// if the charity (cp user) is RCSI then just display the contact details message
 					// ID == 1 == RCSI
 					if (selectedCpUser.ID == 1) {
-						htmlString.AppendFormat ("<p style='color:#E11937;'><strong>Contact Details</strong></p> <div> {0} </div> ",
+						htmlString.AppendFormat ("<br/><p style='color:#E11937;'><strong>Contact Details</strong></p> <div> {0} </div> ",
 							"If you have further concerns about this condition please contact your own G.P.");
 					} else {
 						htmlString.AppendFormat ("<p style='color:#E11937;'><strong>Contact Details</strong></p> <div>{0}, {1}</div> ",
