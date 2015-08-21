@@ -144,7 +144,6 @@
     <BundleResource Include="Resources\images\Search1.png" />
     <BundleResource Include="Resources\images\arrow_top.png" />
     <BundleResource Include="Resources\images\blood.png" />
-    <BundleResource Include="Resources\images\contact.png" />
     <BundleResource Include="Resources\images\ecard.png" />
     <BundleResource Include="Resources\images\heartfo.jpg" />
     <BundleResource Include="Resources\images\irish_heart_foundation.jpg" />
@@ -154,7 +153,6 @@
     <BundleResource Include="Resources\images\organ.png" />
     <BundleResource Include="Resources\images\organNotready.jpg" />
     <BundleResource Include="Resources\images\search.jpg" />
-    <BundleResource Include="Resources\images\search.png" />
     <BundleResource Include="Resources\images\settings_top.png" />
     <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\Default%402x.png" />
@@ -162,7 +160,6 @@
     <BundleResource Include="Resources\images\RCSI.png" />
     <BundleResource Include="Resources\images\donor.png" />
     <BundleResource Include="Resources\images\emergency.png" />
-    <BundleResource Include="Resources\images\feedback.png" />
     <BundleResource Include="Resources\images\fourm.jpg" />
     <BundleResource Include="Resources\images\help.png" />
     <BundleResource Include="Resources\images\hospitals.png" />
@@ -219,6 +216,9 @@
     <BundleResource Include="Resources\images\BMI_chart.png" />
     <BundleResource Include="Resources\images\RCSI_Old.jpg" />
     <BundleResource Include="Resources\images\RCSI.jpg" />
+    <BundleResource Include="Resources\images\contact.png" />
+    <BundleResource Include="Resources\images\feedback.png" />
+    <BundleResource Include="Resources\images\search.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -355,6 +355,7 @@
     <Compile Include="FeedbackTableViewController.designer.cs">
       <DependentUpon>FeedbackTableViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoadingOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />

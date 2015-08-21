@@ -2,7 +2,7 @@ using System;
 using UIKit;
 using CoreGraphics;
 
-namespace MyHealthDB
+namespace RCSI
 {
 	/// <summary>
 	/// A simple modal overlay that shows an activity spinner and loading message. To use, 

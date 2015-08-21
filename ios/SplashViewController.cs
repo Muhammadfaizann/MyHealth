@@ -4,7 +4,6 @@ using System;
 
 using Foundation;
 using UIKit;
-using MyHealthDB;
 using CoreGraphics;
 
 

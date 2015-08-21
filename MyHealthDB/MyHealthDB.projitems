@@ -70,7 +70,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblProvince.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\MyProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblMyProfile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LoadingOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
