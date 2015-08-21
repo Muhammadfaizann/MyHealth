@@ -69,5 +69,14 @@ namespace RCSI
 				this.ParentViewController.NavigationController.PushViewController(profileController, true);
 			}
 		}
+
+		partial void goToHome (UIButton sender)
+		{
+			if (!this.ParentViewController.GetType().Equals(typeof(HomeController)))
+			{
+				var homeController = (HomeController)Storyboard.InstantiateViewController("HomeController");
+				this.ParentViewController.NavigationController.PushViewController(homeController, true);
+			}
+		}
 	}
 }

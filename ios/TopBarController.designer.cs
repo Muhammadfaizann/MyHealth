@@ -23,12 +23,23 @@ namespace RCSI
 		[Outlet]
 		UIKit.UILabel lblSmartHealth { get; set; }
 
+		[Outlet]
+		UIKit.UIImage lblRCSIHome { get; set; }
+
 		[Action ("syncWithServer:")]
 		partial void syncWithServer (Foundation.NSObject sender);
 
 		[Action ("goToSettings:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		partial void goToSettings (UIButton sender);
+
+		[Action ("goToHome:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void goToHome (UIButton sender);
+
+		[Action ("goToHome:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void goToHome (UIImage sender);
 
 		void ReleaseDesignerOutlets ()
 		{

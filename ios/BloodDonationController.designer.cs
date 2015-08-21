@@ -41,12 +41,20 @@ namespace RCSI
 		[Outlet]
 		UIKit.UILabel oPlus { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UILabel lblTitle { get; set; }
+
 		[Action ("goToIBTSSite:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		partial void goToIBTSSite (UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (lblTitle != null) {
+				lblTitle.Dispose ();
+				lblTitle = null;
+			}
 		}
 	}
 }

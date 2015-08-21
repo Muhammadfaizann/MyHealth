@@ -14,10 +14,6 @@ namespace RCSI
 	[Register ("FeedbackController")]
 	partial class FeedbackController
 	{
-		[Action ("saveTheFeeback:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void saveTheFeeback (UIButton sender);
-
 		[Outlet]
 		UIKit.UITextField username { get; set; }
 
@@ -26,6 +22,10 @@ namespace RCSI
 
 		[Outlet]
 		UIKit.UITextField usermessage { get; set; }
+
+		[Action ("saveTheFeeback:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void saveTheFeeback (UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{

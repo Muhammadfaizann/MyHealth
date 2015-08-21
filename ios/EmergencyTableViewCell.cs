@@ -26,6 +26,7 @@ namespace RCSI
 			string tel = contact.PhoneNumber;
 			lblName.Text = name;
 			lblAddress.Text = address;
+			lblAddress.Lines = 8;
 			btnTel.TouchUpInside += DialNumber;
 			btnTel.SetTitle( tel, UIControlState.Normal);
 

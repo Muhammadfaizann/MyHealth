@@ -5,7 +5,9 @@
 // Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace RCSI
 {
@@ -20,23 +22,9 @@ namespace RCSI
 
 		[Outlet]
 		public UIKit.UITextField txtUserName { get; private set; }
-		
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (txtEmail != null) {
-				txtEmail.Dispose ();
-				txtEmail = null;
-			}
-
-			if (txtMessage != null) {
-				txtMessage.Dispose ();
-				txtMessage = null;
-			}
-
-			if (txtUserName != null) {
-				txtUserName.Dispose ();
-				txtUserName = null;
-			}
 		}
 	}
 }

@@ -16,6 +16,7 @@ namespace RCSI
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
+
 			if (this.ParentViewController != null) {
 				lblTitle.Text = this.ParentViewController.Title;
 			}
