@@ -37,10 +37,6 @@ namespace RCSI
 		[GeneratedCode ("iOS Designer", "1.0")]
 		partial void goToHome (UIButton sender);
 
-		[Action ("goToHome:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void goToHome (UIImage sender);
-
 		void ReleaseDesignerOutlets ()
 		{
 		}

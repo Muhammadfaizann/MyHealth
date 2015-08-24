@@ -29,6 +29,34 @@ namespace RCSI
 			String localHtmlUrl = Path.Combine (NSBundle.MainBundle.BundlePath, fileName);
 			webView.LoadRequest (new NSUrlRequest (new NSUrl(localHtmlUrl, false)));
 			webView.ScalesPageToFit = false;
+			webView.ShouldStartLoad = HandleShouldStartLoad;
+		}
+
+		public bool HandleShouldStartLoad(UIWebView webView, NSUrlRequest request, UIWebViewNavigationType navigationType)
+		{
+			// you need to implement this method depending on your criteria
+			if (navigationType.Equals(UIWebViewNavigationType.LinkClicked))
+			{
+
+				UIAlertView alert = new UIAlertView ("Alert", "This link will take you to an external website, Do you want to Proceed?", null, "OK", new string[] {"Cancel"});
+				alert.Clicked += (s, b) => {
+					if(b.ButtonIndex == 0) {
+						LogManager.Log<LogExternalLink> (new LogExternalLink (){ 
+							Date = DateTime.Now, 
+							Link = request.Url.AbsoluteString 
+						});
+						// open in Safari
+						UIApplication.SharedApplication.OpenUrl(request.Url);
+					}
+					// return false so the UIWebView won't load the web page
+				};
+				alert.Show();
+
+				return false;
+			}
+
+			// this.OpenInExternalBrowser(request) returned false -> let the UIWebView load the request
+			return true;
 		}
 
 	}
