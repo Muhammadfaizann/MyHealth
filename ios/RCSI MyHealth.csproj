@@ -58,13 +58,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer: Jessica Halligan (3NADA2BL7J)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Royal College of Surgeons in Ireland (G6GYXXM25C)</CodesignKey>
     <IpaPackageName>
     </IpaPackageName>
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <CodesignProvision>a2270221-7a7a-4f1c-b5df-be2417f091a8</CodesignProvision>
+    <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchSdkVersion>8.2</MtouchSdkVersion>
     <MtouchProfiling>true</MtouchProfiling>

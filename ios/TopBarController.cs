@@ -43,6 +43,8 @@ namespace RCSI
 						DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 						//await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						await MyHealthDB.ServiceConsumer.SyncDevice ();
+						UIAlertView alert = new UIAlertView (null, "MyHealth has been updated", null, "OK",null);
+						alert.Show ();
 					}
 					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 				};
