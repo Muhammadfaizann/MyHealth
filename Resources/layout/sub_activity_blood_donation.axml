@@ -204,12 +204,13 @@
         android:background="#ffffff"
         android:textColor="#ff4b92cc"
         android:layout_marginTop="0.0dp" />
-    <AutoCompleteTextView
+    <TextView
+        android:text="No Internet Access"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72.8dp"
         android:layout_below="@id/rowfour"
         android:id="@+id/bloodDonationLabel"
-        android:text="No Internet Access"
         android:gravity="center"
         android:textColor="#ff333333" />
 </RelativeLayout>

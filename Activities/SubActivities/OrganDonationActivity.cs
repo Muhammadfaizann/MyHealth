@@ -69,6 +69,10 @@ namespace MyHealthAndroid
 				var newActivity = new Intent(this, typeof(MyProfileActivity));
 				StartActivity(newActivity);
 				break;
+			//case Resource.Id.txtAppTitle:
+			//	var homeActivity = new Intent(this, typeof(HomeActivity));
+			//	StartActivity(homeActivity);
+			//	break;
 			}
 			return base.OnMenuItemSelected (featureId, item);
 		}

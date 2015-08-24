@@ -167,6 +167,7 @@ namespace MyHealthAndroid
 				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
 				if (aboutus.mainImage != null && aboutus.mainImage.Length > 0) {
 					_imageView.SetImageBitmap (BitmapFactory.DecodeByteArray (aboutus.mainImage, 0, aboutus.mainImage.Length));
+					//_imageView.Dispose();
 				}
 
 				await LogManager.Log (new LogUsage {

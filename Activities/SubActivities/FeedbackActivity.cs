@@ -79,15 +79,34 @@ namespace MyHealthAndroid
 			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
 			return base.OnCreateOptionsMenu (menu);
 		}
+		public void Home (View view)
+		{
+			try
+			{
+				var homeActivity = new Intent(this, typeof(HomeActivity));
+				StartActivity(homeActivity);
 
+			}
+			finally
+			{
+			}
+		}
 		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
 		{
 			switch (item.ItemId) {
+			//TextView t2 = (TextView) findViewById(Resource.Id.txtAppTitle);
+			//t2.setMovementMethod(LinkMovementMethod.getInstance());
+			case Resource.Id.txtAppTitle:
+				//Resource.Id.txtAppTitle.setMovementMethod(LinkMovementMethod.getInstance());
+				var homeActivity = new Intent(this, typeof(HomeActivity));
+				StartActivity(homeActivity);
 
+				break;
 			case Resource.Id.action_profile:
 				var newActivity = new Intent(this, typeof(MyProfileActivity));
 				StartActivity(newActivity);
 				break;
+			
 			}
 			return base.OnMenuItemSelected (featureId, item);
 		}

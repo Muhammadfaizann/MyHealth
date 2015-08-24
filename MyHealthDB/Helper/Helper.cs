@@ -62,7 +62,7 @@ namespace MyHealthDB.Helper
 									</head>
 									<body> <div style=""padding: 5px; font-family: Arial;"">");
 
-			htmlString.AppendFormat ("<h3>{0}</h3> <div>{1}</div>",
+			htmlString.AppendFormat ("<h3>{0}</h3> <div>{1}</div><p style=\"color:#E11937;\"><strong>Link to Website</strong></p>\n<a href=\"https://www.rcsi.ie\">For further inormation visit the RCSI website</a>",
 				info.Title,
 				info.Description);
 			htmlString.Append ("</div> </body>");
