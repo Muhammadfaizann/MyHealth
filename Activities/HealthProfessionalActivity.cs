@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Android.App;
 using Android.Content;
@@ -9,8 +11,9 @@ using Android.Widget;
 using MyHealthAndroid;
 using MyHealthDB;
 using MyHealthDB.Logger;
+using Android.Preferences;
 
-namespace MyHealth.Android
+namespace MyHealthAndroid
 {
 	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class HealthProfessionalActivity : Activity
@@ -51,6 +54,13 @@ namespace MyHealth.Android
 				Date = DateTime.Now, 
 				Page = Convert.ToInt32(Pages.HealthProfessionals)
 			});
+
+			var _homeButton = FindViewById<TextView> (Resource.Id.txtAppTitle);
+			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+			_homeButton.Touch += delegate {
+				var homeActivity = new Intent (this, typeof(HomeActivity));
+				StartActivity (homeActivity);
+			};
 		}
 
 		//------------------------ custom activity ----------------------//

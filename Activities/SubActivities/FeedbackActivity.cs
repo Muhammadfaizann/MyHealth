@@ -12,6 +12,7 @@ using Android.Widget;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
+using Android.Text;
 
 namespace MyHealthAndroid
 {
@@ -62,6 +63,13 @@ namespace MyHealthAndroid
 			{
 				base.OnBackPressed();
 			};
+			var _homeButton = FindViewById<TextView> (Resource.Id.txtAppTitle);
+			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+			_homeButton.Touch += delegate {
+				var homeActivity = new Intent (this, typeof(HomeActivity));
+				StartActivity (homeActivity);
+			};
+
 		}
 
 		//------------------------ custom activity ----------------------//
@@ -94,14 +102,7 @@ namespace MyHealthAndroid
 		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
 		{
 			switch (item.ItemId) {
-			//TextView t2 = (TextView) findViewById(Resource.Id.txtAppTitle);
-			//t2.setMovementMethod(LinkMovementMethod.getInstance());
-			case Resource.Id.txtAppTitle:
-				//Resource.Id.txtAppTitle.setMovementMethod(LinkMovementMethod.getInstance());
-				var homeActivity = new Intent(this, typeof(HomeActivity));
-				StartActivity(homeActivity);
 
-				break;
 			case Resource.Id.action_profile:
 				var newActivity = new Intent(this, typeof(MyProfileActivity));
 				StartActivity(newActivity);
@@ -110,6 +111,7 @@ namespace MyHealthAndroid
 			}
 			return base.OnMenuItemSelected (featureId, item);
 		}
+
 	}
 }
 

@@ -9,7 +9,7 @@ using Android.Preferences;
 
 using Android.Views;
 using Android.Widget;
-using MyHealth.Android;
+using MyHealthAndroid;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using System.Threading.Tasks;
@@ -89,14 +89,14 @@ namespace MyHealthAndroid{
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
 					//double TotalMinutes = DateTime.Now.Subtract (LastSyncDate).TotalMinutes;
 
-					ProgressDialog progressDialog = new ProgressDialog (this);
-					progressDialog.Indeterminate = true;
-					progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-					progressDialog.SetTitle ("Please Wait...");
-					progressDialog.SetMessage("Synching Data With Server...");
-					progressDialog.SetCancelable(false);
-					progressDialog.Show();
-
+					//ProgressDialog progressDialog = new ProgressDialog (this);
+					//progressDialog.Indeterminate = true;
+					//progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+					//progressDialog.SetTitle ("Please Wait...");
+					//progressDialog.SetMessage("Synching Data With Server...");
+					//progressDialog.SetCancelable(false);
+					//progressDialog.Show();
+					//Toast.MakeText (this, "Synching Data With Server", ToastLength.Long).Show();
 					if (TotalHours > 24) {
 						//Toast.MakeText(this, "It is now longer then 5 minutes", ToastLength.Long).Show();
 						//await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
@@ -107,8 +107,8 @@ namespace MyHealthAndroid{
 					} else {
 						await LogManager.SyncAllLogs ();
 					}
-
-					progressDialog.Dismiss ();
+					//Toast.MakeText (this, "Your device is updated", ToastLength.Long).Show();
+					//progressDialog.Dismiss ();
 				}
 			}
 		}
@@ -146,16 +146,17 @@ namespace MyHealthAndroid{
 				break;
 			case Resource.Id.action_sync:
 
-				ProgressDialog progressDialog = new ProgressDialog (this);
-				progressDialog.Indeterminate = true;
-				progressDialog.SetProgressStyle (ProgressDialogStyle.Spinner);
-				progressDialog.SetTitle ("Please Wait...");
-				progressDialog.SetMessage ("Synching Data With Server...");
-				progressDialog.SetCancelable (false);
-				progressDialog.Show ();
+				//ProgressDialog progressDialog = new ProgressDialog (this);
+				//progressDialog.Indeterminate = true;
+				//progressDialog.SetProgressStyle (ProgressDialogStyle.Spinner);
+				//progressDialog.SetTitle ("Please Wait...");
+				//progressDialog.SetMessage ("Synching Data With Server...");
+				//progressDialog.SetCancelable (false);
+				//progressDialog.Show ();
 
 				try {
 					// Get the shared Preferences
+					Toast.MakeText (this, "Updating Device", ToastLength.Long).Show();
 					var preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext); 
 					string strLastSyncDate = preferences.GetString ("LastSyncDate", DateTime.MinValue.ToString ("dd-MMM-yyyy HH:mm:ss"));
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
@@ -166,14 +167,14 @@ namespace MyHealthAndroid{
 					//ServiceConsumer.SyncDevice(LastSyncDate)
 					ServiceConsumer.SyncDevice ()
 						.ContinueWith ((r) => {
-							progressDialog.Dismiss ();
+							//progressDialog.Dismiss ();
 							Toast.MakeText (this, "Successfully updated the system.", ToastLength.Long).Show ();
 							editor.PutBoolean ("applicationUpdated", true);
 							editor.Apply ();
 						},
 						TaskScheduler.FromCurrentSynchronizationContext ());
 				} catch (Exception ex) {
-					progressDialog.Dismiss ();
+					//progressDialog.Dismiss ();
 					Toast.MakeText (this, ex.ToString (), ToastLength.Long).Show ();
 				}
 				break;

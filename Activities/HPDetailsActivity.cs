@@ -38,10 +38,18 @@ namespace MyHealthAndroid
 			_model = new CommonData ();
 			_caller = _model.GetHealthProfessionals().ElementAt(Intent.GetIntExtra("callerCellPosition",0));
 
+
 			//based on the extra that will be receied form last activity
 			//all the resource will be set. 
 			await SetContentAsPerCaller (_caller);
 			SetCustomActionBar ();
+
+			var _homeButton = FindViewById<TextView> (Resource.Id.txtAppTitle);
+			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+			_homeButton.Touch += delegate {
+				var homeActivity = new Intent (this, typeof(HomeActivity));
+				StartActivity (homeActivity);
+			};
 		}
 
 		//------------------------ custom activity ----------------------//

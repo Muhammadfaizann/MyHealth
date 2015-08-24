@@ -12,7 +12,7 @@ using MyHealthAndroid;
 using MyHealthDB;
 using MyHealthDB.Logger;
 
-namespace MyHealth.Android
+namespace MyHealthAndroid
 {
 	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class HealthNewsActivity : Activity
@@ -54,6 +54,13 @@ namespace MyHealth.Android
 				Date = DateTime.Now, 
 				Page = Convert.ToInt32(Pages.HealthNews)
 			});
+
+			var _homeButton = FindViewById<TextView> (Resource.Id.txtAppTitle);
+			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+			_homeButton.Touch += delegate {
+				var homeActivity = new Intent (this, typeof(HomeActivity));
+				StartActivity (homeActivity);
+			};
 		}
 
 		//------------------------ custom activity ----------------------//

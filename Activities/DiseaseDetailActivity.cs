@@ -43,6 +43,13 @@ namespace MyHealthAndroid
 
 			var _selectedDiseaseId = Intent.GetIntExtra ("diseaseId", -1);
 
+			var _homeButton = FindViewById<TextView> (Resource.Id.txtAppTitle);
+			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+			_homeButton.Touch += delegate {
+				var homeActivity = new Intent (this, typeof(HomeActivity));
+				StartActivity (homeActivity);
+			};
+
 			if (_selectedDiseaseId > 0) {
 				var selectedDisease = await DatabaseManager.SelectDisease (_selectedDiseaseId);
 				_backButtonTitle = selectedDisease.Name;
