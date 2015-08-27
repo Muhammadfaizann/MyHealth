@@ -128,7 +128,7 @@ namespace RCSI
 				UIAlertView dialog = new UIAlertView ();
 				dialog.Title = "Accept Terms of Use";
 				//UIKit.UIButton btnWebsite;
-				var url = "http://myhealthapp.ie/terms.html";
+				var url = "http://rcsimyhealth.ie/terms-and-conditions.html";
 				//dialog.Message = "Read our terms and conditions" + url;
 				dialog.AddButton ("Don't Agree");
 				dialog.AddButton ("Agree");
@@ -161,7 +161,7 @@ namespace RCSI
 	//					};
 						break;
 					case 2:
-						UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://myhealthapp.ie/terms.html"));
+						UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://rcsimyhealth.ie/terms-and-conditions.html"));
 						exit (0);
 						break;
 					}
@@ -198,7 +198,7 @@ namespace RCSI
 
 		public void OpenWebSite(object sender, EventArgs e)
 		{
-			UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://myhealthapp.ie/terms.html"));
+			UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://rcsimyhealth.ie/terms-and-conditions.html"));
 		}
 	}
 }
