@@ -1,5 +1,5 @@
-<Properties StartupItem="ios/RCSI MyHealth.csproj" GitUserInfo="UsingMD">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.Tekenable Tekenable’s iPhone" />
+﻿<Properties StartupItem="My.Health.Android.csproj" GitUserInfo="UsingMD">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.1991c259" />
   <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -14,16 +14,13 @@
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/RecentCategoryController.cs" line="22" column="1" />
       <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/ios/IllnessDetailsController.cs" line="29" column="1" />
       <Breakpoint conditionExpression="disease.ID == 181" file="/Users/awaiskhan/tekenable/RCSI/MyHealthDB/DatabaseManager.cs" line="191" column="1" />
-      <Breakpoint file="/Users/awaiskhan/tekenable/RCSI/Activities/HPDetailsActivity.cs" line="272" column="1" />
-      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/RecentCategoryController.cs" line="77" column="1" />
-      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/SearchButtonsController.cs" line="37" column="1" />
-      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/SearchButtonsController.cs" line="20" column="1" />
-      <Breakpoint file="/Users/tekenabletekenable/Projects/tekenable/RCSI/ios/SearchButtonsController.cs" line="53" column="1" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="81" column="1" />
+      <Breakpoint file="C:\BitBucket\RCSI\MyHealth_Android_Develop\Activities\LaunchActivity.cs" line="96" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <DisabledProjects>
-    <String>My.Health.Android.csproj</String>
+    <String>ios\RCSI MyHealth.csproj</String>
   </DisabledProjects>
-
+  <MonoDevelop.Ide.ItemProperties.My.Health.Android AndroidDesignerPreferredDevice="Nexus 4" />
 </Properties>
