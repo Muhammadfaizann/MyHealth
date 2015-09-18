@@ -118,7 +118,7 @@ namespace MyHealthAndroid
 
 				//StartActivity(Intent.CreateChooser(sharingIntent, "Share via"));*/
 
-				String shareBody = "I have just researched \"" + _backButtonTitle + "\" to find out more please download the MyHealth app from http://myhealthapp.ie";
+				String shareBody = "I have just researched \"" + _backButtonTitle + "\" to find out more please download the MyHealth app from http://www.rcsimyhealth.ie";
 				String shareSubject = _backButtonTitle + " - MyHealth app";
 
 				Intent emailIntent = new Intent();

@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchText"
-        android:hint="Health Condition's"
+        android:hint="Health Conditions"
         android:textColor="#ff000000"
         android:textColorHighlight="#ffbdbdbd"
         android:textColorHint="#ff949494"

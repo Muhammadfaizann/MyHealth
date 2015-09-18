@@ -49,7 +49,6 @@
     <AndroidSigningKeyAlias>RCSI MyHealth</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>RCSIMyHealth</AndroidSigningKeyPass>
     <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
-    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
