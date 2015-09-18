@@ -94,7 +94,7 @@ namespace RCSI
 		}
 
 		public void btnShareClick () {
-			var name = "I have just researched \"" + SelectedDisease.Name + "\" to find out more please download the MyHealth app from www.rcsimyhealth.ie";
+			var name = "I have just researched \"" + SelectedDisease.Name + "\" to find out more please download the RCSI MyHealth app from www.rcsimyhealth.ie";
 			var url = NSUrl.FromString ("http://rcsimyhealth.ie/");
 			//var item = UIActivity.FromObject (name);
 			var item = UIActivity.FromObject (name);

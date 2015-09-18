@@ -428,7 +428,7 @@ namespace RCSI
 			else if (type.Equals (comboType.Gender)) 
 			{
 				data.Add ("Male");
-				data.Add ("female");
+				data.Add ("Female");
 			}
 			else if (type.Equals (comboType.Age)) 
 			{

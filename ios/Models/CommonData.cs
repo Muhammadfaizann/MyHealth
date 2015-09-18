@@ -316,7 +316,7 @@ namespace RCSI
 		public List<String> GetGenderList () {
 			var data = new List<String> ();
 				data.Add ("Male");
-				data.Add ("female");
+				data.Add ("Female");
 			return data;
 		}
 

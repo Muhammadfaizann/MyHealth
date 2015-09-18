@@ -21,10 +21,14 @@ namespace RCSI
 
 		public async override void ViewDidLoad ()
 		{
+			
 			base.ViewDidLoad ();
-			var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
-			this.loadingOverlay = new LoadingOverlay (bounds);
-			this.View.Add ( this.loadingOverlay );
+			string Harry1 = "Harry";
+			if (!UIDevice.CurrentDevice.Model.Contains("iPad")) {
+				var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
+				this.loadingOverlay = new LoadingOverlay (bounds);
+				this.View.Add (this.loadingOverlay);
+			}
 			//bool isAgree = NSUserDefaults.StandardUserDefaults.BoolForKey ("Agree");
 //			if (isAgree) {
 //				//PerformSegue ("Home", this);
@@ -68,7 +72,9 @@ namespace RCSI
 					} else {
 						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 					}
-					loadingOverlay.Hide ();
+					if (UIDevice.CurrentDevice.Model != "iPad") {
+						loadingOverlay.Hide ();
+					}
 					ShowAcceptanceDialog ();
 				} else {
 					if (connected) {
@@ -80,11 +86,15 @@ namespace RCSI
 						} else {
 							userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
 							userDefs.Synchronize ();
-							loadingOverlay.Hide ();
+							if (UIDevice.CurrentDevice.Model != "iPad") {
+								loadingOverlay.Hide ();
+							}
 							ShowAcceptanceDialog ();
 						}
 					} else {
-						loadingOverlay.Hide ();
+						if (UIDevice.CurrentDevice.Model != "iPad") {
+							loadingOverlay.Hide ();
+						}
 						ShowConnectivityDialog ();
 					}
 
