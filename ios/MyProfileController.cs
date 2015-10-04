@@ -41,6 +41,8 @@ namespace RCSI
 				Page = Convert.ToInt32(Pages.MyBMI)
 			});
 
+			scrollView.ContentSize = new CoreGraphics.CGSize (this.View.Frame.Width, 460);
+
 			txtHeightFt.BorderStyle = UITextBorderStyle.None;
 			txtCounty.Layer.BorderWidth = 0;
 
