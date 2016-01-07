@@ -35,9 +35,11 @@ namespace MyHealthDB
 			}
 		}
 
+		private static SQLiteAsyncConnection conn;
 		public static SQLiteAsyncConnection dbConnection {
 			get {
-				var conn = new SQLiteAsyncConnection (DatabaseFilePath);
+				if (conn == null)
+					conn = new SQLiteAsyncConnection (DatabaseFilePath);
 				return conn;
 			}
 		}

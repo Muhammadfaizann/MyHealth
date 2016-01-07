@@ -71,8 +71,6 @@ namespace MyHealthDB
 		{
 			_service = new WebService ();
 
-			obj = new HttpResponseMessage();
-
 			//Helper.Helper.DeviceId = "9412D71E-ED92-4149-991E-5D2F26ED4D8F";
 			//Helper.Helper.PIN = "1234";
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
@@ -83,104 +81,351 @@ namespace MyHealthDB
 			//Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + syncDate.Day);
 
 			try {
-				//the initial hand shake
-				obj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
-				content = await obj.Content.ReadAsStringAsync();
-				SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
-				Helper.Helper.Hash = _SMHandShake.Hash;
-				if (_SMHandShake.StatusId != 1) {
-					Console.WriteLine ("HandShake was rejected");
-					return false;
+				String serviceContent;
+
+				// the initial hand shake
+				using (var responseMessageObj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash)) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(serviceContent);
+					Helper.Helper.Hash = _SMHandShake.Hash;
+					if (_SMHandShake.StatusId != 1) {
+						Console.WriteLine ("HandShake was rejected");
+						return false;
+					}
 				}
 
 				//get the latest about us
-				obj = await _service.GetAboutUs ();
-				content = await obj.Content.ReadAsStringAsync ();
-				List<AboutUs> aboutus = JsonConvert.DeserializeObject<List<AboutUs>> (content);
-				if (aboutus != null && aboutus.Count > 0 ) {
-					if (await UpdateDBManager.UpdateAboutUs (aboutus [0])) {
-						Console.WriteLine ("About us was updated. ");
+				using (var responseMessageObj = await _service.GetAboutUs ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync ();
+					List<AboutUs> aboutus = JsonConvert.DeserializeObject<List<AboutUs>> (serviceContent);
+					if (aboutus != null && aboutus.Count > 0) {
+						if (await UpdateDBManager.UpdateAboutUs (aboutus [0])) {
+							Console.WriteLine ("About us was updated. ");
+						}
 					}
 				}
 
 				//call the service for updates.
-				obj = await _service.GetAllConditions ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblCPCondition> _AllDiseases = JsonConvert.DeserializeObject<List<SMtblCPCondition>>(content);
-				if (await UpdateDBManager.UpdateDiseases (_AllDiseases)) {
-					Console.WriteLine ("\n Diseases are updated. \n");
+				using (var responseMessageObj = await _service.GetAllConditions ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCPCondition> _AllDiseases = JsonConvert.DeserializeObject<List<SMtblCPCondition>>(serviceContent);
+					if (await UpdateDBManager.UpdateDiseases (_AllDiseases)) {
+						Console.WriteLine ("\n Diseases are updated. \n");
+					}
 				}
 
-				obj = await _service.GetAllCategories ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblCPCategory> _AllCategories = JsonConvert.DeserializeObject<List<SMtblCPCategory>>(content);
-				if (await UpdateDBManager.UpdateCategories (_AllCategories)) {
-					Console.WriteLine ("\n Categories are updated. \n");
+				using (var responseMessageObj = await _service.GetAllCategories ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCPCategory> _AllCategories = JsonConvert.DeserializeObject<List<SMtblCPCategory>>(serviceContent);
+					if (await UpdateDBManager.UpdateCategories (_AllCategories)) {
+						Console.WriteLine ("\n Categories are updated. \n");
+					}
 				}
 
-				obj = await _service.GetConditionCategories();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMConditionCategories> _ConditionCategory = JsonConvert.DeserializeObject<List<SMConditionCategories>>(content);
-				if (await UpdateDBManager.UpdateDiseasesCategories (_ConditionCategory)) {
-					Console.WriteLine ("\n DiseasesForCategory are updated. \n");
+				using (var responseMessageObj = await _service.GetConditionCategories()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMConditionCategories> _ConditionCategory = JsonConvert.DeserializeObject<List<SMConditionCategories>>(serviceContent);
+					if (await UpdateDBManager.UpdateDiseasesCategories (_ConditionCategory)) {
+						Console.WriteLine ("\n DiseasesForCategory are updated. \n");
+					}
 				}
 
-				obj = await _service.GetAllProvince ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblProvince> _AllProvinces = JsonConvert.DeserializeObject<List<SMtblProvince>>(content);
-				if (await UpdateDBManager.UpdateProvince (_AllProvinces)) {
-					Console.WriteLine ("\n All Provinces are updated. \n");
+				using (var responseMessageObj = await _service.GetAllProvince ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblProvince> _AllProvinces = JsonConvert.DeserializeObject<List<SMtblProvince>>(serviceContent);
+					if (await UpdateDBManager.UpdateProvince (_AllProvinces)) {
+						Console.WriteLine ("\n All Provinces are updated. \n");
+					}
 				}
 
-				obj = await _service.GetAllCounty ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblCounty> _AllCounties = JsonConvert.DeserializeObject<List<SMtblCounty>>(content);
-				if (await UpdateDBManager.UpdateCounty (_AllCounties)) {
-					Console.WriteLine ("\n DiseasesForCategory are updated. \n");
+				using (var responseMessageObj = await _service.GetAllCounty ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCounty> _AllCounties = JsonConvert.DeserializeObject<List<SMtblCounty>>(serviceContent);
+					if (await UpdateDBManager.UpdateCounty (_AllCounties)) {
+						Console.WriteLine ("\n DiseasesForCategory are updated. \n");
+					}
 				}
 
-				obj = await _service.GetHospitals ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblHealthHospital> _AllHospitals = JsonConvert.DeserializeObject<List<SMtblHealthHospital>>(content);
-				if (await UpdateDBManager.UpdateHospitals(_AllHospitals)) {
-					Console.WriteLine ("\n Hospitals are updated. \n");
+				using (var responseMessageObj = await _service.GetHospitalsNoDate ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthHospital> _AllHospitals = JsonConvert.DeserializeObject<List<SMtblHealthHospital>>(serviceContent);
+					if (await UpdateDBManager.UpdateHospitals(_AllHospitals)) {
+						Console.WriteLine ("\n Hospitals are updated. \n");
+					}
 				}
 
-				obj = await _service.GetAllEmergencyNumbers ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblHealthEmergencyNumber> _AllEmergencyContacts = JsonConvert.DeserializeObject<List<SMtblHealthEmergencyNumber>>(content);
-				if (await UpdateDBManager.UpdateEmergencyNumber(_AllEmergencyContacts)) {
-					Console.WriteLine ("\n Emergency Numbers are updated. \n");
+				using (var responseMessageObj = await _service.GetAllEmergencyNumbers ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthEmergencyNumber> _AllEmergencyContacts = JsonConvert.DeserializeObject<List<SMtblHealthEmergencyNumber>>(serviceContent);
+					if (await UpdateDBManager.UpdateEmergencyNumber(_AllEmergencyContacts)) {
+						Console.WriteLine ("\n Emergency Numbers are updated. \n");
+					}
 				}
 
-				obj = await _service.GetAllOrgnisations ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblHealthOrganizationsInfo> _AllOrganisations = JsonConvert.DeserializeObject<List<SMtblHealthOrganizationsInfo>>(content);
-				if (await UpdateDBManager.UpdateOrganizations (_AllOrganisations)) {
-					Console.WriteLine ("\n Organisations are updated.");
+				using (var responseMessageObj = await _service.GetAllOrgnisationsNoDate ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthOrganizationsInfo> _AllOrganisations = JsonConvert.DeserializeObject<List<SMtblHealthOrganizationsInfo>>(serviceContent);
+					if (await UpdateDBManager.UpdateOrganizations (_AllOrganisations)) {
+						Console.WriteLine ("\n Organisations are updated.");
+					}
 				}
 
-				obj = await _service.GetAllCpUsers ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblCpUser> _allCpUsers = JsonConvert.DeserializeObject<List<SMtblCpUser>>(content);
-				if (await UpdateDBManager.UpdateCpUsers (_allCpUsers)) {
-					Console.WriteLine ("\n CpUsers are updated.");
+				using (var responseMessageObj = await _service.GetAllCpUsers ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCpUser> _allCpUsers = JsonConvert.DeserializeObject<List<SMtblCpUser>>(serviceContent);
+					if (await UpdateDBManager.UpdateCpUsers (_allCpUsers)) {
+						Console.WriteLine ("\n CpUsers are updated.");
+					}
 				}
 
-				obj = await _service.GetImportantNotices ();
-				content = await obj.Content.ReadAsStringAsync();
-				List<SMtblHealthImportantNotice> _allImportantNotices = JsonConvert.DeserializeObject<List<SMtblHealthImportantNotice>>(content);
-				if (await UpdateDBManager.UpdateImportantNotices (_allImportantNotices)) {
-					Console.WriteLine ("\n ImportantNotice are updated.");
+				using (var responseMessageObj = await _service.GetImportantNotices ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthImportantNotice> _allImportantNotices = JsonConvert.DeserializeObject<List<SMtblHealthImportantNotice>>(serviceContent);
+					if (await UpdateDBManager.UpdateImportantNotices (_allImportantNotices)) {
+						Console.WriteLine ("\n ImportantNotice are updated.");
+					}
 				}
 					
-				obj = await _service.GoodBye();
+				using (var responseMessageObj = await _service.GoodBye())
+				{
+				}
 
 			} catch (Exception ex) {
 				Console.WriteLine ("Exception : {0}", ex);
 			}
 			await LogManager.SyncAllLogs ();
 			//TODO : Make a table and save successfull sync date. 
+			return true;
+		}
+
+		// sync device for the first time
+		public async static Task<Boolean> FirstTimeSyncDevice ()
+		{
+			_service = new WebService ();
+
+			var AllDevices = await DatabaseManager.SelectAllDevices ();
+			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+
+			try {
+				String serviceContent;
+
+				// the initial hand shake to get token to be use in further requests
+				using (var responseMessageObj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash)) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(serviceContent);
+					Helper.Helper.Hash = _SMHandShake.Hash;
+					if (_SMHandShake.StatusId != 1) {
+						Console.WriteLine ("HandShake was rejected");
+						return false;
+					}
+				}
+
+				//get the latest about us
+				using (var responseMessageObj = await _service.GetAboutUs ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync ();
+					List<AboutUs> aboutus = JsonConvert.DeserializeObject<List<AboutUs>> (serviceContent);
+					if (aboutus != null && aboutus.Count > 0) {
+						if (await UpdateDBManager.UpdateAboutUs (aboutus [0])) {
+							Console.WriteLine ("About us was updated. ");
+						}
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetAllProvince ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblProvince> _AllProvinces = JsonConvert.DeserializeObject<List<SMtblProvince>>(serviceContent);
+					if (await UpdateDBManager.UpdateProvince (_AllProvinces)) {
+						Console.WriteLine ("\n All Provinces are updated. \n");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetAllCounty ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCounty> _AllCounties = JsonConvert.DeserializeObject<List<SMtblCounty>>(serviceContent);
+					if (await UpdateDBManager.UpdateCounty (_AllCounties)) {
+						Console.WriteLine ("\n DiseasesForCategory are updated. \n");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetAllEmergencyNumbers ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthEmergencyNumber> _AllEmergencyContacts = JsonConvert.DeserializeObject<List<SMtblHealthEmergencyNumber>>(serviceContent);
+					if (await UpdateDBManager.UpdateEmergencyNumber(_AllEmergencyContacts)) {
+						Console.WriteLine ("\n Emergency Numbers are updated. \n");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetAllCpUsers ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCpUser> _allCpUsers = JsonConvert.DeserializeObject<List<SMtblCpUser>>(serviceContent);
+					if (await UpdateDBManager.UpdateCpUsers (_allCpUsers)) {
+						Console.WriteLine ("\n CpUsers are updated.");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetImportantNotices ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthImportantNotice> _allImportantNotices = JsonConvert.DeserializeObject<List<SMtblHealthImportantNotice>>(serviceContent);
+					if (await UpdateDBManager.UpdateImportantNotices (_allImportantNotices)) {
+						Console.WriteLine ("\n ImportantNotice are updated.");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GoodBye())
+				{
+				}
+
+			} catch (Exception ex) {
+				Console.WriteLine ("Exception : {0}", ex);
+			}
+			await LogManager.SyncAllLogs ();
+			//TODO : Make a table and save successfull sync date. 
+			return true;
+		}
+
+		public static async Task<Boolean> SyncConditionsData()
+		{
+			_service = new WebService ();
+
+			var AllDevices = await DatabaseManager.SelectAllDevices ();
+			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+
+			try {
+				String serviceContent;
+
+				// the initial hand shake to get token to be use in further requests
+				using (var responseMessageObj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash)) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(serviceContent);
+					Helper.Helper.Hash = _SMHandShake.Hash;
+					if (_SMHandShake.StatusId != 1) {
+						Console.WriteLine ("HandShake was rejected");
+						return false;
+					}
+				}
+
+				//call the service for updates.
+				using (var responseMessageObj = await _service.GetAllConditions ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCPCondition> _AllDiseases = JsonConvert.DeserializeObject<List<SMtblCPCondition>>(serviceContent);
+					if (await UpdateDBManager.UpdateDiseases (_AllDiseases)) {
+						Console.WriteLine ("\n Diseases are updated. \n");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetAllCategoriesNoDate ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblCPCategory> _AllCategories = JsonConvert.DeserializeObject<List<SMtblCPCategory>>(serviceContent);
+					if (await UpdateDBManager.UpdateCategories (_AllCategories)) {
+						Console.WriteLine ("\n Categories are updated. \n");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetConditionCategories()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMConditionCategories> _ConditionCategory = JsonConvert.DeserializeObject<List<SMConditionCategories>>(serviceContent);
+					if (await UpdateDBManager.UpdateDiseasesCategories (_ConditionCategory)) {
+						Console.WriteLine ("\n DiseasesForCategory are updated. \n");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GoodBye())
+				{
+				}
+			}
+			catch (Exception ex) {
+				Console.WriteLine ("Exception in SyncConditionsData method: {0}", ex.Message);
+			}
+			return true;
+		}
+
+		public static async Task<Boolean> SyncHospitalsData()
+		{
+			_service = new WebService ();
+
+			var AllDevices = await DatabaseManager.SelectAllDevices ();
+			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+
+			try {
+				String serviceContent;
+
+				// the initial hand shake to get token to be use in further requests
+				using (var responseMessageObj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash)) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(serviceContent);
+					Helper.Helper.Hash = _SMHandShake.Hash;
+					if (_SMHandShake.StatusId != 1) {
+						Console.WriteLine ("HandShake was rejected");
+						return false;
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetHospitalsNoDate ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthHospital> _AllHospitals = JsonConvert.DeserializeObject<List<SMtblHealthHospital>>(serviceContent);
+					if (await UpdateDBManager.UpdateHospitals(_AllHospitals)) {
+						Console.WriteLine ("\n Hospitals are updated. \n");
+					}
+				}
+
+//				using (var responseMessageObj = await _service.GetAllOrgnisationsNoDate ()) {
+//					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+//					List<SMtblHealthOrganizationsInfo> _AllOrganisations = JsonConvert.DeserializeObject<List<SMtblHealthOrganizationsInfo>>(serviceContent);
+//					if (await UpdateDBManager.UpdateOrganizations (_AllOrganisations)) {
+//						Console.WriteLine ("\n Organisations are updated.");
+//					}
+//				}
+
+				using (var responseMessageObj = await _service.GoodBye())
+				{
+				}
+			}
+			catch (Exception ex) {
+				Console.WriteLine ("Exception in SyncHospitalsData method: {0}", ex.Message);
+			}
+			return true;
+		}
+
+		public static async Task<Boolean> SyncOrganisationData()
+		{
+			_service = new WebService ();
+
+			var AllDevices = await DatabaseManager.SelectAllDevices ();
+			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+
+			try {
+				String serviceContent;
+
+				// the initial hand shake to get token to be use in further requests
+				using (var responseMessageObj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash)) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(serviceContent);
+					Helper.Helper.Hash = _SMHandShake.Hash;
+					if (_SMHandShake.StatusId != 1) {
+						Console.WriteLine ("HandShake was rejected");
+						return false;
+					}
+				}
+
+				using (var responseMessageObj = await _service.GetAllOrgnisationsNoDate ()) {
+					serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					List<SMtblHealthOrganizationsInfo> _AllOrganisations = JsonConvert.DeserializeObject<List<SMtblHealthOrganizationsInfo>>(serviceContent);
+					if (await UpdateDBManager.UpdateOrganizations (_AllOrganisations)) {
+						Console.WriteLine ("\n Organisations are updated.");
+					}
+				}
+
+				using (var responseMessageObj = await _service.GoodBye())
+				{
+				}
+			}
+			catch (Exception ex) {
+				Console.WriteLine ("Exception in SyncHospitalsData method: {0}", ex.Message);
+			}
 			return true;
 		}
 

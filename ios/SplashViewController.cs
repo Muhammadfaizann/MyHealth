@@ -23,7 +23,7 @@ namespace RCSI
 		{
 			
 			base.ViewDidLoad ();
-			string Harry1 = "Harry";
+			//string Harry1 = "Harry";
 			if (!UIDevice.CurrentDevice.Model.Contains("iPad")) {
 				var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
 				this.loadingOverlay = new LoadingOverlay (bounds);
@@ -59,9 +59,12 @@ namespace RCSI
 					double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
 					if (TotalHours > 24) {
 						if (connected) {
+							// this line is not awaited therefore control will transfer to the next line immediately before SyncDevice method completes execution
 							MyHealthDB.ServiceConsumer.SyncDevice ().ContinueWith ((t) => {
 								if (t.Result) {
 									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
+									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "ConditionsLastSyncDate");
+									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "HospitalsLastSyncDate");
 									userDefs.Synchronize ();
 								}
 								UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
@@ -78,7 +81,7 @@ namespace RCSI
 					ShowAcceptanceDialog ();
 				} else {
 					if (connected) {
-						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
+						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.FirstTimeSyncDevice ();
 						//var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						if (!isSyncSuccessful) {
 							_alert.Message = "Unable to Sync device with server, please try again later";
@@ -100,12 +103,18 @@ namespace RCSI
 
 					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 				}
-			} else {
+			}	// end if device-registered
+			else {
+				// device is not registered
+				// so handle first-time use
 				if (connected) {
 					string OSVer = UIDevice.CurrentDevice.SystemVersion;
 					string OSVersion = OSVer.Replace (".", "-");
+					// registering device with the system
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice ("iPhone", OSVersion)) {
-						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice ();
+						// first time sync device
+						var isSyncSuccessful = await MyHealthDB.ServiceConsumer.FirstTimeSyncDevice ();
+						//var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice();
 						//var isSyncSuccessful = await MyHealthDB.ServiceConsumer.SyncDevice (LastSyncDate);
 						if (!isSyncSuccessful) {
 							_alert.Message = "Unable to Sync device with server, please try again later";

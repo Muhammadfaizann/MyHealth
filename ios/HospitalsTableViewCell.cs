@@ -4,6 +4,7 @@ using System;
 
 using Foundation;
 using UIKit;
+using CoreGraphics;
 using MyHealthDB.Logger;
 using MyHealthDB;
 
@@ -11,6 +12,11 @@ namespace RCSI
 {
 	public partial class HospitalsTableViewCell : UITableViewCell
 	{
+		public HospitalsTableViewCell ()
+		{
+			
+		}
+
 		public HospitalsTableViewCell (IntPtr handle) : base (handle)
 		{
 		}
@@ -22,6 +28,15 @@ namespace RCSI
 
 		public void UpdateCell(string name, string tel,string website)
 		{
+			/*UIFont cellFont = lblName.Font;
+			CGSize constraintSize = new CGSize(lblName.Bounds.Size.Width, float.MaxValue);
+			//CGSize labelSize = name.SizeWithFont(cellFont, constraintSize, UILineBreakMode.WordWrap);
+
+			CGSize labelSize = lblName.SizeThatFits (constraintSize);
+			//lblName.Frame = new CGRect(lblName.Frame.X, lblName.Frame.Y, lblName.Frame.Width, labelSize.Height);
+			lblName.SizeToFit ();*/
+
+
 			lblName.Text = name;
 			btnWebsite.SetTitle( "Website: " + website, UIControlState.Normal);
 			btnWebsite.TouchUpInside -= OpenWebSite;
@@ -48,7 +63,7 @@ namespace RCSI
 				UIAlertView alert = new UIAlertView ("Alert", "This link will take you to an external website, Do you want to Proceed?", null, "OK", new string[] {"Cancel"});
 				alert.Clicked += (s, b) => {
 					if(b.ButtonIndex == 0) {
-						LogManager.Log<LogExternalLink> (new LogExternalLink (){ 
+						 LogManager.Log<LogExternalLink> (new LogExternalLink (){ 
 							Date = DateTime.Now, 
 							Link = siteUrl
 								
@@ -61,6 +76,25 @@ namespace RCSI
 				alert.Show();
 				alert.Dispose ();
 			}
+		}
+
+		public nfloat GetHeight (string name, string tel,string website)
+		{
+			UIFont cellFont = lblName.Font;
+			CGSize constraintSize = new CGSize(lblName.Bounds.Size.Width, float.MaxValue);
+			//CGSize labelSize = name.SizeWithFont(cellFont, constraintSize, UILineBreakMode.WordWrap);
+
+			CGSize labelSize = lblName.SizeThatFits (constraintSize);
+
+			var cellCurrentHeight = this.Frame.Height;
+			var labelCurrentHeight = lblName.Frame.Height;
+
+			if (labelSize.Height > labelCurrentHeight) {
+				var diff = labelSize.Height - labelCurrentHeight;
+				cellCurrentHeight += diff;
+			}
+
+			return cellCurrentHeight;
 		}
 	}
 }

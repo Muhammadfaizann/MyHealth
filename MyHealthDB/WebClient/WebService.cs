@@ -30,6 +30,11 @@ namespace MyHealthDB.Service
 			return await Client.GetAsync("api/v1/Category/GetAll");
 		}
 
+		public async Task<HttpResponseMessage> GetAllCategoriesNoDate()
+		{
+			return await Client.GetAsync("api/v1/Category/GetAllNoDate");
+		}
+
 		public async Task<HttpResponseMessage> GetConditionCategories()
 		{
 			return await Client.GetAsync("api/v1/Condition/GetConditionCategories");
@@ -50,6 +55,11 @@ namespace MyHealthDB.Service
 			return await Client.GetAsync ("api/v1/MyHealth/Hospital/GetAll");
 		}
 
+		public async Task<HttpResponseMessage> GetHospitalsNoDate()
+		{
+			return await Client.GetAsync ("api/v1/MyHealth/Hospital/GetAllNoDate");
+		}
+
 		public async Task<HttpResponseMessage> GetAllEmergencyNumbers ()
 		{
 			return await Client.GetAsync ("api/v1/MyHealth/EmergencyNumber/GetAll");
@@ -58,6 +68,11 @@ namespace MyHealthDB.Service
 		public async Task<HttpResponseMessage> GetAllOrgnisations ()
 		{
 			return await Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAll");
+		}
+
+		public async Task<HttpResponseMessage> GetAllOrgnisationsNoDate ()
+		{
+			return await Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAllNoDate");
 		}
 
 		public async Task<HttpResponseMessage> GetAllCpUsers ()

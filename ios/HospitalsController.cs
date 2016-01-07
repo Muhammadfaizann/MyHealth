@@ -29,6 +29,49 @@ namespace RCSI
 				Date = DateTime.Now,
 				Page = Convert.ToInt32(Pages.Hospitals)
 			});
+			var isSyncRequired = true;
+			var userDefs = NSUserDefaults.StandardUserDefaults;
+			var strLastSyncDate = userDefs.StringForKey ("HospitalsLastSyncDate");
+			if (String.IsNullOrEmpty (strLastSyncDate)) {
+				isSyncRequired = true;
+			} else {
+				var LastSyncDate = Convert.ToDateTime (strLastSyncDate);
+				double TotalHours = DateTime.Now.Subtract (LastSyncDate).TotalHours;
+
+				isSyncRequired = TotalHours > 24;
+			}
+
+			if (isSyncRequired) {
+				var remoteHostStatus = Reachability.RemoteHostStatus ();
+				var internetStatus = Reachability.InternetConnectionStatus ();
+				var localWifiStatus = Reachability.LocalWifiConnectionStatus ();
+
+				var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
+				if (connected) {
+					LoadingOverlay loadingOverlay = null;
+					if (!UIDevice.CurrentDevice.Model.Contains("iPad")) {
+						var bounds = UIScreen.MainScreen.Bounds; // portrait bounds
+						loadingOverlay = new LoadingOverlay (bounds);
+						this.View.Add (loadingOverlay);
+					}
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+
+				if (await ServiceConsumer.SyncHospitalsData()) {
+						userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "HospitalsLastSyncDate");
+						userDefs.Synchronize ();
+					}
+					else {
+						ShowUnableToSyncDialog ();
+					}
+
+					if (UIDevice.CurrentDevice.Model != "iPad") {
+						loadingOverlay.Hide ();
+					}
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+				} else {
+					ShowConnectivityDialog ();
+				}
+			}
 
 			_hospitalsContactSource = new HospitalsContactSource (this);
 			await _hospitalsContactSource.UpdateData ();
@@ -39,6 +82,32 @@ namespace RCSI
 			this.tableView.AddGestureRecognizer (gestureRecognizer);
 
 			//this.tableView.Scrolled += (sender, e) => this.searchBar.ResignFirstResponder ();
+		}
+
+		private void ShowConnectivityDialog () {
+			UIAlertView dialog = new UIAlertView ();
+			dialog.Title = "Connectivity Check";
+			dialog.Message = "Please make sure, Your device in connected to internet.";
+			dialog.AddButton ("Ok");
+
+			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
+				NavigationController.PopViewController(true);
+			};
+
+			dialog.Show ();
+		}
+
+		private void ShowUnableToSyncDialog () {
+			UIAlertView dialog = new UIAlertView ();
+			//dialog.Title = "Connectivity Check";
+			dialog.Message = "Unable to fetch hospitals data, please try again later. If the problem persist please contact with RCSI";
+			dialog.AddButton ("Ok");
+
+			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
+				NavigationController.PopViewController(true);
+			};
+
+			dialog.Show ();
 		}
 
 		public void HideKeyboard ()
@@ -113,7 +182,7 @@ namespace RCSI
 
 		static String cellIdentifier = "HospitalCell";
 		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
-		{	
+		{
 			Hospital item;
 			if (SearchItems == null)
 				item = _items [indexPath.Row];
@@ -130,6 +199,21 @@ namespace RCSI
 			cell.UpdateCell (item.Name, item.PhoneNumber, item.URL);
 			return cell;
 		}
+
+		/*HospitalsTableViewCell dummyCell;
+		public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+		{
+			Hospital item;
+			if (SearchItems == null)
+				item = _items [indexPath.Row];
+			else
+				item = SearchItems [indexPath.Row];
+
+			if (dummyCell == null) {
+				dummyCell = new HospitalsTableViewCell ();
+			}
+			return dummyCell.GetHeight (item.Name, item.PhoneNumber, item.URL);
+		}*/
 
 		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 		{
