@@ -71,7 +71,13 @@ namespace RCSI
 					}
 					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 				} else {
-					ShowConnectivityDialog ();
+					// sync is required but there is no internet connection available
+					// checking if the data was sync for atleast once
+					if (String.IsNullOrEmpty(strLastSyncDate))
+					{
+						// it was not sync even for once therefore show no internet dialog
+						ShowConnectivityDialog();
+					}
 				}
 			}
 
