@@ -497,6 +497,12 @@ namespace MyHealthAndroid
 			editor.PutString("BloodGroup", bloodGroupSelected);
 
 			editor.Apply();
+
+			heightMeter = String.IsNullOrEmpty(heightMeter) ? "0 m" : heightMeter;
+			heightCM = String.IsNullOrEmpty(heightCM) ? "0 cm" : heightCM;
+			weightKg = String.IsNullOrEmpty(weightKg) ? "0 kg" : weightKg;
+			weightg = String.IsNullOrEmpty(weightg) ? "0 g" : weightg;
+
 			MyProfile myprofile = new MyProfile ();
 			myprofile.AgeRange = ageSelected;
 			myprofile.County = selectedCounty;

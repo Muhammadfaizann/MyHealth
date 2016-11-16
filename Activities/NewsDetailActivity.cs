@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Net;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -31,23 +32,32 @@ namespace MyHealthAndroid
 
 			SetCustomActionBar ();
 
-			_channelsList = FindViewById<ListView> (Resource.Id.emergencyList);
-			string channelName = Intent.GetStringExtra ("ChannelName");
+			_channelsList = FindViewById<ListView>(Resource.Id.emergencyList);
+			string channelName = Intent.GetStringExtra("ChannelName");
 
-			if (channelName == "BBC Medical News") {
-				_listAdapter = new NewsFeedAdapter (this, RssFeedName.BBC);
+			var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+			var activeConnection = connectivityManager.ActiveNetworkInfo;
+			if ((activeConnection != null) && activeConnection.IsConnected)
+			{
+				if (channelName == "BBC Medical News")
+				{
+					_listAdapter = new NewsFeedAdapter(this, RssFeedName.BBC);
+				}
+				else if (channelName == "Pulse Latest")
+				{
+					_listAdapter = new NewsFeedAdapter(this, RssFeedName.PULSE);
+				}
+				else if (channelName == "Irish Health")
+				{
+					_listAdapter = new NewsFeedAdapter(this, RssFeedName.IrishHealth);
+				}
+				else if (channelName == "Irish Times Health")
+				{
+					_listAdapter = new NewsFeedAdapter(this, RssFeedName.IrishTimesHealth);
+				}
+				_channelsList.Adapter = _listAdapter;
+				_channelsList.ItemClick += OnListItemClick;
 			}
-			else if (channelName == "Pulse Latest") {
-				_listAdapter = new NewsFeedAdapter (this, RssFeedName.PULSE);
-			}
-			else if (channelName == "Irish Health") {
-				_listAdapter = new NewsFeedAdapter (this, RssFeedName.IrishHealth);
-			}
-			else if (channelName == "Irish Times Health") {
-				_listAdapter = new NewsFeedAdapter (this, RssFeedName.IrishTimesHealth);
-			}
-			_channelsList.Adapter = _listAdapter;
-			_channelsList.ItemClick += OnListItemClick;
 
 			// back button
 			backButton = FindViewById<Button> (Resource.Id.backButton);
