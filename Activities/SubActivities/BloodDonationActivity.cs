@@ -32,13 +32,13 @@ namespace MyHealthAndroid
 
 			var Link = FindViewById (Resource.Id.bloodDonationLink);
 			Link.Click += async (object sender, EventArgs e) => {
-				var uri = Android.Net.Uri.Parse ("http://www.giveblood.ie");
-				var intent = new Intent (Intent.ActionView, uri); 
+				var uri = Android.Net.Uri.Parse ("https://www.giveblood.ie"); //RCSI-305
+                var intent = new Intent (Intent.ActionView, uri); 
 				StartActivity (intent);
 				await LogManager.Log<LogExternalLink> (new LogExternalLink {
 					Date = DateTime.Now, 
-					Link = "http://www.giveblood.ie"
-				});
+					Link = "https://www.giveblood.ie" //RCSI-305
+                });
 			};
 
 			// back button
@@ -69,7 +69,7 @@ namespace MyHealthAndroid
 			var activeConnection = connectivityManager.ActiveNetworkInfo;
 			if ((activeConnection != null) && activeConnection.IsConnected) {
 				try {
-					bloodSupplyList = await ServiceConsumer.GetBloodDonationInfo ("http://www.giveblood.ie/clinicsxml.aspx?blood=1");
+					bloodSupplyList = await ServiceConsumer.GetBloodDonationInfo ("https://www.giveblood.ie/clinicsxml.aspx?blood=1"); //RCSI-305
 					// adding new item for fetch date from service to be displayed in label
 					bloodSupplyList.Add(new BloodSupply { BloodGroup = "FETCHDATE", SupplyDays = DateTime.Now.Date.ToString("dd MMM yyyy") });
 					SaveBloodSupply (bloodSupplyList);
