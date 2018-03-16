@@ -35,6 +35,9 @@
     <AndroidSigningStorePass>RCSIMyHealth</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>RCSI MyHealth</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>RCSIMyHealth</AndroidSigningKeyPass>
+    <AndroidSupportedAbis />
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -48,7 +51,9 @@
     <AndroidSigningStorePass>RCSIMyHealth</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>RCSI MyHealth</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>RCSIMyHealth</AndroidSigningKeyPass>
-    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -222,24 +227,7 @@
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Activities\" />
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Resources\drawable-ldpi\" />
-    <Folder Include="Resources\drawable-mdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\menu\" />
-    <Folder Include="Model\" />
-    <Folder Include="Activities\CustomAdapaters\" />
-    <Folder Include="Assets\Content\" />
-    <Folder Include="Activities\SubActivities\" />
-    <Folder Include="Assets\css\" />
-    <Folder Include="Assets\js\" />
-    <Folder Include="Assets\fonts\" />
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Resources\drawable-xxxhdpi\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\AboutRCSI.html" />
     <AndroidAsset Include="Assets\Content\Heart.html" />
