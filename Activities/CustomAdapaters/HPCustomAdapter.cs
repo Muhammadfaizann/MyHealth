@@ -28,7 +28,7 @@ namespace MyHealthAndroid
 		public override Java.Lang.Object GetItem (int position) {
 			// could wrap a Contact in a Java.Lang.Object
 			// to return it here if needed
-			return null;
+			return _list[position];
 		}
 
 		public override long GetItemId (int position) {

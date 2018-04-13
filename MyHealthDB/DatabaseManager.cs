@@ -734,28 +734,26 @@ namespace MyHealthDB
 		#endregion
 
 		#region[LogFeedback]
-		public async static Task<List<LogFeedback>> SelectAllLogFeedback()
+		public static Task<List<LogFeedback>> SelectAllLogFeedback()
 		{
-			var log = await dbConnection.Table<LogFeedback>().ToListAsync ();
-			return log;
+            return dbConnection.Table<LogFeedback>().ToListAsync ();
 		}
 
-		public async static Task<List<LogFeedback>> SelectLogFeedbackList (int numberOfRecords = 100)
+		public static Task<List<LogFeedback>> SelectLogFeedbackList (int numberOfRecords = 100)
 		{
-			var log = await dbConnection.Table<LogFeedback> ().Take (numberOfRecords).ToListAsync ();
-			return log;
+			return dbConnection.Table<LogFeedback> ().Take (numberOfRecords).ToListAsync ();
 		}
 
-		public async static Task<LogFeedback> SelectLogFeedback(int id)
+		public static Task<LogFeedback> SelectLogFeedback(int id)
 		{
-			return await dbConnection.Table<LogFeedback> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+			return dbConnection.Table<LogFeedback> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
 		}
 
-		public async static Task SaveLogFeedback(LogFeedback log)
+		public static Task SaveLogFeedback(LogFeedback log)
 		{
-//			var selected = await dbConnection.Table<LogFeedback> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
-//			if (selected == null) {
-			await dbConnection.InsertAsync (log).ContinueWith (t => {
+            //			var selected = await dbConnection.Table<LogFeedback> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+            //			if (selected == null) {
+            return dbConnection.InsertAsync (log).ContinueWith (t => {
 				Console.WriteLine ("New LogFeedback Name : {0}", log.ID);
 			});
 //			} else {
@@ -765,9 +763,9 @@ namespace MyHealthDB
 //			}
 		}
 
-		public async static Task DeleteLogFeedback(LogFeedback number)
+		public static Task DeleteLogFeedback(LogFeedback number)
 		{
-			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+            return dbConnection.DeleteAsync(number).ContinueWith(t => {
 				Console.WriteLine ("LogExternalLink with ID : {0} >> deleted", number.ID);
 			});
 		}
@@ -788,28 +786,26 @@ namespace MyHealthDB
 		#endregion
 
 		#region[LogUsage]
-		public async static Task<List<LogUsage>> SelectAllLogUsage()
+		public static Task<List<LogUsage>> SelectAllLogUsage()
 		{
-			var log = await dbConnection.Table<LogUsage>().ToListAsync ();
-			return log;
+            return dbConnection.Table<LogUsage>().ToListAsync ();
 		}
 
-		public async static Task<List<LogUsage>> SelectLogUsageList (int numberOfRecords = 100)
+		public static Task<List<LogUsage>> SelectLogUsageList (int numberOfRecords = 100)
 		{
-			var log = await dbConnection.Table<LogUsage> ().Take (numberOfRecords).ToListAsync ();
-			return log;
+            return dbConnection.Table<LogUsage> ().Take (numberOfRecords).ToListAsync ();
 		}
 
-		public async static Task<LogUsage> SelectLogUsage(int id)
+		public static Task<LogUsage> SelectLogUsage(int id)
 		{
-			return await dbConnection.Table<LogUsage> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+			return dbConnection.Table<LogUsage> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
 		}
 
-		public async static Task SaveLogUsage(LogUsage log)
+		public static Task SaveLogUsage(LogUsage log)
 		{
-//			var selected = await dbConnection.Table<LogUsage> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
-//			if (selected == null) {
-				await dbConnection.InsertAsync (log).ContinueWith (t => {
+            //			var selected = await dbConnection.Table<LogUsage> ().Where(x => x.ID == log.ID).FirstOrDefaultAsync();
+            //			if (selected == null) {
+            return dbConnection.InsertAsync (log).ContinueWith (t => {
 					Console.WriteLine ("New LogExternalLink Name : {0}", log.ID);
 				});
 //			} else {
@@ -820,9 +816,9 @@ namespace MyHealthDB
 //			}
 		}
 
-		public async static Task DeleteLogUsage(LogUsage number)
+		public static Task DeleteLogUsage(LogUsage number)
 		{
-			await dbConnection.DeleteAsync(number).ContinueWith(t => {
+            return dbConnection.DeleteAsync(number).ContinueWith(t => {
 				Console.WriteLine ("LogExternalLink with ID : {0} >> deleted", number.ID);
 			});
 		}
@@ -843,21 +839,19 @@ namespace MyHealthDB
 		#endregion
 
 		#region[CpUser]
-		public async static Task<List<CpUser>> SelectAllCpUser()
+		public static Task<List<CpUser>> SelectAllCpUser()
 		{
-			var user = await dbConnection.Table<CpUser>().ToListAsync ();
-			return user;
+            return dbConnection.Table<CpUser>().ToListAsync ();
 		}
 
-		public async static Task<List<CpUser>> SelectCpUserList (int numberOfRecords = 100)
+		public static Task<List<CpUser>> SelectCpUserList (int numberOfRecords = 100)
 		{
-			var user = await dbConnection.Table<CpUser> ().Take (numberOfRecords).ToListAsync ();
-			return user;
+            return dbConnection.Table<CpUser> ().Take (numberOfRecords).ToListAsync ();
 		}
 
-		public async static Task<CpUser> SelectCpUser(int id)
+		public static Task<CpUser> SelectCpUser(int id)
 		{
-			return await dbConnection.Table<CpUser> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
+			return dbConnection.Table<CpUser> ().Where (c => c.ID == id).FirstOrDefaultAsync ();
 		}
 
 		public async static Task SaveCpUser(CpUser user)
@@ -874,9 +868,9 @@ namespace MyHealthDB
 			}
 		}
 
-		public async static Task DeleteCpUser(CpUser user)
+		public static Task DeleteCpUser(CpUser user)
 		{
-			await dbConnection.DeleteAsync(user).ContinueWith(t => {
+            return dbConnection.DeleteAsync(user).ContinueWith(t => {
 				Console.WriteLine ("CpUser with ID : {0} >> deleted", user.ID);
 			});
 		}

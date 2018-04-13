@@ -36,9 +36,10 @@ namespace MyHealthAndroid
 			_professionalsList.Adapter = _listAdapter;
 
 			_professionalsList.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-				//var item = _model.getHealthProfessionals().ElementAt(e.Position);
+                //var item = _model.getHealthProfessionals().ElementAt(e.Position);
+                var id = _listAdapter.GetItemId(e.Position);
 				var _detialsActivity = new Intent (this, typeof(HPDetailsActivity));
-				_detialsActivity.PutExtra("callerCellPosition", e.Position);
+				_detialsActivity.PutExtra("id", Convert.ToInt32(id));
 				StartActivity(_detialsActivity);
 			};
 

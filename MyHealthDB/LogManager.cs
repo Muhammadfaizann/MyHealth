@@ -11,28 +11,30 @@ namespace MyHealthDB.Logger
 	public static class LogManager
 	{
 		private static string content = "";
-		public async static Task Log<T> (T log)
+		public static Task Log<T> (T log)
 		{
 			try {
 				if (log.GetType () == typeof(LogContent)) {
 					var logContent = log as LogContent;
-					await DatabaseManager.SaveLogContent (logContent);
+                    return DatabaseManager.SaveLogContent (logContent);
 				}
 				if (log.GetType () == typeof(LogUsage)) {
 					var logUsage = log as LogUsage;
-					await DatabaseManager.SaveLogUsage (logUsage);
+                    return DatabaseManager.SaveLogUsage (logUsage);
 				}
 				if (log.GetType () == typeof(LogExternalLink)) {
 					var logExternalLink = log as LogExternalLink;
-					await DatabaseManager.SaveLogExternalLink (logExternalLink);
+                    return DatabaseManager.SaveLogExternalLink (logExternalLink);
 				}
 				if (log.GetType() == typeof(LogFeedback)) {
 					var logUsage = log as LogFeedback;
-					await DatabaseManager.SaveLogFeedback(logUsage);
+					return DatabaseManager.SaveLogFeedback(logUsage);
 				}
 			} catch {
 				// supressing any exception
 			}
+
+            return Task.CompletedTask;
 		}
 
 		public async static Task<Boolean> SyncAllLogs ()
@@ -165,6 +167,7 @@ namespace MyHealthDB.Logger
 		Organisations = 13,
 		Hospitals = 14,
 		MyUsefulNumbers = 15,
+        MyHealthVideos = 16,
 	}
 }
 
