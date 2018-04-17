@@ -44,38 +44,43 @@ namespace MyHealthDB
 			}
 		}
 
-		public async static Task CreateAllTables()
+		public static Task CreateAllTables()
 		{
-			//var db = new SQLiteAsyncConnection(DatabaseRepository.DatabaseFilePath);
-			await dbConnection.CreateTableAsync<RegisteredDevice> ();
+            //var db = new SQLiteAsyncConnection(DatabaseRepository.DatabaseFilePath);
 
-			await dbConnection.CreateTableAsync<Province> ();
+            return Task.WhenAll(
+                dbConnection.CreateTableAsync<RegisteredDevice>(),
 
-			await dbConnection.CreateTableAsync<County> ();
+                dbConnection.CreateTableAsync<Province>(),
 
-			await dbConnection.CreateTableAsync<Disease> ();
+                dbConnection.CreateTableAsync<County>(),
 
-			await dbConnection.CreateTableAsync<DiseaseCategory> ();
+                dbConnection.CreateTableAsync<Disease>(),
 
-			await dbConnection.CreateTableAsync<DiseasesForCategory> ();
+                dbConnection.CreateTableAsync<DiseaseCategory>(),
 
-			await dbConnection.CreateTableAsync<EmergencyContacts> ();
+                dbConnection.CreateTableAsync<DiseasesForCategory>(),
 
-			await dbConnection.CreateTableAsync<Hospital> ();
+                dbConnection.CreateTableAsync<EmergencyContacts>(),
 
-			await dbConnection.CreateTableAsync<HelpData> ();
+                dbConnection.CreateTableAsync<Hospital>(),
 
-			await dbConnection.CreateTableAsync<NewsChannels> ();
+                dbConnection.CreateTableAsync<HelpData>(),
 
-			await dbConnection.CreateTableAsync<Organisation> ();
+                dbConnection.CreateTableAsync<NewsChannels>(),
 
-			await dbConnection.CreateTableAsync<UsefullNumbers> ();
+                dbConnection.CreateTableAsync<Organisation>(),
 
-			await dbConnection.CreateTablesAsync<LogContent, LogExternalLink, LogFeedback, LogUsage> ();
+                dbConnection.CreateTableAsync<UsefullNumbers>(),
 
-			await dbConnection.CreateTablesAsync<CpUser, AboutUs> ();
+                dbConnection.CreateTablesAsync<LogContent, LogExternalLink, LogFeedback, LogUsage>(),
 
-			await dbConnection.CreateTableAsync<ImportantNotice> ();
+                dbConnection.CreateTablesAsync<CpUser, AboutUs>(),
+
+                dbConnection.CreateTableAsync<ImportantNotice>(),
+
+                dbConnection.CreateTableAsync<VideoLink>()
+            );
 		}
 
 		#region[Register]
@@ -614,16 +619,66 @@ namespace MyHealthDB
 			}
 		}
 
-		public async static Task DeleteImportantNotice(ImportantNotice number)
+        public async static Task DeleteImportantNotice(ImportantNotice number)
 		{
 			await dbConnection.DeleteAsync(number).ContinueWith(t => {
 				Console.WriteLine ("New ImportantNotice Name : {0}", number.Name);
 			});
 		}
-		#endregion
+        #endregion
 
-		#region[LogContent]
-		public async static Task<List<LogContent>> SelectAllLogContent()
+        #region Video Links
+
+        public static Task<List<VideoLink>> GetAllVideoLinksAsync()
+        {
+            return dbConnection
+                .Table<VideoLink>()
+                .ToListAsync();
+        }
+
+        public async static Task SaveVideoLinkAsync(VideoLink videoLink)
+        {
+            var existing = await dbConnection
+                .Table<VideoLink>()
+                .Where(x => x.ID == videoLink.ID)
+                .FirstOrDefaultAsync();
+
+            if (existing == null)
+            {
+                await dbConnection.InsertAsync(videoLink).ContinueWith(t =>
+                {
+                    Console.WriteLine("Saved new Video link Title: {0}", videoLink.Title);
+                });
+            }
+            else
+            {
+                await dbConnection.UpdateAsync(videoLink).ContinueWith(t =>
+                {
+                    Console.WriteLine("Update Video link Title: {0}", videoLink.Title);
+                });
+            }
+        }
+
+        public static Task DeleteVideoLinkAsync(int videoLinkId)
+        {
+            return dbConnection.FindAsync<VideoLink>(videoLinkId)
+                .ContinueWith(top =>
+                {
+                    if (top.Result != null)
+                    {
+                        return dbConnection.DeleteAsync(top.Result).ContinueWith(t => {
+                            Console.WriteLine("Deleted video link title : {0}", top.Result.Title);
+                        });
+                    }
+
+                    return Task.FromResult(0);
+                });
+        }
+
+        #endregion Video Links
+
+        #region[LogContent]
+        public async static Task<List<LogContent>> SelectAllLogContent()
 		{
 			var log = await dbConnection.Table<LogContent>().ToListAsync ();
 			return log;

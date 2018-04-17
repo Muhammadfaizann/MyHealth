@@ -167,6 +167,37 @@ namespace MyHealthDB
 			}
 			return true;
 		}
-	}
+
+        public static Task<bool> UpdateVideoLinks(List<SMtblVideoLink> videoLinks)
+        {
+            List<Task> tasks = new List<Task>();
+
+            foreach (var item in videoLinks)
+            {
+                if (item.IsDeleted)
+                {
+                    tasks.Add(
+                        DatabaseManager.DeleteVideoLinkAsync(item.Id)
+                        );
+                }
+                else
+                {
+                    tasks.Add(
+                        DatabaseManager.SaveVideoLinkAsync(new VideoLink
+                        {
+                            ID = item.Id,
+                            Title = item.Title,
+                            Description = item.Description,
+                            UrlDisplayName = item.UrlDisplayName,
+                            Url = item.Url,
+                            IsDeleted = item.IsDeleted,
+                        })
+                    );
+                }
+            }
+
+            return Task.WhenAll(tasks).ContinueWith(_ => _.IsCompleted);
+        }
+    }
 }
 

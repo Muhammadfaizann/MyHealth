@@ -7,7 +7,6 @@ namespace MyHealthDB
 {
 	public class DatabaseRepository
 	{
-		DatabaseManager db = null;
 		protected static string dbLocation;
 		protected static DatabaseRepository me;
 

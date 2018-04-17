@@ -1,25 +1,27 @@
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
-using System.Text;
-using MyHealthDB;
 using MyHealthDB.Model;
 using MyHealthDB.Service;
 using MyHealthDB.Logger;
 
 namespace MyHealthDB
 {
-	public static class ServiceConsumer
+    public static class ServiceConsumer
 	{
 		private static WebService _service;
 		private static HttpResponseMessage obj;
 		private static string content = "";
 
-		public async static Task<Boolean> CheckRegisteredDevice ()
+        static ServiceConsumer()
+        {
+            _service = new WebService();
+        }
+
+        public async static Task<Boolean> CheckRegisteredDevice ()
 		{
 			var device = await DatabaseManager.SelectDevice ();
 			if (device == null) {
@@ -30,7 +32,6 @@ namespace MyHealthDB
 
 		public async static Task<Boolean> RegisterDevice (String device, string OSVersion)
 		{
-			_service = new WebService ();
 			obj = new HttpResponseMessage();
 
 			string DeviceId = Guid.NewGuid().ToString();
@@ -67,10 +68,7 @@ namespace MyHealthDB
 
 		// create this as a generic function to get //
 		public async static Task<Boolean> SyncDevice ()
-		//public async static Task<Boolean> SyncDevice ()
 		{
-			_service = new WebService ();
-
 			//Helper.Helper.DeviceId = "9412D71E-ED92-4149-991E-5D2F26ED4D8F";
 			//Helper.Helper.PIN = "1234";
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
@@ -185,6 +183,17 @@ namespace MyHealthDB
 						Console.WriteLine ("\n ImportantNotice are updated.");
 					}
 				}
+
+                using (var responseMessageObj = await _service.GetVideoLinks())
+                {
+                    serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+                    var allVideoLinks = JsonConvert.DeserializeObject<List<SMtblVideoLink>>(serviceContent);
+
+                    if (await UpdateDBManager.UpdateVideoLinks(allVideoLinks))
+                    {
+                        Console.WriteLine("\n Video links are updated.");
+                    }
+                }
 					
 				using (var responseMessageObj = await _service.GoodBye())
 				{
@@ -201,8 +210,6 @@ namespace MyHealthDB
 		// sync device for the first time
 		public async static Task<Boolean> FirstTimeSyncDevice ()
 		{
-			_service = new WebService ();
-
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
@@ -286,8 +293,6 @@ namespace MyHealthDB
 
 		public static async Task<Boolean> SyncConditionsData()
 		{
-			_service = new WebService ();
-
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
@@ -343,8 +348,6 @@ namespace MyHealthDB
 
 		public static async Task<Boolean> SyncHospitalsData()
 		{
-			_service = new WebService ();
-
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
@@ -391,8 +394,6 @@ namespace MyHealthDB
 
 		public static async Task<Boolean> SyncOrganisationData()
 		{
-			_service = new WebService ();
-
 			var AllDevices = await DatabaseManager.SelectAllDevices ();
 			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);

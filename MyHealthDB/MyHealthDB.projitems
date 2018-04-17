@@ -11,8 +11,10 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\VideoLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDBEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\DBEntityBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblVideoLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\CountyManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\DiseaseCategoryManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\DiseaseManager.cs" />
@@ -74,10 +76,8 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Tables\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
     <Folder Include="$(MSBuildThisFileDirectory)Helper\" />
     <Folder Include="$(MSBuildThisFileDirectory)WebClient\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Model\" />
   </ItemGroup>
 </Project>

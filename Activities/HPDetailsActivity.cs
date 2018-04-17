@@ -111,8 +111,9 @@ namespace MyHealthAndroid
             else if (resourceName.Replace(" ", string.Empty).Equals("MyHealthVideos", StringComparison.InvariantCultureIgnoreCase))
             {
                 // TODO: load data from db and set the list
-
-                //_commonListView.Adapter = null;
+                var videoLinkAdapter = new HPVideoLinksAdapter(this);
+                await videoLinkAdapter.loadData();
+                _commonListView.Adapter = videoLinkAdapter;
                 await LogManager.Log(new LogUsage
                 {
                     Date = DateTime.Now,
