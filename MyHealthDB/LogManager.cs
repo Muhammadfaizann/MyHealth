@@ -11,6 +11,13 @@ namespace MyHealthDB.Logger
 	public static class LogManager
 	{
 		private static string content = "";
+        private static WebService _service;
+
+        static LogManager()
+        {
+            _service = new WebService();
+        }
+
 		public static Task Log<T> (T log)
 		{
 			try {
@@ -39,7 +46,6 @@ namespace MyHealthDB.Logger
 
 		public async static Task<Boolean> SyncAllLogs ()
 		{
-			var service = new WebService ();
 			var obj = new HttpResponseMessage();
 			//uncomment the line below to input dummy data
 			//await inputFakeData ();
@@ -49,7 +55,7 @@ namespace MyHealthDB.Logger
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
 
 			//the initial hand shake
-			obj = await service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
+			obj = await _service.HandShake(Helper.Helper.DeviceId, Helper.Helper.Hash);
 			content = await obj.Content.ReadAsStringAsync();
 			SMHandShake _SMHandShake = JsonConvert.DeserializeObject<SMHandShake>(content);
 			Helper.Helper.Hash = _SMHandShake.Hash;
@@ -68,7 +74,7 @@ namespace MyHealthDB.Logger
 				var logUsage = await DatabaseManager.SelectLogUsageList ();
 
 				if (logContent.Count > 0) {
-					obj = await service.PostLogContent (logContent);
+					obj = await _service.PostLogContent (logContent);
 					content = await obj.Content.ReadAsStringAsync ();
 					if (!content.Equals ("\"Saved\"")) {
 						dataExists = true;
@@ -77,7 +83,7 @@ namespace MyHealthDB.Logger
 					await DatabaseManager.DeleteLogContentList (logContent);
 				}
 				if (logExternalLink.Count > 0) {
-					obj = await service.PostLogContent (logExternalLink);
+					obj = await _service.PostLogContent (logExternalLink);
 					content = await obj.Content.ReadAsStringAsync ();
 					if (!content.Equals ("\"Saved\"")) {
 						dataExists = true;
@@ -86,7 +92,7 @@ namespace MyHealthDB.Logger
 					await DatabaseManager.DeleteLogExternalLinkList (logExternalLink);
 				}
 				if (logFeedback.Count > 0) {
-					obj = await service.PostLogContent (logFeedback);
+					obj = await _service.PostLogContent (logFeedback);
 					content = await obj.Content.ReadAsStringAsync ();
 					if (!content.Equals ("\"Saved\"")) {
 						dataExists = true;
@@ -95,7 +101,7 @@ namespace MyHealthDB.Logger
 					await DatabaseManager.DeleteLogFeedbackList (logFeedback);
 				}
 				if (logUsage.Count > 0) {
-					obj = await service.PostLogContent (logUsage);
+					obj = await _service.PostLogContent (logUsage);
 					content = await obj.Content.ReadAsStringAsync ();
 					if (!content.Equals ("\"Saved\"")) {
 						dataExists = true;
