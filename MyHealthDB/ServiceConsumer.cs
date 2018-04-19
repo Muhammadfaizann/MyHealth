@@ -194,7 +194,7 @@ namespace MyHealthDB
                         Console.WriteLine("\n Video links are updated.");
                     }
                 }
-					
+				
 				using (var responseMessageObj = await _service.GoodBye())
 				{
 				}
@@ -279,7 +279,18 @@ namespace MyHealthDB
 					}
 				}
 
-				using (var responseMessageObj = await _service.GoodBye())
+                using (var responseMessageObj = await _service.GetVideoLinks())
+                {
+                    serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+                    var allVideoLinks = JsonConvert.DeserializeObject<List<SMtblVideoLink>>(serviceContent);
+
+                    if (await UpdateDBManager.UpdateVideoLinks(allVideoLinks))
+                    {
+                        Console.WriteLine("\n Video links are updated.");
+                    }
+                }
+
+                using (var responseMessageObj = await _service.GoodBye())
 				{
 				}
 
@@ -336,7 +347,18 @@ namespace MyHealthDB
 					}
 				}
 
-				using (var responseMessageObj = await _service.GoodBye())
+                using (var responseMessageObj = await _service.GetVideoLinks())
+                {
+                    serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+                    var allVideoLinks = JsonConvert.DeserializeObject<List<SMtblVideoLink>>(serviceContent);
+
+                    if (await UpdateDBManager.UpdateVideoLinks(allVideoLinks))
+                    {
+                        Console.WriteLine("\n Video links are updated.");
+                    }
+                }
+
+                using (var responseMessageObj = await _service.GoodBye())
 				{
 				}
 			}
@@ -488,10 +510,10 @@ namespace MyHealthDB
 				Console.WriteLine ("HandShake was rejected");
 				return false;
 			}
-				myprofile.DeviceId = Helper.Helper.DeviceId;
-				obj = await service.PostMyProfileData (myprofile);
-				content = await obj.Content.ReadAsStringAsync ();
-				return true;
+			myprofile.DeviceId = Helper.Helper.DeviceId;
+			obj = await service.PostMyProfileData (myprofile);
+			content = await obj.Content.ReadAsStringAsync ();
+			return true;
 		}
 	}
 
