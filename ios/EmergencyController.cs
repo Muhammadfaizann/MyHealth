@@ -26,10 +26,21 @@ namespace RCSI
 				Date = DateTime.Now,
 				Page = Convert.ToInt32(Pages.Emergency)
 			});
-		
-			_emergencyContactSource = new EmergencyContactSource (this);
-			_emergencyContactSource._items = await DatabaseManager.SelectAllEmergencyContacts ();
-			this.tableView.Source = _emergencyContactSource;
+
+			if (true)
+			{
+				_emergencyContactSource = new EmergencyContactSource(this);
+				_emergencyContactSource._items = await DatabaseManager.SelectAllEmergencyContacts ();
+				this.tableView.Source = _emergencyContactSource;
+			}
+			else
+			{
+				// TODO: detect navigated segue
+				var videoLinksTableSource = new VideoLinksSource(this);
+				videoLinksTableSource._items = await DatabaseManager.GetAllVideoLinksAsync();
+        		this.tableView.Source = videoLinksTableSource;
+			}
+
 			this.tableView.ReloadData ();
 
 			/*UITapGestureRecognizer gestureRecognizer = new UITapGestureRecognizer (HideKeyboard);
@@ -80,6 +91,46 @@ namespace RCSI
 			//_controller.HideKeyboard ();
 			//_controller.PerformSegue ("Details", tableView);
 			//tableView.DeselectRow (indexPath, true);
+		}
+	}
+
+	public class VideoLinksSource : UITableViewSource
+	{
+		public List<VideoLink> _items;
+		EmergencyController _controller;
+		public VideoLinksSource(EmergencyController controller)
+		{
+			_controller = controller;
+		}
+
+		public override nint NumberOfSections(UITableView tableView)
+		{
+			return 1;
+		}
+
+		public override nint RowsInSection(UITableView tableView, nint section)
+		{
+			return _items.Count;
+		}
+
+		static String cellIdentifier = "EmergencyCell";
+		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+		{
+			EmergencyTableViewCell cell = null;
+			cell = tableView.DequeueReusableCell(cellIdentifier) as EmergencyTableViewCell;
+			// if there are no cells to reuse, create a new one
+			if (cell == null)
+			{
+				cell = new EmergencyTableViewCell(UITableViewCellStyle.Default, cellIdentifier);
+				cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+			}
+			cell.UpdateCell(_items.ElementAt(indexPath.Row));
+
+			return cell;
+		}
+
+		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
 		}
 	}
 }

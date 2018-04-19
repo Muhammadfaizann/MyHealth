@@ -10,11 +10,11 @@ namespace RCSI
 {
 	public partial class EmergencyTableViewCell : UITableViewCell
 	{
-		public EmergencyTableViewCell (IntPtr handle) : base (handle)
+		public EmergencyTableViewCell(IntPtr handle) : base(handle)
 		{
 		}
 
-		public EmergencyTableViewCell(UITableViewCellStyle style,string cellidentifier) : base(style,cellidentifier)
+		public EmergencyTableViewCell(UITableViewCellStyle style, string cellidentifier) : base(style, cellidentifier)
 		{
 
 		}
@@ -28,15 +28,28 @@ namespace RCSI
 			lblAddress.Text = address;
 			lblAddress.Lines = 8;
 			btnTel.TouchUpInside += DialNumber;
-			btnTel.SetTitle( tel, UIControlState.Normal);
-
+			btnTel.SetTitle(tel, UIControlState.Normal);
 		}
 
 		public void DialNumber(object sender, EventArgs e)
 		{
-			string number = ((UIButton)sender).Title (UIControlState.Normal).Replace("Tel: ","").Trim().Replace (" ", "");
-			if(!string.IsNullOrEmpty(number))
-				UIApplication.SharedApplication.OpenUrl (new NSUrl ("tel:" + number));
+			string number = ((UIButton)sender).Title(UIControlState.Normal).Replace("Tel: ", "").Trim().Replace(" ", "");
+			if (!string.IsNullOrEmpty(number))
+				UIApplication.SharedApplication.OpenUrl(new NSUrl("tel:" + number));
+		}
+
+		public void UpdateCell(VideoLink video)
+		{
+			string url = string.IsNullOrWhiteSpace(video.UrlDisplayName) ? video.Url : video.UrlDisplayName;
+			lblName.Text = video.Title;
+			lblAddress.Text = video.Description;
+			lblAddress.Lines = 8;
+			btnTel.SetTitle(url, UIControlState.Normal);
+			// TODO: test/debug open url in browser/youtube
+
+			EventHandler funct = (object sender, EventArgs e) => UIApplication.SharedApplication.OpenUrl(new NSUrl(video.Url));
+			btnTel.TouchUpInside -= funct;
+		    btnTel.TouchUpInside += funct;
 		}
 	}
 }
