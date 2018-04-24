@@ -14,6 +14,12 @@ namespace RCSI
 {
 	public partial class EmergencyController : UIViewController
 	{
+		public bool IsVideos
+		{
+			get;
+			set;
+		}
+
 		private EmergencyContactSource _emergencyContactSource;
 		public EmergencyController (IntPtr handle) : base (handle)
 		{
@@ -27,18 +33,18 @@ namespace RCSI
 				Page = Convert.ToInt32(Pages.Emergency)
 			});
 
-			if (true)
+			if (IsVideos)
 			{
-				_emergencyContactSource = new EmergencyContactSource(this);
-				_emergencyContactSource._items = await DatabaseManager.SelectAllEmergencyContacts ();
-				this.tableView.Source = _emergencyContactSource;
+				var videoLinksTableSource = new VideoLinksSource(this);
+				videoLinksTableSource._items = await DatabaseManager.GetAllVideoLinksAsync();
+
+				this.tableView.Source = videoLinksTableSource;
 			}
 			else
 			{
-				// TODO: detect navigated segue
-				var videoLinksTableSource = new VideoLinksSource(this);
-				videoLinksTableSource._items = await DatabaseManager.GetAllVideoLinksAsync();
-        		this.tableView.Source = videoLinksTableSource;
+				_emergencyContactSource = new EmergencyContactSource(this);
+				_emergencyContactSource._items = await DatabaseManager.SelectAllEmergencyContacts();
+				this.tableView.Source = _emergencyContactSource;
 			}
 
 			this.tableView.ReloadData ();
@@ -47,6 +53,15 @@ namespace RCSI
 			this.tableView.AddGestureRecognizer (gestureRecognizer);*/
 
 			//this.tableView.Scrolled += (sender, e) => this.searchBar.ResignFirstResponder ();
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
+			if (IsVideos)
+			{
+				Title = "MyHealth Videos";
+			}
 		}
 	}
 

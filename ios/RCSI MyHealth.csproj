@@ -375,6 +375,10 @@
       <DependentUpon>FeedbackTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\LoadingOverlay.cs" />
+    <Compile Include="HealthServicesTableViewController.cs" />
+    <Compile Include="HealthServicesTableViewController.designer.cs">
+      <DependentUpon>HealthServicesTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
