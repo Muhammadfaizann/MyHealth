@@ -104,7 +104,7 @@ namespace MyHealthAndroid
 
 			var data = new List<HPData> ();
 
-			data.Add (new HPData { Id = 5, DisplayName = "MyHealth Videos", DisplayIcon = Resource.Drawable.emergency });
+			data.Add (new HPData { Id = 5, DisplayName = "MyHealth Videos", DisplayIcon = Resource.Drawable.videos });
             data.Add (new HPData { Id = 0, DisplayName = "Emergency", DisplayIcon = Resource.Drawable.emergency });
 			data.Add (new HPData { Id = 1, DisplayName = "Organisations", DisplayIcon = Resource.Drawable.organisations });
 			data.Add (new HPData { Id = 2, DisplayName = "Hospitals", DisplayIcon = Resource.Drawable.hospitals });

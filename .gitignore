@@ -22,3 +22,4 @@ _ReSharper*/
 [Pp]ackage*/
 *.orig
 MvcApplication1/Logs/
+Resources/Resource.designer.cs

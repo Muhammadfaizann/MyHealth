@@ -230,7 +230,9 @@
   </ItemGroup>
   <Import Project="MyHealthDB\MyHealthDB.projitems" Label="Shared" Condition="Exists('MyHealthDB\MyHealthDB.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\videos.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\AboutRCSI.html" />
     <AndroidAsset Include="Assets\Content\Heart.html" />
