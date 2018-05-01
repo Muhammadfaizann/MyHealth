@@ -8,124 +8,129 @@ namespace MyHealthDB.Service
 {
 	public class WebService
 	{
-		public async Task<HttpResponseMessage> HandShake(string DeviceId, string Hash)
+		public Task<HttpResponseMessage> HandShake(string DeviceId, string Hash)
 		{
 			//"api/v1/Application/HandShake/{DeviceId}/{Hash}"
-			return await Client.GetAsync(String.Format("api/v1/Application/HandShake/{0}/{1}", DeviceId, Hash), true );
+			return Client.GetAsync(String.Format("api/v1/Application/HandShake/{0}/{1}", DeviceId, Hash), true );
 		}
 
 
-		public async Task<HttpResponseMessage> GoodBye()
+		public Task<HttpResponseMessage> GoodBye()
 		{
-			return await Client.GetAsync("api/v1/Application/GoodBye");
+			return Client.GetAsync("api/v1/Application/GoodBye");
 		}
 
-		public async Task<HttpResponseMessage> GetAllConditions ()
+		public Task<HttpResponseMessage> GetAllConditions ()
 		{
-			return await Client.GetAsync ("api/v1/Condition/GetAll");
+			return Client.GetAsync ("api/v1/Condition/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetAllCategories()
+		public Task<HttpResponseMessage> GetAllCategories()
 		{
-			return await Client.GetAsync("api/v1/Category/GetAll");
+			return Client.GetAsync("api/v1/Category/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetAllCategoriesNoDate()
+		public Task<HttpResponseMessage> GetAllCategoriesNoDate()
 		{
-			return await Client.GetAsync("api/v1/Category/GetAllNoDate");
+			return Client.GetAsync("api/v1/Category/GetAllNoDate");
 		}
 
-		public async Task<HttpResponseMessage> GetConditionCategories()
+		public Task<HttpResponseMessage> GetConditionCategories()
 		{
-			return await Client.GetAsync("api/v1/Condition/GetConditionCategories");
+			return Client.GetAsync("api/v1/Condition/GetConditionCategories");
 		}
 
-		public async Task<HttpResponseMessage> GetAllProvince ()
+		public Task<HttpResponseMessage> GetAllProvince ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/Province/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/Province/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetAllCounty ()
+		public Task<HttpResponseMessage> GetAllCounty ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/County/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/County/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetHospitals()
+		public Task<HttpResponseMessage> GetHospitals()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/Hospital/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/Hospital/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetHospitalsNoDate()
+		public Task<HttpResponseMessage> GetHospitalsNoDate()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/Hospital/GetAllNoDate");
+			return Client.GetAsync ("api/v1/MyHealth/Hospital/GetAllNoDate");
 		}
 
-		public async Task<HttpResponseMessage> GetAllEmergencyNumbers ()
+		public Task<HttpResponseMessage> GetAllEmergencyNumbers ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/EmergencyNumber/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/EmergencyNumber/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetAllOrgnisations ()
+		public Task<HttpResponseMessage> GetAllOrgnisations ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetAllOrgnisationsNoDate ()
+		public Task<HttpResponseMessage> GetAllOrgnisationsNoDate ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAllNoDate");
+			return Client.GetAsync ("api/v1/MyHealth/OrganizationsInfoService/GetAllNoDate");
 		}
 
-		public async Task<HttpResponseMessage> GetAllCpUsers ()
+		public Task<HttpResponseMessage> GetAllCpUsers ()
 		{
-			return await Client.GetAsync ("api/v1/CPUser/GetAll");
+			return Client.GetAsync ("api/v1/CPUser/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetAboutUs ()
+		public Task<HttpResponseMessage> GetAboutUs ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/AboutRCSI/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/AboutRCSI/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> GetImportantNotices ()
+		public Task<HttpResponseMessage> GetImportantNotices ()
 		{
-			return await Client.GetAsync ("api/v1/MyHealth/ImportantNotice/GetAll");
+			return Client.GetAsync ("api/v1/MyHealth/ImportantNotice/GetAll");
 		}
 
-		public async Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash, string OSVersion)
+        public Task<HttpResponseMessage> GetVideoLinks()
+        {
+            return Client.GetAsync("api/v1/MyHealth/videoLinks");
+        }
+
+		public Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash, string OSVersion)
 		{
 			var url = string.Format ("api/v1/Application/RegisterMe/{0}/{1}/{2}/{3}/{4}", DeviceId, Type, UserName, Hash, OSVersion);
-			return await Client.GetAsync (url, true);
+			return Client.GetAsync (url, true);
 		}
 
-		public async Task<HttpResponseMessage> PostMyProfileData(MyProfile data)
+		public Task<HttpResponseMessage> PostMyProfileData(MyProfile data)
 		{
 			string url = string.Format("api/v1/MyHealth/MyProfile/PostData");
-			return await Client.Post(data,url);
+			return Client.Post(data,url);
 
 		}
 
-		public async Task<HttpResponseMessage> PostLogContent(List<LogContent> data)
+		public Task<HttpResponseMessage> PostLogContent(List<LogContent> data)
 		{
 			string url = string.Format("api/v1/LogContent/PostAll");
-			return await Client.Post(data,url);
+			return Client.Post(data,url);
 
 		}
 
-		public async Task<HttpResponseMessage> PostLogContent(List<LogFeedback> data)
+		public Task<HttpResponseMessage> PostLogContent(List<LogFeedback> data)
 		{
 			string url = string.Format("api/v1/LogFeedback/PostAll");
-			return await Client.Post(data, url);
+			return Client.Post(data, url);
 		}
 
-		public async Task<HttpResponseMessage> PostLogContent(List<LogExternalLink> data)
+		public Task<HttpResponseMessage> PostLogContent(List<LogExternalLink> data)
 		{
 			string url = string.Format ("api/v1/LogExternalLink/PostAll");
-			return await Client.Post (data, url);
+			return Client.Post (data, url);
 		}
 
-		public async Task<HttpResponseMessage> PostLogContent(List<LogUsage> data)
+		public Task<HttpResponseMessage> PostLogContent(List<LogUsage> data)
 		{
 			string url = string.Format ("api/v1/LogUsage/PostAll");
-			return await Client.Post (data, url);
+			return Client.Post (data, url);
 		}
 
 		//		public async Task<HttpResponseMessage> GetApplicationUsersApp()

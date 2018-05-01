@@ -22,8 +22,10 @@ namespace MyHealthAndroid
 			_model = new CommonData ();
 		}
 
-		public async Task loadData () {
-			_list = await _model.GetEmergencyContacts ();
+		public Task loadData () {
+			return _model
+                .GetEmergencyContacts ()
+                .ContinueWith(_ => _list = _.Result);
 		}
 
 			
@@ -39,7 +41,7 @@ namespace MyHealthAndroid
 		}
 
 		public override long GetItemId (int position) {
-			return -1;
+			return _list[position].ID.Value;
 		}
 
 		public override View GetView (int position, View convertView, ViewGroup parent)

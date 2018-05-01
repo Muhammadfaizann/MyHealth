@@ -36,7 +36,7 @@ namespace MyHealthAndroid
 		{
 			base.OnCreate (bundle);
 			_model = new CommonData ();
-			_caller = _model.GetHealthProfessionals().ElementAt(Intent.GetIntExtra("callerCellPosition",0));
+			_caller = _model.GetHealthProfessionals().First(i => i.Id == Intent.GetIntExtra("id",0));
 
 
 			//based on the extra that will be receied form last activity
@@ -81,6 +81,9 @@ namespace MyHealthAndroid
 			case 4:
 				await setSimpleLayout (data.DisplayName);
 				break;
+            case 5:
+                await setLayoutWithTable(data.DisplayName);
+                break;
 			}
 
 			//implement the back button 
@@ -104,7 +107,20 @@ namespace MyHealthAndroid
 					Date = DateTime.Now,
 					Page = Convert.ToInt32(Pages.Emergency)
 				});
-			} else {
+			}
+            else if (resourceName.Replace(" ", string.Empty).Equals("MyHealthVideos", StringComparison.InvariantCultureIgnoreCase))
+            {
+                // TODO: load data from db and set the list
+                var videoLinkAdapter = new HPVideoLinksAdapter(this);
+                await videoLinkAdapter.loadData();
+                _commonListView.Adapter = videoLinkAdapter;
+                await LogManager.Log(new LogUsage
+                {
+                    Date = DateTime.Now,
+                    Page = Convert.ToInt32(Pages.MyHealthVideos)
+                });
+            }
+            else {
 				var emergencyAdapter = new HPOrgnisationAdapter (this);
 				await emergencyAdapter.loadData ();
 				_commonListView.Adapter = emergencyAdapter;
