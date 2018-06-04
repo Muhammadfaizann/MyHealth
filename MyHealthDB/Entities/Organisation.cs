@@ -1,10 +1,8 @@
 using System;
-using MyHealth.DB.SQLite;
-using MyHealthDB.Model;
 
 namespace MyHealthDB
 {
-	public class Organisation : DBEntityBase
+    public class Organisation : DBEntityBase
 	{
 //		public Organisation(SMtblHealthOrganizationsInfo organizatoin)
 //		{

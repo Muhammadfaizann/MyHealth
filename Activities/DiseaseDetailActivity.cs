@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Webkit;
@@ -15,8 +13,8 @@ using Android.Graphics;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
-using System.Threading.Tasks;
 using Android.Content.PM;
+using Android.Annotation;
 
 namespace MyHealthAndroid
 {
@@ -216,32 +214,48 @@ namespace MyHealthAndroid
 			_activity = activity;
 		}
 
-		public override bool ShouldOverrideUrlLoading (WebView view, string url)
-		{
-			var alert = new AlertDialog.Builder (_activity);
-			alert.SetTitle ("");
-			alert.SetMessage ("This link will take you to an external website, Do you want to Proceed?");
+        public override bool ShouldOverrideUrlLoading(WebView view, string url)
+        {
+            Handle(url);
 
-			alert.SetCancelable (false);
+            base.ShouldOverrideUrlLoading(view, url);
 
-			alert.SetPositiveButton ("OK",(senderAlert, args) => {
-				LogManager.Log<LogExternalLink> (new LogExternalLink (){ Date = DateTime.Now, Link = url });
+            return true;
+        }
 
-				// launch another Activity that handles URLs
-				Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse (url));
-				_activity.StartActivity (intent);
-			});
+        [TargetApi(Value = (int)BuildVersionCodes.N)]
+        public override bool ShouldOverrideUrlLoading(WebView view, IWebResourceRequest request)
+        {
+            Handle(request.Url.Path);
 
-			alert.SetNegativeButton ("Cancel", (senderAlert, args) => {
-				//perform your own task for this conditional button click
-			});
-			//run the alert in UI thread to display in the screen
-			_activity.RunOnUiThread (() => {
-				alert.Show ();
-			});
+            base.ShouldOverrideUrlLoading(view, request);
 
-			base.ShouldOverrideUrlLoading (view, url);
-			return true;
-		}
-	}
+            return true;
+        }
+
+        private void Handle(string url)
+        {
+            var alert = new AlertDialog.Builder(_activity);
+            alert.SetTitle("");
+            alert.SetMessage("This link will take you to an external website, Do you want to Proceed?");
+
+            alert.SetCancelable(false);
+
+            alert.SetPositiveButton("OK", (senderAlert, args) => {
+                LogManager.Log<LogExternalLink>(new LogExternalLink() { Date = DateTime.Now, Link = url });
+
+                // launch another Activity that handles URLs
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
+                _activity.StartActivity(intent);
+            });
+
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                //perform your own task for this conditional button click
+            });
+            //run the alert in UI thread to display in the screen
+            _activity.RunOnUiThread(() => {
+                alert.Show();
+            });
+        }
+    }
 }

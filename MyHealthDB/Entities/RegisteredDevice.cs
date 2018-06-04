@@ -1,9 +1,6 @@
-using System;
-using MyHealth.DB.SQLite;
-
 namespace MyHealthDB
 {
-	public class RegisteredDevice: DBEntityBase
+    public class RegisteredDevice: DBEntityBase
 	{
 		public RegisteredDevice()
 		{

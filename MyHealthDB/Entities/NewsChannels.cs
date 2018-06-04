@@ -1,9 +1,8 @@
 using System;
-using MyHealth.DB.SQLite;
 
 namespace MyHealthDB
 {
-	public class NewsChannels : DBEntityBase
+    public class NewsChannels : DBEntityBase
 	{
 		public NewsChannels()
 		{

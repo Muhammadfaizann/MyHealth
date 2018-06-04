@@ -9,7 +9,6 @@ namespace MyHealthAndroid
 	public class SharedUserData<T>
 	{
 		public string key { get; private set;}
-		private T value;
 		private string _preferenceName;
 		private T _defaultValue;
 
