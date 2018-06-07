@@ -10,14 +10,21 @@ namespace RCSI
 {
 	public partial class EmergencyTableViewCell : UITableViewCell
 	{
-		public EmergencyTableViewCell(IntPtr handle) : base(handle)
+        private string UrlToOpen
+        {
+            get;
+            set;
+        }
+
+        public EmergencyTableViewCell(IntPtr handle) : base(handle)
 		{
 		}
 
 		public EmergencyTableViewCell(UITableViewCellStyle style, string cellidentifier) : base(style, cellidentifier)
 		{
-
 		}
+
+        public delegate void EventHandler(object obj, EventArgs e);
 
 		public void UpdateCell(EmergencyContacts contact)
 		{
@@ -45,11 +52,15 @@ namespace RCSI
 			lblAddress.Text = video.Description;
 			lblAddress.Lines = 8;
 			btnTel.SetTitle(url, UIControlState.Normal);
-			// TODO: test/debug open url in browser/youtube
+            btnTel.TouchUpInside -= BtnTel_TouchUpInside;
+            btnTel.TouchUpInside += BtnTel_TouchUpInside;
 
-			EventHandler funct = (object sender, EventArgs e) => UIApplication.SharedApplication.OpenUrl(new NSUrl(video.Url));
-			btnTel.TouchUpInside -= funct;
-		    btnTel.TouchUpInside += funct;
+            UrlToOpen = video.Url;
 		}
-	}
+
+        void BtnTel_TouchUpInside(object sender, EventArgs e)
+        {
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(UrlToOpen));
+        }
+    }
 }

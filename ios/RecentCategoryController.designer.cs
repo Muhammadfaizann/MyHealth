@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -11,14 +11,18 @@ using UIKit;
 
 namespace RCSI
 {
-	[Register ("RecentCategoryController")]
-	partial class RecentCategoryController
-	{
-		[Outlet]
-		UIKit.UITableView tableView { get; set; }
+    [Register ("RecentCategoryController")]
+    partial class RecentCategoryController
+    {
+        [Outlet]
+        UIKit.UITableView tableView { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (tableView != null) {
+                tableView.Dispose ();
+                tableView = null;
+            }
+        }
+    }
 }

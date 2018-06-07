@@ -40,8 +40,6 @@ namespace RCSI
 
 		#endregion
 
-		Boolean FirstTimeInstall;
-
 		public HomeController (IntPtr handle) : base (handle)
 		{
 		}

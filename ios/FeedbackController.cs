@@ -36,7 +36,8 @@ namespace RCSI
 		{
 			if (username.Text.Equals("") || useremail.Text.Equals("") || usermessage.Text.Equals(""))
 			{
-				var alert =  new UIAlertView("Error", "Please fill in all the details", null, "Ok", null);
+                var alert = new UIAlertView { Title = "Error", Message = "Please fill in all the details" };
+                alert.AddButton("Ok");
 				alert.Show();
 			} else {
 				await LogManager.Log(new LogFeedback {
@@ -77,7 +78,7 @@ namespace RCSI
 
 			// handling keyborad return and done key press event to hide keyboard
 			[Export ("textFieldShouldReturn:")]
-			public bool ShouldReturn (UIKit.UITextField textField)
+			public override bool ShouldReturn (UIKit.UITextField textField)
 			{
 				textField.ResignFirstResponder();
 				if (textField == _controller.username) {

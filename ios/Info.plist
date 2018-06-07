@@ -7,7 +7,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>6.1</string>
+	<string>7.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -22,23 +22,17 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Icon-Small</string>
-		<string>Icon</string>
-		<string>Icon-Small@2x</string>
-		<string>Icon-Small-40@2x</string>
-		<string>Icon@2x</string>
-		<string>Icon-60@2x</string>
-		<string>Icon-40@2x</string>
-	</array>
 	<key>CFBundleDisplayName</key>
 	<string>RCSI MyHealth</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.11</string>
+	<string>1.14</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.10</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
+	<key>CFBundleName</key>
+	<string>RCSI MyHealth</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>

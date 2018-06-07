@@ -46,7 +46,11 @@ namespace RCSI
 				if (!siteUrl.StartsWith ("http://", StringComparison.InvariantCultureIgnoreCase)) {
 					siteUrl = "http://" + siteUrl;
 				}
-				UIAlertView alert = new UIAlertView ("Alert", "This link will take you to an external website, Do you want to Proceed?", null, "OK", new string[] {"Cancel"});
+				UIAlertView alert = new UIAlertView ();
+                alert.Title = "Alert";
+                alert.Message = "This link will take you to an external website, Do you want to Proceed?";
+                alert.AddButton("Ok");
+                alert.AddButton("Cancel");
 				alert.Clicked += (s, b) => {
 					if(b.ButtonIndex == 0) {
 						LogManager.Log<LogExternalLink> (new LogExternalLink (){ 
