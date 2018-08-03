@@ -57,7 +57,7 @@ namespace RCSI
 					Name = "My Garda Station",
 					Number = ""
 				});
-				MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
+				await MyHealthDB.DatabaseManager.SaveUsefullNumber (new UsefullNumbers { 
 					ID = 4,
 					Name = "My Pharmacy",
 					Number = ""

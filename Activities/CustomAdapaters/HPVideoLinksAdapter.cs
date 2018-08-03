@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Content;
 using MyHealthDB;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace MyHealthAndroid
 {
@@ -58,8 +59,23 @@ namespace MyHealthAndroid
 
 		private void onNumberClicked (object sender, EventArgs e) {
             var position = Convert.ToInt32(((TextView)sender).Tag);
+            var url = _list[position].Url;
 
-            var uri = Android.Net.Uri.Parse(_list[position].Url);
+            if (url.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+            {
+                url = Regex.Replace(url, "https://", "https://", RegexOptions.IgnoreCase);
+            }
+            else if (url.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
+            {
+                url = Regex.Replace(url, "http://", "http://", RegexOptions.IgnoreCase);
+            }
+            else if (url.StartsWith("ftp://", StringComparison.InvariantCultureIgnoreCase))
+            {
+                url = Regex.Replace(url, "ftp://", "ftp://", RegexOptions.IgnoreCase);
+            }
+
+            var uri = Android.Net.Uri.Parse(url);
+
 			var intent = new Intent (Intent.ActionView, uri); 
 			_activity.StartActivity (intent); 
 		}

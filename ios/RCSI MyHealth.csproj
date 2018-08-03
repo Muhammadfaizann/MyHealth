@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -28,7 +28,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Distribution: Royal College of Surgeons in Ireland (G6GYXXM25C)</CodesignKey>
-    <MtouchSdkVersion>8.2</MtouchSdkVersion>
+    <MtouchSdkVersion>11.4</MtouchSdkVersion>
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386, x86_64</MtouchArch>
@@ -129,6 +129,21 @@
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SQLite-net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\netstandard1.1\SQLite-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.5\lib\Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=62684c7b4f184e3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.sqlite3.ios_unified.1.1.5\lib\Xamarin.iOS10\SQLitePCLRaw.provider.sqlite3.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -192,11 +207,6 @@
     <BundleResource Include="Resources\images\map_large.jpg" />
     <BundleResource Include="Resources\images\RCSI_Front_Building_1.jpg" />
     <BundleResource Include="Resources\images\sync.png" />
-    <BundleResource Include="Resources\Icon-Small.png" />
-    <BundleResource Include="Resources\Icon.png" />
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-    <BundleResource Include="Resources\Icon%402x.png" />
-    <BundleResource Include="Resources\Icon-60%402x.png" />
     <BundleResource Include="Resources\images\provinces.jpg" />
     <BundleResource Include="Resources\css\map.css" />
     <BundleResource Include="Resources\Provinces.html" />
@@ -209,21 +219,16 @@
     <BundleResource Include="Resources\images\o_minus.png" />
     <BundleResource Include="Resources\images\o_plus.png" />
     <BundleResource Include="Resources\css\bootstrap.min.css" />
-    <BundleResource Include="Resources\Icon-40.png" />
     <BundleResource Include="Resources\Icon-40%402x.png" />
-    <BundleResource Include="Resources\Icon-40%403x.png" />
-    <BundleResource Include="Resources\Icon-60%403x.png" />
     <BundleResource Include="Resources\Icon-76.png" />
     <BundleResource Include="Resources\Icon-76%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
-    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
-    <BundleResource Include="Resources\images\BMI_chart_Old.png" />
     <BundleResource Include="Resources\images\BMI_chart.png" />
-    <BundleResource Include="Resources\images\RCSI_Old.jpg" />
     <BundleResource Include="Resources\images\RCSI.jpg" />
     <BundleResource Include="Resources\images\contact.png" />
     <BundleResource Include="Resources\images\feedback.png" />
     <BundleResource Include="Resources\images\search.png" />
+    <BundleResource Include="Resources\images\videos.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -361,6 +366,10 @@
       <DependentUpon>FeedbackTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\LoadingOverlay.cs" />
+    <Compile Include="HealthServicesTableViewController.cs" />
+    <Compile Include="HealthServicesTableViewController.designer.cs">
+      <DependentUpon>HealthServicesTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
@@ -377,5 +386,20 @@
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />
     <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small-40%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork.png" />
   </ItemGroup>
 </Project>

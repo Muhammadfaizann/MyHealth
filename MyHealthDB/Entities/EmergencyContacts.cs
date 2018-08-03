@@ -1,15 +1,12 @@
 using System;
-using MyHealth.DB.SQLite;
-using MyHealthDB.Model;
 
 namespace MyHealthDB
 {
-	public class EmergencyContacts : DBEntityBase
+    public class EmergencyContacts : DBEntityBase
 	{
 		public EmergencyContacts()
 		{
 		}
-
 
 		//[PrimaryKey]
 		//public int ID { get; set; }

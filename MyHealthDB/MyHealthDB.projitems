@@ -51,8 +51,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\DiseasesForCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\DiseaseForCategoryManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLiteAsync.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\RegisteredDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\SuccessfullSync.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblLogContent.cs" />
@@ -74,7 +72,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblMyProfile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)SQLite\" />
     <Folder Include="$(MSBuildThisFileDirectory)Tables\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
     <Folder Include="$(MSBuildThisFileDirectory)Helper\" />

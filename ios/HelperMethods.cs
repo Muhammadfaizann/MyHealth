@@ -62,9 +62,9 @@ namespace RCSI
 			return toReturn.ToArray ();
 		}
 
-		public async static Task<Boolean> CheckIfInternetAvailable() {
+		public static Task<Boolean> CheckIfInternetAvailable() {
 			var internetStatus = Reachability.InternetConnectionStatus ();
-			return internetStatus != NetworkStatus.NotReachable;
+            return Task.FromResult(internetStatus != NetworkStatus.NotReachable);
 		}
 
 		#region [Blood Supply Details]

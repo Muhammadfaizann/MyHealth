@@ -134,7 +134,10 @@ namespace RCSI
 		{
 			string url = _feedItemList [indexPath.Row].Link;
 
-			UIAlertView alert = new UIAlertView ("Alert", "you will now be redirected to an external website, Do you want to Proceed?", null, "OK", new string[] {"Cancel"});
+            UIAlertView alert = new UIAlertView { Title = "Alert", Message = "you will now be redirected to an external website, Do you want to Proceed?" };
+            alert.AddButton("OK");
+            alert.AddButton("Cancel");
+            alert.CancelButtonIndex = 1;
 			alert.Clicked += (s, b) => {
 				if(b.ButtonIndex == 0)
 					// open in Safari

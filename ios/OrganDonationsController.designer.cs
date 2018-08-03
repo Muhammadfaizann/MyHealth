@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -11,14 +11,18 @@ using UIKit;
 
 namespace RCSI
 {
-	[Register ("OrganDonationsController")]
-	partial class OrganDonationsController
-	{
-		[Outlet]
-		UIKit.UIWebView webView { get; set; }
+    [Register ("OrganDonationsController")]
+    partial class OrganDonationsController
+    {
+        [Outlet]
+        UIKit.UIWebView webView { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+        void ReleaseDesignerOutlets ()
+        {
+            if (webView != null) {
+                webView.Dispose ();
+                webView = null;
+            }
+        }
+    }
 }

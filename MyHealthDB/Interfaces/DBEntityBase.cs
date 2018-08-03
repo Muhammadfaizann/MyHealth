@@ -1,9 +1,8 @@
-using System;
-using MyHealth.DB.SQLite;
+using SQLite;
 
 namespace MyHealthDB
 {
-	public class DBEntityBase : IDBEntity
+    public class DBEntityBase : IDBEntity
 	{
 		public DBEntityBase ()
 		{

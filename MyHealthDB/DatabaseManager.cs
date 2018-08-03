@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using MyHealth.DB.SQLiteAsync;
+using SQLite;
 
 namespace MyHealthDB
 {
@@ -19,6 +19,7 @@ namespace MyHealthDB
 
 				#if __ANDROID__
 				string libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+				System.IO.Directory.CreateDirectory(libraryPath);
 
 				#else
 
@@ -39,7 +40,7 @@ namespace MyHealthDB
 		public static SQLiteAsyncConnection dbConnection {
 			get {
 				if (conn == null)
-					conn = new SQLiteAsyncConnection (DatabaseFilePath);
+					conn = new SQLiteAsyncConnection (DatabaseFilePath, storeDateTimeAsTicks: false);
 				return conn;
 			}
 		}

@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -11,17 +11,27 @@ using UIKit;
 
 namespace RCSI
 {
-	[Register ("OrganisationsController")]
-	partial class OrganisationsController
-	{
-		[Outlet]
-		UIKit.UISearchBar searchBar { get; set; }
+    [Register ("OrganisationsController")]
+    partial class OrganisationsController
+    {
+        [Outlet]
+        UIKit.UISearchBar searchBar { get; set; }
 
-		[Outlet]
-		UIKit.UITableView tableView { get; set; }
 
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+        [Outlet]
+        UIKit.UITableView tableView { get; set; }
+
+        void ReleaseDesignerOutlets ()
+        {
+            if (searchBar != null) {
+                searchBar.Dispose ();
+                searchBar = null;
+            }
+
+            if (tableView != null) {
+                tableView.Dispose ();
+                tableView = null;
+            }
+        }
+    }
 }

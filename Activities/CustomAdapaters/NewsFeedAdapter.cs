@@ -7,6 +7,7 @@ using Android.Content;
 using Android.Graphics;
 using System.Net;
 using Android.Text;
+using Android.OS;
 
 namespace MyHealthAndroid
 {
@@ -81,8 +82,20 @@ namespace MyHealthAndroid
 			Headline.Text = _list [position].Title;
 			var imageBitmap = GetImageBitmapFromUrl (_list[position].ImageUrl);
 			NewsImage.SetImageBitmap (imageBitmap);
-			if (_feed == RssFeedName.PULSE) {
-				ActualNews.SetText (Html.FromHtml (_list [position].Description), TextView.BufferType.Spannable);
+			if (_feed == RssFeedName.PULSE)
+            {
+                var htmlString = _list[position].Description;
+                ISpanned html;
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
+                {
+                    html = Html.FromHtml(htmlString, Android.Text.FromHtmlOptions.ModeLegacy);
+                }
+                else
+                {
+                    html = Html.FromHtml(htmlString);
+                }
+
+                ActualNews.SetText (html, TextView.BufferType.Spannable);
 			} else {
 				ActualNews.Text = _list [position].Description;
 			}

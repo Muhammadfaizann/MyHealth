@@ -60,7 +60,8 @@ namespace RCSI
 
 			await MyHealthDB.DatabaseManager.SaveUsefullNumber (number);
 
-			UIAlertView _message = new UIAlertView ("", "Saved Successfully!", null, "Ok", null);
+            UIAlertView _message = new UIAlertView { Message = "Saved Successfully!" };
+            _message.AddButton("Ok");
 			_message.Show ();
 
 			_message.Clicked += async delegate {
@@ -84,7 +85,7 @@ namespace RCSI
 			#region [TextField Delegate Methods]
 
 			[Export ("textFieldShouldReturn:")]
-			public bool ShouldReturn (UIKit.UITextField textField)
+            public override bool ShouldReturn (UIKit.UITextField textField)
 			{
 				textField.ResignFirstResponder();
 				if (textField == _controller.txtTitle) {

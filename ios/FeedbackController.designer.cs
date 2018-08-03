@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -11,24 +11,26 @@ using UIKit;
 
 namespace RCSI
 {
-	[Register ("FeedbackController")]
-	partial class FeedbackController
-	{
-		[Outlet]
-		UIKit.UITextField username { get; set; }
+    [Register ("FeedbackController")]
+    partial class FeedbackController
+    {
+        [Outlet]
+        UIKit.UITextField username { get; set; }
 
-		[Outlet]
-		UIKit.UITextField useremail { get; set; }
 
-		[Outlet]
-		UIKit.UITextField usermessage { get; set; }
+        [Outlet]
+        UIKit.UITextField useremail { get; set; }
 
-		[Action ("saveTheFeeback:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void saveTheFeeback (UIButton sender);
 
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+        [Outlet]
+        UIKit.UITextField usermessage { get; set; }
+
+        [Action ("saveTheFeeback:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void saveTheFeeback (UIKit.UIButton sender);
+
+        void ReleaseDesignerOutlets ()
+        {
+        }
+    }
 }

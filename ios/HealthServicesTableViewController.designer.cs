@@ -7,12 +7,11 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
-namespace RCSI
+namespace RCSI.MyHealth
 {
-    [Register ("NewsController")]
-    partial class NewsController
+    [Register ("HealthServicesTableViewController")]
+    partial class HealthServicesTableViewController
     {
         void ReleaseDesignerOutlets ()
         {

@@ -187,7 +187,9 @@ namespace RCSI
 				await MyHealthDB.ServiceConsumer.SendMyProfileData (myprofile);
 			}
 
-			UIAlertView alert = new UIAlertView (null, "Profile saved successfully", null, "OK",null);
+			UIAlertView alert = new UIAlertView ();
+            alert.Message = "Profile saved successfully";
+            alert.AddButton("Ok");
 			alert.Show ();
 		}
 
@@ -266,7 +268,8 @@ namespace RCSI
 
 				bmi = Math.Round(((weight1 + weight2) / ((height1 + height2) * (height1 + height2))) * 703,2);
 			}
-			UIAlertView alert = new UIAlertView ("BMI Calculation", "your BMI is " + bmi.ToString(), null, "OK", null);
+            UIAlertView alert = new UIAlertView { Title = "BMI Calculation", Message = "your BMI is " + bmi.ToString() };
+            alert.AddButton("OK");
 			alert.Show ();
 
 			PerformSegue ("CalculateBMI", this);

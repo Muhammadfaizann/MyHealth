@@ -1,9 +1,8 @@
 using System;
-using MyHealth.DB.SQLite;
 
 namespace MyHealthDB
 {
-	public class HelpData : DBEntityBase
+    public class HelpData : DBEntityBase
 	{
 		public HelpData()
 		{

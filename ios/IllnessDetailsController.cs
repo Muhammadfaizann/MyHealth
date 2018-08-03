@@ -72,7 +72,10 @@ namespace RCSI
 			if (navigationType.Equals(UIWebViewNavigationType.LinkClicked))
 			{
 
-				UIAlertView alert = new UIAlertView ("Alert", "This link will take you to an external website, Do you want to Proceed?", null, "OK", new string[] {"Cancel"});
+                UIAlertView alert = new UIAlertView { Title = "Alert", Message = "This link will take you to an external website, Do you want to Proceed?" };
+                alert.AddButton("OK");
+                alert.AddButton("Cancel");
+                alert.CancelButtonIndex = 1;
 				alert.Clicked += (s, b) => {
 					if(b.ButtonIndex == 0) {
 						LogManager.Log<LogExternalLink> (new LogExternalLink (){ 

@@ -42,7 +42,10 @@ namespace RCSI
 			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
 
 			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
-			UIAlertView _alert = new UIAlertView (null, "Internet is not accessible, please check your device settings and try again", null, "Ok", null);
+            UIAlertView _alert = new UIAlertView(); //null, , null, "Ok", null);
+            _alert.Message = "Internet is not accessible, please check your device settings and try again";
+            _alert.AddButton("Ok");
+            _alert.CancelButtonIndex = 0;
 			_alert.Clicked += (object sender, UIButtonEventArgs e) => {
 				// no internet connection leads in exit of application
 				//NSThread.Exit ();
@@ -146,9 +149,6 @@ namespace RCSI
 			if (!isAgree) {
 				UIAlertView dialog = new UIAlertView ();
 				dialog.Title = "Accept Terms of Use";
-				//UIKit.UIButton btnWebsite;
-				var url = "http://rcsimyhealth.ie/terms-and-conditions.html";
-				//dialog.Message = "Read our terms and conditions" + url;
 				dialog.AddButton ("Don't Agree");
 				dialog.AddButton ("Agree");
 				dialog.AddButton ("Read Our T&Cs");
@@ -167,17 +167,7 @@ namespace RCSI
 						NSUserDefaults defs = NSUserDefaults.StandardUserDefaults;
 						defs.SetBool (true, "Agree");
 						defs.Synchronize ();
-	//					if (DatabaseExists) {
-	//						PerformSegue ("Home", this);
-	//					} else {
-							//var dbCreated = await MyHealthDB.ServiceConsumer.CreateDatabase("iOS");
-							//if (dbCreated) {
-								//NSUserDefaults userDefaults = NSUserDefaults.StandardUserDefaults;
-								//userDefaults.SetBool(true, "DatabaseExists");
-								//userDefaults.Synchronize();
 						PerformSegue ("Home", this);
-							//}
-	//					};
 						break;
 					case 2:
 						UIApplication.SharedApplication.OpenUrl (new NSUrl ("http://rcsimyhealth.ie/terms-and-conditions.html"));

@@ -10,14 +10,21 @@ namespace RCSI
 {
 	public partial class EmergencyTableViewCell : UITableViewCell
 	{
-		public EmergencyTableViewCell (IntPtr handle) : base (handle)
+        private string UrlToOpen
+        {
+            get;
+            set;
+        }
+
+        public EmergencyTableViewCell(IntPtr handle) : base(handle)
 		{
 		}
 
-		public EmergencyTableViewCell(UITableViewCellStyle style,string cellidentifier) : base(style,cellidentifier)
+		public EmergencyTableViewCell(UITableViewCellStyle style, string cellidentifier) : base(style, cellidentifier)
 		{
-
 		}
+
+        public delegate void EventHandler(object obj, EventArgs e);
 
 		public void UpdateCell(EmergencyContacts contact)
 		{
@@ -28,15 +35,32 @@ namespace RCSI
 			lblAddress.Text = address;
 			lblAddress.Lines = 8;
 			btnTel.TouchUpInside += DialNumber;
-			btnTel.SetTitle( tel, UIControlState.Normal);
-
+			btnTel.SetTitle(tel, UIControlState.Normal);
 		}
 
 		public void DialNumber(object sender, EventArgs e)
 		{
-			string number = ((UIButton)sender).Title (UIControlState.Normal).Replace("Tel: ","").Trim().Replace (" ", "");
-			if(!string.IsNullOrEmpty(number))
-				UIApplication.SharedApplication.OpenUrl (new NSUrl ("tel:" + number));
+			string number = ((UIButton)sender).Title(UIControlState.Normal).Replace("Tel: ", "").Trim().Replace(" ", "");
+			if (!string.IsNullOrEmpty(number))
+				UIApplication.SharedApplication.OpenUrl(new NSUrl("tel:" + number));
 		}
-	}
+
+		public void UpdateCell(VideoLink video)
+		{
+			string url = string.IsNullOrWhiteSpace(video.UrlDisplayName) ? video.Url : video.UrlDisplayName;
+			lblName.Text = video.Title;
+			lblAddress.Text = video.Description;
+			lblAddress.Lines = 8;
+			btnTel.SetTitle(url, UIControlState.Normal);
+            btnTel.TouchUpInside -= BtnTel_TouchUpInside;
+            btnTel.TouchUpInside += BtnTel_TouchUpInside;
+
+            UrlToOpen = video.Url;
+		}
+
+        void BtnTel_TouchUpInside(object sender, EventArgs e)
+        {
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(UrlToOpen));
+        }
+    }
 }

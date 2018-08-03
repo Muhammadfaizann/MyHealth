@@ -174,7 +174,7 @@ namespace MyHealthAndroid
 		}
 		//------------------------ Get Device ID ----------------------//
 
-		private string RetreiveDeviceID ()
+		/*private string RetreiveDeviceID ()
 		{
 			string telephonyDeviceID = "";
 			//string telephonySIMSerialNumber = "";
@@ -190,7 +190,7 @@ namespace MyHealthAndroid
 			var androidID = Android.Provider.Settings.Secure.GetString(ApplicationContext.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
 			var deviceUuid = new UUID (androidID.GetHashCode (), ((long)telephonyDeviceID.GetHashCode () << 32));//| telephonySIMSerialNumber.GetHashCode());
 			return deviceUuid.ToString();
-		}
+		}*/
 
 		//------------------------ menu item ----------------------//
 		public override bool OnCreateOptionsMenu (IMenu menu)
