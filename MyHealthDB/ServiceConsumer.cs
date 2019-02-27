@@ -194,6 +194,17 @@ namespace MyHealthDB
                         Console.WriteLine("\n Video links are updated.");
                     }
                 }
+
+                using (var responseMessageObj = await _service.GetMediaCategories())
+                {
+                    serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+                    var allMediaCategories = JsonConvert.DeserializeObject<List<SMtblMediaCategory>>(serviceContent);
+
+                    if (await UpdateDBManager.UpdateMediaCategories(allMediaCategories))
+                    {
+                        Console.WriteLine("\n Media Categories are updated");
+                    }
+                }
 				
 				using (var responseMessageObj = await _service.GoodBye())
 				{

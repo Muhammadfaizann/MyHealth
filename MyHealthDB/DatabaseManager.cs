@@ -678,6 +678,54 @@ namespace MyHealthDB
 
         #endregion Video Links
 
+        #region Media Categories
+
+        public static Task<List<MediaCategory>> GetAllMediaCategoriesAsync()
+        {
+            return dbConnection
+                .Table<MediaCategory>()
+                .ToListAsync();
+        }
+
+        public async static Task SaveMediaCategoryAsync(MediaCategory mediaCategory)
+        {
+            var existing = await dbConnection
+                .Table<MediaCategory>()
+                .Where(x => x.ID == mediaCategory.ID)
+                .FirstOrDefaultAsync();
+
+            if (existing == null)
+            {
+                await dbConnection.InsertAsync(mediaCategory).ContinueWith(t =>
+                {
+                    Console.WriteLine("Saved new Media Category title: {0}", mediaCategory.CategoryTitle);
+                });
+
+                return;
+            }
+
+            await dbConnection.UpdateAsync(mediaCategory).ContinueWith(t =>
+            {
+                Console.WriteLine("Updated media category title: {0}", mediaCategory.CategoryTitle);
+            });
+        }
+
+        public static Task DeleteMediaCategoryAsync(int categoryId)
+        {
+            return dbConnection.FindAsync<MediaCategory>(categoryId)
+                .ContinueWith(c =>
+                {
+                    if (c.Result != null)
+                    {
+                        return dbConnection.DeleteAsync(c.Result).ContinueWith(ca => Console.WriteLine("Deleted Media Category title: {0}", c.Result.CategoryTitle));
+                    }
+
+                    return Task.FromResult(0);
+                });
+        }
+
+        #endregion Media Categories
+
         #region[LogContent]
         public async static Task<List<LogContent>> SelectAllLogContent()
 		{

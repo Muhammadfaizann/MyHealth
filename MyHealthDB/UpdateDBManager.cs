@@ -201,6 +201,22 @@ namespace MyHealthDB
 
             return Task.WhenAll(tasks).ContinueWith(_ => _.IsCompleted);
         }
+
+        public static Task<bool> UpdateMediaCategories(List<SMtblMediaCategory> mediaCategories)
+        {
+            var tasks = mediaCategories
+                .Select(c => c.IsDeleted
+                    ? DatabaseManager.DeleteMediaCategoryAsync(c.Id)
+                    : DatabaseManager.SaveMediaCategoryAsync(new MediaCategory
+                    {
+                        ID = c.Id,
+                        CategoryTitle = c.CategoryTitle,
+                        LastUpdatedDate = c.LastUpdatedDate
+                    }))
+                .ToList();
+
+            return Task.WhenAll(tasks).ContinueWith(_ => _.IsCompleted);
+        }
     }
 }
 

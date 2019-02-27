@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\VideoLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDBEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\DBEntityBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblMediaCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SMtblVideoLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\CountyManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\DiseaseCategoryManager.cs" />
@@ -23,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Tables\HospitalManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\NewsChannelsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\OrganisationManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\MediaCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\UsefullNumberManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\County.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Disease.cs" />
