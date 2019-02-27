@@ -637,6 +637,15 @@ namespace MyHealthDB
                 .ToListAsync();
         }
 
+        public static async Task<List<VideoLink>> GetVideoLinksAsync(string categoryId)
+        {
+            var videoLinks = await GetAllVideoLinksAsync();
+
+            return videoLinks
+                .Where(vl => vl.MediaCategoryIds.Split(',').Contains($"{categoryId}"))
+                .ToList();
+        }
+
         public async static Task SaveVideoLinkAsync(VideoLink videoLink)
         {
             var existing = await dbConnection
