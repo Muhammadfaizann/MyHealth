@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MyHealthDB.Model
 {
@@ -13,5 +14,7 @@ namespace MyHealthDB.Model
         public DateTime LastUpdatedDate { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public List<int> MediaCategoryIds { get; set; }
     }
 }

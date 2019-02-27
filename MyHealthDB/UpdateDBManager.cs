@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using MyHealthDB.Model;
+using System.Linq;
 
 namespace MyHealthDB
 {
@@ -191,6 +192,8 @@ namespace MyHealthDB
                             UrlDisplayName = item.UrlDisplayName,
                             Url = item.Url,
                             IsDeleted = item.IsDeleted,
+
+                            MediaCategoryIds = string.Join(",", item.MediaCategoryIds),
                         })
                     );
                 }
