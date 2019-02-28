@@ -80,7 +80,9 @@ namespace MyHealthDB
 
                 dbConnection.CreateTableAsync<ImportantNotice>(),
 
-                dbConnection.CreateTableAsync<VideoLink>()
+                dbConnection.CreateTableAsync<VideoLink>(),
+
+                dbConnection.CreateTableAsync<MediaCategory>()
             );
 		}
 

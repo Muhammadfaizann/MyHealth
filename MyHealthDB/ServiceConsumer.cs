@@ -205,8 +205,8 @@ namespace MyHealthDB
                         Console.WriteLine("\n Media Categories are updated");
                     }
                 }
-				
-				using (var responseMessageObj = await _service.GoodBye())
+
+                using (var responseMessageObj = await _service.GoodBye())
 				{
 				}
 
