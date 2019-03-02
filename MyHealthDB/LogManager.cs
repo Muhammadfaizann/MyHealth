@@ -174,6 +174,7 @@ namespace MyHealthDB.Logger
 		Hospitals = 14,
 		MyUsefulNumbers = 15,
         MyHealthVideos = 16,
+        MyHealthMediaCategories = 17,
 	}
 }
 

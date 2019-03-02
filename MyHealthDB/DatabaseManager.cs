@@ -695,6 +695,7 @@ namespace MyHealthDB
         {
             return dbConnection
                 .Table<MediaCategory>()
+                .OrderBy(c => c.CategoryTitle)
                 .ToListAsync();
         }
 

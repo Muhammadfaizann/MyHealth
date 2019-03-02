@@ -15,7 +15,7 @@ using MyHealthDB.Logger;
 using System.Threading.Tasks;
 
 namespace MyHealthAndroid{
-	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class HomeActivity : Activity
 	{
 		private ImageButton searchBtn;

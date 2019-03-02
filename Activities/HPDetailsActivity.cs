@@ -17,296 +17,324 @@ using MyHealthDB.Logger;
 
 namespace MyHealthAndroid
 {
-	public delegate void ShowHospitalsEventHandler(int province);
-	[Activity (Label = "MyHealth" ,ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
-	public class HPDetailsActivity : Activity
-	{
-		private HPData _caller;
-		private CommonData _model;
-		private ListView _commonListView;
-		private Button _addNumberButton;
-		//private Button _saveNumberButton;
-		private Button _backButton;
-		private WebView _webView;
-		private ImageView _imageView;
+    public delegate void ShowHospitalsEventHandler(int province);
+    [Activity(Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
+    public class HPDetailsActivity : Activity
+    {
+        private HPData _caller;
+        private CommonData _model;
+        private ListView _commonListView;
+        private Button _addNumberButton;
+        private Button _backButton;
+        private WebView _webView;
+        private ImageView _imageView;
 
-		private HPUserfulNumberAdapter _contactAdapter;
+        private HPUserfulNumberAdapter _contactAdapter;
 
-		protected async override void OnCreate (Bundle bundle)
-		{
-			base.OnCreate (bundle);
-			_model = new CommonData ();
-			_caller = _model.GetHealthProfessionals().First(i => i.Id == Intent.GetIntExtra("id",0));
+        protected async override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            _model = new CommonData();
+            _caller = _model.GetHealthProfessionals().First(i => i.Id == Intent.GetIntExtra("id", 0));
 
+            //based on the extra that will be receied form last activity
+            //all the resource will be set. 
+            await SetContentAsPerCaller(_caller);
+            SetCustomActionBar();
 
-			//based on the extra that will be receied form last activity
-			//all the resource will be set. 
-			await SetContentAsPerCaller (_caller);
-			SetCustomActionBar ();
-
-			var _homeButton = FindViewById<TextView> (Resource.Id.txtAppTitle);
-			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
-			_homeButton.Touch += delegate {
-				var homeActivity = new Intent (this, typeof(HomeActivity));
-				StartActivity (homeActivity);
-			};
-		}
-
-		//------------------------ custom activity ----------------------//
-		public void SetCustomActionBar () 
-		{
-			ActionBar.SetDisplayShowHomeEnabled (false);
-			ActionBar.SetDisplayShowTitleEnabled (false);
-			ActionBar.SetCustomView (Resource.Layout.actionbar_custom);
-			ActionBar.SetDisplayShowCustomEnabled (true);
-		}
-
-		//-------------------------------------- Setup Layout --------------------------------------//
-		private async Task SetContentAsPerCaller (HPData data) {
-		
-			switch (data.Id) 
-			{
-			case 0:  
-				await setLayoutWithTable (data.DisplayName);
-				break;
-			case 1:
-				await setLayoutWithTable (data.DisplayName);
-				break;
-			case 2:
-				await setSimpleLayout (data.DisplayName);
-				break;
-			case 3:
-				await setLayoutWithTableContacts ();
-				break;
-			case 4:
-				await setSimpleLayout (data.DisplayName);
-				break;
-            case 5:
-                await setLayoutWithTable(data.DisplayName);
-                break;
-			}
-
-			//implement the back button 
-			_backButton = FindViewById<Button> (Resource.Id.backButton);
-			_backButton.Text = data.DisplayName;
-			_backButton.Click += (object sender, EventArgs e) => 
-			{
-				base.OnBackPressed();
-			};
-		}
-
-		private async Task setLayoutWithTable (string resourceName) 
-		{
-			SetContentView (Resource.Layout.activity_hp_details_table);
-			_commonListView = FindViewById<ListView> (Resource.Id.emergencyList);
-			if (resourceName.Equals ("Emergency")) {
-				var emergencyAdapter = new HPEmergencyAdapter (this);
-				await emergencyAdapter.loadData ();
-				_commonListView.Adapter = emergencyAdapter;
-				await LogManager.Log (new LogUsage {
-					Date = DateTime.Now,
-					Page = Convert.ToInt32(Pages.Emergency)
-				});
-			}
-            else if (resourceName.Replace(" ", string.Empty).Equals("MyHealthVideos", StringComparison.InvariantCultureIgnoreCase))
+            var _homeButton = FindViewById<TextView>(Resource.Id.txtAppTitle);
+            _homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
+            _homeButton.Touch += delegate
             {
-                // TODO: load data from db and set the list
-                var videoLinkAdapter = new HPVideoLinksAdapter(this);
-                await videoLinkAdapter.loadData();
-                _commonListView.Adapter = videoLinkAdapter;
+                var homeActivity = new Intent(this, typeof(HomeActivity));
+                homeActivity.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
+
+                StartActivity(homeActivity);
+            };
+        }
+
+        protected override void OnDestroy()
+        {
+            if (_commonListView != null)
+            {
+                _commonListView.ItemClick -= MediaCategoryClicked;
+            }
+
+            base.OnDestroy();
+        }
+
+        //------------------------ custom activity ----------------------//
+        public void SetCustomActionBar()
+        {
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+            ActionBar.SetCustomView(Resource.Layout.actionbar_custom);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+        }
+
+        //-------------------------------------- Setup Layout --------------------------------------//
+        private async Task SetContentAsPerCaller(HPData data)
+        {
+            switch (data.Id)
+            {
+                case 0:
+                    await setLayoutWithTable(data.DisplayName);
+                    break;
+                case 1:
+                    await setLayoutWithTable(data.DisplayName);
+                    break;
+                case 2:
+                    await setSimpleLayout(data.DisplayName);
+                    break;
+                case 3:
+                    await setLayoutWithTableContacts();
+                    break;
+                case 4:
+                    await setSimpleLayout(data.DisplayName);
+                    break;
+                case 5:
+                    await setLayoutWithTable(data.DisplayName);
+                    break;
+            }
+
+            //implement the back button 
+            _backButton = FindViewById<Button>(Resource.Id.backButton);
+            _backButton.Text = data.DisplayName;
+            _backButton.Click += (object sender, EventArgs e) =>
+            {
+                base.OnBackPressed();
+            };
+        }
+
+        private async Task setLayoutWithTable(string resourceName)
+        {
+            SetContentView(Resource.Layout.activity_hp_details_table);
+            _commonListView = FindViewById<ListView>(Resource.Id.emergencyList);
+            if (resourceName.Equals("Emergency"))
+            {
+                var emergencyAdapter = new HPEmergencyAdapter(this);
+                await emergencyAdapter.loadData();
+                _commonListView.Adapter = emergencyAdapter;
                 await LogManager.Log(new LogUsage
                 {
                     Date = DateTime.Now,
-                    Page = Convert.ToInt32(Pages.MyHealthVideos)
+                    Page = Convert.ToInt32(Pages.Emergency)
                 });
             }
-            else {
-				var emergencyAdapter = new HPOrgnisationAdapter (this);
-				await emergencyAdapter.loadData ();
-				_commonListView.Adapter = emergencyAdapter;
-				await LogManager.Log (new LogUsage {
-					Date = DateTime.Now,
-					Page = Convert.ToInt32(Pages.Organisations)
-				});
-			}
-		}
+            else if (resourceName.Replace(" ", string.Empty).Equals("MyHealthMedia", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var mcAdapter = new MediaCategoriesAdapter(this);
+                await mcAdapter.loadData();
+                _commonListView.Adapter = mcAdapter;
+                await LogManager.Log(new LogUsage
+                {
+                    Date = DateTime.Now,
+                    Page = Convert.ToInt32(Pages.MyHealthMediaCategories)
+                });
 
-		private async Task setLayoutWithTableContacts () 
-		{
-			SetContentView (Resource.Layout.activity_hp_details_contacts);
-			_commonListView = FindViewById<ListView> (Resource.Id.hpUsefulContactList);
-			_contactAdapter = new HPUserfulNumberAdapter (this);
-			await _contactAdapter.loadData ();
-			_commonListView.Adapter = _contactAdapter;
+                _commonListView.ItemClick += MediaCategoryClicked;
+            }
+            else
+            {
+                var emergencyAdapter = new HPOrgnisationAdapter(this);
+                await emergencyAdapter.loadData();
+                _commonListView.Adapter = emergencyAdapter;
+                await LogManager.Log(new LogUsage
+                {
+                    Date = DateTime.Now,
+                    Page = Convert.ToInt32(Pages.Organisations)
+                });
+            }
+        }
 
-			await LogManager.Log (new LogUsage {
-				Date = DateTime.Now, 
-				Page = Convert.ToInt32(Pages.MyUsefulNumbers)
-			});
+        private void MediaCategoryClicked(object sender, AdapterView.ItemClickEventArgs arg)
+        {
+            var videoLinksActivity = new Intent(this, typeof(VideoLinksActivity));
+            videoLinksActivity.PutExtra("CategoryId", Convert.ToInt32(arg.Id));
 
-			_addNumberButton = FindViewById<Button> (Resource.Id.addContactButton);
-			//_saveNumberButton = FindViewById<Button> (Resource.Id.saveContactButton);
-			//_saveNumberButton.Visibility = ViewStates.Invisible;
-			_addNumberButton.Click += onAddButtonClicked;
-			//_saveNumberButton.Click += onSaveButtonClicked;
-		}
+            var mcAdapter = _commonListView.Adapter as MediaCategoriesAdapter;
+            videoLinksActivity.PutExtra("CategoryTitle", mcAdapter[arg.Position].CategoryTitle);
 
-		private async Task setSimpleLayout (string resourceName) 
-		{
-			SetContentView (Resource.Layout.activity_hp_details_simple);
-			_webView = FindViewById<WebView> (Resource.Id.simpleWebView);
-			_imageView = FindViewById<ImageView> (Resource.Id.simpleDetailImage);
+            StartActivity(videoLinksActivity);
+        }
 
-			if (resourceName.Equals ("Hospitals")) {
-				//_webView.Visibility = ViewStates.Invisible;
-				//_imageView.SetImageResource (Resource.Drawable.map_large);
-				//_imageView.Clickable = true;
-				_imageView.Visibility = ViewStates.Gone;
-				_webView.Settings.JavaScriptEnabled = true;
-				MyWebViewClient _webClient = new MyWebViewClient ();
-				_webClient.OnShowHospitals += (int provinceId) => {
-					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
-					intent.PutExtra("provinceId", provinceId);
-					StartActivity(intent);
-				};
-				_webView.SetWebViewClient (_webClient);
-				_webView.SetWebChromeClient (new WebChromeClient ());
-				_webView.LoadUrl ("file:///android_asset/Content/Provinces.html");
+        private async Task setLayoutWithTableContacts()
+        {
+            SetContentView(Resource.Layout.activity_hp_details_contacts);
+            _commonListView = FindViewById<ListView>(Resource.Id.hpUsefulContactList);
+            _contactAdapter = new HPUserfulNumberAdapter(this);
+            await _contactAdapter.loadData();
+            _commonListView.Adapter = _contactAdapter;
 
-				await LogManager.Log ( new LogUsage {
-					Date = DateTime.Now,
-					Page = Convert.ToInt32(Pages.Hospitals)
-				});
+            await LogManager.Log(new LogUsage
+            {
+                Date = DateTime.Now,
+                Page = Convert.ToInt32(Pages.MyUsefulNumbers)
+            });
 
-				/*_imageView.Click += (object sender, EventArgs e) => {
-					var intent = new Intent(this, typeof(HospitalsInCountyActivity));
-					intent.PutExtra("county", "somecounty");
-					StartActivity(intent);
-				};*/
+            _addNumberButton = FindViewById<Button>(Resource.Id.addContactButton);
+            _addNumberButton.Click += onAddButtonClicked;
+        }
 
-			} else {
-				AboutUs aboutus = await MyHealthDB.DatabaseManager.SelectAboutUs (0);
-				string htmlString = Helper.BuildHtmlForAboutUs(aboutus);
+        private async Task setSimpleLayout(string resourceName)
+        {
+            SetContentView(Resource.Layout.activity_hp_details_simple);
+            _webView = FindViewById<WebView>(Resource.Id.simpleWebView);
+            _imageView = FindViewById<ImageView>(Resource.Id.simpleDetailImage);
 
-				_webView.LoadDataWithBaseURL ("file:///android_asset/", htmlString, "text/html", "utf-8", null);
-				if (aboutus.mainImage != null && aboutus.mainImage.Length > 0) {
-					_imageView.SetImageBitmap (BitmapFactory.DecodeByteArray (aboutus.mainImage, 0, aboutus.mainImage.Length));
-					//_imageView.Dispose();
-				}
+            if (resourceName.Equals("Hospitals"))
+            {
+                _imageView.Visibility = ViewStates.Gone;
+                _webView.Settings.JavaScriptEnabled = true;
+                MyWebViewClient _webClient = new MyWebViewClient();
+                _webClient.OnShowHospitals += (int provinceId) =>
+                {
+                    var intent = new Intent(this, typeof(HospitalsInCountyActivity));
+                    intent.PutExtra("provinceId", provinceId);
+                    StartActivity(intent);
+                };
+                _webView.SetWebViewClient(_webClient);
+                _webView.SetWebChromeClient(new WebChromeClient());
+                _webView.LoadUrl("file:///android_asset/Content/Provinces.html");
 
-				await LogManager.Log (new LogUsage {
-					Date = DateTime.Now,
-					Page = Convert.ToInt32(Pages.AboutRCSI)
-				});
+                await LogManager.Log(new LogUsage
+                {
+                    Date = DateTime.Now,
+                    Page = Convert.ToInt32(Pages.Hospitals)
+                });
+            }
+            else
+            {
+                AboutUs aboutus = await MyHealthDB.DatabaseManager.SelectAboutUs(0);
+                string htmlString = Helper.BuildHtmlForAboutUs(aboutus);
 
-				//_webView.LoadUrl ("file:///android_asset/Content/AboutRCSI.html");
-				//_imageView.SetImageResource (Resource.Drawable.RCSI_Front_Building_1);
-			}
-		}
+                _webView.LoadDataWithBaseURL("file:///android_asset/", htmlString, "text/html", "utf-8", null);
+                if (aboutus.mainImage != null && aboutus.mainImage.Length > 0)
+                {
+                    _imageView.SetImageBitmap(BitmapFactory.DecodeByteArray(aboutus.mainImage, 0, aboutus.mainImage.Length));
+                }
 
-		//-------------------------------------- Event Handlers --------------------------------------//
+                await LogManager.Log(new LogUsage
+                {
+                    Date = DateTime.Now,
+                    Page = Convert.ToInt32(Pages.AboutRCSI)
+                });
+            }
+        }
 
-		protected void onAddButtonClicked (object sender, EventArgs e) 
-		{
-			//this calls the same dialog so it can add new number.
-			ShowInputDialog (-1, _contactAdapter.contactList);
-		}
+        //-------------------------------------- Event Handlers --------------------------------------//
 
-		protected void onSaveButtonClicked (object sender, EventArgs e) 
-		{
+        protected void onAddButtonClicked(object sender, EventArgs e)
+        {
+            //this calls the same dialog so it can add new number.
+            ShowInputDialog(-1, _contactAdapter.contactList);
+        }
 
-		}
+        protected void onSaveButtonClicked(object sender, EventArgs e)
+        {
 
-		//-------------------------------------- Public functions --------------------------------------//
+        }
 
-		public void ShowInputDialog(int index, List<UsefullNumbers> contactList) 
-		{
-			//var contactList = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        //-------------------------------------- Public functions --------------------------------------//
 
-			//pass the contactsList from where you call this function. 
-			alert.SetTitle("Add / Edit Contact");
-			var view = this.LayoutInflater.Inflate (Resource.Layout.alertview_custom_layout, null);
-			alert.SetView (view);
+        public void ShowInputDialog(int index, List<UsefullNumbers> contactList)
+        {
+            //var contactList = await MyHealthDB.DatabaseManager.SelectAllUsefullNumbers ();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-			var UserName = view.FindViewById<EditText>(Resource.Id.contactNameInput);
-			var UserNumber = view.FindViewById<EditText>(Resource.Id.contactNumberInput);
-			if (index >= 0) {
-				UserName.Text = contactList.ElementAt(index).Name;
-				UserNumber.Text = contactList.ElementAt(index).Number;
-			}
+            //pass the contactsList from where you call this function. 
+            alert.SetTitle("Add / Edit Contact");
+            var view = this.LayoutInflater.Inflate(Resource.Layout.alertview_custom_layout, null);
+            alert.SetView(view);
 
-			alert.SetPositiveButton ("Save", async (object sender, DialogClickEventArgs e) => {
+            var UserName = view.FindViewById<EditText>(Resource.Id.contactNameInput);
+            var UserNumber = view.FindViewById<EditText>(Resource.Id.contactNumberInput);
+            if (index >= 0)
+            {
+                UserName.Text = contactList.ElementAt(index).Name;
+                UserNumber.Text = contactList.ElementAt(index).Number;
+            }
 
-				if (!UserName.Text.Equals("")) {
-					UsefullNumbers contact;
-					if (index >= 0) {
-						contact = contactList.ElementAt(index);
-						contact.Name = UserName.Text;
-						contact.Number = UserNumber.Text;
-					} else {
-						contact = new UsefullNumbers();
-						contact.ID = contactList.Max(x => x.ID) + 1;
-						contact.Name = UserName.Text; 
-						contact.Number = UserNumber.Text;
-					}
-					await MyHealthDB.DatabaseManager.SaveUsefullNumber(contact);
-					_contactAdapter = new HPUserfulNumberAdapter (this);
-					await _contactAdapter.loadData();
-					_commonListView.Adapter = _contactAdapter;
-					Toast.MakeText(this, "Updated usefull numbers list", ToastLength.Long).Show();
-				}
+            alert.SetPositiveButton("Save", async (object sender, DialogClickEventArgs e) =>
+            {
 
-			});
+                if (!UserName.Text.Equals(""))
+                {
+                    UsefullNumbers contact;
+                    if (index >= 0)
+                    {
+                        contact = contactList.ElementAt(index);
+                        contact.Name = UserName.Text;
+                        contact.Number = UserNumber.Text;
+                    }
+                    else
+                    {
+                        contact = new UsefullNumbers();
+                        contact.ID = contactList.Max(x => x.ID) + 1;
+                        contact.Name = UserName.Text;
+                        contact.Number = UserNumber.Text;
+                    }
+                    await MyHealthDB.DatabaseManager.SaveUsefullNumber(contact);
+                    _contactAdapter = new HPUserfulNumberAdapter(this);
+                    await _contactAdapter.loadData();
+                    _commonListView.Adapter = _contactAdapter;
+                    Toast.MakeText(this, "Updated usefull numbers list", ToastLength.Long).Show();
+                }
 
-			alert.SetNegativeButton ("Cancel", (object sender, DialogClickEventArgs e) => {
+            });
 
-			});
+            alert.SetNegativeButton("Cancel", (object sender, DialogClickEventArgs e) =>
+            {
 
-			alert.Show();
-		}
+            });
 
-		//-------------------------------------- Private functions --------------------------------------//
+            alert.Show();
+        }
 
-		//------------------------ menu item ----------------------//
-		public override bool OnCreateOptionsMenu (IMenu menu)
-		{
-			MenuInflater.Inflate (Resource.Menu.main_activity_actions, menu);
-			return base.OnCreateOptionsMenu (menu);
-		}
+        //-------------------------------------- Private functions --------------------------------------//
 
-		public override bool OnMenuItemSelected (int featureId, IMenuItem item)
-		{
-			switch (item.ItemId) {
+        //------------------------ menu item ----------------------//
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.main_activity_actions, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
 
-			case Resource.Id.action_profile:
-				var newActivity = new Intent(this, typeof(MyProfileActivity));
-				StartActivity(newActivity);
-				break;
-			}
-			return base.OnMenuItemSelected (featureId, item);
-		}
-	}
+        public override bool OnMenuItemSelected(int featureId, IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
 
-	public class MyWebViewClient : WebViewClient
-	{
-		public event ShowHospitalsEventHandler OnShowHospitals;
+                case Resource.Id.action_profile:
+                    var newActivity = new Intent(this, typeof(MyProfileActivity));
+                    StartActivity(newActivity);
+                    break;
+            }
+            return base.OnMenuItemSelected(featureId, item);
+        }
+    }
 
-		public override bool ShouldOverrideUrlLoading (WebView view, string url)
-		{
-			var provinceName = url.Substring(url.IndexOf("?") + 1);
-			DatabaseManager.SelectProvince (provinceName)
-				.ContinueWith((r) => {
-					var provinceId = r.Result.ID.Value;
+    public class MyWebViewClient : WebViewClient
+    {
+        public event ShowHospitalsEventHandler OnShowHospitals;
 
-					if (OnShowHospitals != null) {
-						OnShowHospitals (provinceId);
-					}
-				}, TaskScheduler.FromCurrentSynchronizationContext());
-			return true;
-		}
+        public override bool ShouldOverrideUrlLoading(WebView view, string url)
+        {
+            var provinceName = url.Substring(url.IndexOf("?") + 1);
+            DatabaseManager.SelectProvince(provinceName)
+                .ContinueWith((r) =>
+                {
+                    var provinceId = r.Result.ID.Value;
 
-		/*public override void OnPageStarted (WebView view, string url, Android.Graphics.Bitmap favicon)
+                    if (OnShowHospitals != null)
+                    {
+                        OnShowHospitals(provinceId);
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            return true;
+        }
+
+        /*public override void OnPageStarted (WebView view, string url, Android.Graphics.Bitmap favicon)
 		{
 			base.OnPageStarted (view, url, favicon);
 		}
@@ -320,7 +348,7 @@ namespace MyHealthAndroid
 		{
 			base.OnReceivedError (view, errorCode, description, failingUrl);
 		}*/
-	}
+    }
 
 }
 

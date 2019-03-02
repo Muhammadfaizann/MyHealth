@@ -7,7 +7,6 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using MyHealthAndroid;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
@@ -19,12 +18,10 @@ namespace MyHealthAndroid
 	{
 		private Button backButton;
 		private ListView _channelsList;
-		//private CommonData _model = new CommonData ();
 
 		protected async override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-			//_model = new CommonData ();
 
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_hp_details_table);
@@ -59,8 +56,9 @@ namespace MyHealthAndroid
 			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
 			_homeButton.Touch += delegate {
 				var homeActivity = new Intent (this, typeof(HomeActivity));
+                homeActivity.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
 				StartActivity (homeActivity);
-			};
+            };
 		}
 
 		//------------------------ custom activity ----------------------//

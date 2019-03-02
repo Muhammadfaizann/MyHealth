@@ -1,17 +1,13 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using MyHealthAndroid;
 using MyHealthDB;
 using MyHealthDB.Logger;
-using Android.Preferences;
 
 namespace MyHealthAndroid
 {
@@ -20,12 +16,9 @@ namespace MyHealthAndroid
 	{
 		private Button backButton;
 		private ListView _professionalsList;
-		//private CommonData _model;
 
 		protected async override void OnCreate (Bundle bundle)
 		{
-			//_model = new CommonData ();
-
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.activity_health_professionals);
 
@@ -36,7 +29,6 @@ namespace MyHealthAndroid
 			_professionalsList.Adapter = _listAdapter;
 
 			_professionalsList.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-                //var item = _model.getHealthProfessionals().ElementAt(e.Position);
                 var id = _listAdapter.GetItemId(e.Position);
 				var _detialsActivity = new Intent (this, typeof(HPDetailsActivity));
 				_detialsActivity.PutExtra("id", Convert.ToInt32(id));
@@ -60,8 +52,9 @@ namespace MyHealthAndroid
 			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
 			_homeButton.Touch += delegate {
 				var homeActivity = new Intent (this, typeof(HomeActivity));
+                homeActivity.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
 				StartActivity (homeActivity);
-			};
+            };
 		}
 
 		//------------------------ custom activity ----------------------//
