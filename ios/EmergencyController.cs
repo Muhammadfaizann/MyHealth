@@ -20,6 +20,12 @@ namespace RCSI
 			set;
 		}
 
+		public int MediaCategoryId
+		{
+			get;
+			set;
+		}
+
 		private EmergencyContactSource _emergencyContactSource;
 		public EmergencyController (IntPtr handle) : base (handle)
 		{
@@ -36,7 +42,7 @@ namespace RCSI
 			if (IsVideos)
 			{
 				var videoLinksTableSource = new VideoLinksSource(this);
-				videoLinksTableSource._items = await DatabaseManager.GetAllVideoLinksAsync();
+				videoLinksTableSource._items = await DatabaseManager.GetVideoLinksAsync($"{MediaCategoryId}");
 
 				this.tableView.Source = videoLinksTableSource;
 			}
@@ -58,10 +64,6 @@ namespace RCSI
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			if (IsVideos)
-			{
-				Title = "MyHealth Videos";
-			}
 		}
 	}
 
