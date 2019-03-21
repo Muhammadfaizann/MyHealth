@@ -32,9 +32,7 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
+    <CodesignProvision>My Health</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <Optimize>true</Optimize>
@@ -47,7 +45,6 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
     <CodesignKey>iPhone Distribution: Royal College of Surgeons in Ireland (G6GYXXM25C)</CodesignKey>
   </PropertyGroup>
@@ -67,11 +64,10 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
+    <CodesignProvision>My Health</CodesignProvision>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchSdkVersion>8.2</MtouchSdkVersion>
     <MtouchProfiling>true</MtouchProfiling>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <Optimize>true</Optimize>
@@ -84,13 +80,11 @@
     <CodesignKey>iPhone Distribution: Royal College of Surgeons in Ireland (G6GYXXM25C)</CodesignKey>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <MtouchUseLlvm>true</MtouchUseLlvm>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <IpaPackageName>
     </IpaPackageName>
     <MtouchI18n>
     </MtouchI18n>
-    <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
-    <MtouchUseSGen>true</MtouchUseSGen>
+    <CodesignProvision>My Health</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -105,7 +99,6 @@
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <IpaPackageName>
     </IpaPackageName>
     <MtouchI18n>
@@ -118,7 +111,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <CodesignProvision>bba49716-f714-452a-9520-4b3c2bd64a94</CodesignProvision>
+    <CodesignProvision>My Health</CodesignProvision>
     <CodesignKey>iPhone Distribution: Royal College of Surgeons in Ireland (G6GYXXM25C)</CodesignKey>
     <IpaPackageName>
     </IpaPackageName>
@@ -126,7 +119,6 @@
     </MtouchI18n>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite-net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -369,6 +361,10 @@
     <Compile Include="HealthServicesTableViewController.cs" />
     <Compile Include="HealthServicesTableViewController.designer.cs">
       <DependentUpon>HealthServicesTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaCategoriesController.cs" />
+    <Compile Include="MediaCategoriesController.designer.cs">
+      <DependentUpon>MediaCategoriesController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
