@@ -143,7 +143,7 @@ namespace MyHealthAndroid
 
 			alert.SetCancelable (false);
 
-			alert.SetPositiveButton ("Ok",(senderAlert, args) => {
+			alert.SetPositiveButton ("OK",(senderAlert, args) => {
 				System.Environment.Exit (0);
 			});
 

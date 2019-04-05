@@ -88,7 +88,7 @@ namespace RCSI
 			UIAlertView dialog = new UIAlertView ();
 			dialog.Title = "Connectivity Check";
 			dialog.Message = "Please make sure, Your device in connected to internet.";
-			dialog.AddButton ("Ok");
+			dialog.AddButton ("OK");
 
 			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 				NavigationController.PopViewController(true);
@@ -101,7 +101,7 @@ namespace RCSI
 			UIAlertView dialog = new UIAlertView ();
 			//dialog.Title = "Connectivity Check";
 			dialog.Message = "Unable to fetch hospitals data, please try again later. If the problem persist please contact with RCSI";
-			dialog.AddButton ("Ok");
+			dialog.AddButton ("OK");
 
 			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 				NavigationController.PopViewController(true);

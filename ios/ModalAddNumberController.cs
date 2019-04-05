@@ -61,7 +61,7 @@ namespace RCSI
 			await MyHealthDB.DatabaseManager.SaveUsefullNumber (number);
 
             UIAlertView _message = new UIAlertView { Message = "Saved Successfully!" };
-            _message.AddButton("Ok");
+            _message.AddButton("OK");
 			_message.Show ();
 
 			_message.Clicked += async delegate {

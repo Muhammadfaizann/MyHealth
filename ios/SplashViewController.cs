@@ -42,9 +42,9 @@ namespace RCSI
 			var connected = (remoteHostStatus != NetworkStatus.NotReachable) && (internetStatus != NetworkStatus.NotReachable) || (localWifiStatus != NetworkStatus.NotReachable);
 
 			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
-            UIAlertView _alert = new UIAlertView(); //null, , null, "Ok", null);
+            UIAlertView _alert = new UIAlertView(); //null, , null, "OK", null);
             _alert.Message = "Internet is not accessible, please check your device settings and try again";
-            _alert.AddButton("Ok");
+            _alert.AddButton("OK");
             _alert.CancelButtonIndex = 0;
 			_alert.Clicked += (object sender, UIButtonEventArgs e) => {
 				// no internet connection leads in exit of application
@@ -63,15 +63,13 @@ namespace RCSI
 					if (TotalHours > 24) {
 						if (connected) {
 							// this line is not awaited therefore control will transfer to the next line immediately before SyncDevice method completes execution
-							MyHealthDB.ServiceConsumer.SyncDevice ().ContinueWith ((t) => {
-								if (t.Result) {
-									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
-									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "ConditionsLastSyncDate");
-									userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "HospitalsLastSyncDate");
-									userDefs.Synchronize ();
-								}
-								UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-							});
+							if (await MyHealthDB.ServiceConsumer.SyncDevice()) {
+								userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "LastSyncDate");
+								userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "ConditionsLastSyncDate");
+								userDefs.SetString (DateTime.Now.ToString ("dd-MMM-yyyy HH:mm:ss"), "HospitalsLastSyncDate");
+								userDefs.Synchronize ();
+							}
+							UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 						} else {
 							UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 						}
@@ -145,6 +143,8 @@ namespace RCSI
 
 		//------------------------ Get Device ID --------------------//
 		private void ShowAcceptanceDialog() {
+			loadingOverlay?.Hide ();
+
 			bool isAgree = NSUserDefaults.StandardUserDefaults.BoolForKey ("Agree");
 			if (!isAgree) {
 				UIAlertView dialog = new UIAlertView ();
@@ -180,7 +180,6 @@ namespace RCSI
 			} else {
 				PerformSegue ("Home", this);
 			}
-
 		}
 		
 
@@ -188,7 +187,7 @@ namespace RCSI
 			UIAlertView dialog = new UIAlertView ();
 			dialog.Title = "Connectivity Check";
 			dialog.Message = "Please make sure, Your device in connected to internet.";
-			dialog.AddButton ("Ok");
+			dialog.AddButton ("OK");
 
 			dialog.Clicked += (object sender, UIButtonEventArgs e) => {
 				// don't agree leads in exit of application
