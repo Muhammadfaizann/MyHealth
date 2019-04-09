@@ -694,9 +694,7 @@ namespace MyHealthDB
         public static Task<List<MediaCategory>> GetAllMediaCategoriesAsync()
         {
             return dbConnection
-                .Table<MediaCategory>()
-                .OrderBy(c => c.CategoryTitle)
-                .ToListAsync();
+                .QueryAsync<MediaCategory>($"Select * FROM {nameof(MediaCategory)} ORDER BY lower({nameof(MediaCategory.CategoryTitle)});");
         }
 
         public async static Task SaveMediaCategoryAsync(MediaCategory mediaCategory)
