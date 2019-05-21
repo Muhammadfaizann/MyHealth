@@ -138,7 +138,7 @@ namespace RCSI
 			this.NavigationController.PopViewController(true);
 		}
 
-		async private Task SetupImportantNotice() {
+		async public Task SetupImportantNotice(bool startScroll = false) {
 			var importantNotice = await DatabaseManager.SelectImportantNotice(DateTime.Now.Date);
 			if (importantNotice != null) {
 				//importantNotice.Name = "The quick brown fox jumps over the lazy dog, it is very very long and lengthy text for testing if it worked fine or not lets see...";
@@ -173,7 +173,26 @@ namespace RCSI
 					);
 				}
 
-//				this.BeginScroll ();
+				if (startScroll)
+				{
+					this.BeginScroll ();
+				}
+			}
+			else
+			{
+				_lblMessage.Text = "Important Notice";
+				_lblMessage.TextAlignment = UITextAlignment.Center;
+
+				// get the text width
+				_labelWidth = _lblMessage.Text.StringSize (_lblMessage.Font).Width;
+				// if calculated width is less than the screen width then set it to screen width
+				if (_labelWidth < _labelScrollviewContainer.Frame.Width) {
+					_labelWidth = _labelScrollviewContainer.Frame.Width;
+				}
+				var frameOrignal = new CGRect(0, 0, _labelWidth, _labelScrollviewContainer.Frame.Height);
+				_lblMessage.Frame = frameOrignal;
+
+				_labelWidth = 0;
 			}
 		}
 

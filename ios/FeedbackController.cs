@@ -37,7 +37,7 @@ namespace RCSI
 			if (username.Text.Equals("") || useremail.Text.Equals("") || usermessage.Text.Equals(""))
 			{
                 var alert = new UIAlertView { Title = "Error", Message = "Please fill in all the details" };
-                alert.AddButton("Ok");
+                alert.AddButton("OK");
 				alert.Show();
 			} else {
 				await LogManager.Log(new LogFeedback {
@@ -46,7 +46,7 @@ namespace RCSI
 				});
 
 				UIAlertView _alert = new UIAlertView(null, "Thank you for your feedback",
-					alertDelegate, "Ok", null);
+					alertDelegate, "OK", null);
 				_alert.Show();
 			}
 		}
@@ -103,7 +103,7 @@ namespace RCSI
 			public override void Clicked (UIAlertView alertview, nint buttonIndex)
 			{
 				if (buttonIndex == 0) {
-					// on Ok button press return back to the contact listing screen
+					// on OK button press return back to the contact listing screen
 					_controller.NavigationController.PopViewController (true);
 				}
 			}

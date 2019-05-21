@@ -32,8 +32,6 @@ namespace MyHealthDB
 
 		public async static Task<Boolean> RegisterDevice (String device, string OSVersion)
 		{
-			obj = new HttpResponseMessage();
-
 			string DeviceId = Guid.NewGuid().ToString();
 			string UserName = "Name" + DateTime.Now.Ticks.ToString();
 			string Type = device; //DateTime.Now.Second % 2 == 0 ? "Android" : "IPhone";
@@ -47,12 +45,19 @@ namespace MyHealthDB
 				//Save UserName, DeviceType, DeviceId into Database.
 				//Use these for SMHandShake Call
 
-				await DatabaseManager.SaveDevice (new RegisteredDevice {
-					ID = _SMtblRegisterDevice.ID,
-					UserName = _SMtblRegisterDevice.UserName,
-					DeviceId = _SMtblRegisterDevice.DEVICE_ID,
-					DeviceType = _SMtblRegisterDevice.Type
-				});
+				var deviceRegistered = await DatabaseManager.SelectDevice();
+
+				if (deviceRegistered == null)
+				{
+					deviceRegistered = new RegisteredDevice();
+				}
+
+				deviceRegistered.ID = _SMtblRegisterDevice.ID;
+				deviceRegistered.UserName = _SMtblRegisterDevice.UserName;
+				deviceRegistered.DeviceId = _SMtblRegisterDevice.DEVICE_ID;
+				deviceRegistered.DeviceType = _SMtblRegisterDevice.Type;
+
+				await DatabaseManager.SaveDevice (deviceRegistered);
 			} else {
 				return false;
 			}
@@ -71,12 +76,11 @@ namespace MyHealthDB
 		{
 			//Helper.Helper.DeviceId = "9412D71E-ED92-4149-991E-5D2F26ED4D8F";
 			//Helper.Helper.PIN = "1234";
-			var AllDevices = await DatabaseManager.SelectAllDevices ();
-//			if (AllDevices.Count < 1)
-//				return false;
-			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
+			var device = await DatabaseManager.SelectDevice ();
+			if (device == null)
+				return false;
+			Helper.Helper.DeviceId = device.DeviceId;
 			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
-			//Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + syncDate.Day);
 
 			try {
 				String serviceContent;
@@ -221,9 +225,11 @@ namespace MyHealthDB
 		// sync device for the first time
 		public async static Task<Boolean> FirstTimeSyncDevice ()
 		{
-			var AllDevices = await DatabaseManager.SelectAllDevices ();
-			Helper.Helper.DeviceId = AllDevices [0].DeviceId;
-			Helper.Helper.Hash  = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
+			var device = await DatabaseManager.SelectDevice ();
+			if (device == null)
+				return false;
+			Helper.Helper.DeviceId = device.DeviceId;
+			Helper.Helper.Hash = Helper.Helper.generateMD5(Helper.Helper.DeviceId + Helper.Helper.PIN + DateTime.Now.Day);
 
 			try {
 				String serviceContent;
@@ -298,6 +304,17 @@ namespace MyHealthDB
                     if (await UpdateDBManager.UpdateVideoLinks(allVideoLinks))
                     {
                         Console.WriteLine("\n Video links are updated.");
+                    }
+                }
+
+				using (var responseMessageObj = await _service.GetMediaCategories())
+                {
+                    serviceContent = await responseMessageObj.Content.ReadAsStringAsync();
+					var allMediaCategories = JsonConvert.DeserializeObject<List<SMtblMediaCategory>>(serviceContent);
+
+                    if (await UpdateDBManager.UpdateMediaCategories(allMediaCategories))
+                    {
+                        Console.WriteLine("\n Media Categories are updated");
                     }
                 }
 

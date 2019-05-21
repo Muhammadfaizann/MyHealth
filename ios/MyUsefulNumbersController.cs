@@ -102,7 +102,7 @@ namespace RCSI
 //				}
 //				await MyHealthDB.DatabaseManager.SaveUsefullNumber (number);
 //			}
-//			UIAlertView _message = new UIAlertView ("", "Saved Successfully!", null, "Ok", null);
+//			UIAlertView _message = new UIAlertView ("", "Saved Successfully!", null, "OK", null);
 //			_message.Show ();
 //		}
 

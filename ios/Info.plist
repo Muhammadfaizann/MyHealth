@@ -24,15 +24,17 @@
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>RCSI MyHealth</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.14</string>
-	<key>CFBundleVersion</key>
-	<string>1.10</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>CFBundleName</key>
 	<string>RCSI MyHealth</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>CFBundleVersion</key>
+	<string>2</string>
 </dict>
 </plist>

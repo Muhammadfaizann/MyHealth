@@ -45,10 +45,14 @@ namespace RCSI
 						await MyHealthDB.ServiceConsumer.SyncDevice ();
 						UIAlertView alert = new UIAlertView ();
                         alert.Message = "MyHealth has been updated";
-                        alert.AddButton("Ok");
+                        alert.AddButton("OK");
                         alert.CancelButtonIndex = 0;
 						alert.Show ();
+
+						var homeController = this.ParentViewController as HomeController;
+						await homeController.SetupImportantNotice(true);
 					}
+
 					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 				};
 			}

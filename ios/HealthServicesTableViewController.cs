@@ -15,12 +15,6 @@ namespace RCSI.MyHealth
 
 		public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
 		{
-			if ("Videos".Equals(segue.Identifier))
-			{
-				var viewController = segue.DestinationViewController as EmergencyController;
-				viewController.IsVideos = true;
-			}
-
 			base.PrepareForSegue(segue, sender);
 		}
 	}

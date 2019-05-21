@@ -63,7 +63,7 @@ namespace RCSI
 				UIAlertView alert = new UIAlertView ();
                 alert.Title = "Alert";
                 alert.Message = "This link will take you to an external website, Do you want to Proceed?";
-                alert.AddButton("Ok");
+                alert.AddButton("OK");
                 alert.AddButton("Cancel");
 
 				alert.Clicked += (s, b) => {

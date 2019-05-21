@@ -189,7 +189,7 @@ namespace RCSI
 
 			UIAlertView alert = new UIAlertView ();
             alert.Message = "Profile saved successfully";
-            alert.AddButton("Ok");
+            alert.AddButton("OK");
 			alert.Show ();
 		}
 
