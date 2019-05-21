@@ -80,7 +80,9 @@ namespace MyHealthDB
 
                 dbConnection.CreateTableAsync<ImportantNotice>(),
 
-                dbConnection.CreateTableAsync<VideoLink>()
+                dbConnection.CreateTableAsync<VideoLink>(),
+
+                dbConnection.CreateTableAsync<MediaCategory>()
             );
 		}
 
@@ -637,6 +639,15 @@ namespace MyHealthDB
                 .ToListAsync();
         }
 
+        public static async Task<List<VideoLink>> GetVideoLinksAsync(string categoryId)
+        {
+            var videoLinks = await GetAllVideoLinksAsync();
+
+            return videoLinks
+                .Where(vl => vl.MediaCategoryIds.Split(',').Contains($"{categoryId}"))
+                .ToList();
+        }
+
         public async static Task SaveVideoLinkAsync(VideoLink videoLink)
         {
             var existing = await dbConnection
@@ -677,6 +688,53 @@ namespace MyHealthDB
         }
 
         #endregion Video Links
+
+        #region Media Categories
+
+        public static Task<List<MediaCategory>> GetAllMediaCategoriesAsync()
+        {
+            return dbConnection
+                .QueryAsync<MediaCategory>($"Select * FROM {nameof(MediaCategory)} ORDER BY lower({nameof(MediaCategory.CategoryTitle)});");
+        }
+
+        public async static Task SaveMediaCategoryAsync(MediaCategory mediaCategory)
+        {
+            var existing = await dbConnection
+                .Table<MediaCategory>()
+                .Where(x => x.ID == mediaCategory.ID)
+                .FirstOrDefaultAsync();
+
+            if (existing == null)
+            {
+                await dbConnection.InsertAsync(mediaCategory).ContinueWith(t =>
+                {
+                    Console.WriteLine("Saved new Media Category title: {0}", mediaCategory.CategoryTitle);
+                });
+
+                return;
+            }
+
+            await dbConnection.UpdateAsync(mediaCategory).ContinueWith(t =>
+            {
+                Console.WriteLine("Updated media category title: {0}", mediaCategory.CategoryTitle);
+            });
+        }
+
+        public static Task DeleteMediaCategoryAsync(int categoryId)
+        {
+            return dbConnection.FindAsync<MediaCategory>(categoryId)
+                .ContinueWith(c =>
+                {
+                    if (c.Result != null)
+                    {
+                        return dbConnection.DeleteAsync(c.Result).ContinueWith(ca => Console.WriteLine("Deleted Media Category title: {0}", c.Result.CategoryTitle));
+                    }
+
+                    return Task.FromResult(0);
+                });
+        }
+
+        #endregion Media Categories
 
         #region[LogContent]
         public async static Task<List<LogContent>> SelectAllLogContent()

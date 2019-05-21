@@ -52,7 +52,7 @@
     <AndroidSigningStorePass>RCSIMyHealth</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>RCSI MyHealth</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>RCSIMyHealth</AndroidSigningKeyPass>
-    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <EnableProguard>true</EnableProguard>
@@ -91,7 +91,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CustomAdapaters\MediaCategoriesAdapter.cs" />
     <Compile Include="Activities\CustomAdapaters\HPVideoLinksAdapter.cs" />
+    <Compile Include="Activities\SubActivities\VideoLinksActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\LaunchActivity.cs" />

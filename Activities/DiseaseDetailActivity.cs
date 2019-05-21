@@ -45,8 +45,9 @@ namespace MyHealthAndroid
 			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
 			_homeButton.Touch += delegate {
 				var homeActivity = new Intent (this, typeof(HomeActivity));
+                homeActivity.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
 				StartActivity (homeActivity);
-			};
+            };
 
 			if (_selectedDiseaseId > 0) {
 				var selectedDisease = await DatabaseManager.SelectDisease (_selectedDiseaseId);

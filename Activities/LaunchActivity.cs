@@ -122,12 +122,8 @@ namespace MyHealthAndroid
 				});
 
 				alert.SetNeutralButton ("Read Our T&Cs", (senderAlert, args) => {
-					//var uri = "http://myhealthapp.ie/terms.html";
-					//var intent = new Intent (Intent.ActionView, uri); 
-					//this.StartActivity (intent);
 					Intent intent = new Intent (Intent.ActionView, Android.Net.Uri.Parse ("http://www.rcsimyhealth.ie/terms-and-conditions.html"));
 					StartActivity (intent);
-					//StartActivity(type:UrlQuerySanitizer("www.google.com"));
 					System.Environment.Exit (0);
 				});
 

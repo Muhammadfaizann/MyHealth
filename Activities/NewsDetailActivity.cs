@@ -71,8 +71,9 @@ namespace MyHealthAndroid
 			_homeButton.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
 			_homeButton.Touch += delegate {
 				var homeActivity = new Intent (this, typeof(HomeActivity));
+                homeActivity.SetFlags(ActivityFlags.ClearTop | ActivityFlags.ClearTask | ActivityFlags.NewTask);
 				StartActivity (homeActivity);
-			};
+            };
 		}
 
 		void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)

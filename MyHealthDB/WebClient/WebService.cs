@@ -95,7 +95,12 @@ namespace MyHealthDB.Service
             return Client.GetAsync("api/v1/MyHealth/videoLinks");
         }
 
-		public Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash, string OSVersion)
+        public Task<HttpResponseMessage> GetMediaCategories()
+        {
+            return Client.GetAsync("api/v1/MyHealth/mediaCategories");
+        }
+
+        public Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash, string OSVersion)
 		{
 			var url = string.Format ("api/v1/Application/RegisterMe/{0}/{1}/{2}/{3}/{4}", DeviceId, Type, UserName, Hash, OSVersion);
 			return Client.GetAsync (url, true);

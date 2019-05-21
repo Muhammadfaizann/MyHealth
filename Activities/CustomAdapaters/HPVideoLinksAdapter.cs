@@ -10,18 +10,18 @@ using System.Text.RegularExpressions;
 
 namespace MyHealthAndroid
 {
-	public class HPVideoLinksAdapter : BaseAdapter
-	{
-		private List<VideoLink> _list;
-		private Activity _activity;
+    public class HPVideoLinksAdapter : BaseAdapter
+    {
+        private List<VideoLink> _list;
+        private Activity _activity;
 
-		public HPVideoLinksAdapter(Activity activity)
-		{
-			_activity = activity;
-		}
+        public HPVideoLinksAdapter(Activity activity)
+        {
+            _activity = activity;
+        }
 
-		public Task loadData () => DatabaseManager
-            .GetAllVideoLinksAsync()
+        public Task loadData(int categoryId) => DatabaseManager
+            .GetVideoLinksAsync($"{categoryId}")
             .ContinueWith(_ => _list = _.Result);
 			
 		//count of rows in ListView

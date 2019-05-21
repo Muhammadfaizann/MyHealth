@@ -27,24 +27,24 @@ namespace MyHealthDB.WebClient
             _client = null;
         }
 
-		public async static Task<HttpResponseMessage> GetAsync(string url, bool anonymous = false)
+        public async static Task<HttpResponseMessage> GetAsync(string url, bool anonymous = false)
 		{
 			try
 			{
                 if (anonymous)
                     _client.DefaultRequestHeaders.Authorization = null;
                 else
-						// Add an Authorization header for authentication
+					// Add an Authorization header for authentication
 					_client.DefaultRequestHeaders.Authorization =
-							new AuthenticationHeaderValue("Basic",
-								Convert.ToBase64String(Encoding.UTF8.GetBytes(String.Format("{0}:{1}", Helper.Helper.DeviceId, Helper.Helper.Hash))));
+						new AuthenticationHeaderValue("Basic",
+							Convert.ToBase64String(Encoding.UTF8.GetBytes(String.Format("{0}:{1}", Helper.Helper.DeviceId, Helper.Helper.Hash))));
 
-					Console.WriteLine("url : {0}, DeviceID : {1}, Hash : {2}", url, Helper.Helper.DeviceId, Helper.Helper.Hash);
+				Console.WriteLine("url : {0}, DeviceID : {1}, Hash : {2}", url, Helper.Helper.DeviceId, Helper.Helper.Hash);
 
 				HttpResponseMessage msg = await _client.GetAsync(url);
-					msg.EnsureSuccessStatusCode();
-					return msg;
-				}
+				msg.EnsureSuccessStatusCode();
+				return msg;
+			}
 
 			catch (Exception ex)
 			{
@@ -58,9 +58,9 @@ namespace MyHealthDB.WebClient
 		{
 			try {
 				_client.DefaultRequestHeaders.Authorization =
-						new AuthenticationHeaderValue ("Basic",
-						Convert.ToBase64String (Encoding.UTF8.GetBytes (String.Format ("{0}:{1}", Helper.Helper.DeviceId, Helper.Helper.Hash))));
-					Console.WriteLine("url : {0}, DeviceID : {1}, Hash : {2}", url, Helper.Helper.DeviceId, Helper.Helper.Hash);
+					new AuthenticationHeaderValue ("Basic",
+					Convert.ToBase64String (Encoding.UTF8.GetBytes (String.Format ("{0}:{1}", Helper.Helper.DeviceId, Helper.Helper.Hash))));
+				Console.WriteLine("url : {0}, DeviceID : {1}, Hash : {2}", url, Helper.Helper.DeviceId, Helper.Helper.Hash);
 				return _client.PostAsync (url, new StringContent (JsonConvert.SerializeObject (data), Encoding.UTF8, "application/json"));
 			}
 			catch (Exception ex)

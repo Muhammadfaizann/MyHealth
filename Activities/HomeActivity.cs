@@ -15,7 +15,7 @@ using MyHealthDB.Logger;
 using System.Threading.Tasks;
 
 namespace MyHealthAndroid{
-	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
 	public class HomeActivity : Activity
 	{
 		private ImageButton searchBtn;
@@ -78,11 +78,6 @@ namespace MyHealthAndroid{
 				var activeConnection = connectivityManager.ActiveNetworkInfo;
 				if ((activeConnection != null) && activeConnection.IsConnected) {
 
-					var importantNotice = await DatabaseManager.SelectImportantNotice(DateTime.Now.Date);
-					if (importantNotice != null) {
-						impNotice.Text = importantNotice.Name;
-						impNotice.SetBackgroundColor (Color.ParseColor (importantNotice.NoticeColor));
-					}
 					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);
 
@@ -107,10 +102,17 @@ namespace MyHealthAndroid{
 					} else {
 						await LogManager.SyncAllLogs ();
 					}
-					//Toast.MakeText (this, "Your device is updated", ToastLength.Long).Show();
-					//progressDialog.Dismiss ();
-				}
-			}
+                    //Toast.MakeText (this, "Your device is updated", ToastLength.Long).Show();
+                    //progressDialog.Dismiss ();
+                }
+
+                var importantNotice = await DatabaseManager.SelectImportantNotice(DateTime.Now.Date);
+                if (importantNotice != null)
+                {
+                    impNotice.Text = importantNotice.Name;
+                    impNotice.SetBackgroundColor(Color.ParseColor(importantNotice.NoticeColor));
+                }
+            }
 		}
 
 		//------------------------ custom activity ----------------------//

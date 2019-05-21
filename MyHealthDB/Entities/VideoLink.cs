@@ -12,5 +12,7 @@ namespace MyHealthDB
         public DateTime LastUpdatedDate { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public string MediaCategoryIds { get; set; }
     }
 }

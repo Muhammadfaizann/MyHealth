@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using MyHealthDB.Model;
+using System.Linq;
 
 namespace MyHealthDB
 {
@@ -191,10 +192,28 @@ namespace MyHealthDB
                             UrlDisplayName = item.UrlDisplayName,
                             Url = item.Url,
                             IsDeleted = item.IsDeleted,
+
+                            MediaCategoryIds = string.Join(",", item.MediaCategoryIds),
                         })
                     );
                 }
             }
+
+            return Task.WhenAll(tasks).ContinueWith(_ => _.IsCompleted);
+        }
+
+        public static Task<bool> UpdateMediaCategories(List<SMtblMediaCategory> mediaCategories)
+        {
+            var tasks = mediaCategories
+                .Select(c => c.IsDeleted
+                    ? DatabaseManager.DeleteMediaCategoryAsync(c.Id)
+                    : DatabaseManager.SaveMediaCategoryAsync(new MediaCategory
+                    {
+                        ID = c.Id,
+                        CategoryTitle = c.CategoryTitle,
+                        LastUpdatedDate = c.LastUpdatedDate
+                    }))
+                .ToList();
 
             return Task.WhenAll(tasks).ContinueWith(_ => _.IsCompleted);
         }
