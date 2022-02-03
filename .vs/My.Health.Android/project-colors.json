@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "8892ded7-fe9e-4620-a868-c3e9cc2517e8": {
+      "ProjectGuid": "8892ded7-fe9e-4620-a868-c3e9cc2517e8",
+      "DisplayName": "MyHealthDB",
+      "ColorIndex": 0
+    },
+    "2b5bc4e3-8b3c-40bb-852b-b93c45f97e39": {
+      "ProjectGuid": "2b5bc4e3-8b3c-40bb-852b-b93c45f97e39",
+      "DisplayName": "My.Health.Android",
+      "ColorIndex": 1
+    },
+    "519cf0a5-37dc-451f-8909-86e945044746": {
+      "ProjectGuid": "519cf0a5-37dc-451f-8909-86e945044746",
+      "DisplayName": "RCSI MyHealth",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

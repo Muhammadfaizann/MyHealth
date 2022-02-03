@@ -9,17 +9,24 @@ namespace MyHealthDB.WebClient
 {
 	public class Client
 	{
-		private static string baseURL = "http://myhealthapp.ie/MyHealth_Webservices/";	//http://devrcsiapi.tekenable-test.com:83/";
+		private static string baseURL = "https://www.myhealthapp.ie/MyHealth_Webservices/";	//http://devrcsiapi.tekenable-test.com:83/";
 
         private static HttpClient _client;
 
         static Client()
         {
-            _client = new HttpClient();
+			#if DEBUG
+						//baseURL = "http://192.168.1.200:45455/";
+			#endif
+
+			_client = new HttpClient();
             _client.BaseAddress = new Uri(Client.baseURL);
             // Add an Accept header for JSON format.
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue ("application/json"));
-        }
+
+
+
+		}
 
         ~Client()
         {
