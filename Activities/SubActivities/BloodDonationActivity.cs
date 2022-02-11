@@ -10,6 +10,7 @@ using Android.OS;
 
 using Android.Views;
 using Android.Widget;
+using MyHealthAndroid.Model;
 using MyHealthDB;
 using MyHealthDB.Logger;
 
@@ -66,9 +67,11 @@ namespace MyHealthAndroid
 			bloodSupplyList = GetBloodSupply ();
 			this.SetLables (bloodSupplyList);
 
-			var connectivityManager = (ConnectivityManager) GetSystemService (ConnectivityService);
-			var activeConnection = connectivityManager.ActiveNetworkInfo;
-			if ((activeConnection != null) && activeConnection.IsConnected) {
+			//var connectivityManager = (ConnectivityManager) GetSystemService (ConnectivityService);
+			//var activeConnection = connectivityManager.ActiveNetworkInfo;
+			//if ((activeConnection != null) && activeConnection.IsConnected)
+			if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
+			{
 				try {
 					bloodSupplyList = await ServiceConsumer.GetBloodDonationInfo ("https://www.giveblood.ie/clinicsxml.aspx?blood=1"); //RCSI-305
 					// adding new item for fetch date from service to be displayed in label

@@ -12,10 +12,11 @@ using Android.Widget;
 
 using MyHealthDB;
 using MyHealthDB.Logger;
-using Android.Preferences;
+using AndroidX.Preference;
 using System.Threading.Tasks;
 using Android.Views.InputMethods;
 using Android.Net;
+using MyHealthAndroid.Model;
 
 namespace MyHealthAndroid
 {
@@ -515,10 +516,12 @@ namespace MyHealthAndroid
 			myprofile.Weight_Grams = Convert.ToInt32 (weightg.Replace (" g", String.Empty));;
 			//myprofile.ApplicationId = 
 			//myprofile.Save ();
-			var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
-			var activeConnection = connectivityManager.ActiveNetworkInfo;
+			//var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
+			//var activeConnection = connectivityManager.ActiveNetworkInfo;
 
-			if ((activeConnection != null) && activeConnection.IsConnected) {
+			//if ((activeConnection != null) && activeConnection.IsConnected)
+			if (NetworkStatus.IsActive() && NetworkStatus.IsConnected())
+				{
 				Toast.MakeText(this.BaseContext, "Sending Data", ToastLength.Long).Show();
 				bool sent = await MyHealthDB.ServiceConsumer.SendMyProfileData (myprofile);
 				//Toast.MakeText(this.BaseContext, sent.ToString(), ToastLength.Long).Show();

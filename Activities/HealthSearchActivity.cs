@@ -8,7 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Android.Preferences;
+using AndroidX.Preference;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using System.Threading.Tasks;

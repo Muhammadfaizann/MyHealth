@@ -27,27 +27,35 @@ namespace RCSI
 			username.Delegate = textFieldDelegate;
 			useremail.Delegate = textFieldDelegate;
 			usermessage.Delegate = textFieldDelegate;
-
-			alertDelegate = new FeedbackAlertViewDelegate(this);
 		}
 
-		FeedbackAlertViewDelegate alertDelegate;
+		
 		async partial void saveTheFeeback (UIButton sender)
 		{
 			if (username.Text.Equals("") || useremail.Text.Equals("") || usermessage.Text.Equals(""))
 			{
-                var alert = new UIAlertView { Title = "Error", Message = "Please fill in all the details" };
-                alert.AddButton("OK");
-				alert.Show();
+                //var alert = new UIAlertView { Title = "Error", Message = "Please fill in all the details" };
+                //alert.AddButton("OK");
+				//alert.Show();
+
+				UIAlertController _alert = UIAlertController.Create("Error", "Please fill in all the details", UIAlertControllerStyle.Alert);
+				_alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+				PresentViewController(_alert, true, null);
+
 			} else {
+				
 				await LogManager.Log(new LogFeedback {
 					Date = DateTime.Now, 
 					FeedbackText = string.Format("<name>{0}<name><email>{1}</email><message>{2}</message>", username.Text, useremail.Text, usermessage.Text)
 				});
 
-				UIAlertView _alert = new UIAlertView(null, "Thank you for your feedback",
-					alertDelegate, "OK", null);
-				_alert.Show();
+				//UIAlertView _alert = new UIAlertView(null, "Thank you for your feedback",
+				//alertDelegate, "OK", null);
+				//_alert.Show();
+
+				UIAlertController _alert = UIAlertController.Create(null, "Thank you for your feedback", UIAlertControllerStyle.Alert);
+				_alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+				PresentViewController(_alert, true, null);
 			}
 		}
 

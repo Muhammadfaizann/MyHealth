@@ -207,6 +207,7 @@ namespace MyHealthAndroid
 		}
 	}
 
+
 	public class MyHealthWebViewClient : WebViewClient
 	{
 		Activity _activity;
@@ -215,16 +216,6 @@ namespace MyHealthAndroid
 			_activity = activity;
 		}
 
-        public override bool ShouldOverrideUrlLoading(WebView view, string url)
-        {
-            Handle(url);
-
-            base.ShouldOverrideUrlLoading(view, url);
-
-            return true;
-        }
-
-        [TargetApi(Value = (int)BuildVersionCodes.N)]
         public override bool ShouldOverrideUrlLoading(WebView view, IWebResourceRequest request)
         {
             Handle(request.Url.Path);

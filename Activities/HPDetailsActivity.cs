@@ -318,8 +318,9 @@ namespace MyHealthAndroid
     {
         public event ShowHospitalsEventHandler OnShowHospitals;
 
-        public override bool ShouldOverrideUrlLoading(WebView view, string url)
+        public override bool ShouldOverrideUrlLoading(WebView view, IWebResourceRequest WebRequest)
         {
+            string url = WebRequest.Url.ToString();
             var provinceName = url.Substring(url.IndexOf("?") + 1);
             DatabaseManager.SelectProvince(provinceName)
                 .ContinueWith((r) =>

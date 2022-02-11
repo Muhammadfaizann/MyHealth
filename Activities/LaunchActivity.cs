@@ -5,12 +5,13 @@ using Android.App;
 using Android.Content;
 using Android.Net;
 using Android.OS;
-using Android.Preferences;
+using AndroidX.Preference;
 using Android.Telephony;
 using Android.Views;
 using Android.Widget;
 using Java.Util;
 using System.Threading;
+using MyHealthAndroid.Model;
 
 namespace MyHealthAndroid
 {
@@ -19,7 +20,8 @@ namespace MyHealthAndroid
 	public class LaunchActivity : Activity
 	{
 		private ISharedPreferences preferences;
-		private ProgressDialog progressDialog;
+		//private ProgressDialog progressDialog;
+		AlertDialog progressDialog;
 
 		protected async override void OnCreate (Bundle bundle)
 		{
@@ -31,35 +33,26 @@ namespace MyHealthAndroid
 			//Get the shared Preferences
 			preferences = PreferenceManager.GetDefaultSharedPreferences (this.ApplicationContext);
 
-			progressDialog = new ProgressDialog (this);
-			progressDialog.Indeterminate = true;
-			progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-			progressDialog.SetTitle ("Initializing, Please Wait...");
-			progressDialog.SetMessage("Verifying Data...");
-			progressDialog.SetCancelable(false);
+			progressDialog = ProgressAlertBuilder.getProgressDialog(this);
 			progressDialog.Show();
 
 			await MyHealthDB.ServiceConsumer.CreateDatabase ();
-			progressDialog.SetMessage("Checking Device Registration...");
 
 			if (await MyHealthDB.ServiceConsumer.CheckRegisteredDevice ()) {
 				bool isDeviceSynced = preferences.GetBoolean("applicationUpdated",false);
 				if (!isDeviceSynced) {
-					progressDialog.SetMessage("Synching Data With Server...");
 					if (await SyncDevice ())
 						ShowAcceptanceDialog ();
 				} else {
 					ShowAcceptanceDialog ();
 				}
 			} else {
-				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
-				var activeConnection = connectivityManager.ActiveNetworkInfo;
-
-				if ((activeConnection != null) && activeConnection.IsConnected) {
-					progressDialog.SetMessage("Registering Device...");
+				if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
+				{
+					
 
 					if (await MyHealthDB.ServiceConsumer.RegisterDevice("Android", Android.OS.Build.VERSION.SdkInt.ToString())) {
-						progressDialog.SetMessage("Synching Data With Server...");
+						
 						if(await SyncDevice())
 							ShowAcceptanceDialog ();
 					}

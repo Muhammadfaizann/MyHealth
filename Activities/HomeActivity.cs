@@ -5,7 +5,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.Net;
 using Android.OS;
-using Android.Preferences;
+using AndroidX.Preference;
 
 using Android.Views;
 using Android.Widget;
@@ -13,6 +13,7 @@ using MyHealthAndroid;
 using MyHealthDB;
 using MyHealthDB.Logger;
 using System.Threading.Tasks;
+using MyHealthAndroid.Model;
 
 namespace MyHealthAndroid{
 	[Activity (Label = "MyHealth", ScreenOrientation = global::Android.Content.PM.ScreenOrientation.Portrait)]
@@ -74,9 +75,12 @@ namespace MyHealthAndroid{
 				//Toast.MakeText (this, "Please Sync with latest data.", ToastLength.Long).Show ();
 				StartActivity (new Intent (this, typeof(MyProfileActivity)));
 			} else {
-				var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
-				var activeConnection = connectivityManager.ActiveNetworkInfo;
-				if ((activeConnection != null) && activeConnection.IsConnected) {
+				//var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
+
+				//var activeConnection = connectivityManager.ActiveNetworkInfo;
+				//if ((activeConnection != null) && activeConnection.IsConnected)
+				if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
+				{
 
 					string strLastSyncDate = preferences.GetString("LastSyncDate",DateTime.MinValue.ToString("dd-MMM-yyyy HH:mm:ss"));
 					DateTime LastSyncDate = Convert.ToDateTime (strLastSyncDate);

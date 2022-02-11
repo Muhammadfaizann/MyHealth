@@ -86,14 +86,8 @@ namespace MyHealthAndroid
             {
                 var htmlString = _list[position].Description;
                 ISpanned html;
-                if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
-                {
-                    html = Html.FromHtml(htmlString, Android.Text.FromHtmlOptions.ModeLegacy);
-                }
-                else
-                {
-                    html = Html.FromHtml(htmlString);
-                }
+                
+				html = Html.FromHtml(htmlString, Android.Text.FromHtmlOptions.ModeLegacy);
 
                 ActualNews.SetText (html, TextView.BufferType.Spannable);
 			} else {

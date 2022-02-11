@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MyHealthAndroid.Model;
 
 namespace MyHealthAndroid
 {
@@ -35,9 +36,10 @@ namespace MyHealthAndroid
 			_channelsList = FindViewById<ListView>(Resource.Id.emergencyList);
 			string channelName = Intent.GetStringExtra("ChannelName");
 
-			var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
-			var activeConnection = connectivityManager.ActiveNetworkInfo;
-			if ((activeConnection != null) && activeConnection.IsConnected)
+			//var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+			//var activeConnection = connectivityManager.ActiveNetworkInfo;
+			//if ((activeConnection != null) && activeConnection.IsConnected)
+			if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
 			{
 				if (channelName == "BBC Medical News")
 				{
