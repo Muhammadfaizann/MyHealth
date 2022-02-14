@@ -75,10 +75,7 @@ namespace MyHealthAndroid{
 				//Toast.MakeText (this, "Please Sync with latest data.", ToastLength.Long).Show ();
 				StartActivity (new Intent (this, typeof(MyProfileActivity)));
 			} else {
-				//var connectivityManager = (ConnectivityManager)GetSystemService (ConnectivityService);
-
-				//var activeConnection = connectivityManager.ActiveNetworkInfo;
-				//if ((activeConnection != null) && activeConnection.IsConnected)
+	
 				if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
 				{
 

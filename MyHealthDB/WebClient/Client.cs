@@ -15,10 +15,6 @@ namespace MyHealthDB.WebClient
 
         static Client()
         {
-			#if DEBUG
-						//baseURL = "http://192.168.1.200:45455/";
-			#endif
-
 			_client = new HttpClient();
             _client.BaseAddress = new Uri(Client.baseURL);
             // Add an Accept header for JSON format.

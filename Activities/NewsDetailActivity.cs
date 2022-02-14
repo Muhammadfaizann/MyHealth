@@ -36,9 +36,7 @@ namespace MyHealthAndroid
 			_channelsList = FindViewById<ListView>(Resource.Id.emergencyList);
 			string channelName = Intent.GetStringExtra("ChannelName");
 
-			//var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
-			//var activeConnection = connectivityManager.ActiveNetworkInfo;
-			//if ((activeConnection != null) && activeConnection.IsConnected)
+
 			if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
 			{
 				if (channelName == "BBC Medical News")

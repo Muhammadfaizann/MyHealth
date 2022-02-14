@@ -103,9 +103,7 @@ namespace MyHealthDB.Service
         public Task<HttpResponseMessage> RegisterDevice (string DeviceId, string Type, string UserName, string Hash, string OSVersion)
 		{
 			var url = string.Format ("api/v1/Application/RegisterMe/{0}/{1}/{2}/{3}/{4}", DeviceId, Type, UserName, Hash, OSVersion);
-			var returnvalue = Client.GetAsync(url, true);
-			return returnvalue;
-			//return Client.GetAsync (url, true);
+			return Client.GetAsync (url, true);
 		}
 
 		public Task<HttpResponseMessage> PostMyProfileData(MyProfile data)

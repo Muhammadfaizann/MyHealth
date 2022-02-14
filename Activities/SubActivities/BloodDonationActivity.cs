@@ -67,9 +67,6 @@ namespace MyHealthAndroid
 			bloodSupplyList = GetBloodSupply ();
 			this.SetLables (bloodSupplyList);
 
-			//var connectivityManager = (ConnectivityManager) GetSystemService (ConnectivityService);
-			//var activeConnection = connectivityManager.ActiveNetworkInfo;
-			//if ((activeConnection != null) && activeConnection.IsConnected)
 			if(NetworkStatus.IsActive() && NetworkStatus.IsConnected())
 			{
 				try {
